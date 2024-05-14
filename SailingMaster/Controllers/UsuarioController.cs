@@ -49,6 +49,7 @@ namespace SailingMaster.Controllers
             try
             {
                 Usuario existing = GetByID(user.ID);
+                user.password = existing.password;
                 user.co_us_in = existing.co_us_in;
                 user.fe_us_in = existing.fe_us_in;
                 user.fec_camb = existing.fec_camb;

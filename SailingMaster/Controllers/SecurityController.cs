@@ -46,6 +46,17 @@ namespace SailingMaster.Controllers
             return Encoding.UTF8.GetString(bytesDecrypted);
         }
 
+        // Gen Point Pass
+        public static string GeneratePointPass(string pass)
+        {
+            string pointPass = "•";
+
+            for (int i = 0; i < pass.Length; i++)
+                pointPass += "•";
+
+            return pointPass;
+        }
+
         // Full encrypt
         private static byte[] Encrypt(byte[] bytesToBeEncrypted, byte[] passwordBytes)
         {

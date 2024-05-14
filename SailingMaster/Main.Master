@@ -35,7 +35,7 @@
             <li><a href="#"><i class="fas fa-file"></i><p class="m-0">Proformas</p></a></li>
             <li><a href="#"><i class="fas fa-file-invoice"></i><p class="m-0">Liquidaciones</p></a></li>
             <li><a href="/Usuarios/Index.aspx" id="item_users" runat="server"><i class="fas fa-user"></i><p class="m-0">Usuarios</p></a></li>
-            <li><a href="#" id="item_prods" runat="server"><i class="fas fa-list"></i><p class="m-0">Tarifario</p></a></li>
+            <li><a href="/Servicios/Index.aspx" id="item_prods" runat="server"><i class="fas fa-list"></i><p class="m-0">Tarifario</p></a></li>
         </ul>
     </div>
     <div class="col-9 container">

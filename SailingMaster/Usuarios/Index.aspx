@@ -72,7 +72,7 @@
         </div>
         <div class="form-grid">
             <dx:ASPxGridView ID="GV_Usuarios" runat="server" Width="100%" Theme="Material" AutoGenerateColumns="False" DataSourceID="DS_Usuario" KeyFieldName="ID" 
-                EnableTheming="True">
+                EnableTheming="True" OnRowCommand="GV_Usuarios_RowCommand">
                 <SettingsDataSecurity AllowDelete="False" AllowInsert="False" AllowEdit="False"></SettingsDataSecurity>
                 <SettingsSearchPanel Visible="True"></SettingsSearchPanel>
                 <Columns>
