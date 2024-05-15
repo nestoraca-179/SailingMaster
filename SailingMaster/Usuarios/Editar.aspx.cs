@@ -20,11 +20,20 @@ namespace SailingMaster.Usuarios
             {
                 Usuario user = UsuarioController.GetByID(int.Parse(Request.QueryString["ID"].ToString()));
 
-                if (!IsPostBack)
-                    CargarUsuario(user);
+                if (user.tip_usuario != 0)
+                {
+                    PN_ContainerForm.Visible = false;
+                    PN_Error.Visible = true;
+                    LBL_Error.Text = "No tienes acceso al área de usuarios";
+                }
+                else
+                {
+                    if (!IsPostBack)
+                        CargarUsuario(user);
 
-                IDUser = Request.QueryString["ID"].ToString();
-                LBL_IDUsuario.Text = "Editar Usuario " + user.descrip;
+                    IDUser = Request.QueryString["ID"].ToString();
+                    LBL_IDUsuario.Text = "Editar Usuario " + user.descrip;
+                }
             }
             else
             {

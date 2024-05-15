@@ -13,7 +13,18 @@ namespace SailingMaster.Usuarios
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            CK_Activo.Checked = true;
+            Usuario user = (Session["USER"] as Usuario);
+
+            if (user.tip_usuario != 0)
+            {
+                PN_ContainerForm.Visible = false;
+                PN_Error.Visible = true;
+                LBL_Error.Text = "No tienes acceso al área de usuarios";
+            }
+            else
+            {
+                CK_Activo.Checked = true;
+            }
         }
 
         protected void BTN_Volver_Click(object sender, EventArgs e)

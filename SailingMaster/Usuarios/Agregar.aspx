@@ -15,19 +15,19 @@
     </div>
 </asp:Panel>
 <form id="Form1" runat="server" class="container">
-    <div class="row my-5">
-        <div class="col d-flex">
-            <asp:LinkButton ID="BTN_Volver" runat="server" CssClass="btn btn-primary" OnClick="BTN_Volver_Click">
-                <i class="fas fa-arrow-left"></i> Regresar
-            </asp:LinkButton>
-            <dx:ASPxButton ID="BTN_Guardar" runat="server" CssClass="btn btn-success mx-2" Text="Guardar" ValidationGroup="Usuario" OnClick="BTN_Guardar_Click" />
-        </div>
-        <div class="col">
-            <dx:ASPxLabel ID="LBL_IDUsuario" runat="server" Text="Agregar Usuario" Width="100%" Font-Size="24px" CssClass="title-screen text-center text-light"></dx:ASPxLabel>
-        </div>
-        <div class="col"></div>
-    </div>
     <asp:Panel ID="PN_ContainerForm" runat="server" CssClass="form-header">
+        <div class="row my-5">
+            <div class="col d-flex">
+                <asp:LinkButton ID="BTN_Volver" runat="server" CssClass="btn btn-primary" OnClick="BTN_Volver_Click">
+                    <i class="fas fa-arrow-left"></i> Regresar
+                </asp:LinkButton>
+                <dx:ASPxButton ID="BTN_Guardar" runat="server" CssClass="btn btn-success mx-2" Text="Guardar" ValidationGroup="Usuario" OnClick="BTN_Guardar_Click" />
+            </div>
+            <div class="col">
+                <dx:ASPxLabel ID="LBL_IDUsuario" runat="server" Text="Agregar Usuario" Width="100%" Font-Size="24px" CssClass="title-screen text-center text-light"></dx:ASPxLabel>
+            </div>
+            <div class="col"></div>
+        </div>
         <div class="row">
             <div class="col">
                 <div class="controls">

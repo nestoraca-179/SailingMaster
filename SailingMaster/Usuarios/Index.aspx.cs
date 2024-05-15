@@ -34,7 +34,7 @@ namespace SailingMaster.Usuarios
             {
                 PN_ContainerForm.Visible = false;
                 PN_Error.Visible = true;
-                LBL_Error.Text = "No tienes acceso al área de configuración";
+                LBL_Error.Text = "No tienes acceso al área de usuarios";
             }
         }
 

@@ -14,8 +14,8 @@ namespace SailingMaster
 
                 if (user.tip_usuario != 0)
                 {
-                    item_users.Attributes.Add("class", "disabled");
-                    item_prods.Attributes.Add("class", "disabled");
+                    item_users.Attributes.Add("class", "btn disabled");
+                    item_prods.Attributes.Add("class", "btn disabled");
                     item_users.Attributes.Add("href", "#");
                     item_prods.Attributes.Add("href", "#");
                 }

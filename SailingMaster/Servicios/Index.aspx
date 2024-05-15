@@ -26,7 +26,7 @@
                 </asp:LinkButton>
             </div>
             <div class="col">
-                <h2 class="text-center text-light">Servicios</h2>
+                <h2 class="text-center text-light">Tarifario</h2>
             </div>
             <div class="col"></div>
         </div>

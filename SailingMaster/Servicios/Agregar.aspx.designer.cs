@@ -7,7 +7,7 @@
 // </generado automáticamente>
 //------------------------------------------------------------------------------
 
-namespace SailingMaster.Usuarios
+namespace SailingMaster.Servicios
 {
 
 
@@ -78,13 +78,13 @@ namespace SailingMaster.Usuarios
         protected global::DevExpress.Web.ASPxLabel LBL_IDUsuario;
 
         /// <summary>
-        /// Control TB_Username.
+        /// Control TB_Code.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::DevExpress.Web.ASPxTextBox TB_Username;
+        protected global::DevExpress.Web.ASPxTextBox TB_Code;
 
         /// <summary>
         /// Control TB_Descrip.
@@ -96,31 +96,13 @@ namespace SailingMaster.Usuarios
         protected global::DevExpress.Web.ASPxTextBox TB_Descrip;
 
         /// <summary>
-        /// Control TB_Password.
+        /// Control TB_Price.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::DevExpress.Web.ASPxTextBox TB_Password;
-
-        /// <summary>
-        /// Control TB_Email.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::DevExpress.Web.ASPxTextBox TB_Email;
-
-        /// <summary>
-        /// Control DDL_TipoUsuario.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::DevExpress.Web.ASPxComboBox DDL_TipoUsuario;
+        protected global::DevExpress.Web.ASPxTextBox TB_Price;
 
         /// <summary>
         /// Control CK_Activo.

@@ -42,6 +42,15 @@ namespace SailingMaster.Usuarios
         protected global::System.Web.UI.HtmlControls.HtmlForm Form1;
 
         /// <summary>
+        /// Control PN_ContainerForm.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Panel PN_ContainerForm;
+
+        /// <summary>
         /// Control BTN_Volver.
         /// </summary>
         /// <remarks>
@@ -67,15 +76,6 @@ namespace SailingMaster.Usuarios
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::DevExpress.Web.ASPxLabel LBL_IDUsuario;
-
-        /// <summary>
-        /// Control PN_ContainerForm.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Panel PN_ContainerForm;
 
         /// <summary>
         /// Control TB_Username.
