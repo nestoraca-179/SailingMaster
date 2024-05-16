@@ -78,6 +78,24 @@ namespace SailingMaster.Servicios
         protected global::System.Web.UI.WebControls.LinkButton BTN_AgregarServicio;
 
         /// <summary>
+        /// Control GV_Servicios.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::DevExpress.Web.ASPxGridView GV_Servicios;
+
+        /// <summary>
+        /// Control DS_Servicios.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.SqlDataSource DS_Servicios;
+
+        /// <summary>
         /// Control LBL_Delete.
         /// </summary>
         /// <remarks>

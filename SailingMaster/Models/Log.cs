@@ -18,7 +18,7 @@ namespace SailingMaster.Models
         public System.DateTime fecha { get; set; }
         public string usuario { get; set; }
         public string item { get; set; }
-        public int id_item { get; set; }
+        public string id_item { get; set; }
         public string accion { get; set; }
         public string campos { get; set; }
     }

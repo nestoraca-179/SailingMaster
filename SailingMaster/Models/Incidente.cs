@@ -17,6 +17,6 @@ namespace SailingMaster.Models
         public int ID { get; set; }
         public string Titulo { get; set; }
         public string Descripcion { get; set; }
-        public Nullable<System.DateTime> Fecha { get; set; }
+        public System.DateTime Fecha { get; set; }
     }
 }

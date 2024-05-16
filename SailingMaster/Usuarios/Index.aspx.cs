@@ -1,12 +1,8 @@
 ﻿using SailingMaster.Controllers;
 using SailingMaster.Models;
 using System;
-using System.Collections.Generic;
 using System.Data;
-using System.Linq;
-using System.Web;
 using System.Web.UI;
-using System.Web.UI.WebControls;
 
 namespace SailingMaster.Usuarios
 {
@@ -62,7 +58,8 @@ namespace SailingMaster.Usuarios
 
         protected void BTN_EliminarUsuario_Click(object sender, EventArgs e)
         {
-            int result = UsuarioController.Delete(int.Parse(IDSelected));
+            Usuario user = (Session["USER"] as Usuario);
+            int result = UsuarioController.Delete(int.Parse(IDSelected), user.username);
 
             if (result == 1)
             {

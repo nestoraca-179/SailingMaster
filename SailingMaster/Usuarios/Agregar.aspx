@@ -1,14 +1,6 @@
 ﻿<%@ Page Title="Agregar Usuario" Language="C#" MasterPageFile="~/Main.Master" AutoEventWireup="true" CodeBehind="Agregar.aspx.cs" Inherits="SailingMaster.Usuarios.Agregar" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
-<style>
-    form {
-        display: block;
-    }
-    label {
-        color: #FFF;
-    }
-</style>
 <asp:Panel ID="PN_Error" runat="server" Width="100%" CssClass="mt-2" Visible="false">
     <div class="alert alert-danger m-0">
         <dx:ASPxLabel ID="LBL_Error" runat="server" Width="100%" Font-Size="14px" CssClass="m-0"></dx:ASPxLabel>

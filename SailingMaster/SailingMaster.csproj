@@ -116,6 +116,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Servicios\Agregar.aspx" />
+    <Content Include="Servicios\Editar.aspx" />
     <Content Include="Servicios\Index.aspx" />
     <Content Include="Usuarios\Agregar.aspx" />
     <Content Include="Usuarios\Editar.aspx" />
@@ -142,8 +143,10 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\IncidentController.cs" />
     <Compile Include="Controllers\LogController.cs" />
+    <Compile Include="Controllers\MonedaController.cs" />
     <Compile Include="Controllers\Repository.cs" />
     <Compile Include="Controllers\SecurityController.cs" />
+    <Compile Include="Controllers\ServicioController.cs" />
     <Compile Include="Controllers\UsuarioController.cs" />
     <Compile Include="Dashboard.aspx.cs">
       <DependentUpon>Dashboard.aspx</DependentUpon>
@@ -182,6 +185,9 @@
     <Compile Include="Models\Log.cs">
       <DependentUpon>SailingMaster.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\Moneda.cs">
+      <DependentUpon>SailingMaster.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\SailingMaster.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -197,6 +203,9 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>SailingMaster.edmx</DependentUpon>
     </Compile>
+    <Compile Include="Models\Servicio.cs">
+      <DependentUpon>SailingMaster.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\Usuario.cs">
       <DependentUpon>SailingMaster.tt</DependentUpon>
     </Compile>
@@ -207,6 +216,13 @@
     </Compile>
     <Compile Include="Servicios\Agregar.aspx.designer.cs">
       <DependentUpon>Agregar.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Servicios\Editar.aspx.cs">
+      <DependentUpon>Editar.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Servicios\Editar.aspx.designer.cs">
+      <DependentUpon>Editar.aspx</DependentUpon>
     </Compile>
     <Compile Include="Servicios\Index.aspx.cs">
       <DependentUpon>Index.aspx</DependentUpon>

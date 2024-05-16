@@ -5,7 +5,7 @@ namespace SailingMaster.Controllers
 {
     public class LogController : Repository
     {
-        public static void CreateLog(string user, string item, int id_item, string action, string campos)
+        public static void CreateLog(string user, string item, string id_item, string action, string campos)
         {
             using (SailingMasterEntities context = new SailingMasterEntities())
             {

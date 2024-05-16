@@ -1,10 +1,6 @@
-﻿using SailingMaster.Models;
+﻿using SailingMaster.Controllers;
+using SailingMaster.Models;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.UI;
-using System.Web.UI.WebControls;
 
 namespace SailingMaster.Servicios
 {
@@ -33,39 +29,40 @@ namespace SailingMaster.Servicios
 
         protected void BTN_Guardar_Click(object sender, EventArgs e)
         {
-            //Usuario user = new Usuario();
+            Servicio serv = new Servicio();
 
-            //try
-            //{
-            //    user.username = TB_Username.Text;
-            //    user.password = SecurityController.Encrypt(TB_Password.Text);
-            //    user.descrip = TB_Descrip.Text;
-            //    user.email = TB_Email.Text;
-            //    user.activo = CK_Activo.Checked;
-            //    user.tip_usuario = byte.Parse(DDL_TipoUsuario.Value.ToString());
-            //    user.co_us_in = (Session["USER"] as Usuario).username;
-            //    user.fe_us_in = DateTime.Now;
-            //    user.co_us_mo = (Session["USER"] as Usuario).username;
-            //    user.fe_us_mo = DateTime.Now;
+            try
+            {
+                Moneda mon = MonedaController.GetByID(DDL_Moneda.Value.ToString());
+                decimal price = decimal.Parse(TB_Price.Value.ToString());
 
-            //    int result = UsuarioController.Add(user);
+                serv.ID = TB_Code.Text;
+                serv.descrip = TB_Descrip.Text;
+                serv.precio_base = mon.@base ? price : price * mon.tasa;
+                serv.activo = CK_Activo.Checked;
+                serv.co_us_in = (Session["USER"] as Usuario).username;
+                serv.fe_us_in = DateTime.Now;
+                serv.co_us_mo = (Session["USER"] as Usuario).username;
+                serv.fe_us_mo = DateTime.Now;
 
-            //    if (result == 1)
-            //    {
-            //        Response.Redirect("/Usuarios/Index.aspx?new_user=1");
-            //    }
-            //    else
-            //    {
-            //        PN_Error.Visible = true;
-            //        LBL_Error.Text = "Ha ocurrido un error al agregar el Usuario. Ver tabla de Incidentes";
-            //    }
-            //}
-            //catch (Exception ex)
-            //{
-            //    PN_Error.Visible = true;
-            //    LBL_Error.Text = "Ha ocurrido un error. Ver tabla de Incidentes";
-            //    IncidentController.CreateIncident(string.Format("ERROR PROCESANDO DATOS DEL USUARIO {0}", user.ID), ex);
-            //}
+                int result = ServicioController.Add(serv);
+
+                if (result == 1)
+                {
+                    Response.Redirect("/Servicios/Index.aspx?new_serv=1");
+                }
+                else
+                {
+                    PN_Error.Visible = true;
+                    LBL_Error.Text = "Ha ocurrido un error al agregar el Servicio. Ver tabla de Incidentes";
+                }
+            }
+            catch (Exception ex)
+            {
+                PN_Error.Visible = true;
+                LBL_Error.Text = "Ha ocurrido un error. Ver tabla de Incidentes";
+                IncidentController.CreateIncident(string.Format("ERROR PROCESANDO DATOS DEL SERVICIO {0}", serv.ID), ex);
+            }
         }
     }
 }

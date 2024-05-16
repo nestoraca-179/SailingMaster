@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Security;
@@ -27,7 +26,7 @@ namespace SailingMaster.Controllers
                         {
                             FormsAuthentication.SetAuthCookie(username, true);
                             HttpContext.Current.Session["USER"] = user;
-                            LogController.CreateLog(user.username, "LOGIN", user.ID, "L", null);
+                            LogController.CreateLog(user.username, "LOGIN", user.ID.ToString(), "L", null);
 
                             if (DateTime.Compare(user.fec_camb, DateTime.Now) < 0)
                                 result = 4;
@@ -54,7 +53,7 @@ namespace SailingMaster.Controllers
         {
             Usuario user = HttpContext.Current.Session["USER"] as Usuario;
 
-            LogController.CreateLog(user.username, "LOGOUT", user.ID, "D", null);
+            LogController.CreateLog(user.username, "LOGOUT", user.ID.ToString(), "D", null);
             FormsAuthentication.SignOut();
             HttpContext.Current.Session.Clear();
         }

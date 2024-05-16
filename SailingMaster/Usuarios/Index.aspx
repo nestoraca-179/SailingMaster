@@ -1,47 +1,6 @@
 ﻿<%@ Page Title="Usuarios | SailingMaster" Language="C#" MasterPageFile="~/Main.Master" AutoEventWireup="true" CodeBehind="Index.aspx.cs" Inherits="SailingMaster.Usuarios.Index" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
-<style>
-    form {
-        display: block;
-    }
-    .form-grid {
-        position: static;
-    }
-    .btn.btn-info {
-        font-size: 14px;
-        padding: 0 10px;
-    }
-    table td {
-        border-color: #3E4753 !important;
-    }
-    .dxgvTable_Material {
-        border: solid #3E4753 !important;
-        border-width: 1px 1px 0 1px !important;
-        border-radius: 0px !important;
-    }
-    .dxgvDataRow_Material:last-child td.dxgv, .dxgvDataRow_Material td.dxgv {
-        border-bottom: solid 1px #3E4753 !important;
-    }
-    .dxgvSearchPanel_Material {
-        padding: 10px !important;
-    }
-    .dxgvSearchPanel_Material table {
-        border-radius: 0 !important;
-    }
-    .dxgvSearchPanel_Material input {
-        padding: 5px !important;
-        border-radius: 0 !important;
-    }
-    .form-grid table.dxgvTable_Material .btn {
-        width: 100%;
-        padding: 10px;
-        color: #FFF;
-        font-size: 13px;
-        text-decoration: none;
-        border-radius: 0;
-    }
-</style>
 <script>
     function openModalDelete() {
         setTimeout(function () { $("#modal-delete").modal("show"); }, 1);

@@ -7,7 +7,9 @@
       <Diagram DiagramId="1245a5c06f2c4ca4815db03565b1b2f8" Name="Diagram1">
         <EntityTypeShape EntityType="SailingMasterModel.Usuario" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="SailingMasterModel.Incidente" Width="1.5" PointX="3.375" PointY="0.75" />
-        <EntityTypeShape EntityType="SailingMasterModel.Log" Width="1.5" PointX="3.375" PointY="3.75" />
+        <EntityTypeShape EntityType="SailingMasterModel.Moneda" Width="1.5" PointX="5.75" PointY="0.75" />
+        <EntityTypeShape EntityType="SailingMasterModel.Servicio" Width="1.5" PointX="0.75" PointY="5.75" />
+        <EntityTypeShape EntityType="SailingMasterModel.Log" Width="1.5" PointX="3.375" PointY="4.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

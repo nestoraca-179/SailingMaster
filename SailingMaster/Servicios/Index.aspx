@@ -1,11 +1,10 @@
 ﻿<%@ Page Title="Servicios | SailingMaster" Language="C#" MasterPageFile="~/Main.Master" AutoEventWireup="true" CodeBehind="Index.aspx.cs" Inherits="SailingMaster.Servicios.Index" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
-<style>
-
-</style>
 <script>
-
+    function openModalDelete() {
+        setTimeout(function () { $("#modal-delete").modal("show"); }, 1);
+    }
 </script>
 <form id="Form1" runat="server" class="container">
     <asp:Panel ID="PN_Success" runat="server" Width="100%" CssClass="mt-2" Visible="false">
@@ -31,7 +30,69 @@
             <div class="col"></div>
         </div>
         <div class="form-grid">
-            
+            <dx:ASPxGridView ID="GV_Servicios" runat="server" Width="100%" Theme="Material" AutoGenerateColumns="False" DataSourceID="DS_Servicios" KeyFieldName="ID"
+                EnableTheming="True" OnRowCommand="GV_Servicios_RowCommand">
+                <SettingsDataSecurity AllowDelete="False" AllowInsert="False" AllowEdit="False"></SettingsDataSecurity>
+                <SettingsSearchPanel Visible="True"></SettingsSearchPanel>
+                <Columns>
+                    <dx:GridViewDataTextColumn FieldName="ID" ReadOnly="True" VisibleIndex="0" Caption="Código">
+                        <EditFormSettings Visible="False"></EditFormSettings>
+                        <HeaderStyle BackColor="#191c24" ForeColor="#F0F0F0"></HeaderStyle>
+                        <CellStyle BackColor="#17181C" ForeColor="#F0F0F0" Border-BorderColor="#3E4753"></CellStyle>
+                    </dx:GridViewDataTextColumn>
+                    <dx:GridViewDataTextColumn FieldName="descrip" VisibleIndex="1" Caption="Descripción">
+                        <HeaderStyle BackColor="#191c24" ForeColor="#F0F0F0"></HeaderStyle>
+                        <CellStyle BackColor="#17181C" ForeColor="#F0F0F0" Border-BorderColor="#3E4753"></CellStyle>
+                    </dx:GridViewDataTextColumn>
+                    <dx:GridViewDataTextColumn FieldName="precio_bsd" ReadOnly="True" VisibleIndex="2" UnboundType="Decimal" Caption="Precio BSD">
+                        <PropertiesTextEdit DisplayFormatString="Bs. D {0:n}"></PropertiesTextEdit>
+                        <HeaderStyle BackColor="#191c24" ForeColor="#F0F0F0"></HeaderStyle>
+                        <CellStyle BackColor="#17181C" ForeColor="#F0F0F0" Border-BorderColor="#3E4753"></CellStyle>
+                    </dx:GridViewDataTextColumn>
+                    <dx:GridViewDataTextColumn FieldName="precio_usd" ReadOnly="True" VisibleIndex="3" UnboundType="Decimal" Caption="Precio USD">
+                        <PropertiesTextEdit DisplayFormatString="${0:n}"></PropertiesTextEdit>
+                        <HeaderStyle BackColor="#191c24" ForeColor="#F0F0F0"></HeaderStyle>
+                        <CellStyle BackColor="#17181C" ForeColor="#F0F0F0" Border-BorderColor="#3E4753"></CellStyle>
+                    </dx:GridViewDataTextColumn>
+                    <dx:GridViewDataTextColumn FieldName="precio_eur" ReadOnly="True" VisibleIndex="4" UnboundType="Decimal" Caption="Precio EUR">
+                        <PropertiesTextEdit DisplayFormatString="€{0:n}"></PropertiesTextEdit>
+                        <HeaderStyle BackColor="#191c24" ForeColor="#F0F0F0"></HeaderStyle>
+                        <CellStyle BackColor="#17181C" ForeColor="#F0F0F0" Border-BorderColor="#3E4753"></CellStyle>
+                    </dx:GridViewDataTextColumn>
+                    <dx:GridViewDataCheckColumn FieldName="activo" VisibleIndex="5" Caption="Activo">
+                        <HeaderStyle BackColor="#191c24" ForeColor="#F0F0F0"></HeaderStyle>
+                        <CellStyle BackColor="#17181C" ForeColor="#F0F0F0" Border-BorderColor="#3E4753"></CellStyle>
+                    </dx:GridViewDataCheckColumn>
+                    <dx:GridViewDataColumn Width="110px" VisibleIndex="7" Caption="Editar">
+                        <HeaderStyle BackColor="#191c24" ForeColor="#F0F0F0"></HeaderStyle>
+                        <CellStyle BackColor="#17181C" ForeColor="#F0F0F0" Border-BorderColor="#3E4753"></CellStyle>
+                        <DataItemTemplate>
+                            <asp:LinkButton ID="BTN_EditarServicio" runat="server" CssClass="btn btn-primary" CommandName="Editar">
+                                <i class="fas fa-edit"></i> Editar
+                            </asp:LinkButton>
+                        </DataItemTemplate>
+                    </dx:GridViewDataColumn>
+                    <dx:GridViewDataColumn Width="110px" VisibleIndex="8" Caption="Eliminar" >
+                        <HeaderStyle BackColor="#191c24" ForeColor="#F0F0F0"></HeaderStyle>
+                        <CellStyle BackColor="#17181C" ForeColor="#F0F0F0" Border-BorderColor="#3E4753"></CellStyle>
+                        <DataItemTemplate>
+                            <asp:LinkButton ID="BTN_ConfirmarEliminarServicio" runat="server" CssClass="btn btn-danger" CommandName="Eliminar">
+                                <i class="fas fa-times"></i> Eliminar
+                            </asp:LinkButton>
+                        </DataItemTemplate>
+                    </dx:GridViewDataColumn>
+                </Columns>
+                <Styles>
+                    <SearchPanel BackColor="#464C53"></SearchPanel>
+                </Styles>
+            </dx:ASPxGridView>
+            <asp:SqlDataSource runat="server" ID="DS_Servicios" ConnectionString='<%$ ConnectionStrings:SailingMasterConnectionString %>' SelectCommand="SELECT ID,
+	   descrip,
+	   cast(precio_base as decimal(18, 2)) as precio_bsd,
+	   cast((precio_base / (select tasa from Moneda where ID = 'USD')) as decimal(18, 2)) as precio_usd,
+	   cast((precio_base / (select tasa from Moneda where ID = 'EUR')) as decimal(18, 2)) as precio_eur,
+	   activo
+FROM Servicio"></asp:SqlDataSource>
         </div>
     </asp:Panel>
     <!-- MODAL DELETE -->

@@ -28,7 +28,7 @@ namespace SailingMaster.Controllers
                         context.SaveChanges();
                         tran.Commit();
 
-                        LogController.CreateLog(u.co_us_in, "USUARIO", u.ID, "I", null);
+                        LogController.CreateLog(u.co_us_in, "USUARIO", u.ID.ToString(), "I", null);
                         result = 1;
                     }
                     catch (Exception ex)
@@ -59,7 +59,7 @@ namespace SailingMaster.Controllers
                 db.Entry(existing).CurrentValues.SetValues(user);
                 db.SaveChanges();
 
-                LogController.CreateLog(user.co_us_mo, "USUARIO", user.ID, "M", campos);
+                LogController.CreateLog(user.co_us_mo, "USUARIO", user.ID.ToString(), "M", campos);
                 result = 1;
             }
             catch (Exception ex)
@@ -70,7 +70,7 @@ namespace SailingMaster.Controllers
             return result;
         }
 
-        public static int Delete(int ID)
+        public static int Delete(int ID, string us)
         {
             int result = 0;
             Usuario user = GetByID(ID);
@@ -80,7 +80,7 @@ namespace SailingMaster.Controllers
                 Usuario u = db.Usuario.Remove(user);
                 db.SaveChanges();
 
-                LogController.CreateLog(u.co_us_in, "USUARIO", u.ID, "E", null);
+                LogController.CreateLog(us, "USUARIO", u.ID.ToString(), "E", null);
                 result = 1;
             }
             catch (Exception ex)

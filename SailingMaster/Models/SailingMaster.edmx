@@ -10,9 +10,9 @@
             <PropertyRef Name="ID" />
           </Key>
           <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="Titulo" Type="varchar(max)" />
-          <Property Name="Descripcion" Type="varchar(max)" />
-          <Property Name="Fecha" Type="smalldatetime" />
+          <Property Name="Titulo" Type="varchar(max)" Nullable="false" />
+          <Property Name="Descripcion" Type="varchar(max)" Nullable="false" />
+          <Property Name="Fecha" Type="datetime" Nullable="false" />
         </EntityType>
         <EntityType Name="Log">
           <Key>
@@ -22,9 +22,35 @@
           <Property Name="fecha" Type="smalldatetime" Nullable="false" />
           <Property Name="usuario" Type="varchar" MaxLength="10" Nullable="false" />
           <Property Name="item" Type="varchar" MaxLength="60" Nullable="false" />
-          <Property Name="id_item" Type="int" Nullable="false" />
+          <Property Name="id_item" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="accion" Type="char" MaxLength="1" Nullable="false" />
           <Property Name="campos" Type="varchar(max)" />
+        </EntityType>
+        <EntityType Name="Moneda">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="varchar" MaxLength="40" Nullable="false" />
+          <Property Name="descrip" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="base" Type="bit" Nullable="false" />
+          <Property Name="tasa" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="co_us_in" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="fe_us_in" Type="datetime" Nullable="false" />
+          <Property Name="co_us_mo" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="fe_us_mo" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Servicio">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="varchar" MaxLength="40" Nullable="false" />
+          <Property Name="descrip" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="precio_base" Type="money" Nullable="false" />
+          <Property Name="activo" Type="bit" Nullable="false" />
+          <Property Name="co_us_in" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="fe_us_in" Type="datetime" />
+          <Property Name="co_us_mo" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="fe_us_mo" Type="datetime" />
         </EntityType>
         <EntityType Name="Usuario">
           <Key>
@@ -34,7 +60,7 @@
           <Property Name="username" Type="varchar" MaxLength="20" Nullable="false" />
           <Property Name="password" Type="varchar(max)" Nullable="false" />
           <Property Name="descrip" Type="varchar" MaxLength="50" Nullable="false" />
-          <Property Name="email" Type="varchar(max)" />
+          <Property Name="email" Type="varchar" MaxLength="60" />
           <Property Name="activo" Type="bit" Nullable="false" />
           <Property Name="tip_usuario" Type="tinyint" Nullable="false" />
           <Property Name="fec_camb" Type="datetime" Nullable="false" />
@@ -46,6 +72,8 @@
         <EntityContainer Name="SailingMasterModelStoreContainer">
           <EntitySet Name="Incidente" EntityType="Self.Incidente" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Log" EntityType="Self.Log" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Moneda" EntityType="Self.Moneda" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Servicio" EntityType="Self.Servicio" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Usuario" EntityType="Self.Usuario" Schema="dbo" store:Type="Tables" />
         </EntityContainer>
       </Schema></edmx:StorageModels>
@@ -60,7 +88,7 @@
           <Property Name="username" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="password" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="descrip" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="email" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="email" Type="String" MaxLength="60" FixedLength="false" Unicode="false" />
           <Property Name="activo" Type="Boolean" Nullable="false" />
           <Property Name="tip_usuario" Type="Byte" Nullable="false" />
           <Property Name="fec_camb" Type="DateTime" Nullable="false" Precision="3" />
@@ -72,6 +100,8 @@
         <EntityContainer Name="SailingMasterEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="Usuario" EntityType="Self.Usuario" />
           <EntitySet Name="Incidente" EntityType="SailingMasterModel.Incidente" />
+          <EntitySet Name="Moneda" EntityType="SailingMasterModel.Moneda" />
+          <EntitySet Name="Servicio" EntityType="SailingMasterModel.Servicio" />
           <EntitySet Name="Log" EntityType="SailingMasterModel.Log" />
         </EntityContainer>
         <EntityType Name="Incidente">
@@ -79,9 +109,35 @@
             <PropertyRef Name="ID" />
           </Key>
           <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Titulo" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
-          <Property Name="Descripcion" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
-          <Property Name="Fecha" Type="DateTime" Precision="0" />
+          <Property Name="Titulo" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Descripcion" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Fecha" Type="DateTime" Precision="3" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Moneda">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="String" Nullable="false" MaxLength="40" FixedLength="false" Unicode="false" />
+          <Property Name="descrip" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="base" Type="Boolean" Nullable="false" />
+          <Property Name="tasa" Type="Decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="co_us_in" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="fe_us_in" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="co_us_mo" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="fe_us_mo" Type="DateTime" Nullable="false" Precision="3" />
+        </EntityType>
+        <EntityType Name="Servicio">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="String" Nullable="false" MaxLength="40" FixedLength="false" Unicode="false" />
+          <Property Name="descrip" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="precio_base" Type="Decimal" Nullable="false" Precision="19" Scale="4" />
+          <Property Name="activo" Type="Boolean" Nullable="false" />
+          <Property Name="co_us_in" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="fe_us_in" Type="DateTime" Precision="3" />
+          <Property Name="co_us_mo" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="fe_us_mo" Type="DateTime" Precision="3" />
         </EntityType>
         <EntityType Name="Log">
           <Key>
@@ -91,7 +147,7 @@
           <Property Name="fecha" Type="DateTime" Nullable="false" Precision="0" />
           <Property Name="usuario" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
           <Property Name="item" Type="String" Nullable="false" MaxLength="60" FixedLength="false" Unicode="false" />
-          <Property Name="id_item" Type="Int32" Nullable="false" />
+          <Property Name="id_item" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="accion" Type="String" Nullable="false" MaxLength="1" FixedLength="true" Unicode="false" />
           <Property Name="campos" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
         </EntityType>
@@ -125,6 +181,34 @@
                 <ScalarProperty Name="Fecha" ColumnName="Fecha" />
                 <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
                 <ScalarProperty Name="Titulo" ColumnName="Titulo" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Moneda">
+            <EntityTypeMapping TypeName="SailingMasterModel.Moneda">
+              <MappingFragment StoreEntitySet="Moneda">
+                <ScalarProperty Name="fe_us_mo" ColumnName="fe_us_mo" />
+                <ScalarProperty Name="co_us_mo" ColumnName="co_us_mo" />
+                <ScalarProperty Name="fe_us_in" ColumnName="fe_us_in" />
+                <ScalarProperty Name="co_us_in" ColumnName="co_us_in" />
+                <ScalarProperty Name="tasa" ColumnName="tasa" />
+                <ScalarProperty Name="base" ColumnName="base" />
+                <ScalarProperty Name="descrip" ColumnName="descrip" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Servicio">
+            <EntityTypeMapping TypeName="SailingMasterModel.Servicio">
+              <MappingFragment StoreEntitySet="Servicio">
+                <ScalarProperty Name="fe_us_mo" ColumnName="fe_us_mo" />
+                <ScalarProperty Name="co_us_mo" ColumnName="co_us_mo" />
+                <ScalarProperty Name="fe_us_in" ColumnName="fe_us_in" />
+                <ScalarProperty Name="co_us_in" ColumnName="co_us_in" />
+                <ScalarProperty Name="activo" ColumnName="activo" />
+                <ScalarProperty Name="precio_base" ColumnName="precio_base" />
+                <ScalarProperty Name="descrip" ColumnName="descrip" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
               </MappingFragment>
             </EntityTypeMapping>

@@ -27,6 +27,8 @@ namespace SailingMaster.Models
     
         public virtual DbSet<Usuario> Usuario { get; set; }
         public virtual DbSet<Incidente> Incidente { get; set; }
+        public virtual DbSet<Moneda> Moneda { get; set; }
+        public virtual DbSet<Servicio> Servicio { get; set; }
         public virtual DbSet<Log> Log { get; set; }
     }
 }

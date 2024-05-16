@@ -105,6 +105,24 @@ namespace SailingMaster.Servicios
         protected global::DevExpress.Web.ASPxTextBox TB_Price;
 
         /// <summary>
+        /// Control DDL_Moneda.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::DevExpress.Web.ASPxComboBox DDL_Moneda;
+
+        /// <summary>
+        /// Control DS_Moneda.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.SqlDataSource DS_Moneda;
+
+        /// <summary>
         /// Control CK_Activo.
         /// </summary>
         /// <remarks>
