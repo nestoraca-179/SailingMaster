@@ -99,6 +99,7 @@
       <DependentUpon>SailingMaster.edmx</DependentUpon>
       <LastGenOutput>SailingMaster.cs</LastGenOutput>
     </Content>
+    <Content Include="Proformas\Index.aspx" />
     <Content Include="Scripts\bootstrap-5.2.js" />
     <EntityDeploy Include="Models\SailingMaster.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
@@ -208,6 +209,13 @@
     </Compile>
     <Compile Include="Models\Usuario.cs">
       <DependentUpon>SailingMaster.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Proformas\Index.aspx.cs">
+      <DependentUpon>Index.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Proformas\Index.aspx.designer.cs">
+      <DependentUpon>Index.aspx</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Servicios\Agregar.aspx.cs">

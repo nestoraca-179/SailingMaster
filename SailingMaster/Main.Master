@@ -32,7 +32,7 @@
 <section class="container-fluid row">
     <div class="col-3" id="menu">
         <ul class="menu">
-            <li><a href="#"><i class="fas fa-file"></i><p class="m-0">Proformas</p></a></li>
+            <li><a href="/Proformas/Index.aspx"><i class="fas fa-file"></i><p class="m-0">Proformas</p></a></li>
             <li><a href="#"><i class="fas fa-file-invoice"></i><p class="m-0">Liquidaciones</p></a></li>
             <li><a href="/Usuarios/Index.aspx" id="item_users" runat="server"><i class="fas fa-user"></i><p class="m-0">Usuarios</p></a></li>
             <li><a href="/Servicios/Index.aspx" id="item_prods" runat="server"><i class="fas fa-list"></i><p class="m-0">Tarifario</p></a></li>
