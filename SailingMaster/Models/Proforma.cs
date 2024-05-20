@@ -12,24 +12,38 @@ namespace SailingMaster.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class Moneda
+    public partial class Proforma
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Moneda()
+        public Proforma()
         {
-            this.Proforma = new HashSet<Proforma>();
+            this.ProformaReng = new HashSet<ProformaReng>();
         }
     
         public string ID { get; set; }
-        public string descrip { get; set; }
-        public bool @base { get; set; }
+        public System.DateTime fecha { get; set; }
+        public string cliente { get; set; }
+        public string puerto { get; set; }
+        public string buque { get; set; }
+        public string viaje { get; set; }
+        public string co_mone { get; set; }
         public decimal tasa { get; set; }
+        public System.DateTime llegada { get; set; }
+        public System.DateTime salida { get; set; }
+        public int toneladas { get; set; }
+        public bool approved { get; set; }
+        public string approved_by { get; set; }
+        public Nullable<System.DateTime> approved_date { get; set; }
+        public bool liquidated { get; set; }
+        public string liquidated_by { get; set; }
+        public Nullable<System.DateTime> liquidated_date { get; set; }
         public string co_us_in { get; set; }
         public System.DateTime fe_us_in { get; set; }
         public string co_us_mo { get; set; }
         public System.DateTime fe_us_mo { get; set; }
     
+        public virtual Moneda Moneda { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Proforma> Proforma { get; set; }
+        public virtual ICollection<ProformaReng> ProformaReng { get; set; }
     }
 }

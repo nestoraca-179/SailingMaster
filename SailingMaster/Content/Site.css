@@ -239,3 +239,6 @@ table td {
 .controls label {
     margin: 5px 0;
 }
+table[id^="MainContent_"] table {
+    border-radius: 5px;
+}

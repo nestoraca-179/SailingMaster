@@ -12,24 +12,19 @@ namespace SailingMaster.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class Moneda
+    public partial class ProformaReng
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Moneda()
-        {
-            this.Proforma = new HashSet<Proforma>();
-        }
-    
-        public string ID { get; set; }
-        public string descrip { get; set; }
-        public bool @base { get; set; }
-        public decimal tasa { get; set; }
+        public int reng_num { get; set; }
+        public string co_prof { get; set; }
+        public string co_serv { get; set; }
+        public string des_serv { get; set; }
+        public Nullable<decimal> price_serv { get; set; }
         public string co_us_in { get; set; }
         public System.DateTime fe_us_in { get; set; }
         public string co_us_mo { get; set; }
         public System.DateTime fe_us_mo { get; set; }
     
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Proforma> Proforma { get; set; }
+        public virtual Proforma Proforma { get; set; }
+        public virtual Servicio Servicio { get; set; }
     }
 }

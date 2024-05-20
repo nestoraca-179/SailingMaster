@@ -14,13 +14,22 @@ namespace SailingMaster.Models
     
     public partial class Servicio
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public Servicio()
+        {
+            this.ProformaReng = new HashSet<ProformaReng>();
+        }
+    
         public string ID { get; set; }
         public string descrip { get; set; }
         public decimal precio_base { get; set; }
         public bool activo { get; set; }
         public string co_us_in { get; set; }
-        public Nullable<System.DateTime> fe_us_in { get; set; }
+        public System.DateTime fe_us_in { get; set; }
         public string co_us_mo { get; set; }
-        public Nullable<System.DateTime> fe_us_mo { get; set; }
+        public System.DateTime fe_us_mo { get; set; }
+    
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<ProformaReng> ProformaReng { get; set; }
     }
 }

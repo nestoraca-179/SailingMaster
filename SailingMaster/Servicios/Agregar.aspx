@@ -46,7 +46,7 @@
             <div class="col-md-4">
                 <div class="controls">
                     <label>Precio Base</label>
-                    <dx:ASPxTextBox ID="TB_Price" runat="server" Theme="Material" Width="100%" AutoCompleteType="None">
+                    <dx:ASPxTextBox ID="TB_Price" runat="server" Theme="Material" Width="100%" AutoCompleteType="None" ValueType="System.Decimal">
                         <ClientSideEvents KeyPress="function (s,e) { onlyNumbers(s, e); }" />
                         <ValidationSettings ValidationGroup="Servicio" ErrorText="" ValidateOnLeave="false" ErrorTextPosition="Bottom">
                             <RequiredField IsRequired="True" ErrorText="Campo Obligatorio" />

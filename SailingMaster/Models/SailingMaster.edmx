@@ -30,10 +30,51 @@
           <Key>
             <PropertyRef Name="ID" />
           </Key>
-          <Property Name="ID" Type="varchar" MaxLength="40" Nullable="false" />
+          <Property Name="ID" Type="varchar" MaxLength="10" Nullable="false" />
           <Property Name="descrip" Type="varchar" MaxLength="100" Nullable="false" />
           <Property Name="base" Type="bit" Nullable="false" />
           <Property Name="tasa" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="co_us_in" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="fe_us_in" Type="datetime" Nullable="false" />
+          <Property Name="co_us_mo" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="fe_us_mo" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Proforma">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="varchar" MaxLength="30" Nullable="false" />
+          <Property Name="fecha" Type="smalldatetime" Nullable="false" />
+          <Property Name="cliente" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="puerto" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="buque" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="viaje" Type="varchar" MaxLength="30" Nullable="false" />
+          <Property Name="co_mone" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="tasa" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="llegada" Type="smalldatetime" Nullable="false" />
+          <Property Name="salida" Type="smalldatetime" Nullable="false" />
+          <Property Name="toneladas" Type="int" Nullable="false" />
+          <Property Name="approved" Type="bit" Nullable="false" />
+          <Property Name="approved_by" Type="varchar" MaxLength="20" />
+          <Property Name="approved_date" Type="datetime" />
+          <Property Name="liquidated" Type="bit" Nullable="false" />
+          <Property Name="liquidated_by" Type="varchar" MaxLength="20" />
+          <Property Name="liquidated_date" Type="datetime" />
+          <Property Name="co_us_in" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="fe_us_in" Type="datetime" Nullable="false" />
+          <Property Name="co_us_mo" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="fe_us_mo" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ProformaReng">
+          <Key>
+            <PropertyRef Name="reng_num" />
+            <PropertyRef Name="co_prof" />
+          </Key>
+          <Property Name="reng_num" Type="int" Nullable="false" />
+          <Property Name="co_prof" Type="varchar" MaxLength="30" Nullable="false" />
+          <Property Name="co_serv" Type="varchar" MaxLength="40" Nullable="false" />
+          <Property Name="des_serv" Type="varchar(max)" Nullable="false" />
+          <Property Name="price_serv" Type="money" />
           <Property Name="co_us_in" Type="varchar" MaxLength="20" Nullable="false" />
           <Property Name="fe_us_in" Type="datetime" Nullable="false" />
           <Property Name="co_us_mo" Type="varchar" MaxLength="20" Nullable="false" />
@@ -48,9 +89,9 @@
           <Property Name="precio_base" Type="money" Nullable="false" />
           <Property Name="activo" Type="bit" Nullable="false" />
           <Property Name="co_us_in" Type="varchar" MaxLength="20" Nullable="false" />
-          <Property Name="fe_us_in" Type="datetime" />
+          <Property Name="fe_us_in" Type="datetime" Nullable="false" />
           <Property Name="co_us_mo" Type="varchar" MaxLength="20" Nullable="false" />
-          <Property Name="fe_us_mo" Type="datetime" />
+          <Property Name="fe_us_mo" Type="datetime" Nullable="false" />
         </EntityType>
         <EntityType Name="Usuario">
           <Key>
@@ -69,75 +110,96 @@
           <Property Name="co_us_mo" Type="varchar" MaxLength="20" Nullable="false" />
           <Property Name="fe_us_mo" Type="datetime" Nullable="false" />
         </EntityType>
+        <Association Name="FK__Proforma__co_mon__5CD6CB2B">
+          <End Role="Moneda" Type="Self.Moneda" Multiplicity="1" />
+          <End Role="Proforma" Type="Self.Proforma" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Moneda">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Proforma">
+              <PropertyRef Name="co_mone" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__ProformaR__co_pr__0F624AF8">
+          <End Role="Proforma" Type="Self.Proforma" Multiplicity="1" />
+          <End Role="ProformaReng" Type="Self.ProformaReng" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Proforma">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="ProformaReng">
+              <PropertyRef Name="co_prof" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__ProformaR__co_se__10566F31">
+          <End Role="Servicio" Type="Self.Servicio" Multiplicity="1" />
+          <End Role="ProformaReng" Type="Self.ProformaReng" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Servicio">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="ProformaReng">
+              <PropertyRef Name="co_serv" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <EntityContainer Name="SailingMasterModelStoreContainer">
           <EntitySet Name="Incidente" EntityType="Self.Incidente" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Log" EntityType="Self.Log" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Moneda" EntityType="Self.Moneda" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Proforma" EntityType="Self.Proforma" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ProformaReng" EntityType="Self.ProformaReng" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Servicio" EntityType="Self.Servicio" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Usuario" EntityType="Self.Usuario" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__Proforma__co_mon__5CD6CB2B" Association="Self.FK__Proforma__co_mon__5CD6CB2B">
+            <End Role="Moneda" EntitySet="Moneda" />
+            <End Role="Proforma" EntitySet="Proforma" />
+          </AssociationSet>
+          <AssociationSet Name="FK__ProformaR__co_pr__0F624AF8" Association="Self.FK__ProformaR__co_pr__0F624AF8">
+            <End Role="Proforma" EntitySet="Proforma" />
+            <End Role="ProformaReng" EntitySet="ProformaReng" />
+          </AssociationSet>
+          <AssociationSet Name="FK__ProformaR__co_se__10566F31" Association="Self.FK__ProformaR__co_se__10566F31">
+            <End Role="Servicio" EntitySet="Servicio" />
+            <End Role="ProformaReng" EntitySet="ProformaReng" />
+          </AssociationSet>
         </EntityContainer>
       </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="SailingMasterModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
-        <EntityType Name="Usuario">
-          <Key>
-            <PropertyRef Name="ID" />
-          </Key>
-          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="username" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="password" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="descrip" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="email" Type="String" MaxLength="60" FixedLength="false" Unicode="false" />
-          <Property Name="activo" Type="Boolean" Nullable="false" />
-          <Property Name="tip_usuario" Type="Byte" Nullable="false" />
-          <Property Name="fec_camb" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="co_us_in" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="fe_us_in" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="co_us_mo" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="fe_us_mo" Type="DateTime" Nullable="false" Precision="3" />
-        </EntityType>
         <EntityContainer Name="SailingMasterEntities" annotation:LazyLoadingEnabled="true">
-          <EntitySet Name="Usuario" EntityType="Self.Usuario" />
           <EntitySet Name="Incidente" EntityType="SailingMasterModel.Incidente" />
-          <EntitySet Name="Moneda" EntityType="SailingMasterModel.Moneda" />
-          <EntitySet Name="Servicio" EntityType="SailingMasterModel.Servicio" />
           <EntitySet Name="Log" EntityType="SailingMasterModel.Log" />
+          <EntitySet Name="Moneda" EntityType="SailingMasterModel.Moneda" />
+          <EntitySet Name="Proforma" EntityType="SailingMasterModel.Proforma" />
+          <EntitySet Name="ProformaReng" EntityType="SailingMasterModel.ProformaReng" />
+          <EntitySet Name="Servicio" EntityType="SailingMasterModel.Servicio" />
+          <EntitySet Name="Usuario" EntityType="SailingMasterModel.Usuario" />
+          <AssociationSet Name="FK__Proforma__co_mon__5CD6CB2B" Association="SailingMasterModel.FK__Proforma__co_mon__5CD6CB2B">
+            <End Role="Moneda" EntitySet="Moneda" />
+            <End Role="Proforma" EntitySet="Proforma" />
+          </AssociationSet>
+          <AssociationSet Name="FK__ProformaR__co_pr__0F624AF8" Association="SailingMasterModel.FK__ProformaR__co_pr__0F624AF8">
+            <End Role="Proforma" EntitySet="Proforma" />
+            <End Role="ProformaReng" EntitySet="ProformaReng" />
+          </AssociationSet>
+          <AssociationSet Name="FK__ProformaR__co_se__10566F31" Association="SailingMasterModel.FK__ProformaR__co_se__10566F31">
+            <End Role="Servicio" EntitySet="Servicio" />
+            <End Role="ProformaReng" EntitySet="ProformaReng" />
+          </AssociationSet>
         </EntityContainer>
         <EntityType Name="Incidente">
           <Key>
             <PropertyRef Name="ID" />
           </Key>
           <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Titulo" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="Descripcion" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="Fecha" Type="DateTime" Precision="3" Nullable="false" />
-        </EntityType>
-        <EntityType Name="Moneda">
-          <Key>
-            <PropertyRef Name="ID" />
-          </Key>
-          <Property Name="ID" Type="String" Nullable="false" MaxLength="40" FixedLength="false" Unicode="false" />
-          <Property Name="descrip" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
-          <Property Name="base" Type="Boolean" Nullable="false" />
-          <Property Name="tasa" Type="Decimal" Precision="18" Scale="2" Nullable="false" />
-          <Property Name="co_us_in" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
-          <Property Name="fe_us_in" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="co_us_mo" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
-          <Property Name="fe_us_mo" Type="DateTime" Nullable="false" Precision="3" />
-        </EntityType>
-        <EntityType Name="Servicio">
-          <Key>
-            <PropertyRef Name="ID" />
-          </Key>
-          <Property Name="ID" Type="String" Nullable="false" MaxLength="40" FixedLength="false" Unicode="false" />
-          <Property Name="descrip" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
-          <Property Name="precio_base" Type="Decimal" Nullable="false" Precision="19" Scale="4" />
-          <Property Name="activo" Type="Boolean" Nullable="false" />
-          <Property Name="co_us_in" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
-          <Property Name="fe_us_in" Type="DateTime" Precision="3" />
-          <Property Name="co_us_mo" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
-          <Property Name="fe_us_mo" Type="DateTime" Precision="3" />
+          <Property Name="Titulo" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Descripcion" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Fecha" Type="DateTime" Nullable="false" Precision="3" />
         </EntityType>
         <EntityType Name="Log">
           <Key>
@@ -151,36 +213,157 @@
           <Property Name="accion" Type="String" Nullable="false" MaxLength="1" FixedLength="true" Unicode="false" />
           <Property Name="campos" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
         </EntityType>
+        <EntityType Name="Moneda">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="descrip" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="base" Type="Boolean" Nullable="false" />
+          <Property Name="tasa" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+          <Property Name="co_us_in" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="fe_us_in" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="co_us_mo" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="fe_us_mo" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="Proforma" Relationship="SailingMasterModel.FK__Proforma__co_mon__5CD6CB2B" FromRole="Moneda" ToRole="Proforma" />
+        </EntityType>
+        <EntityType Name="Proforma">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="fecha" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="cliente" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="puerto" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="buque" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="viaje" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="co_mone" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="tasa" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+          <Property Name="llegada" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="salida" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="toneladas" Type="Int32" Nullable="false" />
+          <Property Name="approved" Type="Boolean" Nullable="false" />
+          <Property Name="approved_by" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="approved_date" Type="DateTime" Precision="3" />
+          <Property Name="liquidated" Type="Boolean" Nullable="false" />
+          <Property Name="liquidated_by" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="liquidated_date" Type="DateTime" Precision="3" />
+          <Property Name="co_us_in" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="fe_us_in" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="co_us_mo" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="fe_us_mo" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="Moneda" Relationship="SailingMasterModel.FK__Proforma__co_mon__5CD6CB2B" FromRole="Proforma" ToRole="Moneda" />
+          <NavigationProperty Name="ProformaReng" Relationship="SailingMasterModel.FK__ProformaR__co_pr__0F624AF8" FromRole="Proforma" ToRole="ProformaReng" />
+        </EntityType>
+        <EntityType Name="ProformaReng">
+          <Key>
+            <PropertyRef Name="reng_num" />
+            <PropertyRef Name="co_prof" />
+          </Key>
+          <Property Name="reng_num" Type="Int32" Nullable="false" />
+          <Property Name="co_prof" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="co_serv" Type="String" Nullable="false" MaxLength="40" FixedLength="false" Unicode="false" />
+          <Property Name="des_serv" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="price_serv" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="co_us_in" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="fe_us_in" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="co_us_mo" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="fe_us_mo" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="Proforma" Relationship="SailingMasterModel.FK__ProformaR__co_pr__0F624AF8" FromRole="ProformaReng" ToRole="Proforma" />
+          <NavigationProperty Name="Servicio" Relationship="SailingMasterModel.FK__ProformaR__co_se__10566F31" FromRole="ProformaReng" ToRole="Servicio" />
+        </EntityType>
+        <EntityType Name="Servicio">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="String" Nullable="false" MaxLength="40" FixedLength="false" Unicode="false" />
+          <Property Name="descrip" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="precio_base" Type="Decimal" Nullable="false" Precision="19" Scale="4" />
+          <Property Name="activo" Type="Boolean" Nullable="false" />
+          <Property Name="co_us_in" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="fe_us_in" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="co_us_mo" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="fe_us_mo" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="ProformaReng" Relationship="SailingMasterModel.FK__ProformaR__co_se__10566F31" FromRole="Servicio" ToRole="ProformaReng" />
+        </EntityType>
+        <EntityType Name="Usuario">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="username" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="password" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="descrip" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="email" Type="String" MaxLength="60" FixedLength="false" Unicode="false" />
+          <Property Name="activo" Type="Boolean" Nullable="false" />
+          <Property Name="tip_usuario" Type="Byte" Nullable="false" />
+          <Property Name="fec_camb" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="co_us_in" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="fe_us_in" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="co_us_mo" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="fe_us_mo" Type="DateTime" Nullable="false" Precision="3" />
+        </EntityType>
+        <Association Name="FK__Proforma__co_mon__5CD6CB2B">
+          <End Type="SailingMasterModel.Moneda" Role="Moneda" Multiplicity="1" />
+          <End Type="SailingMasterModel.Proforma" Role="Proforma" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Moneda">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Proforma">
+              <PropertyRef Name="co_mone" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__ProformaR__co_pr__0F624AF8">
+          <End Type="SailingMasterModel.Proforma" Role="Proforma" Multiplicity="1" />
+          <End Type="SailingMasterModel.ProformaReng" Role="ProformaReng" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Proforma">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="ProformaReng">
+              <PropertyRef Name="co_prof" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__ProformaR__co_se__10566F31">
+          <End Type="SailingMasterModel.Servicio" Role="Servicio" Multiplicity="1" />
+          <End Type="SailingMasterModel.ProformaReng" Role="ProformaReng" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Servicio">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="ProformaReng">
+              <PropertyRef Name="co_serv" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
         <EntityContainerMapping StorageEntityContainer="SailingMasterModelStoreContainer" CdmEntityContainer="SailingMasterEntities">
-          <EntitySetMapping Name="Usuario">
-            <EntityTypeMapping TypeName="SailingMasterModel.Usuario">
-              <MappingFragment StoreEntitySet="Usuario">
-                <ScalarProperty Name="ID" ColumnName="ID" />
-                <ScalarProperty Name="username" ColumnName="username" />
-                <ScalarProperty Name="password" ColumnName="password" />
-                <ScalarProperty Name="descrip" ColumnName="descrip" />
-                <ScalarProperty Name="email" ColumnName="email" />
-                <ScalarProperty Name="activo" ColumnName="activo" />
-                <ScalarProperty Name="tip_usuario" ColumnName="tip_usuario" />
-                <ScalarProperty Name="fec_camb" ColumnName="fec_camb" />
-                <ScalarProperty Name="co_us_in" ColumnName="co_us_in" />
-                <ScalarProperty Name="fe_us_in" ColumnName="fe_us_in" />
-                <ScalarProperty Name="co_us_mo" ColumnName="co_us_mo" />
-                <ScalarProperty Name="fe_us_mo" ColumnName="fe_us_mo" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="Incidente">
             <EntityTypeMapping TypeName="SailingMasterModel.Incidente">
               <MappingFragment StoreEntitySet="Incidente">
                 <ScalarProperty Name="Fecha" ColumnName="Fecha" />
                 <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
                 <ScalarProperty Name="Titulo" ColumnName="Titulo" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Log">
+            <EntityTypeMapping TypeName="SailingMasterModel.Log">
+              <MappingFragment StoreEntitySet="Log">
+                <ScalarProperty Name="campos" ColumnName="campos" />
+                <ScalarProperty Name="accion" ColumnName="accion" />
+                <ScalarProperty Name="id_item" ColumnName="id_item" />
+                <ScalarProperty Name="item" ColumnName="item" />
+                <ScalarProperty Name="usuario" ColumnName="usuario" />
+                <ScalarProperty Name="fecha" ColumnName="fecha" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
               </MappingFragment>
             </EntityTypeMapping>
@@ -199,6 +382,48 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="Proforma">
+            <EntityTypeMapping TypeName="SailingMasterModel.Proforma">
+              <MappingFragment StoreEntitySet="Proforma">
+                <ScalarProperty Name="fe_us_mo" ColumnName="fe_us_mo" />
+                <ScalarProperty Name="co_us_mo" ColumnName="co_us_mo" />
+                <ScalarProperty Name="fe_us_in" ColumnName="fe_us_in" />
+                <ScalarProperty Name="co_us_in" ColumnName="co_us_in" />
+                <ScalarProperty Name="liquidated_date" ColumnName="liquidated_date" />
+                <ScalarProperty Name="liquidated_by" ColumnName="liquidated_by" />
+                <ScalarProperty Name="liquidated" ColumnName="liquidated" />
+                <ScalarProperty Name="approved_date" ColumnName="approved_date" />
+                <ScalarProperty Name="approved_by" ColumnName="approved_by" />
+                <ScalarProperty Name="approved" ColumnName="approved" />
+                <ScalarProperty Name="toneladas" ColumnName="toneladas" />
+                <ScalarProperty Name="salida" ColumnName="salida" />
+                <ScalarProperty Name="llegada" ColumnName="llegada" />
+                <ScalarProperty Name="tasa" ColumnName="tasa" />
+                <ScalarProperty Name="co_mone" ColumnName="co_mone" />
+                <ScalarProperty Name="viaje" ColumnName="viaje" />
+                <ScalarProperty Name="buque" ColumnName="buque" />
+                <ScalarProperty Name="puerto" ColumnName="puerto" />
+                <ScalarProperty Name="cliente" ColumnName="cliente" />
+                <ScalarProperty Name="fecha" ColumnName="fecha" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ProformaReng">
+            <EntityTypeMapping TypeName="SailingMasterModel.ProformaReng">
+              <MappingFragment StoreEntitySet="ProformaReng">
+                <ScalarProperty Name="fe_us_mo" ColumnName="fe_us_mo" />
+                <ScalarProperty Name="co_us_mo" ColumnName="co_us_mo" />
+                <ScalarProperty Name="fe_us_in" ColumnName="fe_us_in" />
+                <ScalarProperty Name="co_us_in" ColumnName="co_us_in" />
+                <ScalarProperty Name="price_serv" ColumnName="price_serv" />
+                <ScalarProperty Name="des_serv" ColumnName="des_serv" />
+                <ScalarProperty Name="co_serv" ColumnName="co_serv" />
+                <ScalarProperty Name="co_prof" ColumnName="co_prof" />
+                <ScalarProperty Name="reng_num" ColumnName="reng_num" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="Servicio">
             <EntityTypeMapping TypeName="SailingMasterModel.Servicio">
               <MappingFragment StoreEntitySet="Servicio">
@@ -213,15 +438,20 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="Log">
-            <EntityTypeMapping TypeName="SailingMasterModel.Log">
-              <MappingFragment StoreEntitySet="Log">
-                <ScalarProperty Name="campos" ColumnName="campos" />
-                <ScalarProperty Name="accion" ColumnName="accion" />
-                <ScalarProperty Name="id_item" ColumnName="id_item" />
-                <ScalarProperty Name="item" ColumnName="item" />
-                <ScalarProperty Name="usuario" ColumnName="usuario" />
-                <ScalarProperty Name="fecha" ColumnName="fecha" />
+          <EntitySetMapping Name="Usuario">
+            <EntityTypeMapping TypeName="SailingMasterModel.Usuario">
+              <MappingFragment StoreEntitySet="Usuario">
+                <ScalarProperty Name="fe_us_mo" ColumnName="fe_us_mo" />
+                <ScalarProperty Name="co_us_mo" ColumnName="co_us_mo" />
+                <ScalarProperty Name="fe_us_in" ColumnName="fe_us_in" />
+                <ScalarProperty Name="co_us_in" ColumnName="co_us_in" />
+                <ScalarProperty Name="fec_camb" ColumnName="fec_camb" />
+                <ScalarProperty Name="tip_usuario" ColumnName="tip_usuario" />
+                <ScalarProperty Name="activo" ColumnName="activo" />
+                <ScalarProperty Name="email" ColumnName="email" />
+                <ScalarProperty Name="descrip" ColumnName="descrip" />
+                <ScalarProperty Name="password" ColumnName="password" />
+                <ScalarProperty Name="username" ColumnName="username" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
               </MappingFragment>
             </EntityTypeMapping>

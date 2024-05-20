@@ -16,7 +16,7 @@ namespace SailingMaster.Proformas
 
         protected void BTN_AgregarProforma_Click(object sender, EventArgs e)
         {
-            //Response.Redirect("/Servicios/Agregar.aspx");
+            Response.Redirect("/Proformas/Agregar.aspx");
         }
 
         protected void BTN_EliminarProforma_Click(object sender, EventArgs e)

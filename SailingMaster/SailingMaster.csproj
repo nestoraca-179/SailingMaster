@@ -99,6 +99,7 @@
       <DependentUpon>SailingMaster.edmx</DependentUpon>
       <LastGenOutput>SailingMaster.cs</LastGenOutput>
     </Content>
+    <Content Include="Proformas\Agregar.aspx" />
     <Content Include="Proformas\Index.aspx" />
     <Content Include="Scripts\bootstrap-5.2.js" />
     <EntityDeploy Include="Models\SailingMaster.edmx">
@@ -189,6 +190,12 @@
     <Compile Include="Models\Moneda.cs">
       <DependentUpon>SailingMaster.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\Proforma.cs">
+      <DependentUpon>SailingMaster.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ProformaReng.cs">
+      <DependentUpon>SailingMaster.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\SailingMaster.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -209,6 +216,13 @@
     </Compile>
     <Compile Include="Models\Usuario.cs">
       <DependentUpon>SailingMaster.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Proformas\Agregar.aspx.cs">
+      <DependentUpon>Agregar.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Proformas\Agregar.aspx.designer.cs">
+      <DependentUpon>Agregar.aspx</DependentUpon>
     </Compile>
     <Compile Include="Proformas\Index.aspx.cs">
       <DependentUpon>Index.aspx</DependentUpon>
