@@ -7,7 +7,7 @@
 // </generado automáticamente>
 //------------------------------------------------------------------------------
 
-namespace SailingMaster.Proformas
+namespace SailingMaster.Documentos
 {
 
 
@@ -69,13 +69,13 @@ namespace SailingMaster.Proformas
         protected global::System.Web.UI.WebControls.Panel PN_ContainerForm;
 
         /// <summary>
-        /// Control BTN_AgregarProforma.
+        /// Control BTN_AgregarDocumento.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton BTN_AgregarProforma;
+        protected global::System.Web.UI.WebControls.LinkButton BTN_AgregarDocumento;
 
         /// <summary>
         /// Control LBL_Delete.
@@ -87,12 +87,12 @@ namespace SailingMaster.Proformas
         protected global::DevExpress.Web.ASPxLabel LBL_Delete;
 
         /// <summary>
-        /// Control BTN_EliminarProforma.
+        /// Control BTN_EliminarDocumento.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::DevExpress.Web.ASPxButton BTN_EliminarProforma;
+        protected global::DevExpress.Web.ASPxButton BTN_EliminarDocumento;
     }
 }

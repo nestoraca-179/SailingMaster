@@ -17,7 +17,7 @@ namespace SailingMaster.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Servicio()
         {
-            this.ProformaReng = new HashSet<ProformaReng>();
+            this.DocumentoReng = new HashSet<DocumentoReng>();
         }
     
         public string ID { get; set; }
@@ -30,6 +30,6 @@ namespace SailingMaster.Models
         public System.DateTime fe_us_mo { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<ProformaReng> ProformaReng { get; set; }
+        public virtual ICollection<DocumentoReng> DocumentoReng { get; set; }
     }
 }

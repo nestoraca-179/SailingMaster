@@ -5,7 +5,7 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 
-namespace SailingMaster.Proformas
+namespace SailingMaster.Documentos
 {
     public partial class Index : System.Web.UI.Page
     {
@@ -14,12 +14,12 @@ namespace SailingMaster.Proformas
 
         }
 
-        protected void BTN_AgregarProforma_Click(object sender, EventArgs e)
+        protected void BTN_AgregarDocumento_Click(object sender, EventArgs e)
         {
-            Response.Redirect("/Proformas/Agregar.aspx");
+            Response.Redirect("/Documentos/Agregar.aspx");
         }
 
-        protected void BTN_EliminarProforma_Click(object sender, EventArgs e)
+        protected void BTN_EliminarDocumento_Click(object sender, EventArgs e)
         {
             //Usuario user = (Session["USER"] as Usuario);
             //int result = ServicioController.Delete(IDSelected, user.username);

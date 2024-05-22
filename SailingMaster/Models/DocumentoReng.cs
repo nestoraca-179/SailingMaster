@@ -12,7 +12,7 @@ namespace SailingMaster.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class ProformaReng
+    public partial class DocumentoReng
     {
         public int reng_num { get; set; }
         public string co_prof { get; set; }
@@ -24,7 +24,7 @@ namespace SailingMaster.Models
         public string co_us_mo { get; set; }
         public System.DateTime fe_us_mo { get; set; }
     
-        public virtual Proforma Proforma { get; set; }
+        public virtual Documento Documento { get; set; }
         public virtual Servicio Servicio { get; set; }
     }
 }

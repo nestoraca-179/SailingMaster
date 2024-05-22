@@ -24,15 +24,6 @@ namespace SailingMaster
         protected global::System.Web.UI.WebControls.Label LBL_User;
 
         /// <summary>
-        /// Control item_users.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlAnchor item_users;
-
-        /// <summary>
         /// Control item_prods.
         /// </summary>
         /// <remarks>
@@ -40,6 +31,15 @@ namespace SailingMaster
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlAnchor item_prods;
+
+        /// <summary>
+        /// Control item_users.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlAnchor item_users;
 
         /// <summary>
         /// Control MainContent.

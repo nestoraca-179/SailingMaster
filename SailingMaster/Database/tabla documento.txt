@@ -1,0 +1,34 @@
+ID - cuenta de buque
+fecha
+cliente
+puerto
+buque
+viaje
+co_mone
+tasa
+llegada
+salida
+toneladas
+total
+status
+   0- GENERADO
+   1- APROBADO (Usuario, Fecha)
+   2- REVISADO (Usuario, Fecha, Observaciones)
+   3- LIQUIDADA (Usuario, Fecha, Monto, Fecha Transf, Referencia) 
+   4- CERRADA (Usuario, Fecha)
+approved_by
+approved_date
+reviewed_by
+reviewed_date
+reviewed_observ
+liquidated_by
+liquidated_date
+liquidated_amount
+liquidated_date_transf
+liquidated_nref_transf
+closed_by
+closed_date
+co_us_in
+fe_us_in
+co_us_mo
+fe_us_mo

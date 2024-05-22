@@ -14,23 +14,25 @@ namespace SailingMaster.Usuarios
         {
             Usuario user = (Session["USER"] as Usuario);
 
-            if (Request.QueryString["new_user"] != null)
-            {
-                PN_Success.Visible = true;
-                LBL_Success.Text = "Usuario agregado con éxito";
-            }
-
-            if (Request.QueryString["edit_user"] != null)
-            {
-                PN_Success.Visible = true;
-                LBL_Success.Text = "Usuario modificado con éxito";
-            }
-
             if (user.tip_usuario != 0)
             {
                 PN_ContainerForm.Visible = false;
                 PN_Error.Visible = true;
                 LBL_Error.Text = "No tienes acceso al área de usuarios";
+            }
+            else
+            {
+                if (Request.QueryString["new_user"] != null)
+                {
+                    PN_Success.Visible = true;
+                    LBL_Success.Text = "Usuario agregado con éxito";
+                }
+
+                if (Request.QueryString["edit_user"] != null)
+                {
+                    PN_Success.Visible = true;
+                    LBL_Success.Text = "Usuario modificado con éxito";
+                }
             }
         }
 

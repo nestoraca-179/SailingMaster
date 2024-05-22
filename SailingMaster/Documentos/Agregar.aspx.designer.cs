@@ -7,7 +7,7 @@
 // </generado automáticamente>
 //------------------------------------------------------------------------------
 
-namespace SailingMaster.Proformas
+namespace SailingMaster.Documentos
 {
 
 
@@ -186,13 +186,13 @@ namespace SailingMaster.Proformas
         protected global::DevExpress.Web.ASPxDateEdit DE_DateSailed;
 
         /// <summary>
-        /// Control GV_ProformaReng.
+        /// Control GV_DocumentoReng.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::DevExpress.Web.ASPxGridView GV_ProformaReng;
+        protected global::DevExpress.Web.ASPxGridView GV_DocumentoReng;
 
         /// <summary>
         /// Control DS_Servicio.

@@ -31,14 +31,14 @@
         </div>
         <div class="form-grid">
             <dx:ASPxGridView ID="GV_Servicios" runat="server" Width="100%" Theme="Material" AutoGenerateColumns="False" DataSourceID="DS_Servicios" KeyFieldName="ID"
-                EnableTheming="True" OnRowCommand="GV_Servicios_RowCommand">
+                EnableTheming="True" OnRowCommand="GV_Servicios_RowCommand" OnHtmlRowPrepared="GV_Servicios_HtmlRowPrepared">
                 <SettingsDataSecurity AllowDelete="False" AllowInsert="False" AllowEdit="False"></SettingsDataSecurity>
                 <SettingsSearchPanel Visible="True"></SettingsSearchPanel>
                 <Columns>
                     <dx:GridViewDataTextColumn FieldName="ID" ReadOnly="True" VisibleIndex="0" Caption="Código">
                         <EditFormSettings Visible="False"></EditFormSettings>
                         <HeaderStyle BackColor="#191c24" ForeColor="#F0F0F0"></HeaderStyle>
-                        <CellStyle BackColor="#17181C" ForeColor="#F0F0F0" Border-BorderColor="#3E4753"></CellStyle>
+                        <%--<CellStyle BackColor="#17181C" ForeColor="#F0F0F0" Border-BorderColor="#3E4753"></CellStyle>--%>
                     </dx:GridViewDataTextColumn>
                     <dx:GridViewDataTextColumn FieldName="descrip" VisibleIndex="1" Caption="Descripción">
                         <HeaderStyle BackColor="#191c24" ForeColor="#F0F0F0"></HeaderStyle>

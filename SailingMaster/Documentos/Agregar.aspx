@@ -1,4 +1,4 @@
-﻿<%@ Page Title="Agregar Proforma" Language="C#" MasterPageFile="~/Main.Master" AutoEventWireup="true" CodeBehind="Agregar.aspx.cs" Inherits="SailingMaster.Proformas.Agregar" %>
+﻿<%@ Page Title="Agregar Documento" Language="C#" MasterPageFile="~/Main.Master" AutoEventWireup="true" CodeBehind="Agregar.aspx.cs" Inherits="SailingMaster.Documentos.Agregar" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
 <asp:Panel ID="PN_Error" runat="server" Width="100%" CssClass="mt-2" Visible="false">
@@ -13,19 +13,19 @@
                 <asp:LinkButton ID="BTN_Volver" runat="server" CssClass="btn btn-primary" OnClick="BTN_Volver_Click">
                     <i class="fas fa-arrow-left"></i> Regresar
                 </asp:LinkButton>
-                <dx:ASPxButton ID="BTN_Guardar" runat="server" CssClass="btn btn-success mx-2" Text="Guardar" ValidationGroup="Proforma" OnClick="BTN_Guardar_Click" />
+                <dx:ASPxButton ID="BTN_Guardar" runat="server" CssClass="btn btn-success mx-2" Text="Guardar" ValidationGroup="Documento" OnClick="BTN_Guardar_Click" />
             </div>
             <div class="col">
-                <dx:ASPxLabel ID="LBL_IDUsuario" runat="server" Text="Agregar Proforma" Width="100%" Font-Size="24px" CssClass="title-screen text-center text-light"></dx:ASPxLabel>
+                <dx:ASPxLabel ID="LBL_IDUsuario" runat="server" Text="Agregar Documento" Width="100%" Font-Size="24px" CssClass="title-screen text-center text-light"></dx:ASPxLabel>
             </div>
             <div class="col"></div>
         </div>
         <div class="row">
             <div class="col-md-4">
                 <div class="controls">
-                    <label>Nro. Proforma</label>
+                    <label>Nro. Documento</label>
                     <dx:ASPxTextBox ID="TB_Code" runat="server" Theme="Material" Width="100%" AutoCompleteType="None">
-                        <ValidationSettings ValidationGroup="Proforma" ErrorText="" ValidateOnLeave="false" ErrorTextPosition="Bottom">
+                        <ValidationSettings ValidationGroup="Documento" ErrorText="" ValidateOnLeave="false" ErrorTextPosition="Bottom">
                             <RequiredField IsRequired="True" ErrorText="Campo Obligatorio" />
                         </ValidationSettings>
                     </dx:ASPxTextBox>
@@ -35,7 +35,7 @@
                 <div class="controls">
                     <label>Cliente</label>
                     <dx:ASPxTextBox ID="TB_Client" runat="server" Theme="Material" Width="100%" AutoCompleteType="None">
-                        <ValidationSettings ValidationGroup="Proforma" ErrorText="" ValidateOnLeave="false" ErrorTextPosition="Bottom">
+                        <ValidationSettings ValidationGroup="Documento" ErrorText="" ValidateOnLeave="false" ErrorTextPosition="Bottom">
                             <RequiredField IsRequired="True" ErrorText="Campo Obligatorio" />
                         </ValidationSettings>
                     </dx:ASPxTextBox>
@@ -46,7 +46,7 @@
                     <div class="controls">
                     <label>Fecha</label>
                     <dx:ASPxDateEdit ID="DE_Date" runat="server" Theme="Material" EditFormat="Date" Width="100%">
-                        <ValidationSettings ValidationGroup="Proforma" ErrorText="" ValidateOnLeave="false" ErrorTextPosition="Bottom">
+                        <ValidationSettings ValidationGroup="Documento" ErrorText="" ValidateOnLeave="false" ErrorTextPosition="Bottom">
                             <RequiredField IsRequired="True" ErrorText="Campo Obligatorio" />
                         </ValidationSettings>
                     </dx:ASPxDateEdit>
@@ -59,7 +59,7 @@
                 <div class="controls">
                     <label>Puerto</label>
                     <dx:ASPxTextBox ID="TB_Port" runat="server" Theme="Material" Width="100%" AutoCompleteType="None">
-                        <ValidationSettings ValidationGroup="Proforma" ErrorText="" ValidateOnLeave="false" ErrorTextPosition="Bottom">
+                        <ValidationSettings ValidationGroup="Documento" ErrorText="" ValidateOnLeave="false" ErrorTextPosition="Bottom">
                             <RequiredField IsRequired="True" ErrorText="Campo Obligatorio" />
                         </ValidationSettings>
                     </dx:ASPxTextBox>
@@ -69,7 +69,7 @@
                 <div class="controls">
                     <label>Buque</label>
                     <dx:ASPxTextBox ID="TB_Vessel" runat="server" Theme="Material" Width="100%" AutoCompleteType="None">
-                        <ValidationSettings ValidationGroup="Proforma" ErrorText="" ValidateOnLeave="false" ErrorTextPosition="Bottom">
+                        <ValidationSettings ValidationGroup="Documento" ErrorText="" ValidateOnLeave="false" ErrorTextPosition="Bottom">
                             <RequiredField IsRequired="True" ErrorText="Campo Obligatorio" />
                         </ValidationSettings>
                     </dx:ASPxTextBox>
@@ -79,7 +79,7 @@
                 <div class="controls">
                     <label>Nro. Viaje</label>
                     <dx:ASPxTextBox ID="TB_Voyage" runat="server" Theme="Material" Width="100%" AutoCompleteType="None">
-                        <ValidationSettings ValidationGroup="Proforma" ErrorText="" ValidateOnLeave="false" ErrorTextPosition="Bottom">
+                        <ValidationSettings ValidationGroup="Documento" ErrorText="" ValidateOnLeave="false" ErrorTextPosition="Bottom">
                             <RequiredField IsRequired="True" ErrorText="Campo Obligatorio" />
                         </ValidationSettings>
                     </dx:ASPxTextBox>
@@ -95,7 +95,7 @@
                             <dx:ListBoxColumn FieldName="ID" Width="40px" Caption="C&#243;digo"></dx:ListBoxColumn>
                             <dx:ListBoxColumn FieldName="descrip" Caption="Descripci&#243;n"></dx:ListBoxColumn>
                         </Columns>
-                        <ValidationSettings ValidationGroup="Proforma" ErrorText="" ValidateOnLeave="false" ErrorTextPosition="Bottom">
+                        <ValidationSettings ValidationGroup="Documento" ErrorText="" ValidateOnLeave="false" ErrorTextPosition="Bottom">
                             <RequiredField IsRequired="True" ErrorText="Campo Obligatorio" />
                         </ValidationSettings>
                     </dx:ASPxComboBox>
@@ -107,7 +107,7 @@
                     <label>Tasa de Cambio</label>
                     <dx:ASPxTextBox ID="TB_Rate" runat="server" Theme="Material" Width="100%" AutoCompleteType="None" ValueType="System.Decimal">
                         <ClientSideEvents KeyPress="function (s,e) { onlyNumbers(s, e); }" />
-                        <ValidationSettings ValidationGroup="Proforma" ErrorText="" ValidateOnLeave="false" ErrorTextPosition="Bottom">
+                        <ValidationSettings ValidationGroup="Documento" ErrorText="" ValidateOnLeave="false" ErrorTextPosition="Bottom">
                             <RequiredField IsRequired="True" ErrorText="Campo Obligatorio" />
                         </ValidationSettings>
                     </dx:ASPxTextBox>
@@ -118,7 +118,7 @@
                     <label>Toneladas Manejadas</label>
                     <dx:ASPxTextBox ID="TB_Tons" runat="server" Theme="Material" Width="100%" AutoCompleteType="None" ValueType="System.Decimal">
                         <ClientSideEvents KeyPress="function (s,e) { onlyNumbers(s, e); }" />
-                        <ValidationSettings ValidationGroup="Proforma" ErrorText="" ValidateOnLeave="false" ErrorTextPosition="Bottom">
+                        <ValidationSettings ValidationGroup="Documento" ErrorText="" ValidateOnLeave="false" ErrorTextPosition="Bottom">
                             <RequiredField IsRequired="True" ErrorText="Campo Obligatorio" />
                         </ValidationSettings>
                     </dx:ASPxTextBox>
@@ -131,7 +131,7 @@
                     <div class="controls">
                         <label>Fecha Llegada</label>
                         <dx:ASPxDateEdit ID="DE_DateArrived" runat="server" Theme="Material" EditFormat="Date" Width="100%">
-                            <ValidationSettings ValidationGroup="Proforma" ErrorText="" ValidateOnLeave="false" ErrorTextPosition="Bottom">
+                            <ValidationSettings ValidationGroup="Documento" ErrorText="" ValidateOnLeave="false" ErrorTextPosition="Bottom">
                                 <RequiredField IsRequired="True" ErrorText="Campo Obligatorio" />
                             </ValidationSettings>
                         </dx:ASPxDateEdit>
@@ -143,7 +143,7 @@
                     <div class="controls">
                         <label>Fecha Salida</label>
                         <dx:ASPxDateEdit ID="DE_DateSailed" runat="server" Theme="Material" EditFormat="Date" Width="100%">
-                            <ValidationSettings ValidationGroup="Proforma" ErrorText="" ValidateOnLeave="false" ErrorTextPosition="Bottom">
+                            <ValidationSettings ValidationGroup="Documento" ErrorText="" ValidateOnLeave="false" ErrorTextPosition="Bottom">
                                 <RequiredField IsRequired="True" ErrorText="Campo Obligatorio" />
                             </ValidationSettings>
                         </dx:ASPxDateEdit>
@@ -154,9 +154,9 @@
         <hr />
         <div class="row">
             <div class="col">
-                <dx:ASPxGridView ID="GV_ProformaReng" runat="server" Theme="Material" Width="100%" ClientInstanceName="grid" AutoGenerateColumns="False" KeyFieldName="reng_num"
-                OnRowInserting="GV_ProformaReng_RowInserting" OnRowUpdating="GV_ProformaReng_RowUpdating"
-                OnRowDeleting="GV_ProformaReng_RowDeleting" OnInitNewRow="GV_ProformaReng_InitNewRow">
+                <dx:ASPxGridView ID="GV_DocumentoReng" runat="server" Theme="Material" Width="100%" ClientInstanceName="grid" AutoGenerateColumns="False" KeyFieldName="reng_num"
+                OnRowInserting="GV_DocumentoReng_RowInserting" OnRowUpdating="GV_DocumentoReng_RowUpdating"
+                OnRowDeleting="GV_DocumentoReng_RowDeleting" OnInitNewRow="GV_DocumentoReng_InitNewRow">
                     <SettingsEditing Mode="Batch" NewItemRowPosition="Bottom">
                         <BatchEditSettings EditMode="Row" ShowConfirmOnLosingChanges="false" KeepChangesOnCallbacks="False" />
                     </SettingsEditing>
@@ -194,6 +194,10 @@
                             <CellStyle BackColor="#17181C" ForeColor="#F0F0F0" Border-BorderColor="#3E4753"></CellStyle>
                         </dx:GridViewDataTextColumn>
                     </Columns>
+                    <Settings ShowFooter="true" />
+                    <TotalSummary>
+                        <dx:ASPxSummaryItem FieldName="price_serv" SummaryType="Sum" DisplayFormat="Total: {0:n}" />
+                    </TotalSummary>
                 </dx:ASPxGridView>
                 <asp:SqlDataSource runat="server" ID="DS_Servicio" ConnectionString='<%$ ConnectionStrings:SailingMasterConnectionString %>' SelectCommand="SELECT [ID], [descrip] FROM [Servicio] ORDER BY [ID]"></asp:SqlDataSource>
             </div>
