@@ -47,14 +47,14 @@ namespace SailingMaster.Documentos
                 Moneda mon = MonedaController.GetByID(DDL_Moneda.Value.ToString());
 
                 prof.ID = TB_Code.Text;
-                prof.cliente = TB_Client.Text;
+                // prof.cliente = TB_Client.Text;
                 prof.fecha = DateTime.Parse(DE_Date.Value.ToString());
                 prof.puerto = TB_Port.Text;
                 prof.buque = TB_Vessel.Text;
                 prof.nro_viaje = TB_Voyage.Text;
                 prof.co_mone = DDL_Moneda.Value.ToString();
                 prof.tasa = decimal.Parse(TB_Rate.Text);
-                prof.num_toneladas = int.Parse(TB_Tons.Text);
+                // prof.num_toneladas = int.Parse(TB_Tons.Text);
                 //prof.fecha_llegada = DateTime.Parse(DE_DateArrived.Value.ToString());
                 //prof.fecha_salida = DateTime.Parse(DE_DateSailed.Value.ToString());
                 //prof.co_us_mo = (Session["USER"] as Usuario).username;
@@ -80,14 +80,36 @@ namespace SailingMaster.Documentos
             }
         }
 
+        protected void GV_DocumentoReng_HtmlRowPrepared(object sender, ASPxGridViewTableRowEventArgs e)
+        {
+            if (e.RowType == DevExpress.Web.GridViewRowType.Data)
+            {
+                if (e.VisibleIndex % 2 == 0)
+                {
+                    e.Row.BackColor = System.Drawing.ColorTranslator.FromHtml("#26272a");
+                }
+                else
+                {
+                    e.Row.BackColor = System.Drawing.ColorTranslator.FromHtml("#333438");
+                }
+            }
+        }
+
         protected void GV_DocumentoReng_RowInserting(object sender, DevExpress.Web.Data.ASPxDataInsertingEventArgs e)
         {
+            string moneda = DDL_Moneda.Value?.ToString();
+            if (string.IsNullOrEmpty(moneda))
+                moneda = "BSD";
+
+            Servicio serv = ServicioController.GetByID(e.NewValues["co_serv"] as string);
+            Moneda mone = MonedaController.GetByID(moneda);
+
             var newRow = new DocumentoReng
             {
                 reng_num = rengs.Count + 1,
                 co_serv = e.NewValues["co_serv"] as string,
-                des_serv = ServicioController.GetByID(e.NewValues["co_serv"] as string).descrip,
-                price_serv = Convert.ToDecimal(e.NewValues["price_serv"])
+                des_serv = serv.descrip,
+                price_serv = Math.Round(serv.precio_base / mone.tasa, 2)
             };
 
             rengs.Add(newRow);
@@ -101,11 +123,18 @@ namespace SailingMaster.Documentos
             int reng_num = Convert.ToInt32(e.Keys["reng_num"]);
             var row = rengs.Find(r => r.reng_num == reng_num);
 
+            string moneda = DDL_Moneda.Value?.ToString();
+            if (string.IsNullOrEmpty(moneda))
+                moneda = "BSD";
+
+            Servicio serv = ServicioController.GetByID(row.co_serv);
+            Moneda mone = MonedaController.GetByID(moneda);
+
             if (row != null)
             {
                 row.co_serv = e.NewValues["co_serv"] as string;
                 row.des_serv = ServicioController.GetByID(e.NewValues["co_serv"] as string).descrip;
-                row.price_serv = Convert.ToDecimal(e.NewValues["price_serv"]);
+                row.price_serv = Math.Round(serv.precio_base / mone.tasa, 2);
             }
 
             e.Cancel = true;

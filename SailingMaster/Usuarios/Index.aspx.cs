@@ -53,6 +53,21 @@ namespace SailingMaster.Usuarios
             }
         }
 
+        protected void GV_Usuarios_HtmlRowPrepared(object sender, DevExpress.Web.ASPxGridViewTableRowEventArgs e)
+        {
+            if (e.RowType == DevExpress.Web.GridViewRowType.Data)
+            {
+                if (e.VisibleIndex % 2 == 0)
+                {
+                    e.Row.BackColor = System.Drawing.ColorTranslator.FromHtml("#26272a");
+                }
+                else
+                {
+                    e.Row.BackColor = System.Drawing.ColorTranslator.FromHtml("#333438");
+                }
+            }
+        }
+
         protected void BTN_AgregarUsuario_Click(object sender, EventArgs e)
         {
             Response.Redirect("/Usuarios/Agregar.aspx");

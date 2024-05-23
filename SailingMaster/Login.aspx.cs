@@ -9,7 +9,7 @@ namespace SailingMaster
         {
             if (Request.QueryString["logout"] != null && Session["USER"] != null)
             {
-                // AccountController.LogOut();
+                AccountController.LogOut();
                 Response.Redirect("/Login.aspx");
             }
 

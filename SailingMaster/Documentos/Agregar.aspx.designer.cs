@@ -78,6 +78,15 @@ namespace SailingMaster.Documentos
         protected global::DevExpress.Web.ASPxLabel LBL_IDUsuario;
 
         /// <summary>
+        /// Control DE_Date.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::DevExpress.Web.ASPxDateEdit DE_Date;
+
+        /// <summary>
         /// Control TB_Code.
         /// </summary>
         /// <remarks>
@@ -94,42 +103,6 @@ namespace SailingMaster.Documentos
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::DevExpress.Web.ASPxTextBox TB_Client;
-
-        /// <summary>
-        /// Control DE_Date.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::DevExpress.Web.ASPxDateEdit DE_Date;
-
-        /// <summary>
-        /// Control TB_Port.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::DevExpress.Web.ASPxTextBox TB_Port;
-
-        /// <summary>
-        /// Control TB_Vessel.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::DevExpress.Web.ASPxTextBox TB_Vessel;
-
-        /// <summary>
-        /// Control TB_Voyage.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::DevExpress.Web.ASPxTextBox TB_Voyage;
 
         /// <summary>
         /// Control DDL_Moneda.
@@ -159,15 +132,6 @@ namespace SailingMaster.Documentos
         protected global::DevExpress.Web.ASPxTextBox TB_Rate;
 
         /// <summary>
-        /// Control TB_Tons.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::DevExpress.Web.ASPxTextBox TB_Tons;
-
-        /// <summary>
         /// Control DE_DateArrived.
         /// </summary>
         /// <remarks>
@@ -184,6 +148,42 @@ namespace SailingMaster.Documentos
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::DevExpress.Web.ASPxDateEdit DE_DateSailed;
+
+        /// <summary>
+        /// Control TB_Port.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::DevExpress.Web.ASPxTextBox TB_Port;
+
+        /// <summary>
+        /// Control TB_Vessel.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::DevExpress.Web.ASPxTextBox TB_Vessel;
+
+        /// <summary>
+        /// Control TB_Voyage.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::DevExpress.Web.ASPxTextBox TB_Voyage;
+
+        /// <summary>
+        /// Control TB_Tons.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::DevExpress.Web.ASPxTextBox TB_Tons;
 
         /// <summary>
         /// Control GV_DocumentoReng.

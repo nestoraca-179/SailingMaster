@@ -33,10 +33,6 @@ namespace SailingMaster.Servicios
                     PN_Success.Visible = true;
                     LBL_Success.Text = "Servicio modificado con éxito";
                 }
-
-                GV_Servicios.Styles.AlternatingRow.Enabled = DevExpress.Utils.DefaultBoolean.True;
-                GV_Servicios.Styles.AlternatingRow.BackColor = System.Drawing.Color.Yellow;
-                GV_Servicios.Styles.Row.BackColor = System.Drawing.Color.Red;
             }
         }
 

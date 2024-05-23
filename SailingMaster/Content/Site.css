@@ -212,7 +212,11 @@ table td {
     border: solid #3E4753 !important;
     border-width: 1px 1px 0 1px !important;
     border-radius: 0px !important;
-    font-family: inherit !important;
+    font-family: var(--bs-body-font-family) !important;
+}
+.dxgvHeader_Material {
+    font-family: var(--bs-body-font-family) !important;
+    font-weight: bold;
 }
 .dxgvDataRow_Material:last-child td.dxgv, .dxgvDataRow_Material td.dxgv {
     border-bottom: solid 1px #3E4753 !important;
@@ -229,17 +233,18 @@ table td {
 .dxgvSearchPanel_Material input {
     padding: 5px !important;
     border-radius: 0 !important;
+    font-family: var(--bs-body-font-family) !important;
 }
 .dxgvStatusBar_Material {
     margin-top: 0 !important;
 }
 .dxgvFooter_Material td.dxgv {
-    background: #0a0a0b !important;
+    background: #0e0f11 !important;
     color: #bbbbbb;
 }
 .form-grid table.dxgvTable_Material .btn {
     width: 100%;
-    padding: 10px;
+    padding: 5px;
     color: #FFF;
     font-size: 13px;
     text-decoration: none;

@@ -31,38 +31,38 @@
         </div>
         <div class="form-grid">
             <dx:ASPxGridView ID="GV_Usuarios" runat="server" Width="100%" Theme="Material" AutoGenerateColumns="False" DataSourceID="DS_Usuario" KeyFieldName="ID" 
-                EnableTheming="True" OnRowCommand="GV_Usuarios_RowCommand">
+                EnableTheming="True" OnRowCommand="GV_Usuarios_RowCommand" OnHtmlRowPrepared="GV_Usuarios_HtmlRowPrepared">
                 <SettingsDataSecurity AllowDelete="False" AllowInsert="False" AllowEdit="False"></SettingsDataSecurity>
                 <SettingsSearchPanel Visible="True"></SettingsSearchPanel>
                 <Columns>
                     <dx:GridViewDataTextColumn FieldName="ID" ReadOnly="True" VisibleIndex="1">
                         <EditFormSettings Visible="False"></EditFormSettings>
-                        <HeaderStyle BackColor="#191c24" ForeColor="#F0F0F0"></HeaderStyle>
-                        <CellStyle BackColor="#17181C" ForeColor="#F0F0F0" Border-BorderColor="#3E4753"></CellStyle>
+                        <HeaderStyle BackColor="#15161a" ForeColor="#F0F0F0"></HeaderStyle>
+                        <CellStyle ForeColor="#F0F0F0" Border-BorderColor="#3E4753"></CellStyle>
                     </dx:GridViewDataTextColumn>
                     <dx:GridViewDataTextColumn FieldName="username" Caption="Usuario" VisibleIndex="2">
-                        <HeaderStyle BackColor="#191c24" ForeColor="#F0F0F0"></HeaderStyle>
-                        <CellStyle BackColor="#17181C" ForeColor="#F0F0F0" Border-BorderColor="#3E4753"></CellStyle>
+                        <HeaderStyle BackColor="#15161a" ForeColor="#F0F0F0"></HeaderStyle>
+                        <CellStyle ForeColor="#F0F0F0" Border-BorderColor="#3E4753"></CellStyle>
                     </dx:GridViewDataTextColumn>
                     <dx:GridViewDataTextColumn FieldName="descrip" Caption="Nombre" VisibleIndex="3">
-                        <HeaderStyle BackColor="#191c24" ForeColor="#F0F0F0"></HeaderStyle>
-                        <CellStyle BackColor="#17181C" ForeColor="#F0F0F0" Border-BorderColor="#3E4753"></CellStyle>
+                        <HeaderStyle BackColor="#15161a" ForeColor="#F0F0F0"></HeaderStyle>
+                        <CellStyle ForeColor="#F0F0F0" Border-BorderColor="#3E4753"></CellStyle>
                     </dx:GridViewDataTextColumn>
                     <dx:GridViewDataTextColumn FieldName="email" Caption="Correo" VisibleIndex="4">
-                        <HeaderStyle BackColor="#191c24" ForeColor="#F0F0F0"></HeaderStyle>
-                        <CellStyle BackColor="#17181C" ForeColor="#F0F0F0" Border-BorderColor="#3E4753"></CellStyle>
+                        <HeaderStyle BackColor="#15161a" ForeColor="#F0F0F0"></HeaderStyle>
+                        <CellStyle ForeColor="#F0F0F0" Border-BorderColor="#3E4753"></CellStyle>
                     </dx:GridViewDataTextColumn>
                     <dx:GridViewDataCheckColumn FieldName="activo" Caption="Activo" VisibleIndex="5">
-                        <HeaderStyle BackColor="#191c24" ForeColor="#F0F0F0"></HeaderStyle>
-                        <CellStyle BackColor="#17181C" ForeColor="#F0F0F0" Border-BorderColor="#3E4753"></CellStyle>
+                        <HeaderStyle BackColor="#15161a" ForeColor="#F0F0F0"></HeaderStyle>
+                        <CellStyle ForeColor="#F0F0F0" Border-BorderColor="#3E4753"></CellStyle>
                     </dx:GridViewDataCheckColumn>
                     <dx:GridViewDataTextColumn FieldName="tip_usuario" Caption="Tipo de Usuario" VisibleIndex="6">
-                        <HeaderStyle BackColor="#191c24" ForeColor="#F0F0F0"></HeaderStyle>
-                        <CellStyle BackColor="#17181C" ForeColor="#F0F0F0" Border-BorderColor="#3E4753"></CellStyle>
+                        <HeaderStyle BackColor="#15161a" ForeColor="#F0F0F0"></HeaderStyle>
+                        <CellStyle ForeColor="#F0F0F0" Border-BorderColor="#3E4753"></CellStyle>
                     </dx:GridViewDataTextColumn>
                     <dx:GridViewDataColumn Width="110px" VisibleIndex="7" Caption="Editar">
-                        <HeaderStyle BackColor="#191c24" ForeColor="#F0F0F0"></HeaderStyle>
-                        <CellStyle BackColor="#17181C" ForeColor="#F0F0F0" Border-BorderColor="#3E4753"></CellStyle>
+                        <HeaderStyle BackColor="#15161a" ForeColor="#F0F0F0"></HeaderStyle>
+                        <CellStyle ForeColor="#F0F0F0" Border-BorderColor="#3E4753"></CellStyle>
                         <DataItemTemplate>
                             <asp:LinkButton ID="BTN_EditarUsuario" runat="server" CssClass="btn btn-primary" CommandName="Editar">
                                 <i class="fas fa-edit"></i> Editar
@@ -70,8 +70,8 @@
                         </DataItemTemplate>
                     </dx:GridViewDataColumn>
                     <dx:GridViewDataColumn Width="110px" VisibleIndex="8" Caption="Eliminar" >
-                        <HeaderStyle BackColor="#191c24" ForeColor="#F0F0F0"></HeaderStyle>
-                        <CellStyle BackColor="#17181C" ForeColor="#F0F0F0" Border-BorderColor="#3E4753"></CellStyle>
+                        <HeaderStyle BackColor="#15161a" ForeColor="#F0F0F0"></HeaderStyle>
+                        <CellStyle ForeColor="#F0F0F0" Border-BorderColor="#3E4753"></CellStyle>
                         <DataItemTemplate>
                             <asp:LinkButton ID="BTN_ConfirmarEliminarUsuario" runat="server" CssClass="btn btn-danger" CommandName="Eliminar">
                                 <i class="fas fa-times"></i> Eliminar
