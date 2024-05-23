@@ -40,25 +40,28 @@ namespace SailingMaster.Documentos
 
         protected void BTN_Guardar_Click(object sender, EventArgs e)
         {
-            Documento prof = new Documento();
+            Documento doc = new Documento();
 
             try
             {
                 Moneda mon = MonedaController.GetByID(DDL_Moneda.Value.ToString());
 
-                prof.ID = TB_Code.Text;
-                // prof.cliente = TB_Client.Text;
-                prof.fecha = DateTime.Parse(DE_Date.Value.ToString());
-                prof.puerto = TB_Port.Text;
-                prof.buque = TB_Vessel.Text;
-                prof.nro_viaje = TB_Voyage.Text;
-                prof.co_mone = DDL_Moneda.Value.ToString();
-                prof.tasa = decimal.Parse(TB_Rate.Text);
-                // prof.num_toneladas = int.Parse(TB_Tons.Text);
-                //prof.fecha_llegada = DateTime.Parse(DE_DateArrived.Value.ToString());
-                //prof.fecha_salida = DateTime.Parse(DE_DateSailed.Value.ToString());
-                //prof.co_us_mo = (Session["USER"] as Usuario).username;
-                //prof.fe_us_mo = DateTime.Now;
+                doc.ID = TB_Code.Text;
+                doc.fecha = DateTime.Parse(DE_Date.Value.ToString());
+                doc.cliente = TB_Client.Text;
+                doc.co_mone = DDL_Moneda.Value.ToString();
+                doc.tasa = decimal.Parse(TB_Rate.Text);
+                doc.fec_llegada = DateTime.Parse(DE_DateArrived.Value.ToString());
+                doc.fec_salida = DateTime.Parse(DE_DateSailed.Value.ToString());
+                doc.puerto = TB_Port.Text;
+                doc.buque = TB_Vessel.Text;
+                doc.nro_viaje = TB_Voyage.Text;
+                doc.num_toneladas = int.Parse(TB_Tons.Text);
+                doc.co_us_in = (Session["USER"] as Usuario).username;
+                doc.fe_us_in = DateTime.Now;
+                doc.co_us_mo = (Session["USER"] as Usuario).username;
+                doc.fe_us_mo = DateTime.Now;
+                doc.total = rengs.Select(r => r.price_serv.Value).Sum();
 
                 //int result = ServicioController.Add(serv);
 
@@ -76,7 +79,7 @@ namespace SailingMaster.Documentos
             {
                 PN_Error.Visible = true;
                 LBL_Error.Text = "Ha ocurrido un error. Ver tabla de Incidentes";
-                IncidentController.CreateIncident(string.Format("ERROR PROCESANDO DATOS DE LA Documento {0}", prof.ID), ex);
+                IncidentController.CreateIncident(string.Format("ERROR PROCESANDO DATOS DEL DOCUMENTO {0}", doc.ID), ex);
             }
         }
 

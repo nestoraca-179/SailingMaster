@@ -242,6 +242,9 @@ table td {
     background: #0e0f11 !important;
     color: #bbbbbb;
 }
+.dxeButtonEditButton_Material {
+    background: #303030;
+}
 .form-grid table.dxgvTable_Material .btn {
     width: 100%;
     padding: 5px;
