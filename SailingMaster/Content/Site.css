@@ -219,7 +219,7 @@ table td {
     font-weight: bold;
 }
 .dxgvDataRow_Material:last-child td.dxgv, .dxgvDataRow_Material td.dxgv {
-    border-bottom: solid 1px #3E4753 !important;
+    border-bottom: solid 0px #3E4753 !important;
 }
 .dxgvEmptyDataRow_Material td.dxgv {
     border-bottom: solid 1px #3E4753 !important;
@@ -242,24 +242,27 @@ table td {
     background: #0e0f11 !important;
     color: #bbbbbb;
 }
+.dxgvBatchEditNewItem_Material {
+    background: #1e1f22;
+}
 .dxeButtonEditButton_Material {
     background: #303030;
 }
 .form-grid table.dxgvTable_Material .btn {
     width: 100%;
     padding: 5px;
-    color: #FFF;
+    color: #F0F0F0;
     font-size: 13px;
     text-decoration: none;
     border-radius: 0;
 }
 #MainContent_GV_DocumentoReng_DXEmptyRow {
     background: #141517 !important;
-    color: #FFF;
+    color: #F0F0F0;
 }
 #MainContent_GV_DocumentoReng_DXStatus {
     background: #141517 !important;
-    color: #FFF;
+    color: #F0F0F0;
     border-radius: 0;
 }
 

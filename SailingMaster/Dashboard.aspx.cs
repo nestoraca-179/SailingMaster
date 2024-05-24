@@ -6,7 +6,12 @@ namespace SailingMaster
     {
         protected void Page_Load(object sender, EventArgs e)
         {
+            if (Session["USER"] != null)
+            {
 
+            }
+            else
+                Response.Redirect("/Login.aspx");
         }
     }
 }

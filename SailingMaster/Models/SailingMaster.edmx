@@ -42,10 +42,10 @@
         <EntityType Name="DocumentoReng">
           <Key>
             <PropertyRef Name="reng_num" />
-            <PropertyRef Name="co_prof" />
+            <PropertyRef Name="co_doc" />
           </Key>
           <Property Name="reng_num" Type="int" Nullable="false" />
-          <Property Name="co_prof" Type="varchar" MaxLength="30" Nullable="false" />
+          <Property Name="co_doc" Type="varchar" MaxLength="30" Nullable="false" />
           <Property Name="co_serv" Type="varchar" MaxLength="40" Nullable="false" />
           <Property Name="des_serv" Type="varchar(max)" Nullable="false" />
           <Property Name="price_serv" Type="money" />
@@ -138,7 +138,7 @@
               <PropertyRef Name="ID" />
             </Principal>
             <Dependent Role="DocumentoReng">
-              <PropertyRef Name="co_prof" />
+              <PropertyRef Name="co_doc" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -186,20 +186,20 @@
           <EntitySet Name="Servicio" EntityType="SailingMasterModel.Servicio" />
           <EntitySet Name="Usuario" EntityType="SailingMasterModel.Usuario" />
           <EntitySet Name="Documento" EntityType="SailingMasterModel.Documento" />
-          <EntitySet Name="DocumentoReng" EntityType="SailingMasterModel.DocumentoReng" />
           <AssociationSet Name="FK__Proforma__co_mon__5CD6CB2B1" Association="SailingMasterModel.FK__Proforma__co_mon__5CD6CB2B1">
             <End Role="Moneda" EntitySet="Moneda" />
             <End Role="Documento" EntitySet="Documento" />
           </AssociationSet>
-          <AssociationSet Name="FK__ProformaR__co_pr__0F624AF81" Association="SailingMasterModel.FK__ProformaR__co_pr__0F624AF81">
+          <EntitySet Name="DocumentoReng" EntityType="SailingMasterModel.DocumentoReng" />
+          <AssociationSet Name="FK__ProformaR__co_pr__0F624AF8" Association="SailingMasterModel.FK__ProformaR__co_pr__0F624AF8">
             <End Role="Documento" EntitySet="Documento" />
             <End Role="DocumentoReng" EntitySet="DocumentoReng" />
           </AssociationSet>
-          <AssociationSet Name="FK__ProformaR__co_se__10566F311" Association="SailingMasterModel.FK__ProformaR__co_se__10566F311">
+          <AssociationSet Name="FK__ProformaR__co_se__10566F31" Association="SailingMasterModel.FK__ProformaR__co_se__10566F31">
             <End Role="Servicio" EntitySet="Servicio" />
             <End Role="DocumentoReng" EntitySet="DocumentoReng" />
           </AssociationSet>
-        </EntityContainer>
+          </EntityContainer>
         <EntityType Name="Incidente">
           <Key>
             <PropertyRef Name="ID" />
@@ -247,7 +247,7 @@
           <Property Name="fe_us_in" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="co_us_mo" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
           <Property Name="fe_us_mo" Type="DateTime" Nullable="false" Precision="3" />
-          <NavigationProperty Name="DocumentoReng" Relationship="SailingMasterModel.FK__ProformaR__co_se__10566F311" FromRole="Servicio" ToRole="DocumentoReng" />
+          <NavigationProperty Name="DocumentoReng" Relationship="SailingMasterModel.FK__ProformaR__co_se__10566F31" FromRole="Servicio" ToRole="DocumentoReng" />
         </EntityType>
         <EntityType Name="Usuario">
           <Key>
@@ -300,25 +300,8 @@
           <Property Name="co_us_mo" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
           <Property Name="fe_us_mo" Type="DateTime" Nullable="false" Precision="3" />
           <NavigationProperty Name="Moneda" Relationship="SailingMasterModel.FK__Proforma__co_mon__5CD6CB2B1" FromRole="Documento" ToRole="Moneda" />
-          <NavigationProperty Name="DocumentoReng" Relationship="SailingMasterModel.FK__ProformaR__co_pr__0F624AF81" FromRole="Documento" ToRole="DocumentoReng" />
-        </EntityType>
-        <EntityType Name="DocumentoReng">
-          <Key>
-            <PropertyRef Name="reng_num" />
-            <PropertyRef Name="co_prof" />
-          </Key>
-          <Property Name="reng_num" Type="Int32" Nullable="false" />
-          <Property Name="co_prof" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="false" />
-          <Property Name="co_serv" Type="String" Nullable="false" MaxLength="40" FixedLength="false" Unicode="false" />
-          <Property Name="des_serv" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
-          <Property Name="price_serv" Type="Decimal" Precision="19" Scale="4" />
-          <Property Name="co_us_in" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
-          <Property Name="fe_us_in" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="co_us_mo" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
-          <Property Name="fe_us_mo" Type="DateTime" Nullable="false" Precision="3" />
-          <NavigationProperty Name="Documento" Relationship="SailingMasterModel.FK__ProformaR__co_pr__0F624AF81" FromRole="DocumentoReng" ToRole="Documento" />
-          <NavigationProperty Name="Servicio" Relationship="SailingMasterModel.FK__ProformaR__co_se__10566F311" FromRole="DocumentoReng" ToRole="Servicio" />
-        </EntityType>
+          <NavigationProperty Name="DocumentoReng" Relationship="SailingMasterModel.FK__ProformaR__co_pr__0F624AF8" FromRole="Documento" ToRole="DocumentoReng" />
+          </EntityType>
         <Association Name="FK__Proforma__co_mon__5CD6CB2B1">
           <End Type="SailingMasterModel.Moneda" Role="Moneda" Multiplicity="1" />
           <End Type="SailingMasterModel.Documento" Role="Documento" Multiplicity="*" />
@@ -331,7 +314,24 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__ProformaR__co_pr__0F624AF81">
+        <EntityType Name="DocumentoReng">
+          <Key>
+            <PropertyRef Name="reng_num" />
+            <PropertyRef Name="co_doc" />
+          </Key>
+          <Property Name="reng_num" Type="Int32" Nullable="false" />
+          <Property Name="co_doc" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="co_serv" Type="String" Nullable="false" MaxLength="40" FixedLength="false" Unicode="false" />
+          <Property Name="des_serv" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="price_serv" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="co_us_in" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="fe_us_in" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="co_us_mo" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="fe_us_mo" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="Documento" Relationship="SailingMasterModel.FK__ProformaR__co_pr__0F624AF8" FromRole="DocumentoReng" ToRole="Documento" />
+          <NavigationProperty Name="Servicio" Relationship="SailingMasterModel.FK__ProformaR__co_se__10566F31" FromRole="DocumentoReng" ToRole="Servicio" />
+        </EntityType>
+        <Association Name="FK__ProformaR__co_pr__0F624AF8">
           <End Type="SailingMasterModel.Documento" Role="Documento" Multiplicity="1" />
           <End Type="SailingMasterModel.DocumentoReng" Role="DocumentoReng" Multiplicity="*" />
           <ReferentialConstraint>
@@ -339,11 +339,11 @@
               <PropertyRef Name="ID" />
             </Principal>
             <Dependent Role="DocumentoReng">
-              <PropertyRef Name="co_prof" />
+              <PropertyRef Name="co_doc" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__ProformaR__co_se__10566F311">
+        <Association Name="FK__ProformaR__co_se__10566F31">
           <End Type="SailingMasterModel.Servicio" Role="Servicio" Multiplicity="1" />
           <End Type="SailingMasterModel.DocumentoReng" Role="DocumentoReng" Multiplicity="*" />
           <ReferentialConstraint>
@@ -355,7 +355,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-      </Schema>
+        </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
@@ -475,7 +475,7 @@
                 <ScalarProperty Name="price_serv" ColumnName="price_serv" />
                 <ScalarProperty Name="des_serv" ColumnName="des_serv" />
                 <ScalarProperty Name="co_serv" ColumnName="co_serv" />
-                <ScalarProperty Name="co_prof" ColumnName="co_prof" />
+                <ScalarProperty Name="co_doc" ColumnName="co_doc" />
                 <ScalarProperty Name="reng_num" ColumnName="reng_num" />
               </MappingFragment>
             </EntityTypeMapping>

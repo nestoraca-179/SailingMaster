@@ -143,6 +143,7 @@
       <DependentUpon>CambioClave.aspx</DependentUpon>
     </Compile>
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\DocumentoController.cs" />
     <Compile Include="Controllers\IncidentController.cs" />
     <Compile Include="Controllers\LogController.cs" />
     <Compile Include="Controllers\MonedaController.cs" />

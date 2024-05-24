@@ -16,21 +16,26 @@ namespace SailingMaster.Documentos
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            Usuario user = (Session["USER"] as Usuario);
+            if (Session["USER"] != null)
+            {
+                Usuario user = (Session["USER"] as Usuario);
 
-            if (user.tip_usuario != 0)
-            {
-                PN_ContainerForm.Visible = false;
-                PN_Error.Visible = true;
-                LBL_Error.Text = "No tienes acceso al área de documentos";
-            }
-            else
-            {
-                if (!IsPostBack)
+                if (user.tip_usuario != 0)
                 {
-                    BindGrid(rengs);
+                    PN_ContainerForm.Visible = false;
+                    PN_Error.Visible = true;
+                    LBL_Error.Text = "No tienes acceso al área de documentos";
+                }
+                else
+                {
+                    if (!IsPostBack)
+                    {
+                        BindGrid(rengs);
+                    }
                 }
             }
+            else
+                Response.Redirect("/Login.aspx");
         }
 
         protected void BTN_Volver_Click(object sender, EventArgs e)
@@ -62,18 +67,36 @@ namespace SailingMaster.Documentos
                 doc.co_us_mo = (Session["USER"] as Usuario).username;
                 doc.fe_us_mo = DateTime.Now;
                 doc.total = rengs.Select(r => r.price_serv.Value).Sum();
+                doc.DocumentoReng = rengs;
 
-                //int result = ServicioController.Add(serv);
+                if (rengs.Count == 0)
+                {
+                    PN_Error.Visible = true;
+                    LBL_Error.Text = "Debes agregar items al documento";
+                }
+                else
+                {
+                    foreach (DocumentoReng r in doc.DocumentoReng)
+                    {
+                        r.co_doc = doc.ID;
+                        r.co_us_in = (Session["USER"] as Usuario).username;
+                        r.fe_us_in = DateTime.Now;
+                        r.co_us_mo = (Session["USER"] as Usuario).username;
+                        r.fe_us_mo = DateTime.Now;
+                    }
 
-                //if (result == 1)
-                //{
-                //    Response.Redirect("/Servicios/Index.aspx?new_serv=1");
-                //}
-                //else
-                //{
-                //    PN_Error.Visible = true;
-                //    LBL_Error.Text = "Ha ocurrido un error al agregar el Servicio. Ver tabla de Incidentes";
-                //}
+                    int result = DocumentoController.Add(doc);
+
+                    if (result == 1)
+                    {
+                        Response.Redirect("/Documentos/Index.aspx?new_doc=1");
+                    }
+                    else
+                    {
+                        PN_Error.Visible = true;
+                        LBL_Error.Text = "Ha ocurrido un error al agregar el Documento. Ver tabla de Incidentes";
+                    }
+                }
             }
             catch (Exception ex)
             {
@@ -152,6 +175,13 @@ namespace SailingMaster.Documentos
 
             if (row != null)
                 rengs.Remove(row);
+
+            int i = 1;
+            foreach (DocumentoReng r in rengs.OrderBy(r => r.reng_num))
+            {
+                r.reng_num = i;
+                i++;
+            }
 
             e.Cancel = true;
             BindGrid(rengs);

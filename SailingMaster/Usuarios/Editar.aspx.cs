@@ -13,7 +13,7 @@ namespace SailingMaster.Usuarios
         {
             if (Request.QueryString["ID"] != null)
             {
-                Usuario user = UsuarioController.GetByID(int.Parse(Request.QueryString["ID"].ToString()));
+                Usuario user = (Session["USER"] as Usuario);
 
                 if (user.tip_usuario != 0)
                 {
@@ -23,11 +23,13 @@ namespace SailingMaster.Usuarios
                 }
                 else
                 {
+                    Usuario edit_user = UsuarioController.GetByID(int.Parse(Request.QueryString["ID"].ToString()));
+
                     if (!IsPostBack)
-                        CargarUsuario(user);
+                        CargarUsuario(edit_user);
 
                     IDUser = Request.QueryString["ID"].ToString();
-                    LBL_IDUsuario.Text = "Editar Usuario " + user.descrip;
+                    LBL_IDUsuario.Text = "Editar Usuario " + edit_user.descrip;
                 }
             }
             else

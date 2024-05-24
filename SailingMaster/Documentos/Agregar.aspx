@@ -61,7 +61,7 @@ form .row:not(.my-5) {
                 <div class="row">
                     <div class="col-md-12">
                         <div class="controls">
-                            <label>Nro. Documento</label>
+                            <label>Cuenta de Buque</label>
                             <dx:ASPxTextBox ID="TB_Code" runat="server" Theme="Material" BackColor="#303030" ForeColor="#F0F0F0" Border-BorderColor="#303030" Width="100%" AutoCompleteType="None">
                                 <ValidationSettings Display="Dynamic" ValidationGroup="Documento" ErrorText="" ValidateOnLeave="false" ErrorTextPosition="Bottom">
                                     <RequiredField IsRequired="True" ErrorText="Campo Obligatorio" />
@@ -215,12 +215,16 @@ form .row:not(.my-5) {
                     </SettingsEditing>
                     <Columns>
                         <dx:GridViewCommandColumn Width="100" ShowNewButtonInHeader="True" ShowEditButton="True" ShowDeleteButton="True" VisibleIndex="0">
-                            <HeaderStyle BackColor="#a84622" ForeColor="#F0F0F0"></HeaderStyle>
-                            <CellStyle ForeColor="#F0F0F0" Border-BorderColor="#3E4753"></CellStyle>
+                            <HeaderStyle BackColor="#332940" Border-BorderWidth="0px" ForeColor="#F0F0F0" Paddings-Padding="5px"></HeaderStyle>
+                            <CellStyle ForeColor="#F0F0F0" Border-BorderWidth="0px">
+                                <Paddings Padding="12px"></Paddings>
+                            </CellStyle>
                         </dx:GridViewCommandColumn>
-                        <dx:GridViewDataTextColumn FieldName="reng_num" Caption="Renglon" VisibleIndex="1" ReadOnly="True">
-                            <HeaderStyle BackColor="#a84622" ForeColor="#F0F0F0"></HeaderStyle>
-                            <CellStyle ForeColor="#F0F0F0" Border-BorderColor="#3E4753"></CellStyle>
+                        <dx:GridViewDataTextColumn Width="50" FieldName="reng_num" Caption="Renglon" VisibleIndex="1" ReadOnly="True">
+                            <HeaderStyle BackColor="#332940" Border-BorderWidth="0px" ForeColor="#F0F0F0" Paddings-Padding="5px"></HeaderStyle>
+                            <CellStyle ForeColor="#F0F0F0" Border-BorderWidth="0px">
+                                <Paddings Padding="12px"></Paddings>
+                            </CellStyle>
                         </dx:GridViewDataTextColumn>
                         <dx:GridViewDataComboBoxColumn FieldName="co_serv" Caption="Codigo" VisibleIndex="2">
                             <PropertiesComboBox DataSourceID="DS_Servicio" ValueField="ID" TextField="descrip" TextFormatString="{0}">
@@ -230,18 +234,24 @@ form .row:not(.my-5) {
                                 </Columns>
                                 <ValidationSettings Display="Dynamic" RequiredField-IsRequired="true" />
                             </PropertiesComboBox>
-                            <HeaderStyle BackColor="#a84622" ForeColor="#F0F0F0"></HeaderStyle>
-                            <CellStyle ForeColor="#F0F0F0" Border-BorderColor="#3E4753"></CellStyle>
+                            <HeaderStyle BackColor="#332940" Border-BorderWidth="0px" ForeColor="#F0F0F0" Paddings-Padding="5px"></HeaderStyle>
+                            <CellStyle ForeColor="#F0F0F0" Border-BorderWidth="0px">
+                                <Paddings Padding="12px"></Paddings>
+                            </CellStyle>
                             <PropertiesComboBox DataSourceID="DS_Servicio" ValueType="System.String" ValueField="ID" TextField="ID" />
                         </dx:GridViewDataComboBoxColumn>
-                        <dx:GridViewDataTextColumn Width="600" FieldName="des_serv" Caption="Descripcion" VisibleIndex="3" ReadOnly="True">
-                            <HeaderStyle BackColor="#a84622" ForeColor="#F0F0F0"></HeaderStyle>
-                            <CellStyle ForeColor="#F0F0F0" Border-BorderColor="#3E4753"></CellStyle>
+                        <dx:GridViewDataTextColumn Width="550" FieldName="des_serv" Caption="Descripcion" VisibleIndex="3" ReadOnly="True">
+                            <HeaderStyle BackColor="#332940" Border-BorderWidth="0px" ForeColor="#F0F0F0" Paddings-Padding="5px"></HeaderStyle>
+                            <CellStyle ForeColor="#F0F0F0" Border-BorderWidth="0px">
+                                <Paddings Padding="12px"></Paddings>
+                            </CellStyle>
                         </dx:GridViewDataTextColumn>
                         <dx:GridViewDataTextColumn FieldName="price_serv" Caption="Precio" VisibleIndex="4" ReadOnly="true">
                             <PropertiesTextEdit DisplayFormatString="{0:n}"></PropertiesTextEdit>
-                            <HeaderStyle BackColor="#a84622" ForeColor="#F0F0F0"></HeaderStyle>
-                            <CellStyle ForeColor="#F0F0F0" Border-BorderColor="#3E4753"></CellStyle>
+                            <HeaderStyle BackColor="#332940" Border-BorderWidth="0px" ForeColor="#F0F0F0" Paddings-Padding="5px"></HeaderStyle>
+                            <CellStyle ForeColor="#F0F0F0" Border-BorderWidth="0px">
+                                <Paddings Padding="12px"></Paddings>
+                            </CellStyle>
                         </dx:GridViewDataTextColumn>
                     </Columns>
                     <Settings ShowFooter="true" />

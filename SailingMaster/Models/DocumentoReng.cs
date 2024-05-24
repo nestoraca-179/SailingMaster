@@ -15,7 +15,7 @@ namespace SailingMaster.Models
     public partial class DocumentoReng
     {
         public int reng_num { get; set; }
-        public string co_prof { get; set; }
+        public string co_doc { get; set; }
         public string co_serv { get; set; }
         public string des_serv { get; set; }
         public Nullable<decimal> price_serv { get; set; }

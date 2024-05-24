@@ -8,18 +8,23 @@ namespace SailingMaster.Servicios
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            Usuario user = (Session["USER"] as Usuario);
-
-            if (user.tip_usuario != 0)
+            if (Session["USER"] != null)
             {
-                PN_ContainerForm.Visible = false;
-                PN_Error.Visible = true;
-                LBL_Error.Text = "No tienes acceso al área de usuarios";
+                Usuario user = (Session["USER"] as Usuario);
+
+                if (user.tip_usuario != 0)
+                {
+                    PN_ContainerForm.Visible = false;
+                    PN_Error.Visible = true;
+                    LBL_Error.Text = "No tienes acceso al área de usuarios";
+                }
+                else
+                {
+                    CK_Activo.Checked = true;
+                }
             }
             else
-            {
-                CK_Activo.Checked = true;
-            }
+                Response.Redirect("/Login.aspx");
         }
 
         protected void BTN_Volver_Click(object sender, EventArgs e)
