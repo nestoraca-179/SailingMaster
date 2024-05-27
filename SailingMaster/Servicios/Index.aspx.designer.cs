@@ -87,13 +87,13 @@ namespace SailingMaster.Servicios
         protected global::DevExpress.Web.ASPxGridView GV_Servicios;
 
         /// <summary>
-        /// Control DS_Servicios.
+        /// Control DS_Servicio.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.SqlDataSource DS_Servicios;
+        protected global::System.Web.UI.WebControls.SqlDataSource DS_Servicio;
 
         /// <summary>
         /// Control LBL_Delete.

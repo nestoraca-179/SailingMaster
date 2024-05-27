@@ -1,7 +1,7 @@
-using SailingMaster.Controllers;
 using System;
 
-namespace SailingMaster {
+namespace SailingMaster
+{
     public class Global_asax : System.Web.HttpApplication {
         void Application_Start(object sender, EventArgs e) {
             DevExpress.Web.ASPxWebControl.CallbackError += new EventHandler(Application_Error);

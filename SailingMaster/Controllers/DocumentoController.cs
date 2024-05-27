@@ -1,17 +1,20 @@
 ﻿using SailingMaster.Models;
 using System;
-using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
-using System.Web;
 
 namespace SailingMaster.Controllers
 {
     public class DocumentoController : Repository
     {
-        public static Documento GetByID(string id)
+        public static Documento GetByID(int id)
         {
-            return db.Documento.Single(d => d.ID == id);
+            Documento doc = db.Documento.AsNoTracking().Include("DocumentoReng").Single(d => d.ID == id);
+
+            foreach (DocumentoReng r in doc.DocumentoReng)
+                r.Documento = null;
+
+            return doc;
         }
 
         public static int Add(Documento doc)
@@ -29,7 +32,7 @@ namespace SailingMaster.Controllers
                         context.SaveChanges();
                         tran.Commit();
 
-                        LogController.CreateLog(d.co_us_in, "DOCUMENTO", d.ID, "I", null);
+                        LogController.CreateLog(d.co_us_in, "DOCUMENTO", d.ID.ToString(), "I", null);
                         result = 1;
                     }
                     catch (Exception ex)

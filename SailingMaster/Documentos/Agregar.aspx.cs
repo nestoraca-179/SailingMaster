@@ -4,15 +4,12 @@ using SailingMaster.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Web;
-using System.Web.UI;
-using System.Web.UI.WebControls;
 
 namespace SailingMaster.Documentos
 {
     public partial class Agregar : System.Web.UI.Page
     {
-        private static readonly List<DocumentoReng> rengs = new List<DocumentoReng>();
+        private static List<DocumentoReng> rengs = new List<DocumentoReng>();
 
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -28,10 +25,49 @@ namespace SailingMaster.Documentos
                 }
                 else
                 {
-                    if (!IsPostBack)
+                    string moneda = DDL_Moneda.Value?.ToString();
+                    if (string.IsNullOrEmpty(moneda))
+                        moneda = "BSD";
+
+                    Moneda mone = MonedaController.GetByID(moneda);
+                    LBL_SignTD.Text = mone.signo;
+
+                    if (Request.QueryString["ID"] != null) // EDITANDO
                     {
-                        BindGrid(rengs);
+                        Documento doc = DocumentoController.GetByID(int.Parse(Request.QueryString["ID"].ToString()));
+
+                        if (doc.status < 4)
+                        {
+                            LBL_TotalReceived.Text = "0,00";
+                            LBL_TotalCancelled.Text = "0,00";
+                            LBL_Balance.Text = "0,00";
+                        }
+                        else
+                        {
+                            LBL_TotalReceived.Text = doc.liquidated_amount.ToString();
+                            LBL_TotalCancelled.Text = "0,00";
+                            LBL_Balance.Text = doc.liquidated_amount.ToString();
+                        }
+
+                        if (!IsPostBack)
+                            CargarDocumento(doc);
                     }
+                    else // AGREGANDO
+                    {
+                        LBL_TotalReceived.Text = "0,00";
+                        LBL_TotalCancelled.Text = "0,00";
+                        LBL_Balance.Text = "0,00";
+
+                        if (!IsPostBack)
+                            rengs = new List<DocumentoReng>();
+                    }
+
+                    LBL_SignTR.Text = mone.signo;
+                    LBL_SignTC.Text = mone.signo;
+                    LBL_SignBC.Text = mone.signo;
+
+                    if (!IsPostBack)
+                        BindGrid(rengs);
                 }
             }
             else
@@ -51,11 +87,11 @@ namespace SailingMaster.Documentos
             {
                 Moneda mon = MonedaController.GetByID(DDL_Moneda.Value.ToString());
 
-                doc.ID = TB_Code.Text;
+                doc.cuenta_buq = TB_Code.Text;
                 doc.fecha = DateTime.Parse(DE_Date.Value.ToString());
                 doc.cliente = TB_Client.Text;
                 doc.co_mone = DDL_Moneda.Value.ToString();
-                doc.tasa = decimal.Parse(TB_Rate.Text);
+                doc.tasa = decimal.Parse(TB_Rate.Text.Replace(".", ","));
                 doc.fec_llegada = DateTime.Parse(DE_DateArrived.Value.ToString());
                 doc.fec_salida = DateTime.Parse(DE_DateSailed.Value.ToString());
                 doc.puerto = TB_Port.Text;
@@ -106,6 +142,43 @@ namespace SailingMaster.Documentos
             }
         }
 
+        protected void DDL_Moneda_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            string moneda = DDL_Moneda.Value?.ToString();
+            if (string.IsNullOrEmpty(moneda))
+                moneda = "BSD";
+
+            Servicio serv;
+            Moneda mone = MonedaController.GetByID(moneda);
+            TB_Rate.Text = mone.tasa.ToString();
+
+            foreach (DocumentoReng r in rengs)
+            {
+                serv = ServicioController.GetByID(r.co_serv);
+                r.price_serv = Math.Round(serv.precio_base / mone.tasa, 2);
+            }
+
+            BindGrid(rengs);
+        }
+
+        protected void TB_Rate_TextChanged(object sender, EventArgs e)
+        {
+            decimal tasa;
+            if (!string.IsNullOrEmpty(TB_Rate.Text))
+                tasa = decimal.Parse(TB_Rate.Text.Replace(".", ","));
+            else
+                tasa = 1;
+
+            Servicio serv;
+            foreach (DocumentoReng r in rengs)
+            {
+                serv = ServicioController.GetByID(r.co_serv);
+                r.price_serv = Math.Round(serv.precio_base / tasa, 2);
+            }
+
+            BindGrid(rengs);
+        }
+
         protected void GV_DocumentoReng_HtmlRowPrepared(object sender, ASPxGridViewTableRowEventArgs e)
         {
             if (e.RowType == DevExpress.Web.GridViewRowType.Data)
@@ -130,17 +203,23 @@ namespace SailingMaster.Documentos
             Servicio serv = ServicioController.GetByID(e.NewValues["co_serv"] as string);
             Moneda mone = MonedaController.GetByID(moneda);
 
+            decimal tasa;
+            if (!string.IsNullOrEmpty(TB_Rate.Text))
+                tasa = decimal.Parse(TB_Rate.Text.Replace(".", ","));
+            else
+                tasa = mone.tasa;
+
             var newRow = new DocumentoReng
             {
                 reng_num = rengs.Count + 1,
                 co_serv = e.NewValues["co_serv"] as string,
                 des_serv = serv.descrip,
-                price_serv = Math.Round(serv.precio_base / mone.tasa, 2)
+                price_serv = Math.Round(serv.precio_base / tasa, 2)
             };
-
             rengs.Add(newRow);
-            e.Cancel = true;
+
             BindGrid(rengs);
+            e.Cancel = true;
             GV_DocumentoReng.CancelEdit();
         }
 
@@ -156,11 +235,17 @@ namespace SailingMaster.Documentos
             Servicio serv = ServicioController.GetByID(row.co_serv);
             Moneda mone = MonedaController.GetByID(moneda);
 
+            decimal tasa;
+            if (!string.IsNullOrEmpty(TB_Rate.Text))
+                tasa = decimal.Parse(TB_Rate.Text.Replace(".", ","));
+            else
+                tasa = mone.tasa;
+
             if (row != null)
             {
                 row.co_serv = e.NewValues["co_serv"] as string;
                 row.des_serv = ServicioController.GetByID(e.NewValues["co_serv"] as string).descrip;
-                row.price_serv = Math.Round(serv.precio_base / mone.tasa, 2);
+                row.price_serv = Math.Round(serv.precio_base / tasa, 2);
             }
 
             e.Cancel = true;
@@ -196,6 +281,28 @@ namespace SailingMaster.Documentos
         {
             GV_DocumentoReng.DataSource = data;
             GV_DocumentoReng.DataBind();
+        }
+        
+        private void CargarDocumento(Documento doc)
+        {
+            TB_Code.Text = doc.cuenta_buq;
+            DE_Date.Value = doc.fecha;
+            TB_Client.Text = doc.cliente;
+            DDL_Moneda.Value = doc.co_mone;
+            TB_Rate.Text = doc.tasa.ToString();
+            DE_DateArrived.Value = doc.fec_llegada;
+            DE_DateSailed.Value = doc.fec_salida;
+            TB_Port.Text = doc.puerto;
+            TB_Vessel.Text = doc.buque;
+            TB_Voyage.Text = doc.nro_viaje;
+            TB_Tons.Text = doc.num_toneladas.ToString();
+            doc.total = doc.DocumentoReng.Select(r => r.price_serv.Value).Sum();
+            rengs = doc.DocumentoReng.ToList();
+
+            foreach (ListEditItem item in DDL_Moneda.Items)
+            {
+                item.Selected = doc.co_mone.ToString() == item.Value.ToString();
+            }
         }
     }
 }

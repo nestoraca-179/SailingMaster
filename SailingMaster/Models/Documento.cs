@@ -20,7 +20,8 @@ namespace SailingMaster.Models
             this.DocumentoReng = new HashSet<DocumentoReng>();
         }
     
-        public string ID { get; set; }
+        public int ID { get; set; }
+        public string cuenta_buq { get; set; }
         public System.DateTime fecha { get; set; }
         public string cliente { get; set; }
         public string puerto { get; set; }

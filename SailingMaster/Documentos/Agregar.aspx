@@ -13,6 +13,7 @@ form .row:not(.my-5) {
 }
 .amounts {
     height: 100%;
+    max-height: 220px;
     background: #242529;
     padding: 15px;
     border: solid 2px #2a2b2e;
@@ -24,10 +25,39 @@ form .row:not(.my-5) {
     margin-bottom: 10px;
 }
 #MainContent_DE_Date_I, #MainContent_DDL_Moneda_I,
-#MainContent_DE_DateArrived_I, #MainContent_DE_DateSailed_I{
+#MainContent_DE_DateArrived_I, #MainContent_DE_DateSailed_I,
+#MainContent_DE_Date_ETC, #MainContent_DDL_Moneda_ETC,
+#MainContent_DE_DateArrived_ETC, #MainContent_DE_DateSailed_ETC {
     color: #F0F0F0;
 }
 </style>
+<script>
+    function endCallback(s, e) {
+        $("#items").text(grid.GetVisibleRowsOnPage());
+
+        var price_total = 0;
+        for (var i = 0; i < grid.GetVisibleRowsOnPage(); i++) {
+            var elem_parent = grid.GetRow(i).getElementsByTagName("td")[4];
+            var elem_last = elem_parent.lastElementChild;
+            var elem_f = elem_last ?? elem_parent;
+
+            var r = parseFloat(elem_f.innerHTML.replaceAll(".", "").replaceAll(",", "."));
+            price_total += r;
+        }
+        console.log(price_total);
+        $("#total_doc").text(price_total.toLocaleString("es-ES", { minimumFractionDigits: 2, maximumFractionDigits: 2, useGrouping: true }));
+
+        $("span").click(function () {
+            if (this.innerHTML == "Eliminar") {
+                setTimeout(function () {
+                    if (grid.batchEditApi.HasChanges()) {
+                        grid.UpdateEdit();
+                    }
+                }, 10)
+            }
+        });
+    }
+</script>
 <asp:Panel ID="PN_Error" runat="server" Width="100%" CssClass="mt-2" Visible="false">
     <div class="alert alert-danger m-0">
         <dx:ASPxLabel ID="LBL_Error" runat="server" Width="100%" Font-Size="14px" CssClass="m-0"></dx:ASPxLabel>
@@ -86,7 +116,8 @@ form .row:not(.my-5) {
                     <div class="col-md-6">
                         <div class="controls">
                             <label>Moneda</label>
-                            <dx:ASPxComboBox ID="DDL_Moneda" runat="server" Theme="Material" Width="100%" BackColor="#303030" Border-BorderColor="#303030" ValueField="ID" TextField="descrip" DataSourceID="DS_Moneda">
+                            <dx:ASPxComboBox ID="DDL_Moneda" runat="server" Theme="Material" Width="100%" BackColor="#303030" Border-BorderColor="#303030" 
+                                ValueField="ID" TextField="descrip" DataSourceID="DS_Moneda" AutoPostBack="true" OnSelectedIndexChanged="DDL_Moneda_SelectedIndexChanged">
                                 <Columns>
                                     <dx:ListBoxColumn FieldName="ID" Width="70px" Caption="C&#243;digo"></dx:ListBoxColumn>
                                     <dx:ListBoxColumn FieldName="descrip" Width="160px" Caption="Descripci&#243;n"></dx:ListBoxColumn>
@@ -101,7 +132,8 @@ form .row:not(.my-5) {
                     <div class="col-md-6">
                         <div class="controls">
                             <label>Tasa de Cambio</label>
-                            <dx:ASPxTextBox ID="TB_Rate" runat="server" Theme="Material" Width="100%" BackColor="#303030" ForeColor="#F0F0F0" Border-BorderColor="#303030" AutoCompleteType="None" ValueType="System.Decimal">
+                            <dx:ASPxTextBox ID="TB_Rate" runat="server" Theme="Material" Width="100%" BackColor="#303030" ForeColor="#F0F0F0" Border-BorderColor="#303030" 
+                                AutoCompleteType="None" ValueType="System.Decimal" AutoPostBack="true" OnTextChanged="TB_Rate_TextChanged">
                                 <ClientSideEvents KeyPress="function (s,e) { onlyNumbers(s, e); }" />
                                 <ValidationSettings Display="Dynamic" ValidationGroup="Documento" ErrorText="" ValidateOnLeave="false" ErrorTextPosition="Bottom">
                                     <RequiredField IsRequired="True" ErrorText="Campo Obligatorio" />
@@ -182,24 +214,36 @@ form .row:not(.my-5) {
                 <div class="amounts">
                     <div class="w-100 d-flex justify-content-between">
                         <h6 class="text-white" style="font-weight: 100">Items:</h6>
-                        <h5 class="text-white">5</h5>
+                        <h5 class="text-white" id="items" style="margin: 0 5px 10px 0;"></h5>
                     </div>
                     <div class="w-100 d-flex justify-content-between">
                         <h6 class="text-white" style="font-weight: 100">Total Documento:</h6>
-                        <h5 class="text-white">$100.00</h5>
+                        <div class="d-flex align-items-center">
+                            <dx:ASPxLabel ID="LBL_SignTD" runat="server" CssClass="text-light" style="font-size: 1.25rem; margin: 0 5px 10px 0;"></dx:ASPxLabel>
+                            <h5 class="text-white" id="total_doc" style="margin: 0 5px 10px 0;"></h5>
+                        </div>
                     </div>
                     <div class="w-100 d-flex justify-content-between">
                         <h6 class="text-white" style="font-weight: 100">Total Monto Recibido:</h6>
-                        <h5 class="text-white">$100.00</h5>
+                        <div class="d-flex align-items-center">
+                            <dx:ASPxLabel ID="LBL_SignTR" runat="server" CssClass="text-light" style="font-size: 1.25rem; margin: 0 5px 10px 0;"></dx:ASPxLabel>
+                            <dx:ASPxLabel ID="LBL_TotalReceived" runat="server" CssClass="text-light" style="font-size: 1.25rem; margin: 0 5px 10px 0;"></dx:ASPxLabel>
+                        </div>
                     </div>
                     <div class="w-100 d-flex justify-content-between">
                         <h6 class="text-white" style="font-weight: 100">Total Monto Cancelado:</h6>
-                        <h5 class="text-white">$50.00</h5>
+                        <div class="d-flex align-items-center">
+                            <dx:ASPxLabel ID="LBL_SignTC" runat="server" CssClass="text-light" style="font-size: 1.25rem; margin: 0 5px 10px 0;"></dx:ASPxLabel>
+                            <dx:ASPxLabel ID="LBL_TotalCancelled" runat="server" CssClass="text-light" style="font-size: 1.25rem; margin: 0 5px 10px 0;"></dx:ASPxLabel>
+                        </div>
                     </div>
                     <hr class="my-2 text-light" />
                     <div class="w-100 d-flex justify-content-between">
                         <h6 class="text-white" style="font-weight: 100">Balance:</h6>
-                        <h5 class="text-white">$50.00</h5>
+                        <div class="d-flex align-items-center">
+                            <dx:ASPxLabel ID="LBL_SignBC" runat="server" CssClass="text-light" style="font-size: 1.25rem; margin: 0 5px 10px 0;"></dx:ASPxLabel>
+                            <dx:ASPxLabel ID="LBL_Balance" runat="server" CssClass="text-light" style="font-size: 1.25rem; margin: 0 5px 10px 0;"></dx:ASPxLabel>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -208,20 +252,22 @@ form .row:not(.my-5) {
         <div class="row">
             <div class="col">
                 <dx:ASPxGridView ID="GV_DocumentoReng" runat="server" Theme="Material" Width="100%" ClientInstanceName="grid" AutoGenerateColumns="False" KeyFieldName="reng_num"
-                OnRowInserting="GV_DocumentoReng_RowInserting" OnRowUpdating="GV_DocumentoReng_RowUpdating" OnRowDeleting="GV_DocumentoReng_RowDeleting" 
+                    OnRowInserting="GV_DocumentoReng_RowInserting" OnRowUpdating="GV_DocumentoReng_RowUpdating" OnRowDeleting="GV_DocumentoReng_RowDeleting" 
                     OnInitNewRow="GV_DocumentoReng_InitNewRow" OnHtmlRowPrepared="GV_DocumentoReng_HtmlRowPrepared">
+                    <ClientSideEvents EndCallback="endCallback" />
+                    <SettingsPager PageSize="100" Visible="False"></SettingsPager>
                     <SettingsEditing Mode="Batch" NewItemRowPosition="Bottom">
                         <BatchEditSettings EditMode="Row" ShowConfirmOnLosingChanges="false" KeepChangesOnCallbacks="False" />
                     </SettingsEditing>
                     <Columns>
                         <dx:GridViewCommandColumn Width="100" ShowNewButtonInHeader="True" ShowEditButton="True" ShowDeleteButton="True" VisibleIndex="0">
-                            <HeaderStyle BackColor="#332940" Border-BorderWidth="0px" ForeColor="#F0F0F0" Paddings-Padding="5px"></HeaderStyle>
+                            <HeaderStyle BackColor="#102140" Border-BorderWidth="0px" ForeColor="#F0F0F0" Paddings-Padding="5px"></HeaderStyle>
                             <CellStyle ForeColor="#F0F0F0" Border-BorderWidth="0px">
                                 <Paddings Padding="12px"></Paddings>
                             </CellStyle>
                         </dx:GridViewCommandColumn>
                         <dx:GridViewDataTextColumn Width="50" FieldName="reng_num" Caption="Renglon" VisibleIndex="1" ReadOnly="True">
-                            <HeaderStyle BackColor="#332940" Border-BorderWidth="0px" ForeColor="#F0F0F0" Paddings-Padding="5px"></HeaderStyle>
+                            <HeaderStyle BackColor="#102140" Border-BorderWidth="0px" ForeColor="#F0F0F0" Paddings-Padding="5px"></HeaderStyle>
                             <CellStyle ForeColor="#F0F0F0" Border-BorderWidth="0px">
                                 <Paddings Padding="12px"></Paddings>
                             </CellStyle>
@@ -234,21 +280,21 @@ form .row:not(.my-5) {
                                 </Columns>
                                 <ValidationSettings Display="Dynamic" RequiredField-IsRequired="true" />
                             </PropertiesComboBox>
-                            <HeaderStyle BackColor="#332940" Border-BorderWidth="0px" ForeColor="#F0F0F0" Paddings-Padding="5px"></HeaderStyle>
+                            <HeaderStyle BackColor="#102140" Border-BorderWidth="0px" ForeColor="#F0F0F0" Paddings-Padding="5px"></HeaderStyle>
                             <CellStyle ForeColor="#F0F0F0" Border-BorderWidth="0px">
                                 <Paddings Padding="12px"></Paddings>
                             </CellStyle>
                             <PropertiesComboBox DataSourceID="DS_Servicio" ValueType="System.String" ValueField="ID" TextField="ID" />
                         </dx:GridViewDataComboBoxColumn>
                         <dx:GridViewDataTextColumn Width="550" FieldName="des_serv" Caption="Descripcion" VisibleIndex="3" ReadOnly="True">
-                            <HeaderStyle BackColor="#332940" Border-BorderWidth="0px" ForeColor="#F0F0F0" Paddings-Padding="5px"></HeaderStyle>
+                            <HeaderStyle BackColor="#102140" Border-BorderWidth="0px" ForeColor="#F0F0F0" Paddings-Padding="5px"></HeaderStyle>
                             <CellStyle ForeColor="#F0F0F0" Border-BorderWidth="0px">
                                 <Paddings Padding="12px"></Paddings>
                             </CellStyle>
                         </dx:GridViewDataTextColumn>
                         <dx:GridViewDataTextColumn FieldName="price_serv" Caption="Precio" VisibleIndex="4" ReadOnly="true">
                             <PropertiesTextEdit DisplayFormatString="{0:n}"></PropertiesTextEdit>
-                            <HeaderStyle BackColor="#332940" Border-BorderWidth="0px" ForeColor="#F0F0F0" Paddings-Padding="5px"></HeaderStyle>
+                            <HeaderStyle BackColor="#102140" Border-BorderWidth="0px" ForeColor="#F0F0F0" Paddings-Padding="5px"></HeaderStyle>
                             <CellStyle ForeColor="#F0F0F0" Border-BorderWidth="0px">
                                 <Paddings Padding="12px"></Paddings>
                             </CellStyle>
@@ -266,6 +312,44 @@ form .row:not(.my-5) {
     <br />
 </form>
 <script>
+    $(document).ready(function () {
+        $("#items").text(grid.GetVisibleRowsOnPage());
+
+        var price_total = 0;
+        for (var i = 0; i < grid.GetVisibleRowsOnPage(); i++) {
+            var elem_parent = grid.GetRow(i).getElementsByTagName("td")[4];
+            var elem_last = elem_parent.lastElementChild;
+            var elem_f = elem_last ?? elem_parent;
+
+            var r = parseFloat(elem_f.innerHTML.replaceAll(".", "").replaceAll(",", "."));
+            price_total += r;
+        }
+        console.log(price_total);
+        $("#total_doc").text(price_total.toLocaleString("es-ES", { minimumFractionDigits: 2, maximumFractionDigits: 2, useGrouping: true }));
+
+        $("span").click(function () {
+            if (this.innerHTML == "Eliminar") {
+                setTimeout(function () {
+                    if (grid.batchEditApi.HasChanges()) {
+                        grid.UpdateEdit();
+                    }
+                }, 10)
+            }
+        });
+    });
+
+    window.onkeydown = function (e) {
+        if (e.keyCode == 13) {
+            e.preventDefault();
+
+            setTimeout(function () {
+                if (grid.batchEditApi.HasChanges()) {
+                    grid.UpdateEdit();
+                }
+            }, 10);
+        }
+    }
+
     function onlyNumbers(_, e) {
         var event = e.htmlEvent || window.event;
         var key = event.keyCode || event.which;
@@ -278,18 +362,6 @@ form .row:not(.my-5) {
 
             if (event.preventDefault)
                 event.preventDefault();
-        }
-    }
-
-    window.onkeydown = function (e) {
-        if (e.keyCode == 13) {
-            e.preventDefault();
-
-            setTimeout(function () {
-                if (grid.batchEditApi.HasChanges()) {
-                    grid.UpdateEdit();
-                }
-            }, 10);
         }
     }
 </script>

@@ -118,6 +118,13 @@ form {
 label {
     color: #FFF;
 }
+hr {
+    color: #F0F0F0;
+}
+/*.btn-alert, .btn-alert:hover, .btn-alert:active {
+    background: #7a08ae;
+    border-color: #7a08ae;
+}*/
 
 /* MODALES */
 .modal {
@@ -231,7 +238,7 @@ table td {
     border-radius: 0 !important;
 }
 .dxgvSearchPanel_Material input {
-    padding: 5px !important;
+    padding: 3px 5px !important;
     border-radius: 0 !important;
     font-family: var(--bs-body-font-family) !important;
 }
@@ -248,15 +255,18 @@ table td {
 .dxeButtonEditButton_Material {
     background: #303030;
 }
+.details-doc .col {
+    color: #F0F0F0;
+}
 .form-grid table.dxgvTable_Material .btn {
     width: 100%;
     padding: 5px;
     color: #F0F0F0;
     font-size: 13px;
     text-decoration: none;
-    border-radius: 0;
+    border-radius: 3px;
 }
-#MainContent_GV_DocumentoReng_DXEmptyRow {
+#MainContent_GV_DocumentoReng_DXEmptyRow, #MainContent_GV_Documentos_DXEmptyRow {
     background: #141517 !important;
     color: #F0F0F0;
 }

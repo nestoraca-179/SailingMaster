@@ -24,6 +24,7 @@ namespace SailingMaster.Models
         public string descrip { get; set; }
         public bool @base { get; set; }
         public decimal tasa { get; set; }
+        public string signo { get; set; }
         public string co_us_in { get; set; }
         public System.DateTime fe_us_in { get; set; }
         public string co_us_mo { get; set; }
