@@ -20,7 +20,7 @@
     <asp:Panel ID="PN_ContainerForm" runat="server">
         <div class="row my-3">
             <div class="col d-flex">
-                <asp:LinkButton ID="BTN_AgregarUsuario" runat="server" Text="Nuevo" CssClass="btn btn-info d-flex align-items-center" OnClick="BTN_AgregarUsuario_Click">
+                <asp:LinkButton ID="BTN_AgregarUsuario" runat="server" Text="Nuevo" CssClass="btn btn-info btn-new d-flex align-items-center" OnClick="BTN_AgregarUsuario_Click">
                     <i class="fas fa-user-plus mx-2"></i> Agregar Nuevo Usuario
                 </asp:LinkButton>
             </div>
@@ -106,7 +106,9 @@
             WHEN 0 THEN 'Administrador'
             WHEN 1 THEN 'Generador'
             WHEN 2 THEN 'Aprobador'
-            WHEN 3 THEN 'Observador'
+            WHEN 3 THEN 'Cobrador'
+            WHEN 4 THEN 'Liquidador'
+            WHEN 5 THEN 'Observador'
             END as tip_usuario
             FROM [Usuario]"></asp:SqlDataSource>
         </div>

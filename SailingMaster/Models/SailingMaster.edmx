@@ -28,11 +28,13 @@
           <Property Name="reviewed_by" Type="varchar" MaxLength="20" />
           <Property Name="reviewed_date" Type="datetime" />
           <Property Name="reviewed_observ" Type="varchar(max)" />
+          <Property Name="collected_by" Type="varchar" MaxLength="20" />
+          <Property Name="collected_date" Type="datetime" />
+          <Property Name="collected_amount" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="collected_date_transf" Type="datetime" />
+          <Property Name="collected_nref_transf" Type="varchar" MaxLength="50" />
           <Property Name="liquidated_by" Type="varchar" MaxLength="20" />
           <Property Name="liquidated_date" Type="datetime" />
-          <Property Name="liquidated_amount" Type="decimal" Precision="18" Scale="2" />
-          <Property Name="liquidated_date_transf" Type="datetime" />
-          <Property Name="liquidated_nref_transf" Type="varchar" MaxLength="50" />
           <Property Name="closed_by" Type="varchar" MaxLength="20" />
           <Property Name="closed_date" Type="datetime" />
           <Property Name="co_us_in" Type="varchar" MaxLength="20" Nullable="false" />
@@ -233,9 +235,6 @@
           <Property Name="reviewed_observ" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
           <Property Name="liquidated_by" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
           <Property Name="liquidated_date" Type="DateTime" Precision="3" />
-          <Property Name="liquidated_amount" Type="Decimal" Precision="18" Scale="2" />
-          <Property Name="liquidated_date_transf" Type="DateTime" Precision="3" />
-          <Property Name="liquidated_nref_transf" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="closed_by" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
           <Property Name="closed_date" Type="DateTime" Precision="3" />
           <Property Name="co_us_in" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
@@ -244,6 +243,11 @@
           <Property Name="fe_us_mo" Type="DateTime" Nullable="false" Precision="3" />
           <NavigationProperty Name="Moneda" Relationship="SailingMasterModel.FK__Proforma__co_mon__5CD6CB2B" FromRole="Documento" ToRole="Moneda" />
           <NavigationProperty Name="DocumentoReng" Relationship="SailingMasterModel.FK__ProformaR__co_pr__0F624AF8" FromRole="Documento" ToRole="DocumentoReng" />
+          <Property Name="collected_by" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="collected_date" Type="DateTime" Precision="3" />
+          <Property Name="collected_amount" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="collected_date_transf" Type="DateTime" Precision="3" />
+          <Property Name="collected_nref_transf" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="DocumentoReng">
           <Key>
@@ -380,15 +384,17 @@
           <EntitySetMapping Name="Documento">
             <EntityTypeMapping TypeName="SailingMasterModel.Documento">
               <MappingFragment StoreEntitySet="Documento">
+                <ScalarProperty Name="collected_nref_transf" ColumnName="collected_nref_transf" />
+                <ScalarProperty Name="collected_date_transf" ColumnName="collected_date_transf" />
+                <ScalarProperty Name="collected_amount" ColumnName="collected_amount" />
+                <ScalarProperty Name="collected_date" ColumnName="collected_date" />
+                <ScalarProperty Name="collected_by" ColumnName="collected_by" />
                 <ScalarProperty Name="fe_us_mo" ColumnName="fe_us_mo" />
                 <ScalarProperty Name="co_us_mo" ColumnName="co_us_mo" />
                 <ScalarProperty Name="fe_us_in" ColumnName="fe_us_in" />
                 <ScalarProperty Name="co_us_in" ColumnName="co_us_in" />
                 <ScalarProperty Name="closed_date" ColumnName="closed_date" />
                 <ScalarProperty Name="closed_by" ColumnName="closed_by" />
-                <ScalarProperty Name="liquidated_nref_transf" ColumnName="liquidated_nref_transf" />
-                <ScalarProperty Name="liquidated_date_transf" ColumnName="liquidated_date_transf" />
-                <ScalarProperty Name="liquidated_amount" ColumnName="liquidated_amount" />
                 <ScalarProperty Name="liquidated_date" ColumnName="liquidated_date" />
                 <ScalarProperty Name="liquidated_by" ColumnName="liquidated_by" />
                 <ScalarProperty Name="reviewed_observ" ColumnName="reviewed_observ" />

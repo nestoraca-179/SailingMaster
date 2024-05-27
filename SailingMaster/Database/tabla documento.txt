@@ -14,18 +14,21 @@ status
    0- GENERADO
    1- APROBADO (Usuario, Fecha)
    2- REVISADO (Usuario, Fecha, Observaciones)
-   3- LIQUIDADA (Usuario, Fecha, Monto, Fecha Transf, Referencia) 
-   4- CERRADA (Usuario, Fecha)
+   3- COBRADO (Usuario, Fecha, Monto, Fecha Transf, Referencia)
+   4- LIQUIDADA (Usuario, Fecha) 
+   5- CERRADA (Usuario, Fecha)
 approved_by
 approved_date
 reviewed_by
 reviewed_date
 reviewed_observ
+collected_by
+collected_date
+collected_amount
+collected_date_transf
+collected_nref_transf
 liquidated_by
 liquidated_date
-liquidated_amount
-liquidated_date_transf
-liquidated_nref_transf
 closed_by
 closed_date
 co_us_in

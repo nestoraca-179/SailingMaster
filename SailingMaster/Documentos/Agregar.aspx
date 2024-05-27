@@ -30,6 +30,31 @@ form .row:not(.my-5) {
 #MainContent_DE_DateArrived_ETC, #MainContent_DE_DateSailed_ETC {
     color: #F0F0F0;
 }
+.buttons-actions {
+    display: flex;
+    justify-content: end;
+    /*align-items: center;*/
+    flex-wrap: wrap;
+}
+.buttons-actions .btn {
+    
+}
+.btn-approved, .btn-approved:hover, .btn-approved:active {
+    background: #1f9547;
+    border-color: #1f9547;
+}
+.btn-reviewed, .btn-reviewed:hover, .btn-reviewed:active {
+    background: #61189D;
+    border-color: #61189D;
+}
+.btn-liquidated, .btn-liquidated:hover, .btn-liquidated:active {
+    background: #DB7B15;
+    border-color: #DB7B15;
+}
+.btn-closed, .btn-closed:hover, .btn-closed:active {
+    background: #34495E;
+    border-color: #34495E;
+}
 </style>
 <script>
     function endCallback(s, e) {
@@ -44,7 +69,6 @@ form .row:not(.my-5) {
             var r = parseFloat(elem_f.innerHTML.replaceAll(".", "").replaceAll(",", "."));
             price_total += r;
         }
-        console.log(price_total);
         $("#total_doc").text(price_total.toLocaleString("es-ES", { minimumFractionDigits: 2, maximumFractionDigits: 2, useGrouping: true }));
 
         $("span").click(function () {
@@ -65,7 +89,7 @@ form .row:not(.my-5) {
 </asp:Panel>
 <form id="Form1" runat="server" class="container">
     <asp:Panel ID="PN_ContainerForm" runat="server" CssClass="form-header">
-        <div class="row my-5">
+        <div class="row mt-5">
             <div class="col d-flex">
                 <asp:LinkButton ID="BTN_Volver" runat="server" CssClass="btn btn-primary d-flex align-items-center" OnClick="BTN_Volver_Click">
                     <i class="fas fa-arrow-left" style="margin-right: 5px;"></i> Regresar
@@ -73,7 +97,7 @@ form .row:not(.my-5) {
                 <dx:ASPxButton ID="BTN_Guardar" runat="server" CssClass="btn btn-success mx-2" Text="Guardar" ValidationGroup="Documento" OnClick="BTN_Guardar_Click" />
             </div>
             <div class="col">
-                <dx:ASPxLabel ID="LBL_IDUsuario" runat="server" Text="Agregar Documento" Width="100%" Font-Size="24px" CssClass="title-screen text-center text-light"></dx:ASPxLabel>
+                <dx:ASPxLabel ID="LBL_IDDocumento" runat="server" Text="Agregar Documento" Width="100%" Font-Size="24px" CssClass="title-screen text-center text-light"></dx:ASPxLabel>
             </div>
             <div class="col">
                 <div class="controls">
@@ -86,6 +110,24 @@ form .row:not(.my-5) {
                 </div>
             </div>
         </div>
+        <hr />
+        <asp:Panel ID="PN_ButtonsActions" runat="server" Visible="false" CssClass="row mx-0 my-3">
+            <div class="col buttons-actions p-0">
+                <asp:LinkButton ID="BTN_PreAprobarDocumento" runat="server" CssClass="btn btn-info mx-1" data-toggle="modal" data-target="#modalAprobar">
+                    <i class="fas fa-check" style="margin-right: 5px;"></i> Aprobar
+                </asp:LinkButton>
+                <asp:LinkButton ID="BTN_RevisarDocumento" runat="server" CssClass="btn btn-warning" CommandName="Revisar">
+                    <i class="fas fa-search" style="margin-right: 5px;"></i> Revisar
+                </asp:LinkButton>
+                <asp:LinkButton ID="BTN_LiquidarDocumento" runat="server" CssClass="btn btn-danger mx-1" CommandName="Liquidar">
+                    <i class="fas fa-file-invoice-dollar" style="margin-right: 5px;"></i> Liquidar
+                </asp:LinkButton>
+                <asp:LinkButton ID="BTN_CerrarDocumento" runat="server" CssClass="btn btn-dark" CommandName="Cerrar">
+                    <i class="fas fa-times" style="margin-right: 5px;"></i> Cerrar
+                </asp:LinkButton>
+            </div>
+            <hr class="m-0 mt-3" />
+        </asp:Panel>
         <div class="row">
             <div class="col-md-8">
                 <div class="row">
@@ -292,12 +334,24 @@ form .row:not(.my-5) {
                                 <Paddings Padding="12px"></Paddings>
                             </CellStyle>
                         </dx:GridViewDataTextColumn>
-                        <dx:GridViewDataTextColumn FieldName="price_serv" Caption="Precio" VisibleIndex="4" ReadOnly="true">
+                        <dx:GridViewDataTextColumn FieldName="price_serv" Caption="Monto Presupuestado" VisibleIndex="4" ReadOnly="true">
                             <PropertiesTextEdit DisplayFormatString="{0:n}"></PropertiesTextEdit>
                             <HeaderStyle BackColor="#102140" Border-BorderWidth="0px" ForeColor="#F0F0F0" Paddings-Padding="5px"></HeaderStyle>
                             <CellStyle ForeColor="#F0F0F0" Border-BorderWidth="0px">
                                 <Paddings Padding="12px"></Paddings>
                             </CellStyle>
+                        </dx:GridViewDataTextColumn>
+                        <dx:GridViewDataTextColumn Caption="Monto Liquidado" VisibleIndex="5" ReadOnly="true">
+                            <PropertiesTextEdit DisplayFormatString="{0:n}"></PropertiesTextEdit>
+                            <HeaderStyle BackColor="#102140" Border-BorderWidth="0px" ForeColor="#F0F0F0" Paddings-Padding="5px"></HeaderStyle>
+                            <CellStyle ForeColor="#F0F0F0" Border-BorderWidth="0px">
+                                <Paddings Padding="12px"></Paddings>
+                            </CellStyle>
+                            <DataItemTemplate>
+                                <span class="mx-1">0,00</span>
+                                <dx:ASPxButton ID="BTN_AgregarSoporte" runat="server" CssClass="btn btn-primary p-1" ForeColor="#F0F0F0" Text="..." AutoPostBack="false" 
+                                    data-toggle="modal" data-target="#modalAgregarSoporte"></dx:ASPxButton>
+                            </DataItemTemplate>
                         </dx:GridViewDataTextColumn>
                     </Columns>
                     <Settings ShowFooter="true" />
@@ -310,6 +364,53 @@ form .row:not(.my-5) {
         </div>
     </asp:Panel>
     <br />
+    <!-- Modal Aprobar -->
+    <div class="modal fade modal-warning" id="modalAprobar" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <i class="fas fa-warning"></i>
+                    <dx:ASPxLabel ID="LBL_Delete" runat="server" Font-Size="25px" Width="100%" Text="¿Deseas aprobar el documento?"></dx:ASPxLabel>
+                </div>
+                <div class="modal-footer buttons">
+                    <button class="btn btn-danger" data-dismiss="modal">No</button>
+                    <dx:ASPxButton ID="BTN_AprobarDocumento" runat="server" Text="Sí" CssClass="btn btn-success"></dx:ASPxButton>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Modal Agregar -->
+    <div class="modal fade modal-warning" id="modalAgregarSoporte" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="m-0">Agregar Soporte</h5>
+                </div>
+                <div class="modal-body">
+                    <div class="form-group" style="text-align: left !important;">
+                        <label class="text-dark my-1">Monto</label>
+                        <input type="text" class="form-control" name="name" />
+                    </div>
+                    <div class="form-group my-3" style="text-align: left !important;">
+                        <label class="text-dark my-1">Fecha</label>
+                        <input type="text" class="form-control" name="name" />
+                    </div>
+                    <div class="form-group" style="text-align: left !important;">
+                        <label class="text-dark my-1">Referencia</label>
+                        <input type="text" class="form-control" name="name" />
+                    </div>
+                    <div class="form-group my-3" style="text-align: left !important;">
+                        <label class="text-dark my-1">Subir Archivo</label>
+                        <input type="file" class="form-control" id="formFile" />
+                    </div>
+                </div>
+                <div class="modal-footer buttons">
+                    <button class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                    <button class="btn btn-primary">Guardar</button>
+                </div>
+            </div>
+        </div>
+    </div>
 </form>
 <script>
     $(document).ready(function () {
@@ -324,7 +425,6 @@ form .row:not(.my-5) {
             var r = parseFloat(elem_f.innerHTML.replaceAll(".", "").replaceAll(",", "."));
             price_total += r;
         }
-        console.log(price_total);
         $("#total_doc").text(price_total.toLocaleString("es-ES", { minimumFractionDigits: 2, maximumFractionDigits: 2, useGrouping: true }));
 
         $("span").click(function () {

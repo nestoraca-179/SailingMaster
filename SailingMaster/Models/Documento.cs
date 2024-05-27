@@ -41,15 +41,17 @@ namespace SailingMaster.Models
         public string reviewed_observ { get; set; }
         public string liquidated_by { get; set; }
         public Nullable<System.DateTime> liquidated_date { get; set; }
-        public Nullable<decimal> liquidated_amount { get; set; }
-        public Nullable<System.DateTime> liquidated_date_transf { get; set; }
-        public string liquidated_nref_transf { get; set; }
         public string closed_by { get; set; }
         public Nullable<System.DateTime> closed_date { get; set; }
         public string co_us_in { get; set; }
         public System.DateTime fe_us_in { get; set; }
         public string co_us_mo { get; set; }
         public System.DateTime fe_us_mo { get; set; }
+        public string collected_by { get; set; }
+        public Nullable<System.DateTime> collected_date { get; set; }
+        public Nullable<decimal> collected_amount { get; set; }
+        public Nullable<System.DateTime> collected_date_transf { get; set; }
+        public string collected_nref_transf { get; set; }
     
         public virtual Moneda Moneda { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

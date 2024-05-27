@@ -24,7 +24,7 @@ body header {
     color: #f0f0f0;
     border-bottom: solid 1px #3e4753;
 }
-body header > .col-3 {
+body header > .col-2 {
     padding: 0;
     text-align: center;
     display: flex;
@@ -32,18 +32,18 @@ body header > .col-3 {
     align-items: center;
     position: relative;
 }
-body header > .col-3 i.fas.fa-bars {
+body header > .col-2 i.fas.fa-bars {
     padding: 10px;
     border-radius: 50%;
-    font-size: 20px;
+    font-size: 17px;
     position: absolute;
     left: 20px;
     cursor: pointer;
 }
-body header > .col-3 i.fas.fa-bars:hover {
+body header > .col-2 i.fas.fa-bars:hover {
     background: #1a1c20;
 }
-body header > .col-9 {
+body header > .col-10 {
     padding: 0;
     justify-content: end !important;
 }
@@ -55,14 +55,14 @@ body > section.container-fluid {
     padding: 0;
     overflow-y: auto;
 }
-body > section.container-fluid > .col-3 {
+body > section.container-fluid > .col-2 {
     background: #26292e;
     padding: 0;
 }
-body > section.container-fluid > .col-3.active {
+body > section.container-fluid > .col-2.active {
     flex: 0;
 }
-body > section.container-fluid > .col-9 {
+body > section.container-fluid > .col-10 {
     background: #18191d;
     flex: auto;
     overflow-y: auto;
@@ -160,7 +160,7 @@ hr {
     margin: 30px auto;
     color: #1064ae;
 }
-#modal-delete i {
+#modal-delete i, .modal-warning i {
     font-size: 7em;
     margin: 30px auto;
     color: #e89c12;
@@ -179,6 +179,7 @@ ul.menu li {
 ul.menu li a {
     width: 100%;
     color: #FFF;
+    font-size: 15px;
     padding: 20px;
     cursor: pointer;
     text-decoration: none;
@@ -195,10 +196,11 @@ ul.menu li a i {
     align-items: center;
 }
 ul.menu li a p {
-    margin-left: 10px !important;
+    margin-left: 25px !important;
 }
-#item_conf.disabled {
+#item_reps.disabled, #item_currencies.disabled {
     color: #848484 !important;
+    border: 0;
 }
 
 /* GRIDVIEWS */
@@ -208,7 +210,7 @@ form {
 .form-grid {
     position: static;
 }
-.btn.btn-info {
+.btn.btn-info.btn-new {
     font-size: 14px;
     padding: 0 10px;
 }

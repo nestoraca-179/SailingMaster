@@ -29,12 +29,11 @@ namespace SailingMaster.Documentos
                     if (string.IsNullOrEmpty(moneda))
                         moneda = "BSD";
 
-                    Moneda mone = MonedaController.GetByID(moneda);
-                    LBL_SignTD.Text = mone.signo;
-
+                    Moneda mone;
                     if (Request.QueryString["ID"] != null) // EDITANDO
                     {
                         Documento doc = DocumentoController.GetByID(int.Parse(Request.QueryString["ID"].ToString()));
+                        mone = MonedaController.GetByID(doc.co_mone);
 
                         if (doc.status < 4)
                         {
@@ -44,16 +43,20 @@ namespace SailingMaster.Documentos
                         }
                         else
                         {
-                            LBL_TotalReceived.Text = doc.liquidated_amount.ToString();
+                            LBL_TotalReceived.Text = doc.collected_amount.ToString();
                             LBL_TotalCancelled.Text = "0,00";
-                            LBL_Balance.Text = doc.liquidated_amount.ToString();
+                            LBL_Balance.Text = doc.collected_amount.ToString();
                         }
 
+                        Page.Title = "Documento #" + doc.ID;
+                        LBL_IDDocumento.Text = "Documento #" + doc.ID;
+                        PN_ButtonsActions.Visible = true;
                         if (!IsPostBack)
                             CargarDocumento(doc);
                     }
                     else // AGREGANDO
                     {
+                        mone = MonedaController.GetByID(moneda);
                         LBL_TotalReceived.Text = "0,00";
                         LBL_TotalCancelled.Text = "0,00";
                         LBL_Balance.Text = "0,00";
@@ -62,6 +65,7 @@ namespace SailingMaster.Documentos
                             rengs = new List<DocumentoReng>();
                     }
 
+                    LBL_SignTD.Text = mone.signo;
                     LBL_SignTR.Text = mone.signo;
                     LBL_SignTC.Text = mone.signo;
                     LBL_SignBC.Text = mone.signo;

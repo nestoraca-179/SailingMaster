@@ -7,31 +7,6 @@
     background: #102140;
     border: 0;
 }
-.buttons-actions {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    flex-wrap: wrap;
-}
-.buttons-actions .btn {
-    width: 40% !important;
-}
-.btn-approved, .btn-approved:hover, .btn-approved:active {
-    background: #1f9547;
-    border-color: #1f9547;
-}
-.btn-reviewed, .btn-reviewed:hover, .btn-reviewed:active {
-    background: #61189D;
-    border-color: #61189D;
-}
-.btn-liquidated, .btn-liquidated:hover, .btn-liquidated:active {
-    background: #DB7B15;
-    border-color: #DB7B15;
-}
-.btn-closed, .btn-closed:hover, .btn-closed:active {
-    background: #34495E;
-    border-color: #34495E;
-}
 </style>
 <script>
     function openModalDelete() {
@@ -52,7 +27,7 @@
     <asp:Panel ID="PN_ContainerForm" runat="server">
         <div class="row my-3">
             <div class="col d-flex">
-                <asp:LinkButton ID="BTN_AgregarDocumento" runat="server" Text="Nuevo" CssClass="btn btn-info d-flex align-items-center" OnClick="BTN_AgregarDocumento_Click">
+                <asp:LinkButton ID="BTN_AgregarDocumento" runat="server" Text="Nuevo" CssClass="btn btn-info btn-new d-flex align-items-center" OnClick="BTN_AgregarDocumento_Click">
                     <i class="fas fa-plus mx-2"></i> Agregar Nuevo Documento
                 </asp:LinkButton>
             </div>
@@ -74,49 +49,67 @@
                             <Paddings Padding="12px"></Paddings>
                         </CellStyle>
                     </dx:GridViewDataTextColumn>
-                    <dx:GridViewDataDateColumn FieldName="fecha" VisibleIndex="1" Caption="Fecha">
-                        <HeaderStyle BackColor="#102140" Border-BorderWidth="0px" ForeColor="#F0F0F0" Paddings-Padding="5px"></HeaderStyle>
-                        <CellStyle ForeColor="#F0F0F0" Border-BorderWidth="0px">
-                            <Paddings Padding="12px"></Paddings>
-                        </CellStyle>
-                    </dx:GridViewDataDateColumn>
-                    <dx:GridViewDataTextColumn FieldName="cliente" VisibleIndex="2" Caption="Cliente">
+                    <dx:GridViewDataTextColumn FieldName="co_mone" VisibleIndex="1" Caption="Moneda">
                         <HeaderStyle BackColor="#102140" Border-BorderWidth="0px" ForeColor="#F0F0F0" Paddings-Padding="5px"></HeaderStyle>
                         <CellStyle ForeColor="#F0F0F0" Border-BorderWidth="0px">
                             <Paddings Padding="12px"></Paddings>
                         </CellStyle>
                     </dx:GridViewDataTextColumn>
-                    <dx:GridViewDataTextColumn FieldName="co_mone" VisibleIndex="3" Caption="Moneda">
-                        <HeaderStyle BackColor="#102140" Border-BorderWidth="0px" ForeColor="#F0F0F0" Paddings-Padding="5px"></HeaderStyle>
-                        <CellStyle ForeColor="#F0F0F0" Border-BorderWidth="0px">
-                            <Paddings Padding="12px"></Paddings>
-                        </CellStyle>
-                    </dx:GridViewDataTextColumn>
-                    <dx:GridViewDataTextColumn FieldName="total" VisibleIndex="4" Caption="Total">
+                    <dx:GridViewDataTextColumn FieldName="total" VisibleIndex="2" Caption="Total">
                         <PropertiesTextEdit DisplayFormatString="{0:N2}"></PropertiesTextEdit>
                         <HeaderStyle BackColor="#102140" Border-BorderWidth="0px" ForeColor="#F0F0F0" Paddings-Padding="5px"></HeaderStyle>
                         <CellStyle ForeColor="#F0F0F0" Border-BorderWidth="0px">
                             <Paddings Padding="12px"></Paddings>
                         </CellStyle>
                     </dx:GridViewDataTextColumn>
-                    <dx:GridViewDataTextColumn FieldName="doc_status" VisibleIndex="5" Caption="Status">
+                    <dx:GridViewDataTextColumn FieldName="doc_status" VisibleIndex="3" Caption="Status">
                         <HeaderStyle BackColor="#102140" Border-BorderWidth="0px" ForeColor="#F0F0F0" Paddings-Padding="5px"></HeaderStyle>
                         <CellStyle ForeColor="#F0F0F0" Border-BorderWidth="0px">
                             <Paddings Padding="12px"></Paddings>
                         </CellStyle>
                     </dx:GridViewDataTextColumn>
-                    <dx:GridViewDataColumn Width="110px" VisibleIndex="6" Caption="Editar">
+                    <dx:GridViewDataDateColumn FieldName="fecha" VisibleIndex="4" Caption="Fec. Generacion">
+                        <HeaderStyle BackColor="#102140" Border-BorderWidth="0px" ForeColor="#F0F0F0" Paddings-Padding="5px"></HeaderStyle>
+                        <CellStyle ForeColor="#F0F0F0" Border-BorderWidth="0px">
+                            <Paddings Padding="12px"></Paddings>
+                        </CellStyle>
+                    </dx:GridViewDataDateColumn>
+                    <dx:GridViewDataDateColumn FieldName="approved_date" VisibleIndex="5" Caption="Fec. Aprobacion">
+                        <HeaderStyle BackColor="#102140" Border-BorderWidth="0px" ForeColor="#F0F0F0" Paddings-Padding="5px"></HeaderStyle>
+                        <CellStyle ForeColor="#F0F0F0" Border-BorderWidth="0px">
+                            <Paddings Padding="12px"></Paddings>
+                        </CellStyle>
+                    </dx:GridViewDataDateColumn>
+                    <dx:GridViewDataDateColumn FieldName="collected_date" VisibleIndex="6" Caption="Fec. Cobro">
+                        <HeaderStyle BackColor="#102140" Border-BorderWidth="0px" ForeColor="#F0F0F0" Paddings-Padding="5px"></HeaderStyle>
+                        <CellStyle ForeColor="#F0F0F0" Border-BorderWidth="0px">
+                            <Paddings Padding="12px"></Paddings>
+                        </CellStyle>
+                    </dx:GridViewDataDateColumn>
+                    <dx:GridViewDataDateColumn FieldName="liquidated_date" VisibleIndex="7" Caption="Fec. Liquidacion">
+                        <HeaderStyle BackColor="#102140" Border-BorderWidth="0px" ForeColor="#F0F0F0" Paddings-Padding="5px"></HeaderStyle>
+                        <CellStyle ForeColor="#F0F0F0" Border-BorderWidth="0px">
+                            <Paddings Padding="12px"></Paddings>
+                        </CellStyle>
+                    </dx:GridViewDataDateColumn>
+                    <dx:GridViewDataDateColumn FieldName="closed_date" VisibleIndex="8" Caption="Fec. Cerrada">
+                        <HeaderStyle BackColor="#102140" Border-BorderWidth="0px" ForeColor="#F0F0F0" Paddings-Padding="5px"></HeaderStyle>
+                        <CellStyle ForeColor="#F0F0F0" Border-BorderWidth="0px">
+                            <Paddings Padding="12px"></Paddings>
+                        </CellStyle>
+                    </dx:GridViewDataDateColumn>
+                    <dx:GridViewDataColumn Width="110px" VisibleIndex="9" Caption="Revisar">
                         <HeaderStyle BackColor="#102140" Border-BorderWidth="0px" ForeColor="#F0F0F0" Paddings-Padding="5px"></HeaderStyle>
                         <CellStyle ForeColor="#F0F0F0" Border-BorderWidth="0px">
                             <Paddings Padding="12px"></Paddings>
                         </CellStyle>
                         <DataItemTemplate>
-                            <asp:LinkButton ID="BTN_EditarDocumento" runat="server" CssClass="btn btn-primary" CommandName="Editar">
-                                <i class="fas fa-pencil-alt" style="margin-right: 5px;"></i> Editar
+                            <asp:LinkButton ID="BTN_RevisarDocumento" runat="server" CssClass="btn btn-primary" CommandName="Revisar">
+                                <i class="fas fa-search" style="margin-right: 5px;"></i>
                             </asp:LinkButton>
                         </DataItemTemplate>
                     </dx:GridViewDataColumn>
-                    <dx:GridViewDataColumn Width="110px" VisibleIndex="7" Caption="Eliminar">
+                    <%--<dx:GridViewDataColumn Width="110px" VisibleIndex="10" Caption="Eliminar">
                         <HeaderStyle BackColor="#102140" Border-BorderWidth="0px" ForeColor="#F0F0F0" Paddings-Padding="5px"></HeaderStyle>
                         <CellStyle ForeColor="#F0F0F0" Border-BorderWidth="0px">
                             <Paddings Padding="12px"></Paddings>
@@ -126,7 +119,7 @@
                                 <i class="fas fa-times" style="margin-right: 5px;"></i> Eliminar
                             </asp:LinkButton>
                         </DataItemTemplate>
-                    </dx:GridViewDataColumn>
+                    </dx:GridViewDataColumn>--%>
                 </Columns>
                 <Styles>
                     <DetailRow BackColor="#18181B"></DetailRow>
@@ -141,6 +134,8 @@
                     <DetailRow>
                         <div class="row details-doc">
                             <div class="col">
+                                Cliente: <dx:ASPxLabel runat="server" Text='<%# Eval("cliente") %>' Font-Bold="true" ForeColor="#F0F0F0" />
+                                <br />
                                 Puerto: <dx:ASPxLabel runat="server" Text='<%# Eval("puerto") %>' Font-Bold="true" ForeColor="#F0F0F0" />
                                 <br />
                                 Buque: <dx:ASPxLabel runat="server" Text='<%# Eval("buque") %>' Font-Bold="true" ForeColor="#F0F0F0" />
@@ -158,8 +153,36 @@
                                 <br />
                                 Fecha Salida: <dx:ASPxLabel runat="server" Text='<%# Eval("fec_salida", "{0:dd/MM/yyyy}") %>' Font-Bold="true" ForeColor="#F0F0F0" />
                                 <br />
+                                Generado Por: <dx:ASPxLabel runat="server" Text='<%# Eval("co_us_in") %>' Font-Bold="true" ForeColor="#F0F0F0" />
                             </div>
-                            <div class="col buttons-actions">
+                            <div class="col">
+                                Aprobado Por: <dx:ASPxLabel runat="server" Text='<%# Eval("approved_by") %>' Font-Bold="true" ForeColor="#F0F0F0" />
+                                <br />
+                                Revisado Por: <dx:ASPxLabel runat="server" Text='<%# Eval("reviewed_by") %>' Font-Bold="true" ForeColor="#F0F0F0" />
+                                <br />
+                                Observacion: <dx:ASPxLabel runat="server" Text='<%# Eval("reviewed_observ") %>' Font-Bold="true" ForeColor="#F0F0F0" />
+                                <br />
+                                Liquidado Por: <dx:ASPxLabel runat="server" Text='<%# Eval("liquidated_by") %>' Font-Bold="true" ForeColor="#F0F0F0" />
+                                <br />
+                                Cerrado Por: <dx:ASPxLabel runat="server" Text='<%# Eval("closed_by") %>' Font-Bold="true" ForeColor="#F0F0F0" />
+                            </div>
+                            <div class="col">
+                                ¿Cobrado?: <dx:ASPxLabel runat="server" Text='<%# Convert.ToInt32(Eval("status")) >= 3 ? "SI" : "NO" %>' Font-Bold="true" ForeColor="#F0F0F0" />
+                                <br />
+                                Cobrado Por: <dx:ASPxLabel runat="server" Text='<%# Eval("collected_by") %>' Font-Bold="true" ForeColor="#F0F0F0" />
+                                <br />
+                                Monto Recibido: <dx:ASPxLabel runat="server" Text='<%# Eval("collected_amount") %>' Font-Bold="true" ForeColor="#F0F0F0" />
+                                <br />
+                                Fec. Transferencia: <dx:ASPxLabel runat="server" Text='<%# Eval("collected_date_transf") %>' Font-Bold="true" ForeColor="#F0F0F0" />
+                                <br />
+                                Nro. Referencia: <dx:ASPxLabel runat="server" Text='<%# Eval("collected_nref_transf") %>' Font-Bold="true" ForeColor="#F0F0F0" />
+                            </div>
+                            <div class="col">
+                                <asp:LinkButton ID="BTN_CobrarDocumento" runat="server" CssClass="btn btn-primary" Width="100px" CommandName="Cobrar">
+                                    <i class="fa-solid fa-hand-holding-dollar" style="margin-right: 5px;"></i> Cobrar
+                                </asp:LinkButton>
+                            </div>
+                            <%--<div class="col buttons-actions">
                                 <asp:LinkButton ID="BTN_AprobarDocumento" runat="server" CssClass="btn btn-approved" CommandName="Aprobar">
                                     <i class="fas fa-check" style="margin-right: 5px;"></i> Aprobar
                                 </asp:LinkButton>
@@ -172,18 +195,20 @@
                                 <asp:LinkButton ID="BTN_CerrarDocumento" runat="server" CssClass="btn btn-closed" CommandName="Cerrar">
                                     <i class="fas fa-times" style="margin-right: 5px;"></i> Cerrar
                                 </asp:LinkButton>
-                            </div>
+                            </div>--%>
                         </div>
                     </DetailRow>
                 </Templates>
             </dx:ASPxGridView>
-            <asp:SqlDataSource runat="server" ID="DS_Documento" ConnectionString='<%$ ConnectionStrings:SailingMasterConnectionString %>' SelectCommand="select ID, cuenta_buq, fecha, cliente, puerto, buque, nro_viaje, co_mone, tasa, fec_llegada, fec_salida, num_toneladas, total,
+            <asp:SqlDataSource runat="server" ID="DS_Documento" ConnectionString='<%$ ConnectionStrings:SailingMasterConnectionString %>' SelectCommand="select ID, cuenta_buq, fecha, cliente, puerto, buque, nro_viaje, co_mone, tasa, fec_llegada, fec_salida, num_toneladas, total, approved_date, reviewed_date, collected_date, 
+            liquidated_date, closed_date, co_us_in, approved_by, reviewed_by, reviewed_observ, collected_by, collected_amount, collected_date_transf, collected_nref_transf, liquidated_by, closed_by, status,
             case status
 	            when 0 then 'GENERADO'
 	            when 1 then 'APROBADO'
 	            when 2 then 'REVISADO'
-	            when 3 then 'LIQUIDADO'
-	            when 4 then 'CERRADO'
+	            when 3 then 'COBRADO'
+	            when 4 then 'LIQUIDADO'
+	            when 5 then 'CERRADO'
             end as doc_status
             from Documento"></asp:SqlDataSource>
         </div>

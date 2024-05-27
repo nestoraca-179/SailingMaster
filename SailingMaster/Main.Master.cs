@@ -19,6 +19,11 @@ namespace SailingMaster
                     item_users.Attributes.Add("href", "#");
                     item_prods.Attributes.Add("href", "#");
                 }
+
+                item_reps.Attributes.Add("class", "btn disabled");
+                item_currencies.Attributes.Add("class", "btn disabled");
+                item_reps.Attributes.Add("href", "#");
+                item_currencies.Attributes.Add("href", "#");
             }
             else
                 Response.Redirect("/Login.aspx");

@@ -1,4 +1,4 @@
 cuenta de buque
 aprobado
-fechas
+fechas (generacion, aprobacion, revision, cobro, liquidacion, clausura)
 - datos de cabecera

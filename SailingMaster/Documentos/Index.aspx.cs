@@ -63,18 +63,10 @@ namespace SailingMaster.Documentos
 
             switch (action)
             {
-                case "Editar":
+                case "Revisar":
                     Response.Redirect("/Documentos/Agregar.aspx?ID=" + IDSelected);
                     break;
-                case "Eliminar":
-                    break;
-                case "Aprobar":
-                    break;
-                case "Revisar":
-                    break;
-                case "Liquidar":
-                    break;
-                case "Cerrar":
+                case "Cobrar":
                     break;
             }
         }

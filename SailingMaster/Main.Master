@@ -15,11 +15,11 @@
 </head>
 <body>
 <header class="row">
-    <div class="col-3">
+    <div class="col-2">
         <i class="fas fa-bars"></i>
-        <a href="/Dashboard.aspx" style="margin: 0; font-size: 20px; text-decoration: none; color: #f0f0f0;">Sailing Master</a>
+        <a href="/Dashboard.aspx" style="margin: 0; font-size: 17px; text-decoration: none; color: #f0f0f0;">Sailing Master</a>
     </div>
-    <div class="col-9 container">
+    <div class="col-10 container">
         <div class="info-user" id="info-user">
             <i class="fas fa-user"></i>
             <asp:Label ID="LBL_User" runat="server" />
@@ -30,14 +30,16 @@
     </div>
 </header>
 <section class="container-fluid row">
-    <div class="col-3" id="menu">
+    <div class="col-2" id="menu">
         <ul class="menu">
             <li><a href="/Servicios/Index.aspx" id="item_prods" runat="server"><i class="fas fa-list"></i><p class="m-0">Tarifario</p></a></li>
-            <li><a href="/Documentos/Index.aspx"><i class="fas fa-file"></i><p class="m-0">Documentos</p></a></li>
+            <li><a href="#" id="item_currencies" runat="server"><i class="fa-solid fa-dollar-sign"></i><p class="m-0">Monedas</p></a></li>
+            <li><a href="/Documentos/Index.aspx" id="item_docs" runat="server"><i class="fa-solid fa-file-invoice-dollar"></i><p class="m-0">Documentos</p></a></li>
+            <li><a href="#" id="item_reps" runat="server"><i class="fa-solid fa-file"></i><p class="m-0">Reportes</p></a></li>
             <li><a href="/Usuarios/Index.aspx" id="item_users" runat="server"><i class="fas fa-user"></i><p class="m-0">Usuarios</p></a></li>
         </ul>
     </div>
-    <div class="col-9 container">
+    <div class="col-10 container">
         <asp:ContentPlaceHolder ID="MainContent" runat="server"></asp:ContentPlaceHolder>
     </div>
 </section>

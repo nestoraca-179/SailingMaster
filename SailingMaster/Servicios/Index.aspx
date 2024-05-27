@@ -20,7 +20,7 @@
     <asp:Panel ID="PN_ContainerForm" runat="server">
         <div class="row my-3">
             <div class="col d-flex">
-                <asp:LinkButton ID="BTN_AgregarServicio" runat="server" Text="Nuevo" CssClass="btn btn-info d-flex align-items-center" OnClick="BTN_AgregarServicio_Click">
+                <asp:LinkButton ID="BTN_AgregarServicio" runat="server" Text="Nuevo" CssClass="btn btn-info btn-new d-flex align-items-center" OnClick="BTN_AgregarServicio_Click">
                     <i class="fas fa-plus mx-2"></i> Agregar Nuevo Servicio
                 </asp:LinkButton>
             </div>

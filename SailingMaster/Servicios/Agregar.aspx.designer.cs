@@ -69,13 +69,13 @@ namespace SailingMaster.Servicios
         protected global::DevExpress.Web.ASPxButton BTN_Guardar;
 
         /// <summary>
-        /// Control LBL_IDUsuario.
+        /// Control LBL_IDServicio.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::DevExpress.Web.ASPxLabel LBL_IDUsuario;
+        protected global::DevExpress.Web.ASPxLabel LBL_IDServicio;
 
         /// <summary>
         /// Control TB_Code.
