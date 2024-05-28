@@ -38,36 +38,12 @@ namespace SailingMaster.Documentos
             Response.Redirect("/Documentos/Agregar.aspx");
         }
 
-        protected void BTN_EliminarDocumento_Click(object sender, EventArgs e)
-        {
-            //Usuario user = (Session["USER"] as Usuario);
-            //int result = ServicioController.Delete(IDSelected, user.username);
-
-            //if (result == 1)
-            //{
-            //    PN_Success.Visible = true;
-            //    LBL_Success.Text = "Servicio eliminado con éxito";
-            //    GV_Servicios.DataBind();
-            //}
-            //else
-            //{
-            //    PN_Error.Visible = true;
-            //    LBL_Error.Text = "Ha ocurrido un error. Ver tabla de Incidentes";
-            //}
-        }
-
         protected void GV_Documentos_RowCommand(object sender, DevExpress.Web.ASPxGridViewRowCommandEventArgs e)
         {
             IDSelected = e.KeyValue.ToString();
-            string action = e.CommandArgs.CommandName;
-
-            switch (action)
+            if (e.CommandArgs.CommandName == "Revisar")
             {
-                case "Revisar":
-                    Response.Redirect("/Documentos/Agregar.aspx?ID=" + IDSelected);
-                    break;
-                case "Cobrar":
-                    break;
+                Response.Redirect("/Documentos/Agregar.aspx?ID=" + IDSelected);
             }
         }
 

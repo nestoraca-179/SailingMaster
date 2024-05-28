@@ -94,7 +94,7 @@
                         </CellStyle>
                         <DataItemTemplate>
                             <asp:LinkButton ID="BTN_ConfirmarEliminarServicio" runat="server" CssClass="btn btn-danger" CommandName="Eliminar">
-                                <i class="fas fa-times"></i> Eliminar
+                                <i class="fas fa-trash"></i> Eliminar
                             </asp:LinkButton>
                         </DataItemTemplate>
                     </dx:GridViewDataColumn>

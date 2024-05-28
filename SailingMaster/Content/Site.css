@@ -121,10 +121,6 @@ label {
 hr {
     color: #F0F0F0;
 }
-/*.btn-alert, .btn-alert:hover, .btn-alert:active {
-    background: #7a08ae;
-    border-color: #7a08ae;
-}*/
 
 /* MODALES */
 .modal {
@@ -180,7 +176,7 @@ ul.menu li a {
     width: 100%;
     color: #FFF;
     font-size: 15px;
-    padding: 20px;
+    padding: 15px 20px;
     cursor: pointer;
     text-decoration: none;
     display: flex;

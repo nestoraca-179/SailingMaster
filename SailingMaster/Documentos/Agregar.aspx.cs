@@ -51,6 +51,7 @@ namespace SailingMaster.Documentos
                         Page.Title = "Documento #" + doc.ID;
                         LBL_IDDocumento.Text = "Documento #" + doc.ID;
                         PN_ButtonsActions.Visible = true;
+
                         if (!IsPostBack)
                             CargarDocumento(doc);
                     }
@@ -70,8 +71,7 @@ namespace SailingMaster.Documentos
                     LBL_SignTC.Text = mone.signo;
                     LBL_SignBC.Text = mone.signo;
 
-                    if (!IsPostBack)
-                        BindGrid(rengs);
+                    BindGrid(rengs);
                 }
             }
             else
@@ -144,6 +144,11 @@ namespace SailingMaster.Documentos
                 LBL_Error.Text = "Ha ocurrido un error. Ver tabla de Incidentes";
                 IncidentController.CreateIncident(string.Format("ERROR PROCESANDO DATOS DEL DOCUMENTO {0}", doc.ID), ex);
             }
+        }
+
+        protected void BTN_EliminarDocumento_Click(object sender, EventArgs e)
+        {
+
         }
 
         protected void DDL_Moneda_SelectedIndexChanged(object sender, EventArgs e)

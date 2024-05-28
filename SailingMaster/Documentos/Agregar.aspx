@@ -33,27 +33,12 @@ form .row:not(.my-5) {
 .buttons-actions {
     display: flex;
     justify-content: end;
-    /*align-items: center;*/
     flex-wrap: wrap;
 }
-.buttons-actions .btn {
-    
-}
-.btn-approved, .btn-approved:hover, .btn-approved:active {
-    background: #1f9547;
-    border-color: #1f9547;
-}
-.btn-reviewed, .btn-reviewed:hover, .btn-reviewed:active {
-    background: #61189D;
-    border-color: #61189D;
-}
-.btn-liquidated, .btn-liquidated:hover, .btn-liquidated:active {
+.btn-alert, .btn-alert:hover, .btn-alert:active, .btn-alert:focus {
     background: #DB7B15;
     border-color: #DB7B15;
-}
-.btn-closed, .btn-closed:hover, .btn-closed:active {
-    background: #34495E;
-    border-color: #34495E;
+    color: #F0F0F0;
 }
 </style>
 <script>
@@ -113,17 +98,23 @@ form .row:not(.my-5) {
         <hr />
         <asp:Panel ID="PN_ButtonsActions" runat="server" Visible="false" CssClass="row mx-0 my-3">
             <div class="col buttons-actions p-0">
-                <asp:LinkButton ID="BTN_PreAprobarDocumento" runat="server" CssClass="btn btn-info mx-1" data-toggle="modal" data-target="#modalAprobar">
+                <asp:LinkButton ID="BTN_PreAprobarDocumento" runat="server" CssClass="btn btn-sm btn-info mx-1" data-toggle="modal" data-target="#modalAprobar">
                     <i class="fas fa-check" style="margin-right: 5px;"></i> Aprobar
                 </asp:LinkButton>
-                <asp:LinkButton ID="BTN_RevisarDocumento" runat="server" CssClass="btn btn-warning" CommandName="Revisar">
+                <asp:LinkButton ID="BTN_PreRevisarDocumento" runat="server" CssClass="btn btn-sm btn-warning" data-toggle="modal" data-target="#modalRevisar">
                     <i class="fas fa-search" style="margin-right: 5px;"></i> Revisar
                 </asp:LinkButton>
-                <asp:LinkButton ID="BTN_LiquidarDocumento" runat="server" CssClass="btn btn-danger mx-1" CommandName="Liquidar">
+                <asp:LinkButton ID="BTN_PreCobrarDocumento" runat="server" CssClass="btn btn-sm btn-primary mx-1" data-toggle="modal" data-target="#modalCobrar">
+                    <i class="fa-solid fa-hand-holding-dollar" style="margin-right: 5px;"></i> Cobrar
+                </asp:LinkButton>
+                <asp:LinkButton ID="BTN_PreLiquidarDocumento" runat="server" CssClass="btn btn-sm btn-alert" data-toggle="modal" data-target="#modalLiquidar">
                     <i class="fas fa-file-invoice-dollar" style="margin-right: 5px;"></i> Liquidar
                 </asp:LinkButton>
-                <asp:LinkButton ID="BTN_CerrarDocumento" runat="server" CssClass="btn btn-dark" CommandName="Cerrar">
+                <asp:LinkButton ID="BTN_PreerrarDocumento" runat="server" CssClass="btn btn-sm btn-secondary mx-1" data-toggle="modal" data-target="#modalCerrar">
                     <i class="fas fa-times" style="margin-right: 5px;"></i> Cerrar
+                </asp:LinkButton>
+                <asp:LinkButton ID="BTN_PreEliminarDocumento" runat="server" CssClass="btn btn-sm btn-danger" data-toggle="modal" data-target="#modal-delete">
+                    <i class="fas fa-trash" style="margin-right: 5px;"></i> Eliminar
                 </asp:LinkButton>
             </div>
             <hr class="m-0 mt-3" />
@@ -297,7 +288,7 @@ form .row:not(.my-5) {
                     OnRowInserting="GV_DocumentoReng_RowInserting" OnRowUpdating="GV_DocumentoReng_RowUpdating" OnRowDeleting="GV_DocumentoReng_RowDeleting" 
                     OnInitNewRow="GV_DocumentoReng_InitNewRow" OnHtmlRowPrepared="GV_DocumentoReng_HtmlRowPrepared">
                     <ClientSideEvents EndCallback="endCallback" />
-                    <SettingsPager PageSize="100" Visible="False"></SettingsPager>
+                    <SettingsPager PageSize="5"></SettingsPager>
                     <SettingsEditing Mode="Batch" NewItemRowPosition="Bottom">
                         <BatchEditSettings EditMode="Row" ShowConfirmOnLosingChanges="false" KeepChangesOnCallbacks="False" />
                     </SettingsEditing>
@@ -364,13 +355,13 @@ form .row:not(.my-5) {
         </div>
     </asp:Panel>
     <br />
-    <!-- Modal Aprobar -->
-    <div class="modal fade modal-warning" id="modalAprobar" tabindex="-1" role="dialog" aria-hidden="true">
+    <!-- MODAL APROBAR -->
+    <div class="modal fade modal-warning" id="modalAprobar" tabindex="-1" role="dialog" aria-hidden="true" data-backdrop="static" data-keyboard="false">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-body">
                     <i class="fas fa-warning"></i>
-                    <dx:ASPxLabel ID="LBL_Delete" runat="server" Font-Size="25px" Width="100%" Text="¿Deseas aprobar el documento?"></dx:ASPxLabel>
+                    <dx:ASPxLabel ID="LBL_AprobarDocumento" runat="server" Font-Size="25px" Width="100%" Text="¿Deseas aprobar el documento?"></dx:ASPxLabel>
                 </div>
                 <div class="modal-footer buttons">
                     <button class="btn btn-danger" data-dismiss="modal">No</button>
@@ -379,8 +370,103 @@ form .row:not(.my-5) {
             </div>
         </div>
     </div>
-    <!-- Modal Agregar -->
-    <div class="modal fade modal-warning" id="modalAgregarSoporte" tabindex="-1" role="dialog" aria-hidden="true">
+    <!-- MODAL REVISAR -->
+    <div class="modal fade" id="modalRevisar" tabindex="-1" role="dialog" aria-hidden="true" data-backdrop="static" data-keyboard="false">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="m-0">Revisión</h5>
+                </div>
+                <div class="modal-body" style="text-align: left !important;">
+                    <label class="text-dark my-1">Observación</label>
+                    <asp:TextBox ID="TB_Observ" runat="server" TextMode="MultiLine" Rows="5" Width="100%" CssClass="form-control" style="resize: none;"></asp:TextBox>
+                </div>
+                <div class="modal-footer buttons">
+                    <button class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                    <dx:ASPxButton ID="BTN_RevisarDocumento" runat="server" Text="Guardar" CssClass="btn btn-primary"></dx:ASPxButton>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- MODAL COBRAR -->
+    <div class="modal fade" id="modalCobrar" tabindex="-1" role="dialog" aria-hidden="true" data-backdrop="static" data-keyboard="false">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="m-0">Cobro</h5>
+                </div>
+                <div class="modal-body">
+                    <div class="form-group" style="text-align: left !important;">
+                        <label class="text-dark my-1">Monto Transf.</label>
+                        <dx:ASPxTextBox ID="TB_Amount" runat="server" Width="100%" CssClass="form-control">
+                            <ClientSideEvents KeyPress="function (s,e) { onlyNumbers(s, e); }" />
+                        </dx:ASPxTextBox>
+                    </div>
+                    <div class="form-group" style="text-align: left !important;">
+                        <label class="text-dark my-1">Fecha Transf.</label>
+                        <dx:ASPxDateEdit ID="DE_DateTransf" runat="server" Width="100%" CssClass="form-control" EditFormat="Date"></dx:ASPxDateEdit>
+                    </div>
+                    <div class="form-group" style="text-align: left !important;">
+                        <label class="text-dark my-1">Referencia Transf.</label>
+                        <dx:ASPxTextBox ID="TB_RefTransf" runat="server" Width="100%" CssClass="form-control">
+                            <ClientSideEvents KeyPress="function (s,e) { onlyNumbers(s, e); }" />
+                        </dx:ASPxTextBox>
+                    </div>
+                </div>
+                <div class="modal-footer buttons">
+                    <button class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                    <dx:ASPxButton ID="BTN_CobrarDocumento" runat="server" Text="Guardar" CssClass="btn btn-primary"></dx:ASPxButton>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- MODAL LIQUIDAR -->
+    <div class="modal fade modal-warning" id="modalLiquidar" tabindex="-1" role="dialog" aria-hidden="true" data-backdrop="static" data-keyboard="false">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <i class="fas fa-warning"></i>
+                    <dx:ASPxLabel ID="LBL_LiquidarDocumento" runat="server" Font-Size="25px" Width="100%" Text="¿Deseas liquidar el documento?"></dx:ASPxLabel>
+                </div>
+                <div class="modal-footer buttons">
+                    <button class="btn btn-danger" data-dismiss="modal">No</button>
+                    <dx:ASPxButton ID="BTN_LiquidarDocumento" runat="server" Text="Sí" CssClass="btn btn-success"></dx:ASPxButton>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- MODAL CERRAR -->
+    <div class="modal fade modal-warning" id="modalCerrar" tabindex="-1" role="dialog" aria-hidden="true" data-backdrop="static" data-keyboard="false">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <i class="fas fa-warning"></i>
+                    <dx:ASPxLabel ID="LBL_CerrarDocumento" runat="server" Font-Size="25px" Width="100%" Text="¿Deseas cerrar el documento?"></dx:ASPxLabel>
+                </div>
+                <div class="modal-footer buttons">
+                    <button class="btn btn-danger" data-dismiss="modal">No</button>
+                    <dx:ASPxButton ID="BTN_CerrarDocumento" runat="server" Text="Sí" CssClass="btn btn-success"></dx:ASPxButton>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- MODAL DELETE -->
+    <div class="modal fade" id="modal-delete" tabindex="-1" role="dialog" aria-hidden="true" data-backdrop="static" data-keyboard="false">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <i class="fas fa-warning"></i>
+                    <dx:ASPxLabel ID="LBL_EliminarDocumento" runat="server" Font-Size="25px" Width="100%" Text="¿Deseas eliminar el documento?"></dx:ASPxLabel>
+                </div>
+                <div class="modal-footer buttons">
+                    <button class="btn btn-danger" data-dismiss="modal">No</button>
+                    <dx:ASPxButton ID="BTN_EliminarDocumento" runat="server" Text="Sí" CssClass="btn btn-success" OnClick="BTN_EliminarDocumento_Click"></dx:ASPxButton>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- MODAL AGREGAR SOPORTE -->
+    <div class="modal fade" id="modalAgregarSoporte" tabindex="-1" role="dialog" aria-hidden="true" data-backdrop="static" data-keyboard="false">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">

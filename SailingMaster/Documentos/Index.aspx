@@ -109,17 +109,6 @@
                             </asp:LinkButton>
                         </DataItemTemplate>
                     </dx:GridViewDataColumn>
-                    <%--<dx:GridViewDataColumn Width="110px" VisibleIndex="10" Caption="Eliminar">
-                        <HeaderStyle BackColor="#102140" Border-BorderWidth="0px" ForeColor="#F0F0F0" Paddings-Padding="5px"></HeaderStyle>
-                        <CellStyle ForeColor="#F0F0F0" Border-BorderWidth="0px">
-                            <Paddings Padding="12px"></Paddings>
-                        </CellStyle>
-                        <DataItemTemplate>
-                            <asp:LinkButton ID="BTN_EliminarDocumento" runat="server" CssClass="btn btn-danger" CommandName="Eliminar">
-                                <i class="fas fa-times" style="margin-right: 5px;"></i> Eliminar
-                            </asp:LinkButton>
-                        </DataItemTemplate>
-                    </dx:GridViewDataColumn>--%>
                 </Columns>
                 <Styles>
                     <DetailRow BackColor="#18181B"></DetailRow>
@@ -177,25 +166,6 @@
                                 <br />
                                 Nro. Referencia: <dx:ASPxLabel runat="server" Text='<%# Eval("collected_nref_transf") %>' Font-Bold="true" ForeColor="#F0F0F0" />
                             </div>
-                            <div class="col">
-                                <asp:LinkButton ID="BTN_CobrarDocumento" runat="server" CssClass="btn btn-primary" Width="100px" CommandName="Cobrar">
-                                    <i class="fa-solid fa-hand-holding-dollar" style="margin-right: 5px;"></i> Cobrar
-                                </asp:LinkButton>
-                            </div>
-                            <%--<div class="col buttons-actions">
-                                <asp:LinkButton ID="BTN_AprobarDocumento" runat="server" CssClass="btn btn-approved" CommandName="Aprobar">
-                                    <i class="fas fa-check" style="margin-right: 5px;"></i> Aprobar
-                                </asp:LinkButton>
-                                <asp:LinkButton ID="BTN_RevisarDocumento" runat="server" CssClass="btn btn-reviewed" CommandName="Revisar">
-                                    <i class="fas fa-search" style="margin-right: 5px;"></i> Revisar
-                                </asp:LinkButton>
-                                <asp:LinkButton ID="BTN_LiquidarDocumento" runat="server" CssClass="btn btn-liquidated" CommandName="Liquidar">
-                                    <i class="fas fa-file-invoice-dollar" style="margin-right: 5px;"></i> Liquidar
-                                </asp:LinkButton>
-                                <asp:LinkButton ID="BTN_CerrarDocumento" runat="server" CssClass="btn btn-closed" CommandName="Cerrar">
-                                    <i class="fas fa-times" style="margin-right: 5px;"></i> Cerrar
-                                </asp:LinkButton>
-                            </div>--%>
                         </div>
                     </DetailRow>
                 </Templates>
@@ -213,20 +183,5 @@
             from Documento"></asp:SqlDataSource>
         </div>
     </asp:Panel>
-    <!-- MODAL DELETE -->
-    <div class="modal fade" id="modal-delete" tabindex="-1" role="dialog" aria-hidden="true" data-backdrop="static" data-keyboard="false">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-body">
-                    <i class="fas fa-warning"></i>
-                    <dx:ASPxLabel ID="LBL_Delete" runat="server" Font-Size="25px" Width="100%"></dx:ASPxLabel>
-                </div>
-                <div class="modal-footer buttons">
-                    <button class="btn btn-danger" data-dismiss="modal">No</button>
-                    <dx:ASPxButton ID="BTN_EliminarDocumento" runat="server" Text="Sí" CssClass="btn btn-success" OnClick="BTN_EliminarDocumento_Click"></dx:ASPxButton>
-                </div>
-            </div>
-        </div>
-    </div>
 </form>
 </asp:Content>

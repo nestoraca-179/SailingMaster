@@ -105,31 +105,49 @@ namespace SailingMaster.Documentos
         protected global::System.Web.UI.WebControls.LinkButton BTN_PreAprobarDocumento;
 
         /// <summary>
-        /// Control BTN_RevisarDocumento.
+        /// Control BTN_PreRevisarDocumento.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton BTN_RevisarDocumento;
+        protected global::System.Web.UI.WebControls.LinkButton BTN_PreRevisarDocumento;
 
         /// <summary>
-        /// Control BTN_LiquidarDocumento.
+        /// Control BTN_PreCobrarDocumento.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton BTN_LiquidarDocumento;
+        protected global::System.Web.UI.WebControls.LinkButton BTN_PreCobrarDocumento;
 
         /// <summary>
-        /// Control BTN_CerrarDocumento.
+        /// Control BTN_PreLiquidarDocumento.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton BTN_CerrarDocumento;
+        protected global::System.Web.UI.WebControls.LinkButton BTN_PreLiquidarDocumento;
+
+        /// <summary>
+        /// Control BTN_PreerrarDocumento.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.LinkButton BTN_PreerrarDocumento;
+
+        /// <summary>
+        /// Control BTN_PreEliminarDocumento.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.LinkButton BTN_PreEliminarDocumento;
 
         /// <summary>
         /// Control TB_Code.
@@ -312,13 +330,13 @@ namespace SailingMaster.Documentos
         protected global::System.Web.UI.WebControls.SqlDataSource DS_Servicio;
 
         /// <summary>
-        /// Control LBL_Delete.
+        /// Control LBL_AprobarDocumento.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::DevExpress.Web.ASPxLabel LBL_Delete;
+        protected global::DevExpress.Web.ASPxLabel LBL_AprobarDocumento;
 
         /// <summary>
         /// Control BTN_AprobarDocumento.
@@ -328,5 +346,113 @@ namespace SailingMaster.Documentos
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::DevExpress.Web.ASPxButton BTN_AprobarDocumento;
+
+        /// <summary>
+        /// Control TB_Observ.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox TB_Observ;
+
+        /// <summary>
+        /// Control BTN_RevisarDocumento.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::DevExpress.Web.ASPxButton BTN_RevisarDocumento;
+
+        /// <summary>
+        /// Control TB_Amount.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::DevExpress.Web.ASPxTextBox TB_Amount;
+
+        /// <summary>
+        /// Control DE_DateTransf.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::DevExpress.Web.ASPxDateEdit DE_DateTransf;
+
+        /// <summary>
+        /// Control TB_RefTransf.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::DevExpress.Web.ASPxTextBox TB_RefTransf;
+
+        /// <summary>
+        /// Control BTN_CobrarDocumento.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::DevExpress.Web.ASPxButton BTN_CobrarDocumento;
+
+        /// <summary>
+        /// Control LBL_LiquidarDocumento.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::DevExpress.Web.ASPxLabel LBL_LiquidarDocumento;
+
+        /// <summary>
+        /// Control BTN_LiquidarDocumento.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::DevExpress.Web.ASPxButton BTN_LiquidarDocumento;
+
+        /// <summary>
+        /// Control LBL_CerrarDocumento.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::DevExpress.Web.ASPxLabel LBL_CerrarDocumento;
+
+        /// <summary>
+        /// Control BTN_CerrarDocumento.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::DevExpress.Web.ASPxButton BTN_CerrarDocumento;
+
+        /// <summary>
+        /// Control LBL_EliminarDocumento.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::DevExpress.Web.ASPxLabel LBL_EliminarDocumento;
+
+        /// <summary>
+        /// Control BTN_EliminarDocumento.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::DevExpress.Web.ASPxButton BTN_EliminarDocumento;
     }
 }
