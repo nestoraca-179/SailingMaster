@@ -24,10 +24,10 @@ form .row:not(.my-5) {
 .amounts h5, .amounts h6 {
     margin-bottom: 10px;
 }
-#MainContent_DE_Date_I, #MainContent_DDL_Moneda_I,
-#MainContent_DE_DateArrived_I, #MainContent_DE_DateSailed_I, #MainContent_DE_DateTransf_I, 
-#MainContent_DE_Date_ETC, #MainContent_DDL_Moneda_ETC,
-#MainContent_DE_DateArrived_ETC, #MainContent_DE_DateSailed_ETC {
+#MainContent_DE_Fecha_I, #MainContent_DDL_Moneda_I,
+#MainContent_DE_FechaLlegada_I, #MainContent_DE_FechaSalida_I, #MainContent_DE_FechaTransf_I, 
+#MainContent_DE_Fecha_ETC, #MainContent_DDL_Moneda_ETC,
+#MainContent_DE_FechaLlegada_ETC, #MainContent_DE_FechaSalida_ETC, #MainContent_DE_FechaTransf_ETC {
     color: #F0F0F0;
 }
 .buttons-actions {
@@ -79,7 +79,8 @@ form .row:not(.my-5) {
                 <asp:LinkButton ID="BTN_Volver" runat="server" CssClass="btn btn-primary d-flex align-items-center" OnClick="BTN_Volver_Click">
                     <i class="fas fa-arrow-left" style="margin-right: 5px;"></i> Regresar
                 </asp:LinkButton>
-                <dx:ASPxButton ID="BTN_Guardar" runat="server" CssClass="btn btn-success mx-2" Text="Guardar" ValidationGroup="Documento" OnClick="BTN_Guardar_Click" />
+                <dx:ASPxButton ID="BTN_Agregar" runat="server" CssClass="btn btn-success mx-2" Text="Agregar" ValidationGroup="Documento" OnClick="BTN_Agregar_Click" />
+                <dx:ASPxButton ID="BTN_Guardar" runat="server" CssClass="btn btn-success mx-2" Text="Guardar" ValidationGroup="Documento" OnClick="BTN_Guardar_Click"  Visible="false" />
             </div>
             <div class="col">
                 <dx:ASPxLabel ID="LBL_IDDocumento" runat="server" Text="Agregar Documento" Width="100%" Font-Size="24px" CssClass="title-screen text-center text-light"></dx:ASPxLabel>
@@ -87,7 +88,7 @@ form .row:not(.my-5) {
             <div class="col">
                 <div class="controls">
                     <label>Fecha</label>
-                    <dx:ASPxDateEdit ID="DE_Date" runat="server" Theme="Material" BackColor="#303030" Border-BorderColor="#303030" EditFormat="Date" Width="100%">
+                    <dx:ASPxDateEdit ID="DE_Fecha" runat="server" Theme="Material" BackColor="#303030" Border-BorderColor="#303030" EditFormat="Date" Width="100%">
                         <ValidationSettings Display="Dynamic" ValidationGroup="Documento" ErrorText="" ValidateOnLeave="false" ErrorTextPosition="Bottom">
                             <RequiredField IsRequired="True" ErrorText="Campo Obligatorio" />
                         </ValidationSettings>
@@ -125,7 +126,7 @@ form .row:not(.my-5) {
                     <div class="col-md-12">
                         <div class="controls">
                             <label>Cuenta de Buque</label>
-                            <dx:ASPxTextBox ID="TB_Code" runat="server" Theme="Material" BackColor="#303030" ForeColor="#F0F0F0" Border-BorderColor="#303030" Width="100%" AutoCompleteType="None">
+                            <dx:ASPxTextBox ID="TB_CuentaBuque" runat="server" Theme="Material" BackColor="#303030" ForeColor="#F0F0F0" Border-BorderColor="#303030" Width="100%" AutoCompleteType="None">
                                 <ValidationSettings Display="Dynamic" ValidationGroup="Documento" ErrorText="" ValidateOnLeave="false" ErrorTextPosition="Bottom">
                                     <RequiredField IsRequired="True" ErrorText="Campo Obligatorio" />
                                 </ValidationSettings>
@@ -137,7 +138,7 @@ form .row:not(.my-5) {
                     <div class="col-md-12">
                         <div class="controls">
                             <label>Cliente</label>
-                            <dx:ASPxTextBox ID="TB_Client" runat="server" Theme="Material" BackColor="#303030" ForeColor="#F0F0F0" Border-BorderColor="#303030" Width="100%" AutoCompleteType="None">
+                            <dx:ASPxTextBox ID="TB_Cliente" runat="server" Theme="Material" BackColor="#303030" ForeColor="#F0F0F0" Border-BorderColor="#303030" Width="100%" AutoCompleteType="None">
                                 <ValidationSettings Display="Dynamic" ValidationGroup="Documento" ErrorText="" ValidateOnLeave="false" ErrorTextPosition="Bottom">
                                     <RequiredField IsRequired="True" ErrorText="Campo Obligatorio" />
                                 </ValidationSettings>
@@ -165,8 +166,8 @@ form .row:not(.my-5) {
                     <div class="col-md-6">
                         <div class="controls">
                             <label>Tasa de Cambio</label>
-                            <dx:ASPxTextBox ID="TB_Rate" runat="server" Theme="Material" Width="100%" BackColor="#303030" ForeColor="#F0F0F0" Border-BorderColor="#303030" 
-                                AutoCompleteType="None" ValueType="System.Decimal" AutoPostBack="true" OnTextChanged="TB_Rate_TextChanged">
+                            <dx:ASPxTextBox ID="TB_Tasa" runat="server" Theme="Material" Width="100%" BackColor="#303030" ForeColor="#F0F0F0" Border-BorderColor="#303030" 
+                                AutoCompleteType="None" ValueType="System.Decimal" AutoPostBack="true" OnTextChanged="TB_Tasa_TextChanged">
                                 <ClientSideEvents KeyPress="function (s,e) { onlyNumbers(s, e); }" />
                                 <ValidationSettings Display="Dynamic" ValidationGroup="Documento" ErrorText="" ValidateOnLeave="false" ErrorTextPosition="Bottom">
                                     <RequiredField IsRequired="True" ErrorText="Campo Obligatorio" />
@@ -179,7 +180,7 @@ form .row:not(.my-5) {
                     <div class="col-md-6">
                         <div class="controls">
                             <label>Fecha Llegada</label>
-                            <dx:ASPxDateEdit ID="DE_DateArrived" runat="server" Theme="Material" Width="100%" BackColor="#303030" Border-BorderColor="#303030" EditFormat="Date">
+                            <dx:ASPxDateEdit ID="DE_FechaLlegada" runat="server" Theme="Material" Width="100%" BackColor="#303030" Border-BorderColor="#303030" EditFormat="Date">
                                 <ValidationSettings Display="Dynamic" ValidationGroup="Documento" ErrorText="" ValidateOnLeave="false" ErrorTextPosition="Bottom">
                                     <RequiredField IsRequired="True" ErrorText="Campo Obligatorio" />
                                 </ValidationSettings>
@@ -189,7 +190,7 @@ form .row:not(.my-5) {
                     <div class="col-md-6">
                         <div class="controls">
                             <label>Fecha Salida</label>
-                            <dx:ASPxDateEdit ID="DE_DateSailed" runat="server" Theme="Material" Width="100%" BackColor="#303030" Border-BorderColor="#303030" EditFormat="Date">
+                            <dx:ASPxDateEdit ID="DE_FechaSalida" runat="server" Theme="Material" Width="100%" BackColor="#303030" Border-BorderColor="#303030" EditFormat="Date">
                                 <ValidationSettings Display="Dynamic" ValidationGroup="Documento" ErrorText="" ValidateOnLeave="false" ErrorTextPosition="Bottom">
                                     <RequiredField IsRequired="True" ErrorText="Campo Obligatorio" />
                                 </ValidationSettings>
@@ -201,7 +202,7 @@ form .row:not(.my-5) {
                     <div class="col-md-6">
                         <div class="controls">
                             <label>Puerto</label>
-                            <dx:ASPxTextBox ID="TB_Port" runat="server" Theme="Material" Width="100%" BackColor="#303030" ForeColor="#F0F0F0" Border-BorderColor="#303030" AutoCompleteType="None">
+                            <dx:ASPxTextBox ID="TB_Puerto" runat="server" Theme="Material" Width="100%" BackColor="#303030" ForeColor="#F0F0F0" Border-BorderColor="#303030" AutoCompleteType="None">
                                 <ValidationSettings Display="Dynamic" ValidationGroup="Documento" ErrorText="" ValidateOnLeave="false" ErrorTextPosition="Bottom">
                                     <RequiredField IsRequired="True" ErrorText="Campo Obligatorio" />
                                 </ValidationSettings>
@@ -211,7 +212,7 @@ form .row:not(.my-5) {
                     <div class="col-md-6">
                         <div class="controls">
                             <label>Buque</label>
-                            <dx:ASPxTextBox ID="TB_Vessel" runat="server" Theme="Material" Width="100%" BackColor="#303030" ForeColor="#F0F0F0" Border-BorderColor="#303030" AutoCompleteType="None">
+                            <dx:ASPxTextBox ID="TB_Buque" runat="server" Theme="Material" Width="100%" BackColor="#303030" ForeColor="#F0F0F0" Border-BorderColor="#303030" AutoCompleteType="None">
                                 <ValidationSettings Display="Dynamic" ValidationGroup="Documento" ErrorText="" ValidateOnLeave="false" ErrorTextPosition="Bottom">
                                     <RequiredField IsRequired="True" ErrorText="Campo Obligatorio" />
                                 </ValidationSettings>
@@ -223,7 +224,7 @@ form .row:not(.my-5) {
                     <div class="col-md-6">
                         <div class="controls">
                             <label>Nro. Viaje</label>
-                            <dx:ASPxTextBox ID="TB_Voyage" runat="server" Theme="Material" Width="100%" BackColor="#303030" ForeColor="#F0F0F0" Border-BorderColor="#303030" AutoCompleteType="None">
+                            <dx:ASPxTextBox ID="TB_Viaje" runat="server" Theme="Material" Width="100%" BackColor="#303030" ForeColor="#F0F0F0" Border-BorderColor="#303030" AutoCompleteType="None">
                                 <ValidationSettings Display="Dynamic" ValidationGroup="Documento" ErrorText="" ValidateOnLeave="false" ErrorTextPosition="Bottom">
                                     <RequiredField IsRequired="True" ErrorText="Campo Obligatorio" />
                                 </ValidationSettings>
@@ -233,7 +234,7 @@ form .row:not(.my-5) {
                     <div class="col-md-6">
                         <div class="controls">
                             <label>Toneladas</label>
-                            <dx:ASPxTextBox ID="TB_Tons" runat="server" Theme="Material" Width="100%" BackColor="#303030" ForeColor="#F0F0F0" Border-BorderColor="#303030" AutoCompleteType="None" ValueType="System.Decimal">
+                            <dx:ASPxTextBox ID="TB_Toneladas" runat="server" Theme="Material" Width="100%" BackColor="#303030" ForeColor="#F0F0F0" Border-BorderColor="#303030" AutoCompleteType="None" ValueType="System.Decimal">
                                 <ClientSideEvents KeyPress="function (s,e) { onlyNumbers(s, e); }" />
                                 <ValidationSettings Display="Dynamic" ValidationGroup="Documento" ErrorText="" ValidateOnLeave="false" ErrorTextPosition="Bottom">
                                     <RequiredField IsRequired="True" ErrorText="Campo Obligatorio" />
@@ -252,29 +253,29 @@ form .row:not(.my-5) {
                     <div class="w-100 d-flex justify-content-between">
                         <h6 class="text-white" style="font-weight: 100">Total Documento:</h6>
                         <div class="d-flex align-items-center">
-                            <dx:ASPxLabel ID="LBL_SignTD" runat="server" CssClass="text-light" style="font-size: 1.25rem; margin: 0 5px 10px 0;"></dx:ASPxLabel>
+                            <dx:ASPxLabel ID="LBL_SignoTD" runat="server" CssClass="text-light" style="font-size: 1.25rem; margin: 0 5px 10px 0;"></dx:ASPxLabel>
                             <h5 class="text-white" id="total_doc" style="margin: 0 5px 10px 0;"></h5>
                         </div>
                     </div>
                     <div class="w-100 d-flex justify-content-between">
                         <h6 class="text-white" style="font-weight: 100">Total Monto Recibido:</h6>
                         <div class="d-flex align-items-center">
-                            <dx:ASPxLabel ID="LBL_SignTR" runat="server" CssClass="text-light" style="font-size: 1.25rem; margin: 0 5px 10px 0;"></dx:ASPxLabel>
-                            <dx:ASPxLabel ID="LBL_TotalReceived" runat="server" CssClass="text-light" style="font-size: 1.25rem; margin: 0 5px 10px 0;"></dx:ASPxLabel>
+                            <dx:ASPxLabel ID="LBL_SignoTR" runat="server" CssClass="text-light" style="font-size: 1.25rem; margin: 0 5px 10px 0;"></dx:ASPxLabel>
+                            <dx:ASPxLabel ID="LBL_TotalRecibido" runat="server" CssClass="text-light" style="font-size: 1.25rem; margin: 0 5px 10px 0;"></dx:ASPxLabel>
                         </div>
                     </div>
                     <div class="w-100 d-flex justify-content-between">
                         <h6 class="text-white" style="font-weight: 100">Total Monto Cancelado:</h6>
                         <div class="d-flex align-items-center">
-                            <dx:ASPxLabel ID="LBL_SignTC" runat="server" CssClass="text-light" style="font-size: 1.25rem; margin: 0 5px 10px 0;"></dx:ASPxLabel>
-                            <dx:ASPxLabel ID="LBL_TotalCancelled" runat="server" CssClass="text-light" style="font-size: 1.25rem; margin: 0 5px 10px 0;"></dx:ASPxLabel>
+                            <dx:ASPxLabel ID="LBL_SignoTC" runat="server" CssClass="text-light" style="font-size: 1.25rem; margin: 0 5px 10px 0;"></dx:ASPxLabel>
+                            <dx:ASPxLabel ID="LBL_TotalCancelado" runat="server" CssClass="text-light" style="font-size: 1.25rem; margin: 0 5px 10px 0;"></dx:ASPxLabel>
                         </div>
                     </div>
                     <hr class="my-2 text-light" />
                     <div class="w-100 d-flex justify-content-between">
                         <h6 class="text-white" style="font-weight: 100">Balance:</h6>
                         <div class="d-flex align-items-center">
-                            <dx:ASPxLabel ID="LBL_SignBC" runat="server" CssClass="text-light" style="font-size: 1.25rem; margin: 0 5px 10px 0;"></dx:ASPxLabel>
+                            <dx:ASPxLabel ID="LBL_SignoBC" runat="server" CssClass="text-light" style="font-size: 1.25rem; margin: 0 5px 10px 0;"></dx:ASPxLabel>
                             <dx:ASPxLabel ID="LBL_Balance" runat="server" CssClass="text-light" style="font-size: 1.25rem; margin: 0 5px 10px 0;"></dx:ASPxLabel>
                         </div>
                     </div>
@@ -340,6 +341,14 @@ form .row:not(.my-5) {
                             </CellStyle>
                             <DataItemTemplate>
                                 <span class="mx-1">0,00</span>
+                            </DataItemTemplate>
+                        </dx:GridViewDataTextColumn>
+                        <dx:GridViewDataTextColumn Caption="Subir Soporte" VisibleIndex="6" ReadOnly="true">
+                            <HeaderStyle BackColor="#102140" Border-BorderWidth="0px" ForeColor="#F0F0F0" Paddings-Padding="5px"></HeaderStyle>
+                            <CellStyle ForeColor="#F0F0F0" Border-BorderWidth="0px">
+                                <Paddings Padding="12px"></Paddings>
+                            </CellStyle>
+                            <DataItemTemplate>
                                 <dx:ASPxButton ID="BTN_AgregarSoporte" runat="server" CssClass="btn btn-primary p-1" ForeColor="#F0F0F0" Text="..." AutoPostBack="false" 
                                     data-toggle="modal" data-target="#modalAgregarSoporte"></dx:ASPxButton>
                             </DataItemTemplate>
@@ -365,7 +374,7 @@ form .row:not(.my-5) {
                 </div>
                 <div class="modal-footer buttons">
                     <button class="btn btn-danger" data-dismiss="modal">No</button>
-                    <dx:ASPxButton ID="BTN_AprobarDocumento" runat="server" Text="Sí" CssClass="btn btn-success"></dx:ASPxButton>
+                    <dx:ASPxButton ID="BTN_AprobarDocumento" runat="server" Text="Sí" CssClass="btn btn-success" OnClick="BTN_AprobarDocumento_Click"></dx:ASPxButton>
                 </div>
             </div>
         </div>
@@ -379,11 +388,16 @@ form .row:not(.my-5) {
                 </div>
                 <div class="modal-body" style="text-align: left !important;">
                     <label class="text-light my-1">Observación</label>
-                    <asp:TextBox ID="TB_Observ" runat="server" TextMode="MultiLine" Rows="5" Width="100%" CssClass="form-control" BackColor="#303030" BorderWidth="0" ForeColor="#F0F0F0" style="resize: none;"></asp:TextBox>
+                    <dx:ASPxMemo ID="MM_Observ" runat="server" Rows="5" Width="100%" CssClass="form-control" Theme="Material" BackColor="#303030" Border-BorderWidth="0" ForeColor="#F0F0F0" 
+                        style="padding: 5px; border-radius: 5px; resize: none;">
+                        <ValidationSettings Display="Dynamic" ValidationGroup="Revisar" ErrorText="" ValidateOnLeave="false" ErrorTextPosition="Bottom">
+                            <RequiredField IsRequired="True" ErrorText="Campo Obligatorio" />
+                        </ValidationSettings>
+                    </dx:ASPxMemo>
                 </div>
                 <div class="modal-footer buttons">
                     <button class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
-                    <dx:ASPxButton ID="BTN_RevisarDocumento" runat="server" Text="Guardar" CssClass="btn btn-primary"></dx:ASPxButton>
+                    <dx:ASPxButton ID="BTN_RevisarDocumento" runat="server" Text="Guardar" CssClass="btn btn-primary" ValidationGroup="Revisar" OnClick="BTN_RevisarDocumento_Click"></dx:ASPxButton>
                 </div>
             </div>
         </div>
@@ -400,15 +414,21 @@ form .row:not(.my-5) {
                         <div class="col">
                             <div class="form-group-h" style="text-align: left !important;">
                                 <label class="my-1">Monto Transf.</label>
-                                <dx:ASPxTextBox ID="TB_Amount" runat="server" Width="100%" CssClass="form-control" BackColor="#303030" Border-BorderWidth="0" ForeColor="#F0F0F0">
+                                <dx:ASPxTextBox ID="TB_MontoTransf" runat="server" Width="100%" CssClass="form-control" Theme="Material" BackColor="#303030" Border-BorderWidth="0" ForeColor="#F0F0F0">
                                     <ClientSideEvents KeyPress="function (s,e) { onlyNumbers(s, e); }" />
+                                    <ValidationSettings Display="Dynamic" ValidationGroup="Cobrar" ErrorText="" ValidateOnLeave="false" ErrorTextPosition="Bottom">
+                                        <RequiredField IsRequired="True" ErrorText="Campo Obligatorio" />
+                                    </ValidationSettings>
                                 </dx:ASPxTextBox>
                             </div>
                         </div>
                         <div class="col">
                             <div class="form-group-h" style="text-align: left !important;">
                                 <label class="my-1">Banco</label>
-                                <dx:ASPxTextBox ID="TB_Bank" runat="server" Width="100%" CssClass="form-control" BackColor="#303030" Border-BorderWidth="0" ForeColor="#F0F0F0">
+                                <dx:ASPxTextBox ID="TB_BancoTransf" runat="server" Width="100%" CssClass="form-control" Theme="Material" BackColor="#303030" Border-BorderWidth="0" ForeColor="#F0F0F0">
+                                    <ValidationSettings Display="Dynamic" ValidationGroup="Cobrar" ErrorText="" ValidateOnLeave="false" ErrorTextPosition="Bottom">
+                                        <RequiredField IsRequired="True" ErrorText="Campo Obligatorio" />
+                                    </ValidationSettings>
                                 </dx:ASPxTextBox>
                             </div>
                         </div>
@@ -417,14 +437,21 @@ form .row:not(.my-5) {
                         <div class="col">
                             <div class="form-group-h" style="text-align: left !important;">
                                 <label class="my-1">Fec. Transf.</label>
-                                <dx:ASPxDateEdit ID="DE_DateTransf" runat="server" Width="100%" CssClass="form-control" EditFormat="Date" Theme="Material" BackColor="#303030" Border-BorderWidth="0"></dx:ASPxDateEdit>
+                                <dx:ASPxDateEdit ID="DE_FechaTransf" runat="server" Width="100%" CssClass="form-control" EditFormat="Date" Theme="Material" BackColor="#303030" Border-BorderWidth="0">
+                                    <ValidationSettings Display="Dynamic" ValidationGroup="Cobrar" ErrorText="" ValidateOnLeave="false" ErrorTextPosition="Bottom">
+                                        <RequiredField IsRequired="True" ErrorText="Campo Obligatorio" />
+                                    </ValidationSettings>
+                                </dx:ASPxDateEdit>
                             </div>
                         </div>
                         <div class="col">
                             <div class="form-group-h" style="text-align: left !important;">
                                 <label class="my-1">Ref. Transf.</label>
-                                <dx:ASPxTextBox ID="TB_RefTransf" runat="server" Width="100%" CssClass="form-control" BackColor="#303030" Border-BorderWidth="0" ForeColor="#F0F0F0">
+                                <dx:ASPxTextBox ID="TB_RefTransf" runat="server" Width="100%" CssClass="form-control" Theme="Material" BackColor="#303030" Border-BorderWidth="0" ForeColor="#F0F0F0">
                                     <ClientSideEvents KeyPress="function (s,e) { onlyNumbers(s, e); }" />
+                                    <ValidationSettings Display="Dynamic" ValidationGroup="Cobrar" ErrorText="" ValidateOnLeave="false" ErrorTextPosition="Bottom">
+                                        <RequiredField IsRequired="True" ErrorText="Campo Obligatorio" />
+                                    </ValidationSettings>
                                 </dx:ASPxTextBox>
                             </div>
                         </div>
@@ -433,14 +460,14 @@ form .row:not(.my-5) {
                         <div class="col">
                             <div class="form-group" style="text-align: left !important;">
                                 <label class="my-2">Subir comprobante</label>
-                                <asp:FileUpload ID="FU_Comprobante" runat="server" CssClass="form-control" Width="100%" BackColor="#303030" BorderWidth="0" ForeColor="#F0F0F0" accept=".pdf" />
+                                <asp:FileUpload ID="FU_CompTransf" runat="server" CssClass="form-control" Width="100%" BackColor="#303030" BorderWidth="0" ForeColor="#F0F0F0" accept=".pdf" />
                             </div>
                         </div>
                     </div>
                 </div>
                 <div class="modal-footer buttons">
                     <button class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
-                    <dx:ASPxButton ID="BTN_CobrarDocumento" runat="server" Text="Guardar" CssClass="btn btn-primary"></dx:ASPxButton>
+                    <dx:ASPxButton ID="BTN_CobrarDocumento" runat="server" Text="Guardar" CssClass="btn btn-primary" ValidationGroup="Cobrar" OnClick="BTN_CobrarDocumento_Click"></dx:ASPxButton>
                 </div>
             </div>
         </div>
@@ -495,24 +522,54 @@ form .row:not(.my-5) {
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="m-0">Agregar Soporte</h5>
+                    <h5 class="m-0 text-light">Agregar Soporte</h5>
                 </div>
                 <div class="modal-body">
-                    <div class="form-group" style="text-align: left !important;">
-                        <label class="text-dark my-1">Monto</label>
-                        <input type="text" class="form-control" name="name" />
+                    <div class="row">
+                        <div class="col">
+                            <div class="form-group-h" style="text-align: left !important;">
+                                <label class="my-1">Monto Pagado</label>
+                                <dx:ASPxTextBox ID="TB_MontoReng" runat="server" Width="100%" CssClass="form-control" BackColor="#303030" Border-BorderWidth="0" ForeColor="#F0F0F0">
+                                    <ClientSideEvents KeyPress="function (s,e) { onlyNumbers(s, e); }" />
+                                </dx:ASPxTextBox>
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="form-group-h" style="text-align: left !important;">
+                                <label class="my-1">Moneda</label>
+                                <dx:ASPxComboBox ID="DDL_MonedaReng" runat="server" Theme="Material" CssClass="form-control" Width="100%" BackColor="#303030" Border-BorderWidth="0" 
+                                    ValueField="ID" TextField="descrip" DataSourceID="DS_Moneda">
+                                    <Columns>
+                                        <dx:ListBoxColumn FieldName="ID" Width="70px" Caption="C&#243;digo"></dx:ListBoxColumn>
+                                        <dx:ListBoxColumn FieldName="descrip" Width="160px" Caption="Descripci&#243;n"></dx:ListBoxColumn>
+                                    </Columns>
+                                </dx:ASPxComboBox>
+                            </div>
+                        </div>
                     </div>
-                    <div class="form-group my-3" style="text-align: left !important;">
-                        <label class="text-dark my-1">Fecha</label>
-                        <input type="text" class="form-control" name="name" />
+                    <div class="row mt-4">
+                        <div class="col">
+                            <div class="form-group-h" style="text-align: left !important;">
+                                <label class="my-1">Fecha</label>
+                                <dx:ASPxDateEdit ID="DE_FechaReng" runat="server" Width="100%" CssClass="form-control" EditFormat="Date" Theme="Material" BackColor="#303030" Border-BorderWidth="0"></dx:ASPxDateEdit>
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="form-group-h" style="text-align: left !important;">
+                                <label class="my-1">Referencia</label>
+                                <dx:ASPxTextBox ID="TB_RefReng" runat="server" Width="100%" CssClass="form-control" BackColor="#303030" Border-BorderWidth="0" ForeColor="#F0F0F0">
+                                    <ClientSideEvents KeyPress="function (s,e) { onlyNumbers(s, e); }" />
+                                </dx:ASPxTextBox>
+                            </div>
+                        </div>
                     </div>
-                    <div class="form-group" style="text-align: left !important;">
-                        <label class="text-dark my-1">Referencia</label>
-                        <input type="text" class="form-control" name="name" />
-                    </div>
-                    <div class="form-group my-3" style="text-align: left !important;">
-                        <label class="text-dark my-1">Subir Archivo</label>
-                        <input type="file" class="form-control" id="formFile" />
+                    <div class="row mt-4">
+                        <div class="col">
+                            <div class="form-group my-3" style="text-align: left !important;">
+                                <label class="my-1">Subir Archivo</label>
+                                <asp:FileUpload ID="FU_TransfReng" runat="server" CssClass="form-control" Width="100%" BackColor="#303030" BorderWidth="0" ForeColor="#F0F0F0" accept=".pdf" />
+                            </div>
+                        </div>
                     </div>
                 </div>
                 <div class="modal-footer buttons">

@@ -6,6 +6,10 @@
     padding: inherit;
     background: #102140;
     border: 0;
+    font-size: 11px;
+}
+.dxgvTable_Material tr.dxgvDataRow_Material td {
+    font-size: 11px;
 }
 </style>
 <script>
@@ -69,36 +73,55 @@
                         </CellStyle>
                     </dx:GridViewDataTextColumn>
                     <dx:GridViewDataDateColumn FieldName="fecha" VisibleIndex="4" Caption="Fec. Generacion">
+                        <PropertiesDateEdit DisplayFormatString="dd/MM/yyyy HH:mm"></PropertiesDateEdit>
                         <HeaderStyle BackColor="#102140" Border-BorderWidth="0px" ForeColor="#F0F0F0" Paddings-Padding="5px"></HeaderStyle>
                         <CellStyle ForeColor="#F0F0F0" Border-BorderWidth="0px">
                             <Paddings Padding="12px"></Paddings>
                         </CellStyle>
                     </dx:GridViewDataDateColumn>
                     <dx:GridViewDataDateColumn FieldName="approved_date" VisibleIndex="5" Caption="Fec. Aprobacion">
+                        <PropertiesDateEdit DisplayFormatString="dd/MM/yyyy HH:mm"></PropertiesDateEdit>
                         <HeaderStyle BackColor="#102140" Border-BorderWidth="0px" ForeColor="#F0F0F0" Paddings-Padding="5px"></HeaderStyle>
                         <CellStyle ForeColor="#F0F0F0" Border-BorderWidth="0px">
                             <Paddings Padding="12px"></Paddings>
                         </CellStyle>
                     </dx:GridViewDataDateColumn>
-                    <dx:GridViewDataDateColumn FieldName="collected_date" VisibleIndex="6" Caption="Fec. Cobro">
+                    <dx:GridViewDataDateColumn FieldName="reviewed_date" VisibleIndex="6" Caption="Fec. Revision">
+                        <PropertiesDateEdit DisplayFormatString="dd/MM/yyyy HH:mm"></PropertiesDateEdit>
                         <HeaderStyle BackColor="#102140" Border-BorderWidth="0px" ForeColor="#F0F0F0" Paddings-Padding="5px"></HeaderStyle>
                         <CellStyle ForeColor="#F0F0F0" Border-BorderWidth="0px">
                             <Paddings Padding="12px"></Paddings>
                         </CellStyle>
                     </dx:GridViewDataDateColumn>
-                    <dx:GridViewDataDateColumn FieldName="liquidated_date" VisibleIndex="7" Caption="Fec. Liquidacion">
+                    <dx:GridViewDataDateColumn FieldName="corrected_date" VisibleIndex="7" Caption="Fec. Correccion">
+                        <PropertiesDateEdit DisplayFormatString="dd/MM/yyyy HH:mm"></PropertiesDateEdit>
                         <HeaderStyle BackColor="#102140" Border-BorderWidth="0px" ForeColor="#F0F0F0" Paddings-Padding="5px"></HeaderStyle>
                         <CellStyle ForeColor="#F0F0F0" Border-BorderWidth="0px">
                             <Paddings Padding="12px"></Paddings>
                         </CellStyle>
                     </dx:GridViewDataDateColumn>
-                    <dx:GridViewDataDateColumn FieldName="closed_date" VisibleIndex="8" Caption="Fec. Cerrada">
+                    <dx:GridViewDataDateColumn FieldName="collected_date" VisibleIndex="8" Caption="Fec. Cobro">
+                        <PropertiesDateEdit DisplayFormatString="dd/MM/yyyy HH:mm"></PropertiesDateEdit>
                         <HeaderStyle BackColor="#102140" Border-BorderWidth="0px" ForeColor="#F0F0F0" Paddings-Padding="5px"></HeaderStyle>
                         <CellStyle ForeColor="#F0F0F0" Border-BorderWidth="0px">
                             <Paddings Padding="12px"></Paddings>
                         </CellStyle>
                     </dx:GridViewDataDateColumn>
-                    <dx:GridViewDataColumn Width="110px" VisibleIndex="9" Caption="Revisar">
+                    <dx:GridViewDataDateColumn FieldName="liquidated_date" VisibleIndex="9" Caption="Fec. Liquidacion">
+                        <PropertiesDateEdit DisplayFormatString="dd/MM/yyyy HH:mm"></PropertiesDateEdit>
+                        <HeaderStyle BackColor="#102140" Border-BorderWidth="0px" ForeColor="#F0F0F0" Paddings-Padding="5px"></HeaderStyle>
+                        <CellStyle ForeColor="#F0F0F0" Border-BorderWidth="0px">
+                            <Paddings Padding="12px"></Paddings>
+                        </CellStyle>
+                    </dx:GridViewDataDateColumn>
+                    <dx:GridViewDataDateColumn FieldName="closed_date" VisibleIndex="10" Caption="Fec. Cerrada">
+                        <PropertiesDateEdit DisplayFormatString="dd/MM/yyyy HH:mm"></PropertiesDateEdit>
+                        <HeaderStyle BackColor="#102140" Border-BorderWidth="0px" ForeColor="#F0F0F0" Paddings-Padding="5px"></HeaderStyle>
+                        <CellStyle ForeColor="#F0F0F0" Border-BorderWidth="0px">
+                            <Paddings Padding="12px"></Paddings>
+                        </CellStyle>
+                    </dx:GridViewDataDateColumn>
+                    <dx:GridViewDataColumn Width="110px" VisibleIndex="11" Caption="Revisar">
                         <HeaderStyle BackColor="#102140" Border-BorderWidth="0px" ForeColor="#F0F0F0" Paddings-Padding="5px"></HeaderStyle>
                         <CellStyle ForeColor="#F0F0F0" Border-BorderWidth="0px">
                             <Paddings Padding="12px"></Paddings>
@@ -132,8 +155,7 @@
                                 Nro. Viaje: <dx:ASPxLabel runat="server" Text='<%# Eval("nro_viaje") %>' Font-Bold="true" ForeColor="#F0F0F0" />
                                 <br />
                                 Nro. Toneladas: <dx:ASPxLabel runat="server" Text='<%# Eval("num_toneladas", "{0:N2}") %>' Font-Bold="true" ForeColor="#F0F0F0" />
-                            </div>
-                            <div class="col">
+                                <br />
                                 Moneda: <dx:ASPxLabel runat="server" Text='<%# Eval("co_mone", "{0:N2}") %>' Font-Bold="true" ForeColor="#F0F0F0" />
                                 <br />
                                 Tasa de Cambio: <dx:ASPxLabel runat="server" Text='<%# Eval("tasa") %>' Font-Bold="true" ForeColor="#F0F0F0" />
@@ -149,14 +171,16 @@
                                 <br />
                                 Revisado Por: <dx:ASPxLabel runat="server" Text='<%# Eval("reviewed_by") %>' Font-Bold="true" ForeColor="#F0F0F0" />
                                 <br />
-                                Observacion: <dx:ASPxLabel runat="server" Text='<%# Eval("reviewed_observ") %>' Font-Bold="true" ForeColor="#F0F0F0" />
-                                <br />
+                                Ult. Observacion: <dx:ASPxLabel runat="server" Text='<%# Eval("reviewed_observ") %>' Font-Bold="true" ForeColor="#F0F0F0" />
+                                <hr class="w-75" />
+                                Corregido Por: <dx:ASPxLabel runat="server" Text='<%# Eval("corrected_by") %>' Font-Bold="true" ForeColor="#F0F0F0" />
+                                <hr class="w-75" />
                                 Liquidado Por: <dx:ASPxLabel runat="server" Text='<%# Eval("liquidated_by") %>' Font-Bold="true" ForeColor="#F0F0F0" />
                                 <br />
                                 Cerrado Por: <dx:ASPxLabel runat="server" Text='<%# Eval("closed_by") %>' Font-Bold="true" ForeColor="#F0F0F0" />
                             </div>
                             <div class="col">
-                                ¿Cobrado?: <dx:ASPxLabel runat="server" Text='<%# Convert.ToInt32(Eval("status")) >= 3 ? "SI" : "NO" %>' Font-Bold="true" ForeColor="#F0F0F0" />
+                                ¿Cobrado?: <dx:ASPxLabel runat="server" Text='<%# Convert.ToInt32(Eval("status")) >= 4 ? "SI" : "NO" %>' Font-Bold="true" ForeColor="#F0F0F0" />
                                 <br />
                                 Cobrado Por: <dx:ASPxLabel runat="server" Text='<%# Eval("collected_by") %>' Font-Bold="true" ForeColor="#F0F0F0" />
                                 <br />
@@ -170,15 +194,18 @@
                     </DetailRow>
                 </Templates>
             </dx:ASPxGridView>
-            <asp:SqlDataSource runat="server" ID="DS_Documento" ConnectionString='<%$ ConnectionStrings:SailingMasterConnectionString %>' SelectCommand="select ID, cuenta_buq, fecha, cliente, puerto, buque, nro_viaje, co_mone, tasa, fec_llegada, fec_salida, num_toneladas, total, approved_date, reviewed_date, collected_date, 
-            liquidated_date, closed_date, co_us_in, approved_by, reviewed_by, reviewed_observ, collected_by, collected_amount, collected_date_transf, collected_nref_transf, liquidated_by, closed_by, status,
+            <asp:SqlDataSource runat="server" ID="DS_Documento" ConnectionString='<%$ ConnectionStrings:SailingMasterConnectionString %>' SelectCommand="select ID, 
+            cuenta_buq, fecha, cliente, puerto, buque, nro_viaje, co_mone, tasa, fec_llegada, fec_salida, num_toneladas, total, approved_date, reviewed_date, corrected_date, 
+            collected_date, liquidated_date, closed_date, co_us_in, approved_by, reviewed_by, reviewed_observ, corrected_by, collected_by, collected_amount, collected_date_transf, 
+            collected_nref_transf, liquidated_by, closed_by, status,
             case status
 	            when 0 then 'GENERADO'
 	            when 1 then 'APROBADO'
 	            when 2 then 'REVISADO'
-	            when 3 then 'COBRADO'
-	            when 4 then 'LIQUIDADO'
-	            when 5 then 'CERRADO'
+	            when 3 then 'CORREGIDO'
+                when 4 then 'COBRADO'
+	            when 5 then 'LIQUIDADO'
+	            when 6 then 'CERRADO'
             end as doc_status
             from Documento"></asp:SqlDataSource>
         </div>

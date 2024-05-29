@@ -1,6 +1,5 @@
-﻿using SailingMaster.Models;
-using System;
-using System.Data;
+﻿using System;
+using SailingMaster.Models;
 
 namespace SailingMaster.Documentos
 {
@@ -24,8 +23,24 @@ namespace SailingMaster.Documentos
                 {
                     if (Request.QueryString["new_doc"] != null)
                     {
+                        string value = Request.QueryString["new_doc"].ToString();
                         PN_Success.Visible = true;
-                        LBL_Success.Text = "Documento agregado con éxito";
+
+                        switch (value)
+                        {
+                            case "0":
+                                LBL_Success.Text = "Documento generado con éxito";
+                                break;
+                            case "1":
+                                LBL_Success.Text = "Documento aprobado con éxito";
+                                break;
+                            case "2":
+                                LBL_Success.Text = "Documento revisado con éxito";
+                                break;
+                            case "3":
+                                LBL_Success.Text = "Documento modificado con éxito";
+                                break;
+                        }
                     }
                 }
             }

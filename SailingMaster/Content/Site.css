@@ -181,7 +181,7 @@ hr {
     padding: 0 !important;
 }
 .form-group-h table .dxeButtonEditButton_Material {
-    padding: 6px !important;
+    padding: 5px !important;
 }
 
 /* MENU */
@@ -274,6 +274,9 @@ table td {
 }
 .dxeButtonEditButton_Material {
     background: #303030;
+}
+.details-doc {
+    line-height: 25px;
 }
 .details-doc .col {
     color: #F0F0F0;

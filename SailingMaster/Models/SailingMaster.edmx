@@ -28,6 +28,8 @@
           <Property Name="reviewed_by" Type="varchar" MaxLength="20" />
           <Property Name="reviewed_date" Type="datetime" />
           <Property Name="reviewed_observ" Type="varchar(max)" />
+          <Property Name="corrected_by" Type="varchar" MaxLength="20" />
+          <Property Name="corrected_date" Type="datetime" />
           <Property Name="collected_by" Type="varchar" MaxLength="20" />
           <Property Name="collected_date" Type="datetime" />
           <Property Name="collected_amount" Type="decimal" Precision="18" Scale="2" />
@@ -248,6 +250,8 @@
           <Property Name="collected_amount" Type="Decimal" Precision="18" Scale="2" />
           <Property Name="collected_date_transf" Type="DateTime" Precision="3" />
           <Property Name="collected_nref_transf" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="corrected_by" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="corrected_date" Type="DateTime" Precision="3" />
         </EntityType>
         <EntityType Name="DocumentoReng">
           <Key>
@@ -384,6 +388,8 @@
           <EntitySetMapping Name="Documento">
             <EntityTypeMapping TypeName="SailingMasterModel.Documento">
               <MappingFragment StoreEntitySet="Documento">
+                <ScalarProperty Name="corrected_date" ColumnName="corrected_date" />
+                <ScalarProperty Name="corrected_by" ColumnName="corrected_by" />
                 <ScalarProperty Name="collected_nref_transf" ColumnName="collected_nref_transf" />
                 <ScalarProperty Name="collected_date_transf" ColumnName="collected_date_transf" />
                 <ScalarProperty Name="collected_amount" ColumnName="collected_amount" />
