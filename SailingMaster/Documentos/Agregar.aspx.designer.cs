@@ -375,6 +375,15 @@ namespace SailingMaster.Documentos
         protected global::DevExpress.Web.ASPxTextBox TB_Amount;
 
         /// <summary>
+        /// Control TB_Bank.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::DevExpress.Web.ASPxTextBox TB_Bank;
+
+        /// <summary>
         /// Control DE_DateTransf.
         /// </summary>
         /// <remarks>
@@ -391,6 +400,15 @@ namespace SailingMaster.Documentos
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::DevExpress.Web.ASPxTextBox TB_RefTransf;
+
+        /// <summary>
+        /// Control FU_Comprobante.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.FileUpload FU_Comprobante;
 
         /// <summary>
         /// Control BTN_CobrarDocumento.

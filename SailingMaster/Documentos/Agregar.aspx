@@ -25,7 +25,7 @@ form .row:not(.my-5) {
     margin-bottom: 10px;
 }
 #MainContent_DE_Date_I, #MainContent_DDL_Moneda_I,
-#MainContent_DE_DateArrived_I, #MainContent_DE_DateSailed_I,
+#MainContent_DE_DateArrived_I, #MainContent_DE_DateSailed_I, #MainContent_DE_DateTransf_I, 
 #MainContent_DE_Date_ETC, #MainContent_DDL_Moneda_ETC,
 #MainContent_DE_DateArrived_ETC, #MainContent_DE_DateSailed_ETC {
     color: #F0F0F0;
@@ -375,11 +375,11 @@ form .row:not(.my-5) {
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="m-0">Revisión</h5>
+                    <h5 class="m-0 text-light">Revisión</h5>
                 </div>
                 <div class="modal-body" style="text-align: left !important;">
-                    <label class="text-dark my-1">Observación</label>
-                    <asp:TextBox ID="TB_Observ" runat="server" TextMode="MultiLine" Rows="5" Width="100%" CssClass="form-control" style="resize: none;"></asp:TextBox>
+                    <label class="text-light my-1">Observación</label>
+                    <asp:TextBox ID="TB_Observ" runat="server" TextMode="MultiLine" Rows="5" Width="100%" CssClass="form-control" BackColor="#303030" BorderWidth="0" ForeColor="#F0F0F0" style="resize: none;"></asp:TextBox>
                 </div>
                 <div class="modal-footer buttons">
                     <button class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
@@ -393,24 +393,49 @@ form .row:not(.my-5) {
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="m-0">Cobro</h5>
+                    <h5 class="m-0 text-light">Cobro</h5>
                 </div>
                 <div class="modal-body">
-                    <div class="form-group" style="text-align: left !important;">
-                        <label class="text-dark my-1">Monto Transf.</label>
-                        <dx:ASPxTextBox ID="TB_Amount" runat="server" Width="100%" CssClass="form-control">
-                            <ClientSideEvents KeyPress="function (s,e) { onlyNumbers(s, e); }" />
-                        </dx:ASPxTextBox>
+                    <div class="row">
+                        <div class="col">
+                            <div class="form-group-h" style="text-align: left !important;">
+                                <label class="my-1">Monto Transf.</label>
+                                <dx:ASPxTextBox ID="TB_Amount" runat="server" Width="100%" CssClass="form-control" BackColor="#303030" Border-BorderWidth="0" ForeColor="#F0F0F0">
+                                    <ClientSideEvents KeyPress="function (s,e) { onlyNumbers(s, e); }" />
+                                </dx:ASPxTextBox>
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="form-group-h" style="text-align: left !important;">
+                                <label class="my-1">Banco</label>
+                                <dx:ASPxTextBox ID="TB_Bank" runat="server" Width="100%" CssClass="form-control" BackColor="#303030" Border-BorderWidth="0" ForeColor="#F0F0F0">
+                                </dx:ASPxTextBox>
+                            </div>
+                        </div>
                     </div>
-                    <div class="form-group" style="text-align: left !important;">
-                        <label class="text-dark my-1">Fecha Transf.</label>
-                        <dx:ASPxDateEdit ID="DE_DateTransf" runat="server" Width="100%" CssClass="form-control" EditFormat="Date"></dx:ASPxDateEdit>
+                    <div class="row mt-4">
+                        <div class="col">
+                            <div class="form-group-h" style="text-align: left !important;">
+                                <label class="my-1">Fec. Transf.</label>
+                                <dx:ASPxDateEdit ID="DE_DateTransf" runat="server" Width="100%" CssClass="form-control" EditFormat="Date" Theme="Material" BackColor="#303030" Border-BorderWidth="0"></dx:ASPxDateEdit>
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="form-group-h" style="text-align: left !important;">
+                                <label class="my-1">Ref. Transf.</label>
+                                <dx:ASPxTextBox ID="TB_RefTransf" runat="server" Width="100%" CssClass="form-control" BackColor="#303030" Border-BorderWidth="0" ForeColor="#F0F0F0">
+                                    <ClientSideEvents KeyPress="function (s,e) { onlyNumbers(s, e); }" />
+                                </dx:ASPxTextBox>
+                            </div>
+                        </div>
                     </div>
-                    <div class="form-group" style="text-align: left !important;">
-                        <label class="text-dark my-1">Referencia Transf.</label>
-                        <dx:ASPxTextBox ID="TB_RefTransf" runat="server" Width="100%" CssClass="form-control">
-                            <ClientSideEvents KeyPress="function (s,e) { onlyNumbers(s, e); }" />
-                        </dx:ASPxTextBox>
+                    <div class="row mt-4">
+                        <div class="col">
+                            <div class="form-group" style="text-align: left !important;">
+                                <label class="my-2">Subir comprobante</label>
+                                <asp:FileUpload ID="FU_Comprobante" runat="server" CssClass="form-control" Width="100%" BackColor="#303030" BorderWidth="0" ForeColor="#F0F0F0" accept=".pdf" />
+                            </div>
+                        </div>
                     </div>
                 </div>
                 <div class="modal-footer buttons">
