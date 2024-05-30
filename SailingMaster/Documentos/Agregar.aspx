@@ -98,6 +98,9 @@ form .row:not(.my-5) {
         </div>
         <hr />
         <asp:Panel ID="PN_ButtonsActions" runat="server" Visible="false" CssClass="row mx-0 my-3">
+            <div class="col d-flex">
+                <h5 class="m-0 text-light">Status: <dx:ASPxLabel ID="LBL_Status" runat="server" Font-Bold="true" Font-Size="Large" CssClass="mx-3 my-0 text-light"></dx:ASPxLabel></h5>
+            </div>
             <div class="col buttons-actions p-0">
                 <asp:LinkButton ID="BTN_PreAprobarDocumento" runat="server" CssClass="btn btn-sm btn-info mx-1" data-toggle="modal" data-target="#modalAprobar">
                     <i class="fas fa-check" style="margin-right: 5px;"></i> Aprobar
@@ -111,7 +114,7 @@ form .row:not(.my-5) {
                 <asp:LinkButton ID="BTN_PreLiquidarDocumento" runat="server" CssClass="btn btn-sm btn-alert" data-toggle="modal" data-target="#modalLiquidar">
                     <i class="fas fa-file-invoice-dollar" style="margin-right: 5px;"></i> Liquidar
                 </asp:LinkButton>
-                <asp:LinkButton ID="BTN_PreerrarDocumento" runat="server" CssClass="btn btn-sm btn-secondary mx-1" data-toggle="modal" data-target="#modalCerrar">
+                <asp:LinkButton ID="BTN_PreCerrarDocumento" runat="server" CssClass="btn btn-sm btn-secondary mx-1" data-toggle="modal" data-target="#modalCerrar">
                     <i class="fas fa-times" style="margin-right: 5px;"></i> Cerrar
                 </asp:LinkButton>
                 <asp:LinkButton ID="BTN_PreEliminarDocumento" runat="server" CssClass="btn btn-sm btn-danger" data-toggle="modal" data-target="#modal-delete">
@@ -482,7 +485,7 @@ form .row:not(.my-5) {
                 </div>
                 <div class="modal-footer buttons">
                     <button class="btn btn-danger" data-dismiss="modal">No</button>
-                    <dx:ASPxButton ID="BTN_LiquidarDocumento" runat="server" Text="Sí" CssClass="btn btn-success"></dx:ASPxButton>
+                    <dx:ASPxButton ID="BTN_LiquidarDocumento" runat="server" Text="Sí" CssClass="btn btn-success" OnClick="BTN_LiquidarDocumento_Click"></dx:ASPxButton>
                 </div>
             </div>
         </div>
@@ -497,7 +500,7 @@ form .row:not(.my-5) {
                 </div>
                 <div class="modal-footer buttons">
                     <button class="btn btn-danger" data-dismiss="modal">No</button>
-                    <dx:ASPxButton ID="BTN_CerrarDocumento" runat="server" Text="Sí" CssClass="btn btn-success"></dx:ASPxButton>
+                    <dx:ASPxButton ID="BTN_CerrarDocumento" runat="server" Text="Sí" CssClass="btn btn-success" OnClick="BTN_CerrarDocumento_Click"></dx:ASPxButton>
                 </div>
             </div>
         </div>

@@ -54,6 +54,7 @@ namespace SailingMaster.Models
         public string collected_nref_transf { get; set; }
         public string corrected_by { get; set; }
         public Nullable<System.DateTime> corrected_date { get; set; }
+        public string collected_bank { get; set; }
     
         public virtual Moneda Moneda { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

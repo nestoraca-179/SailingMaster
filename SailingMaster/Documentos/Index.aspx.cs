@@ -40,6 +40,18 @@ namespace SailingMaster.Documentos
                             case "3":
                                 LBL_Success.Text = "Documento modificado con éxito";
                                 break;
+                            case "4":
+                                LBL_Success.Text = "Documento cobrado con éxito";
+                                break;
+                            case "5":
+                                LBL_Success.Text = "Documento liquidado con éxito";
+                                break;
+                            case "6":
+                                LBL_Success.Text = "Documento cerrado con éxito";
+                                break;
+                            case "-1":
+                                LBL_Success.Text = "Documento eliminado con éxito";
+                                break;
                         }
                     }
                 }

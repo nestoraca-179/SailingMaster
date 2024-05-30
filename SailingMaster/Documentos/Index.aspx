@@ -186,7 +186,9 @@
                                 <br />
                                 Monto Recibido: <dx:ASPxLabel runat="server" Text='<%# Eval("collected_amount") %>' Font-Bold="true" ForeColor="#F0F0F0" />
                                 <br />
-                                Fec. Transferencia: <dx:ASPxLabel runat="server" Text='<%# Eval("collected_date_transf") %>' Font-Bold="true" ForeColor="#F0F0F0" />
+                                Banco Destino: <dx:ASPxLabel runat="server" Text='<%# Eval("collected_bank") %>' Font-Bold="true" ForeColor="#F0F0F0" />
+                                <br />
+                                Fec. Transferencia: <dx:ASPxLabel runat="server" Text='<%# Eval("collected_date_transf", "{0:dd/MM/yyyy}") %>' Font-Bold="true" ForeColor="#F0F0F0" />
                                 <br />
                                 Nro. Referencia: <dx:ASPxLabel runat="server" Text='<%# Eval("collected_nref_transf") %>' Font-Bold="true" ForeColor="#F0F0F0" />
                             </div>
@@ -196,8 +198,8 @@
             </dx:ASPxGridView>
             <asp:SqlDataSource runat="server" ID="DS_Documento" ConnectionString='<%$ ConnectionStrings:SailingMasterConnectionString %>' SelectCommand="select ID, 
             cuenta_buq, fecha, cliente, puerto, buque, nro_viaje, co_mone, tasa, fec_llegada, fec_salida, num_toneladas, total, approved_date, reviewed_date, corrected_date, 
-            collected_date, liquidated_date, closed_date, co_us_in, approved_by, reviewed_by, reviewed_observ, corrected_by, collected_by, collected_amount, collected_date_transf, 
-            collected_nref_transf, liquidated_by, closed_by, status,
+            collected_date, liquidated_date, closed_date, co_us_in, approved_by, reviewed_by, reviewed_observ, corrected_by, collected_by, collected_amount, collected_bank, 
+            collected_date_transf, collected_nref_transf, liquidated_by, closed_by, status,
             case status
 	            when 0 then 'GENERADO'
 	            when 1 then 'APROBADO'

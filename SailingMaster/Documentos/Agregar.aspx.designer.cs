@@ -105,6 +105,15 @@ namespace SailingMaster.Documentos
         protected global::System.Web.UI.WebControls.Panel PN_ButtonsActions;
 
         /// <summary>
+        /// Control LBL_Status.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::DevExpress.Web.ASPxLabel LBL_Status;
+
+        /// <summary>
         /// Control BTN_PreAprobarDocumento.
         /// </summary>
         /// <remarks>
@@ -141,13 +150,13 @@ namespace SailingMaster.Documentos
         protected global::System.Web.UI.WebControls.LinkButton BTN_PreLiquidarDocumento;
 
         /// <summary>
-        /// Control BTN_PreerrarDocumento.
+        /// Control BTN_PreCerrarDocumento.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton BTN_PreerrarDocumento;
+        protected global::System.Web.UI.WebControls.LinkButton BTN_PreCerrarDocumento;
 
         /// <summary>
         /// Control BTN_PreEliminarDocumento.

@@ -33,6 +33,7 @@
           <Property Name="collected_by" Type="varchar" MaxLength="20" />
           <Property Name="collected_date" Type="datetime" />
           <Property Name="collected_amount" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="collected_bank" Type="varchar" MaxLength="50" />
           <Property Name="collected_date_transf" Type="datetime" />
           <Property Name="collected_nref_transf" Type="varchar" MaxLength="50" />
           <Property Name="liquidated_by" Type="varchar" MaxLength="20" />
@@ -252,6 +253,7 @@
           <Property Name="collected_nref_transf" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="corrected_by" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
           <Property Name="corrected_date" Type="DateTime" Precision="3" />
+          <Property Name="collected_bank" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="DocumentoReng">
           <Key>
@@ -388,6 +390,7 @@
           <EntitySetMapping Name="Documento">
             <EntityTypeMapping TypeName="SailingMasterModel.Documento">
               <MappingFragment StoreEntitySet="Documento">
+                <ScalarProperty Name="collected_bank" ColumnName="collected_bank" />
                 <ScalarProperty Name="corrected_date" ColumnName="corrected_date" />
                 <ScalarProperty Name="corrected_by" ColumnName="corrected_by" />
                 <ScalarProperty Name="collected_nref_transf" ColumnName="collected_nref_transf" />

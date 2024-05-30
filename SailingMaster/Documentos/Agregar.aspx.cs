@@ -3,6 +3,7 @@ using SailingMaster.Controllers;
 using SailingMaster.Models;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 
 namespace SailingMaster.Documentos
@@ -43,9 +44,42 @@ namespace SailingMaster.Documentos
                         }
                         else
                         {
-                            LBL_TotalRecibido.Text = doc.collected_amount.ToString();
+                            NumberFormatInfo formato = new NumberFormatInfo();
+                            formato.NumberDecimalSeparator = ",";
+                            formato.NumberGroupSeparator = ".";
+
+                            LBL_TotalRecibido.Text = doc.collected_amount.Value.ToString("N2", formato);
                             LBL_TotalCancelado.Text = "0,00";
-                            LBL_Balance.Text = doc.collected_amount.ToString();
+                            LBL_Balance.Text = doc.collected_amount.Value.ToString("N2", formato);
+                        }
+
+                        string status;
+                        switch (doc.status)
+                        {
+                            case 0:
+                                status = "GENERADO";
+                                break;
+                            case 1:
+                                status = "APROBADO";
+                                break;
+                            case 2:
+                                status = "REVISADO";
+                                break;
+                            case 3:
+                                status = "CORREGIDO";
+                                break;
+                            case 4:
+                                status = "COBRADO";
+                                break;
+                            case 5:
+                                status = "LIQUIDADO";
+                                break;
+                            case 6:
+                                status = "CERRADO";
+                                break;
+                            default:
+                                status = "";
+                                break;
                         }
 
                         Page.Title = "Documento #" + doc.ID;
@@ -53,6 +87,7 @@ namespace SailingMaster.Documentos
                         BTN_Agregar.Visible = false;
                         BTN_Guardar.Visible = true;
                         PN_ButtonsActions.Visible = true;
+                        LBL_Status.Text = status;
 
                         if (!IsPostBack)
                             CargarDocumento(doc);
@@ -266,26 +301,101 @@ namespace SailingMaster.Documentos
             Usuario user = (Session["USER"] as Usuario);
             int id = int.Parse(Request.QueryString["ID"].ToString());
 
-            /*
             Documento doc = DocumentoController.GetByID(id);
-            doc.status = 1; // APROBADO
-            doc.approved_by = user.username;
-            doc.approved_date = DateTime.Now;
+            doc.status = 4; // COBRADO
+            doc.collected_by = user.username;
+            doc.collected_date = DateTime.Now;
+            doc.collected_amount = decimal.Parse(TB_MontoTransf.Text.Replace(".", ","));
+            doc.collected_bank = TB_BancoTransf.Text;
+            doc.collected_date_transf = DateTime.Parse(DE_FechaTransf.Value.ToString());
+            doc.collected_nref_transf = TB_RefTransf.Text;
             doc.co_us_mo = user.username;
             doc.fe_us_mo = DateTime.Now;
-            */
 
-            if (FU_CompTransf.HasFile)
+            //if (FU_CompTransf.HasFile)
+            //{
+            //    string fileName = FU_CompTransf.FileName;
+            //    string contentType = FU_CompTransf.PostedFile.ContentType;
+            //    byte[] fileData = FU_CompTransf.FileBytes;
+            //}
+
+            int result = DocumentoController.Edit(doc);
+
+            if (result == 1)
             {
-                string fileName = FU_CompTransf.FileName;
-                string contentType = FU_CompTransf.PostedFile.ContentType;
-                byte[] fileData = FU_CompTransf.FileBytes;
+                Response.Redirect("/Documentos/Index.aspx?new_doc=4");
+            }
+            else
+            {
+                PN_Error.Visible = true;
+                LBL_Error.Text = "Ha ocurrido un error al revisar el Documento. Ver tabla de Incidentes";
+            }
+        }
+
+        protected void BTN_LiquidarDocumento_Click(object sender, EventArgs e)
+        {
+            Usuario user = (Session["USER"] as Usuario);
+            int id = int.Parse(Request.QueryString["ID"].ToString());
+
+            Documento doc = DocumentoController.GetByID(id);
+            doc.status = 5; // LIQUIDADO
+            doc.liquidated_by = user.username;
+            doc.liquidated_date = DateTime.Now;
+            doc.co_us_mo = user.username;
+            doc.fe_us_mo = DateTime.Now;
+
+            int result = DocumentoController.Edit(doc);
+
+            if (result == 1)
+            {
+                Response.Redirect("/Documentos/Index.aspx?new_doc=5");
+            }
+            else
+            {
+                PN_Error.Visible = true;
+                LBL_Error.Text = "Ha ocurrido un error al revisar el Documento. Ver tabla de Incidentes";
+            }
+        }
+
+        protected void BTN_CerrarDocumento_Click(object sender, EventArgs e)
+        {
+            Usuario user = (Session["USER"] as Usuario);
+            int id = int.Parse(Request.QueryString["ID"].ToString());
+
+            Documento doc = DocumentoController.GetByID(id);
+            doc.status = 6; // CERRADO
+            doc.closed_by = user.username;
+            doc.closed_date = DateTime.Now;
+            doc.co_us_mo = user.username;
+            doc.fe_us_mo = DateTime.Now;
+
+            int result = DocumentoController.Edit(doc);
+
+            if (result == 1)
+            {
+                Response.Redirect("/Documentos/Index.aspx?new_doc=6");
+            }
+            else
+            {
+                PN_Error.Visible = true;
+                LBL_Error.Text = "Ha ocurrido un error al revisar el Documento. Ver tabla de Incidentes";
             }
         }
 
         protected void BTN_EliminarDocumento_Click(object sender, EventArgs e)
         {
+            Usuario user = (Session["USER"] as Usuario);
+            int result = DocumentoController.Delete(int.Parse(Request.QueryString["ID"].ToString()), user.username);
 
+            if (result == 1)
+            {
+                Response.Redirect("/Documentos/Index.aspx?new_doc=-1");
+            }
+            else
+            {
+                PN_Error.Visible = true;
+                LBL_Error.Text = "Ha ocurrido un error al eliminar el Documento. Ver tabla de Incidentes";
+            }
         }
 
         protected void DDL_Moneda_SelectedIndexChanged(object sender, EventArgs e)

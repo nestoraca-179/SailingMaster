@@ -69,6 +69,27 @@ namespace SailingMaster.Controllers
             return result;
         }
 
+        public static int Delete(int ID, string us)
+        {
+            int result = 0;
+            Documento doc = GetByID(ID);
+
+            try
+            {
+                Documento d = db.Documento.Remove(doc);
+                db.SaveChanges();
+
+                LogController.CreateLog(us, "DOCUMENTO", d.ID.ToString(), "E", null);
+                result = 1;
+            }
+            catch (Exception ex)
+            {
+                IncidentController.CreateIncident(string.Format("ERROR ELIMINANDO DOCUMENTO N° {0}", doc.ID), ex);
+            }
+
+            return result;
+        }
+
         private static string GetChanges(Documento doc_v, Documento doc_n)
         {
             string campos = "";
