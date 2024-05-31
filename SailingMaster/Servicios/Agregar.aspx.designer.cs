@@ -96,6 +96,24 @@ namespace SailingMaster.Servicios
         protected global::DevExpress.Web.ASPxTextBox TB_Descrip;
 
         /// <summary>
+        /// Control DDL_TipoServicio.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::DevExpress.Web.ASPxComboBox DDL_TipoServicio;
+
+        /// <summary>
+        /// Control DS_TipoServicio.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.SqlDataSource DS_TipoServicio;
+
+        /// <summary>
         /// Control TB_Price.
         /// </summary>
         /// <remarks>

@@ -43,7 +43,9 @@ namespace SailingMaster.Servicios
 
                 serv.ID = TB_Code.Text;
                 serv.descrip = TB_Descrip.Text;
-                serv.precio_base = mon.@base ? price : price * mon.tasa;
+                serv.tip_serv = int.Parse(DDL_TipoServicio.Value.ToString());
+                serv.precio_base = decimal.Parse(TB_Price.Text.Replace(".", ","));
+                serv.co_mone = DDL_Moneda.Value.ToString();
                 serv.activo = CK_Activo.Checked;
                 serv.co_us_in = (Session["USER"] as Usuario).username;
                 serv.fe_us_in = DateTime.Now;

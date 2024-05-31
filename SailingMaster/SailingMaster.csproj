@@ -99,7 +99,7 @@
       <DependentUpon>SailingMaster.edmx</DependentUpon>
       <LastGenOutput>SailingMaster.cs</LastGenOutput>
     </Content>
-    <Content Include="Documentos\Agregar.aspx" />
+    <Content Include="Documentos\DocumentPage.aspx" />
     <Content Include="Documentos\Index.aspx" />
     <Content Include="Scripts\bootstrap-5.2.js" />
     <EntityDeploy Include="Models\SailingMaster.edmx">
@@ -215,15 +215,18 @@
     <Compile Include="Models\Servicio.cs">
       <DependentUpon>SailingMaster.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\TipoServicio.cs">
+      <DependentUpon>SailingMaster.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\Usuario.cs">
       <DependentUpon>SailingMaster.tt</DependentUpon>
     </Compile>
-    <Compile Include="Documentos\Agregar.aspx.cs">
-      <DependentUpon>Agregar.aspx</DependentUpon>
+    <Compile Include="Documentos\DocumentPage.aspx.cs">
+      <DependentUpon>DocumentPage.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Documentos\Agregar.aspx.designer.cs">
-      <DependentUpon>Agregar.aspx</DependentUpon>
+    <Compile Include="Documentos\DocumentPage.aspx.designer.cs">
+      <DependentUpon>DocumentPage.aspx</DependentUpon>
     </Compile>
     <Compile Include="Documentos\Index.aspx.cs">
       <DependentUpon>Index.aspx</DependentUpon>

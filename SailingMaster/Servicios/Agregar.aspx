@@ -1,6 +1,12 @@
 ﻿<%@ Page Title="Agregar Servicio" Language="C#" MasterPageFile="~/Main.Master" AutoEventWireup="true" CodeBehind="Agregar.aspx.cs" Inherits="SailingMaster.Servicios.Agregar" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
+<style>
+    #MainContent_DDL_Moneda_I, #MainContent_DDL_Moneda_ETC, 
+    #MainContent_DDL_TipoServicio_I, #MainContent_DDL_TipoServicio_ETC {
+        color: #F0F0F0;
+    }
+</style>
 <asp:Panel ID="PN_Error" runat="server" Width="100%" CssClass="mt-2" Visible="false">
     <div class="alert alert-danger m-0">
         <dx:ASPxLabel ID="LBL_Error" runat="server" Width="100%" Font-Size="14px" CssClass="m-0"></dx:ASPxLabel>
@@ -21,20 +27,20 @@
             <div class="col"></div>
         </div>
         <div class="row">
-            <div class="col-md-4">
+            <div class="col-md-3">
                 <div class="controls">
                     <label>Código</label>
-                    <dx:ASPxTextBox ID="TB_Code" runat="server" Theme="Material" Width="100%" AutoCompleteType="None">
+                    <dx:ASPxTextBox ID="TB_Code" runat="server" Theme="Material" Width="100%" BackColor="#303030" Border-BorderColor="#303030" ForeColor="#F0F0F0" AutoCompleteType="None">
                         <ValidationSettings ValidationGroup="Servicio" ErrorText="" ValidateOnLeave="false" ErrorTextPosition="Bottom">
                             <RequiredField IsRequired="True" ErrorText="Campo Obligatorio" />
                         </ValidationSettings>
                     </dx:ASPxTextBox>
                 </div>
             </div>
-            <div class="col-md-8">
+            <div class="col-md-9">
                 <div class="controls">
                     <label>Descripción</label>
-                    <dx:ASPxTextBox ID="TB_Descrip" runat="server" Theme="Material" Width="100%" AutoCompleteType="None">
+                    <dx:ASPxTextBox ID="TB_Descrip" runat="server" Theme="Material" Width="100%" BackColor="#303030" Border-BorderColor="#303030" ForeColor="#F0F0F0" AutoCompleteType="None">
                         <ValidationSettings ValidationGroup="Servicio" ErrorText="" ValidateOnLeave="false" ErrorTextPosition="Bottom">
                             <RequiredField IsRequired="True" ErrorText="Campo Obligatorio" />
                         </ValidationSettings>
@@ -43,10 +49,25 @@
             </div>
         </div>
         <div class="row">
-            <div class="col-md-4">
+            <div class="col-md-3">
+                <div class="controls">
+                    <label>Tipo Servicio</label>
+                    <dx:ASPxComboBox ID="DDL_TipoServicio" runat="server" Theme="Material" Width="100%" BackColor="#303030" Border-BorderColor="#303030" ValueField="ID" TextField="des_tipo" DataSourceID="DS_TipoServicio">
+                        <Columns>
+                            <dx:ListBoxColumn FieldName="ID" Width="40px" Caption="C&#243;digo"></dx:ListBoxColumn>
+                            <dx:ListBoxColumn FieldName="des_tipo" Caption="Descripci&#243;n"></dx:ListBoxColumn>
+                        </Columns>
+                        <ValidationSettings ValidationGroup="Servicio" ErrorText="" ValidateOnLeave="false" ErrorTextPosition="Bottom">
+                            <RequiredField IsRequired="True" ErrorText="Campo Obligatorio" />
+                        </ValidationSettings>
+                    </dx:ASPxComboBox>
+                    <asp:SqlDataSource runat="server" ID="DS_TipoServicio" ConnectionString='<%$ ConnectionStrings:SailingMasterConnectionString %>' SelectCommand="SELECT [ID], [des_tipo] FROM [TipoServicio]"></asp:SqlDataSource>
+                </div>
+            </div>
+            <div class="col-md-3">
                 <div class="controls">
                     <label>Precio Base</label>
-                    <dx:ASPxTextBox ID="TB_Price" runat="server" Theme="Material" Width="100%" AutoCompleteType="None" ValueType="System.Decimal">
+                    <dx:ASPxTextBox ID="TB_Price" runat="server" Theme="Material" Width="100%" AutoCompleteType="None" BackColor="#303030" Border-BorderColor="#303030" ForeColor="#F0F0F0" ValueType="System.Decimal">
                         <ClientSideEvents KeyPress="function (s,e) { onlyNumbers(s, e); }" />
                         <ValidationSettings ValidationGroup="Servicio" ErrorText="" ValidateOnLeave="false" ErrorTextPosition="Bottom">
                             <RequiredField IsRequired="True" ErrorText="Campo Obligatorio" />
@@ -54,10 +75,10 @@
                     </dx:ASPxTextBox>
                 </div>
             </div>
-            <div class="col-md-4">
+            <div class="col-md-3">
                 <div class="controls">
                     <label>Moneda</label>
-                    <dx:ASPxComboBox ID="DDL_Moneda" runat="server" Theme="Material" Width="100%" ValueField="ID" TextField="descrip" DataSourceID="DS_Moneda">
+                    <dx:ASPxComboBox ID="DDL_Moneda" runat="server" Theme="Material" Width="100%" BackColor="#303030" Border-BorderColor="#303030" ValueField="ID" TextField="descrip" DataSourceID="DS_Moneda">
                         <Columns>
                             <dx:ListBoxColumn FieldName="ID" Width="40px" Caption="C&#243;digo"></dx:ListBoxColumn>
                             <dx:ListBoxColumn FieldName="descrip" Caption="Descripci&#243;n"></dx:ListBoxColumn>
@@ -69,7 +90,7 @@
                     <asp:SqlDataSource runat="server" ID="DS_Moneda" ConnectionString='<%$ ConnectionStrings:SailingMasterConnectionString %>' SelectCommand="SELECT [ID], [descrip] FROM [Moneda]"></asp:SqlDataSource>
                 </div>
             </div>
-            <div class="col-md-4 d-flex align-items-center">
+            <div class="col-md-3 d-flex align-items-center">
                 <div class="controls">
                     <dx:ASPxCheckBox ID="CK_Activo" runat="server" Theme="Material" Width="100%" Text="Activo"></dx:ASPxCheckBox>
                 </div>

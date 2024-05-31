@@ -53,12 +53,11 @@ namespace SailingMaster.Servicios
 
             try
             {
-                Moneda mon = MonedaController.GetByID(DDL_Moneda.Value.ToString());
-                decimal price = decimal.Parse(TB_Price.Value.ToString());
-
                 serv.ID = IDServ;
                 serv.descrip = TB_Descrip.Text;
-                serv.precio_base = mon.@base ? price : price * mon.tasa;
+                serv.tip_serv = int.Parse(DDL_TipoServicio.Value.ToString());
+                serv.precio_base = decimal.Parse(TB_Price.Text.Replace(".", ","));
+                serv.co_mone = DDL_Moneda.Value.ToString();
                 serv.activo = CK_Activo.Checked;
                 serv.co_us_mo = (Session["USER"] as Usuario).username;
                 serv.fe_us_mo = DateTime.Now;
@@ -87,13 +86,19 @@ namespace SailingMaster.Servicios
         {
             TB_Code.Text = serv.ID;
             TB_Descrip.Text = serv.descrip;
-            TB_Price.Text = serv.precio_base.ToString();
-            DDL_Moneda.Value = "BSD";
+            DDL_TipoServicio.Value = serv.tip_serv.ToString();
+            TB_Price.Text = Math.Round(serv.precio_base, 2).ToString();
+            DDL_Moneda.Value = serv.co_mone;
             CK_Activo.Checked = serv.activo;
+
+            foreach (ListEditItem item in DDL_TipoServicio.Items)
+            {
+                item.Selected = item.Value.ToString() == serv.tip_serv.ToString();
+            }
 
             foreach (ListEditItem item in DDL_Moneda.Items)
             {
-                item.Selected = item.Value.ToString() == "BSD";
+                item.Selected = item.Value.ToString() == serv.co_mone;
             }
         }
     }

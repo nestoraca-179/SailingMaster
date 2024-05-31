@@ -1,4 +1,4 @@
-﻿<%@ Page Title="Agregar Documento" Language="C#" MasterPageFile="~/Main.Master" AutoEventWireup="true" CodeBehind="Agregar.aspx.cs" Inherits="SailingMaster.Documentos.Agregar" %>
+﻿<%@ Page Title="Documento" Language="C#" MasterPageFile="~/Main.Master" AutoEventWireup="true" CodeBehind="DocumentPage.aspx.cs" Inherits="SailingMaster.Documentos.DocumentPage" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
 <style>
@@ -39,6 +39,10 @@ form .row:not(.my-5) {
     background: #DB7B15;
     border-color: #DB7B15;
     color: #F0F0F0;
+}
+.btn-alert:focus {
+    outline: 0;
+    box-shadow: 0 0 0 0.25rem rgba(253, 145, 49, .5);
 }
 </style>
 <script>
@@ -102,11 +106,11 @@ form .row:not(.my-5) {
                 <h5 class="m-0 text-light">Status: <dx:ASPxLabel ID="LBL_Status" runat="server" Font-Bold="true" Font-Size="Large" CssClass="mx-3 my-0 text-light"></dx:ASPxLabel></h5>
             </div>
             <div class="col buttons-actions p-0">
-                <asp:LinkButton ID="BTN_PreAprobarDocumento" runat="server" CssClass="btn btn-sm btn-info mx-1" data-toggle="modal" data-target="#modalAprobar">
-                    <i class="fas fa-check" style="margin-right: 5px;"></i> Aprobar
-                </asp:LinkButton>
-                <asp:LinkButton ID="BTN_PreRevisarDocumento" runat="server" CssClass="btn btn-sm btn-warning" data-toggle="modal" data-target="#modalRevisar">
+                <asp:LinkButton ID="BTN_PreRevisarDocumento" runat="server" CssClass="btn btn-sm btn-warning mx-1" data-toggle="modal" data-target="#modalRevisar">
                     <i class="fas fa-search" style="margin-right: 5px;"></i> Revisar
+                </asp:LinkButton>
+                <asp:LinkButton ID="BTN_PreAprobarDocumento" runat="server" CssClass="btn btn-sm btn-success" data-toggle="modal" data-target="#modalAprobar">
+                    <i class="fas fa-check" style="margin-right: 5px;"></i> Aprobar
                 </asp:LinkButton>
                 <asp:LinkButton ID="BTN_PreCobrarDocumento" runat="server" CssClass="btn btn-sm btn-primary mx-1" data-toggle="modal" data-target="#modalCobrar">
                     <i class="fa-solid fa-hand-holding-dollar" style="margin-right: 5px;"></i> Cobrar
@@ -410,7 +414,7 @@ form .row:not(.my-5) {
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="m-0 text-light">Cobro</h5>
+                    <h5 class="m-0 text-light">Registrar Cobro</h5>
                 </div>
                 <div class="modal-body">
                     <div class="row">
@@ -525,7 +529,7 @@ form .row:not(.my-5) {
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="m-0 text-light">Agregar Soporte</h5>
+                    <h5 class="m-0 text-light">Subir Soporte de Pago</h5>
                 </div>
                 <div class="modal-body">
                     <div class="row">

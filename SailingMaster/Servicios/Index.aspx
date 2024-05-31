@@ -49,34 +49,34 @@
                             <Paddings Padding="12px"></Paddings>
                         </CellStyle>
                     </dx:GridViewDataTextColumn>
-                    <dx:GridViewDataTextColumn FieldName="precio_bsd" ReadOnly="True" VisibleIndex="2" UnboundType="Decimal" Caption="Precio BSD">
-                        <PropertiesTextEdit DisplayFormatString="Bs. D {0:n}"></PropertiesTextEdit>
+                    <dx:GridViewDataTextColumn FieldName="des_tipo" VisibleIndex="2" Caption="Tipo Servicio">
                         <HeaderStyle BackColor="#102140" Border-BorderWidth="0px" ForeColor="#F0F0F0" Paddings-Padding="5px"></HeaderStyle>
                         <CellStyle ForeColor="#F0F0F0" Border-BorderWidth="0px">
                             <Paddings Padding="12px"></Paddings>
                         </CellStyle>
                     </dx:GridViewDataTextColumn>
-                    <dx:GridViewDataTextColumn FieldName="precio_usd" ReadOnly="True" VisibleIndex="3" UnboundType="Decimal" Caption="Precio USD">
-                        <PropertiesTextEdit DisplayFormatString="${0:n}"></PropertiesTextEdit>
+                    <dx:GridViewDataTextColumn FieldName="co_mone" ReadOnly="True" VisibleIndex="3" Caption="Moneda">
                         <HeaderStyle BackColor="#102140" Border-BorderWidth="0px" ForeColor="#F0F0F0" Paddings-Padding="5px"></HeaderStyle>
                         <CellStyle ForeColor="#F0F0F0" Border-BorderWidth="0px">
                             <Paddings Padding="12px"></Paddings>
                         </CellStyle>
                     </dx:GridViewDataTextColumn>
-                    <dx:GridViewDataTextColumn FieldName="precio_eur" ReadOnly="True" VisibleIndex="4" UnboundType="Decimal" Caption="Precio EUR">
-                        <PropertiesTextEdit DisplayFormatString="€{0:n}"></PropertiesTextEdit>
+                    <dx:GridViewDataTextColumn FieldName="precio_base" ReadOnly="True" VisibleIndex="4" Caption="Precio Base" UnboundType="String">
+                        <PropertiesTextEdit DisplayFormatString="{0:n}">
+                            <Style HorizontalAlign="Left"></Style>
+                        </PropertiesTextEdit>
                         <HeaderStyle BackColor="#102140" Border-BorderWidth="0px" ForeColor="#F0F0F0" Paddings-Padding="5px"></HeaderStyle>
-                        <CellStyle ForeColor="#F0F0F0" Border-BorderWidth="0px">
+                        <CellStyle ForeColor="#F0F0F0" Border-BorderWidth="0px" HorizontalAlign="Left">
                             <Paddings Padding="12px"></Paddings>
                         </CellStyle>
                     </dx:GridViewDataTextColumn>
                     <dx:GridViewDataCheckColumn FieldName="activo" VisibleIndex="5" Caption="Activo">
                         <HeaderStyle BackColor="#102140" Border-BorderWidth="0px" ForeColor="#F0F0F0" Paddings-Padding="5px"></HeaderStyle>
-                        <CellStyle ForeColor="#F0F0F0" Border-BorderWidth="0px">
+                        <CellStyle ForeColor="#F0F0F0" Border-BorderWidth="0px" HorizontalAlign="Left">
                             <Paddings Padding="12px"></Paddings>
                         </CellStyle>
                     </dx:GridViewDataCheckColumn>
-                    <dx:GridViewDataColumn Width="110px" VisibleIndex="7" Caption="Editar">
+                    <dx:GridViewDataColumn Width="110px" VisibleIndex="6" Caption="Editar">
                         <HeaderStyle BackColor="#102140" Border-BorderWidth="0px" ForeColor="#F0F0F0" Paddings-Padding="5px"></HeaderStyle>
                         <CellStyle ForeColor="#F0F0F0" Border-BorderWidth="0px">
                             <Paddings Padding="12px"></Paddings>
@@ -87,7 +87,7 @@
                             </asp:LinkButton>
                         </DataItemTemplate>
                     </dx:GridViewDataColumn>
-                    <dx:GridViewDataColumn Width="110px" VisibleIndex="8" Caption="Eliminar" >
+                    <dx:GridViewDataColumn Width="110px" VisibleIndex="7" Caption="Eliminar" >
                         <HeaderStyle BackColor="#102140" Border-BorderWidth="0px" ForeColor="#F0F0F0" Paddings-Padding="5px"></HeaderStyle>
                         <CellStyle ForeColor="#F0F0F0" Border-BorderWidth="0px">
                             <Paddings Padding="12px"></Paddings>
@@ -103,13 +103,9 @@
                     <SearchPanel BackColor="#464C53"></SearchPanel>
                 </Styles>
             </dx:ASPxGridView>
-            <asp:SqlDataSource runat="server" ID="DS_Servicio" ConnectionString='<%$ ConnectionStrings:SailingMasterConnectionString %>' SelectCommand="SELECT ID,
-	               descrip,
-	               cast(precio_base as decimal(18, 2)) as precio_bsd,
-	               cast((precio_base / (select tasa from Moneda where ID = 'USD')) as decimal(18, 2)) as precio_usd,
-	               cast((precio_base / (select tasa from Moneda where ID = 'EUR')) as decimal(18, 2)) as precio_eur,
-	               activo
-            FROM Servicio"></asp:SqlDataSource>
+            <asp:SqlDataSource runat="server" ID="DS_Servicio" ConnectionString='<%$ ConnectionStrings:SailingMasterConnectionString %>' SelectCommand="select S.ID, S.descrip, TS.des_tipo, S.co_mone, S.precio_base, S.activo
+from Servicio S
+inner join TipoServicio TS on TS.ID = S.tip_serv"></asp:SqlDataSource>
         </div>
     </asp:Panel>
     <!-- MODAL DELETE -->

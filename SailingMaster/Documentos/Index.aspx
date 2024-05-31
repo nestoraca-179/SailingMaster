@@ -43,7 +43,7 @@
         <hr />
         <div class="form-grid">
             <dx:ASPxGridView ID="GV_Documentos" runat="server" Theme="Material" Width="100%" AutoGenerateColumns="False" DataSourceID="DS_Documento" KeyFieldName="ID" 
-                OnHtmlRowPrepared="GV_Documentos_HtmlRowPrepared" OnRowCommand="GV_Documentos_RowCommand">
+                OnHtmlRowPrepared="GV_Documentos_HtmlRowPrepared" OnHtmlDataCellPrepared="GV_Documentos_HtmlDataCellPrepared" OnRowCommand="GV_Documentos_RowCommand">
                 <SettingsDetail ShowDetailRow="True" AllowOnlyOneMasterRowExpanded="True"></SettingsDetail>
                 <SettingsSearchPanel Visible="True"></SettingsSearchPanel>
                 <Columns>
@@ -68,7 +68,7 @@
                     </dx:GridViewDataTextColumn>
                     <dx:GridViewDataTextColumn FieldName="doc_status" VisibleIndex="3" Caption="Status">
                         <HeaderStyle BackColor="#102140" Border-BorderWidth="0px" ForeColor="#F0F0F0" Paddings-Padding="5px"></HeaderStyle>
-                        <CellStyle ForeColor="#F0F0F0" Border-BorderWidth="0px">
+                        <CellStyle ForeColor="#F0F0F0" Border-BorderWidth="0px" Font-Bold="true">
                             <Paddings Padding="12px"></Paddings>
                         </CellStyle>
                     </dx:GridViewDataTextColumn>

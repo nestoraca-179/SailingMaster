@@ -5,10 +5,12 @@ using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
+using System.Web.UI;
+using System.Web.UI.WebControls;
 
 namespace SailingMaster.Documentos
 {
-    public partial class Agregar : System.Web.UI.Page
+    public partial class DocumentPage : System.Web.UI.Page
     {
         private static List<DocumentoReng> rengs = new List<DocumentoReng>();
 
@@ -36,6 +38,7 @@ namespace SailingMaster.Documentos
                         Documento doc = DocumentoController.GetByID(int.Parse(Request.QueryString["ID"].ToString()));
                         mone = MonedaController.GetByID(doc.co_mone);
 
+                        BlockAllItems(doc.status);
                         if (doc.status < 4)
                         {
                             LBL_TotalRecibido.Text = "0,00";
@@ -559,6 +562,44 @@ namespace SailingMaster.Documentos
             {
                 item.Selected = doc.co_mone.ToString() == item.Value.ToString();
             }
+        }
+
+        private void BlockAllItems(int status)
+        {
+            if (status == 6)
+            {
+                // BOTONES
+                DisableLinkButton(BTN_PreRevisarDocumento);
+                DisableLinkButton(BTN_PreAprobarDocumento);
+                DisableLinkButton(BTN_PreCobrarDocumento);
+                DisableLinkButton(BTN_PreLiquidarDocumento);
+                DisableLinkButton(BTN_PreCerrarDocumento);
+                DisableLinkButton(BTN_PreEliminarDocumento);
+
+                // CAMPOS
+                TB_CuentaBuque.Enabled = false;
+                DE_Fecha.Enabled = false;
+                TB_Cliente.Enabled = false;
+                DDL_Moneda.Enabled = false;
+                TB_Tasa.Enabled = false;
+                DE_FechaLlegada.Enabled = false;
+                DE_FechaSalida.Enabled = false;
+                TB_Puerto.Enabled = false;
+                TB_Buque.Enabled = false;
+                TB_Viaje.Enabled = false;
+                TB_Toneladas.Enabled = false;
+            }
+        }
+
+        private void DisableLinkButton(LinkButton linkButton)
+        {
+            linkButton.Attributes.Add("class", "btn disabled");
+            linkButton.Attributes.Remove("href");
+            linkButton.Attributes.Remove("data-toggle");
+            linkButton.Attributes.Remove("data-target");
+            linkButton.Attributes.CssStyle[HtmlTextWriterStyle.Cursor] = "default";
+            linkButton.Enabled = false;
+            linkButton.OnClientClick = null;
         }
     }
 }

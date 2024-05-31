@@ -11,7 +11,7 @@ namespace SailingMaster.Documentos
 {
 
 
-    public partial class Agregar
+    public partial class DocumentPage
     {
 
         /// <summary>
@@ -114,15 +114,6 @@ namespace SailingMaster.Documentos
         protected global::DevExpress.Web.ASPxLabel LBL_Status;
 
         /// <summary>
-        /// Control BTN_PreAprobarDocumento.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton BTN_PreAprobarDocumento;
-
-        /// <summary>
         /// Control BTN_PreRevisarDocumento.
         /// </summary>
         /// <remarks>
@@ -130,6 +121,15 @@ namespace SailingMaster.Documentos
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.LinkButton BTN_PreRevisarDocumento;
+
+        /// <summary>
+        /// Control BTN_PreAprobarDocumento.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.LinkButton BTN_PreAprobarDocumento;
 
         /// <summary>
         /// Control BTN_PreCobrarDocumento.

@@ -18,6 +18,7 @@ namespace SailingMaster.Models
         public Moneda()
         {
             this.Documento = new HashSet<Documento>();
+            this.Servicio = new HashSet<Servicio>();
         }
     
         public string ID { get; set; }
@@ -32,5 +33,7 @@ namespace SailingMaster.Models
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Documento> Documento { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Servicio> Servicio { get; set; }
     }
 }

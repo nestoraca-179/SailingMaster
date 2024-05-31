@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Drawing;
 using SailingMaster.Models;
 
 namespace SailingMaster.Documentos
@@ -62,7 +63,7 @@ namespace SailingMaster.Documentos
 
         protected void BTN_AgregarDocumento_Click(object sender, EventArgs e)
         {
-            Response.Redirect("/Documentos/Agregar.aspx");
+            Response.Redirect("/Documentos/DocumentPage.aspx");
         }
 
         protected void GV_Documentos_RowCommand(object sender, DevExpress.Web.ASPxGridViewRowCommandEventArgs e)
@@ -70,7 +71,7 @@ namespace SailingMaster.Documentos
             IDSelected = e.KeyValue.ToString();
             if (e.CommandArgs.CommandName == "Revisar")
             {
-                Response.Redirect("/Documentos/Agregar.aspx?ID=" + IDSelected);
+                Response.Redirect("/Documentos/DocumentPage.aspx?ID=" + IDSelected);
             }
         }
 
@@ -79,12 +80,39 @@ namespace SailingMaster.Documentos
             if (e.RowType == DevExpress.Web.GridViewRowType.Data)
             {
                 if (e.VisibleIndex % 2 == 0)
-                {
-                    e.Row.BackColor = System.Drawing.ColorTranslator.FromHtml("#26272a");
-                }
+                    e.Row.BackColor = ColorTranslator.FromHtml("#26272a");
                 else
+                    e.Row.BackColor = ColorTranslator.FromHtml("#333438");
+            }
+        }
+
+        protected void GV_Documentos_HtmlDataCellPrepared(object sender, DevExpress.Web.ASPxGridViewTableDataCellEventArgs e)
+        {
+            if (e.DataColumn.FieldName == "doc_status")
+            {
+                switch (e.CellValue.ToString())
                 {
-                    e.Row.BackColor = System.Drawing.ColorTranslator.FromHtml("#333438");
+                    case "GENERADO":
+                        e.Cell.BackColor = ColorTranslator.FromHtml("#18191d");
+                        break;
+                    case "APROBADO":
+                        e.Cell.BackColor = ColorTranslator.FromHtml("#034426");
+                        break;
+                    case "REVISADO":
+                        e.Cell.BackColor = ColorTranslator.FromHtml("#664f08");
+                        break;
+                    case "CORREGIDO":
+                        e.Cell.BackColor = ColorTranslator.FromHtml("#424851");
+                        break;
+                    case "COBRADO":
+                        e.Cell.BackColor = ColorTranslator.FromHtml("#062655");
+                        break;
+                    case "LIQUIDADO":
+                        e.Cell.BackColor = ColorTranslator.FromHtml("#733f08");
+                        break;
+                    case "CERRADO":
+                        e.Cell.BackColor = ColorTranslator.FromHtml("#60040d");
+                        break;
                 }
             }
         }
