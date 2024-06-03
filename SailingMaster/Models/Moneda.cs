@@ -17,7 +17,6 @@ namespace SailingMaster.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Moneda()
         {
-            this.Documento = new HashSet<Documento>();
             this.Servicio = new HashSet<Servicio>();
         }
     
@@ -31,8 +30,6 @@ namespace SailingMaster.Models
         public string co_us_mo { get; set; }
         public System.DateTime fe_us_mo { get; set; }
     
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Documento> Documento { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Servicio> Servicio { get; set; }
     }

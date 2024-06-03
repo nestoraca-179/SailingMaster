@@ -24,7 +24,7 @@ namespace SailingMaster.Models
         public string co_us_mo { get; set; }
         public System.DateTime fe_us_mo { get; set; }
     
-        public virtual Documento Documento { get; set; }
         public virtual Servicio Servicio { get; set; }
+        public virtual Documento Documento { get; set; }
     }
 }

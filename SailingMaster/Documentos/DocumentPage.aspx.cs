@@ -28,90 +28,90 @@ namespace SailingMaster.Documentos
                 }
                 else
                 {
-                    string moneda = DDL_Moneda.Value?.ToString();
-                    if (string.IsNullOrEmpty(moneda))
-                        moneda = "BSD";
+                    //string moneda = DDL_Moneda.Value?.ToString();
+                    //if (string.IsNullOrEmpty(moneda))
+                    //    moneda = "BSD";
 
-                    Moneda mone;
-                    if (Request.QueryString["ID"] != null) // EDITANDO
-                    {
-                        Documento doc = DocumentoController.GetByID(int.Parse(Request.QueryString["ID"].ToString()));
-                        mone = MonedaController.GetByID(doc.co_mone);
+                    //Moneda mone;
+                    //if (Request.QueryString["ID"] != null) // EDITANDO
+                    //{
+                    //    Documento doc = DocumentoController.GetByID(int.Parse(Request.QueryString["ID"].ToString()));
+                    //    mone = MonedaController.GetByID(doc.co_mone);
 
-                        BlockAllItems(doc.status);
-                        if (doc.status < 4)
-                        {
-                            LBL_TotalRecibido.Text = "0,00";
-                            LBL_TotalCancelado.Text = "0,00";
-                            LBL_Balance.Text = "0,00";
-                        }
-                        else
-                        {
-                            NumberFormatInfo formato = new NumberFormatInfo();
-                            formato.NumberDecimalSeparator = ",";
-                            formato.NumberGroupSeparator = ".";
+                    //    BlockAllItems(doc.status);
+                    //    if (doc.status < 4)
+                    //    {
+                    //        LBL_TotalRecibido.Text = "0,00";
+                    //        LBL_TotalCancelado.Text = "0,00";
+                    //        LBL_Balance.Text = "0,00";
+                    //    }
+                    //    else
+                    //    {
+                    //        NumberFormatInfo formato = new NumberFormatInfo();
+                    //        formato.NumberDecimalSeparator = ",";
+                    //        formato.NumberGroupSeparator = ".";
 
-                            LBL_TotalRecibido.Text = doc.collected_amount.Value.ToString("N2", formato);
-                            LBL_TotalCancelado.Text = "0,00";
-                            LBL_Balance.Text = doc.collected_amount.Value.ToString("N2", formato);
-                        }
+                    //        LBL_TotalRecibido.Text = doc.collected_amount.Value.ToString("N2", formato);
+                    //        LBL_TotalCancelado.Text = "0,00";
+                    //        LBL_Balance.Text = doc.collected_amount.Value.ToString("N2", formato);
+                    //    }
 
-                        string status;
-                        switch (doc.status)
-                        {
-                            case 0:
-                                status = "GENERADO";
-                                break;
-                            case 1:
-                                status = "APROBADO";
-                                break;
-                            case 2:
-                                status = "REVISADO";
-                                break;
-                            case 3:
-                                status = "CORREGIDO";
-                                break;
-                            case 4:
-                                status = "COBRADO";
-                                break;
-                            case 5:
-                                status = "LIQUIDADO";
-                                break;
-                            case 6:
-                                status = "CERRADO";
-                                break;
-                            default:
-                                status = "";
-                                break;
-                        }
+                    //    string status;
+                    //    switch (doc.status)
+                    //    {
+                    //        case 0:
+                    //            status = "GENERADO";
+                    //            break;
+                    //        case 1:
+                    //            status = "APROBADO";
+                    //            break;
+                    //        case 2:
+                    //            status = "REVISADO";
+                    //            break;
+                    //        case 3:
+                    //            status = "CORREGIDO";
+                    //            break;
+                    //        case 4:
+                    //            status = "COBRADO";
+                    //            break;
+                    //        case 5:
+                    //            status = "LIQUIDADO";
+                    //            break;
+                    //        case 6:
+                    //            status = "CERRADO";
+                    //            break;
+                    //        default:
+                    //            status = "";
+                    //            break;
+                    //    }
 
-                        Page.Title = "Documento #" + doc.ID;
-                        LBL_IDDocumento.Text = "Documento #" + doc.ID;
-                        BTN_Agregar.Visible = false;
-                        BTN_Guardar.Visible = true;
-                        PN_ButtonsActions.Visible = true;
-                        LBL_Status.Text = status;
+                    //    Page.Title = "Documento #" + doc.ID;
+                    //    LBL_IDDocumento.Text = "Documento #" + doc.ID;
+                    //    BTN_Agregar.Visible = false;
+                    //    BTN_Guardar.Visible = true;
+                    //    PN_ButtonsActions.Visible = true;
+                    //    LBL_Status.Text = status;
 
-                        if (!IsPostBack)
-                            CargarDocumento(doc);
-                    }
-                    else // AGREGANDO
-                    {
-                        mone = MonedaController.GetByID(moneda);
-                        LBL_TotalRecibido.Text = "0,00";
-                        LBL_TotalCancelado.Text = "0,00";
-                        LBL_Balance.Text = "0,00";
+                    //    if (!IsPostBack)
+                    //        CargarDocumento(doc);
+                    //}
+                    //else // AGREGANDO
+                    //{
+                    //    mone = MonedaController.GetByID(moneda);
+                    //    LBL_TotalRecibido.Text = "0,00";
+                    //    LBL_TotalCancelado.Text = "0,00";
+                    //    LBL_Balance.Text = "0,00";
 
-                        if (!IsPostBack)
-                            rengs = new List<DocumentoReng>();
-                    }
+                    //    if (!IsPostBack)
+                    //        rengs = new List<DocumentoReng>();
+                    //}
 
-                    LBL_SignoTD.Text = mone.signo;
-                    LBL_SignoTR.Text = mone.signo;
-                    LBL_SignoTC.Text = mone.signo;
-                    LBL_SignoBC.Text = mone.signo;
+                    //LBL_SignoTD.Text = mone.signo;
+                    //LBL_SignoTR.Text = mone.signo;
+                    //LBL_SignoTC.Text = mone.signo;
+                    //LBL_SignoBC.Text = mone.signo;
 
-                    BindGrid(rengs);
+                    //BindGrid(rengs);
                 }
             }
             else
@@ -129,53 +129,53 @@ namespace SailingMaster.Documentos
 
             try
             {
-                Moneda mon = MonedaController.GetByID(DDL_Moneda.Value.ToString());
+                //Moneda mon = MonedaController.GetByID(DDL_Moneda.Value.ToString());
 
-                doc.cuenta_buq = TB_CuentaBuque.Text;
-                doc.fecha = DateTime.Parse(DE_Fecha.Value.ToString());
-                doc.cliente = TB_Cliente.Text;
-                doc.co_mone = DDL_Moneda.Value.ToString();
-                doc.tasa = decimal.Parse(TB_Tasa.Text.Replace(".", ","));
-                doc.fec_llegada = DateTime.Parse(DE_FechaLlegada.Value.ToString());
-                doc.fec_salida = DateTime.Parse(DE_FechaSalida.Value.ToString());
-                doc.puerto = TB_Puerto.Text;
-                doc.buque = TB_Buque.Text;
-                doc.nro_viaje = TB_Viaje.Text;
-                doc.num_toneladas = int.Parse(TB_Toneladas.Text);
-                doc.co_us_in = (Session["USER"] as Usuario).username;
-                doc.fe_us_in = DateTime.Now;
-                doc.co_us_mo = (Session["USER"] as Usuario).username;
-                doc.fe_us_mo = DateTime.Now;
-                doc.total = rengs.Select(r => r.price_serv.Value).Sum();
-                doc.DocumentoReng = rengs;
+                //doc.cuenta_buq = TB_CuentaBuque.Text;
+                //doc.fecha = DateTime.Parse(DE_Fecha.Value.ToString());
+                //doc.cliente = TB_Cliente.Text;
+                //doc.co_mone = DDL_Moneda.Value.ToString();
+                //doc.tasa = decimal.Parse(TB_Tasa.Text.Replace(".", ","));
+                //doc.fec_llegada = DateTime.Parse(DE_FechaLlegada.Value.ToString());
+                //doc.fec_salida = DateTime.Parse(DE_FechaSalida.Value.ToString());
+                //doc.puerto = TB_Puerto.Text;
+                //doc.buque = TB_Buque.Text;
+                //doc.nro_viaje = TB_Viaje.Text;
+                //doc.num_toneladas = int.Parse(TB_Toneladas.Text);
+                //doc.co_us_in = (Session["USER"] as Usuario).username;
+                //doc.fe_us_in = DateTime.Now;
+                //doc.co_us_mo = (Session["USER"] as Usuario).username;
+                //doc.fe_us_mo = DateTime.Now;
+                //doc.total = rengs.Select(r => r.price_serv.Value).Sum();
+                //doc.DocumentoReng = rengs;
 
-                if (rengs.Count == 0)
-                {
-                    PN_Error.Visible = true;
-                    LBL_Error.Text = "Debes agregar items al documento";
-                }
-                else
-                {
-                    foreach (DocumentoReng r in doc.DocumentoReng)
-                    {
-                        r.co_doc = doc.ID;
-                        r.co_us_in = (Session["USER"] as Usuario).username;
-                        r.fe_us_in = DateTime.Now;
-                        r.co_us_mo = (Session["USER"] as Usuario).username;
-                        r.fe_us_mo = DateTime.Now;
-                    }
+                //if (rengs.Count == 0)
+                //{
+                //    PN_Error.Visible = true;
+                //    LBL_Error.Text = "Debes agregar items al documento";
+                //}
+                //else
+                //{
+                //    foreach (DocumentoReng r in doc.DocumentoReng)
+                //    {
+                //        r.co_doc = doc.ID;
+                //        r.co_us_in = (Session["USER"] as Usuario).username;
+                //        r.fe_us_in = DateTime.Now;
+                //        r.co_us_mo = (Session["USER"] as Usuario).username;
+                //        r.fe_us_mo = DateTime.Now;
+                //    }
 
-                    int result = DocumentoController.Add(doc);
-                    if (result == 1)
-                    {
-                        Response.Redirect("/Documentos/Index.aspx?new_doc=0");
-                    }
-                    else
-                    {
-                        PN_Error.Visible = true;
-                        LBL_Error.Text = "Ha ocurrido un error al agregar el Documento. Ver tabla de Incidentes";
-                    }
-                }
+                //    int result = DocumentoController.Add(doc);
+                //    if (result == 1)
+                //    {
+                //        Response.Redirect("/Documentos/Index.aspx?new_doc=0");
+                //    }
+                //    else
+                //    {
+                //        PN_Error.Visible = true;
+                //        LBL_Error.Text = "Ha ocurrido un error al agregar el Documento. Ver tabla de Incidentes";
+                //    }
+                //}
             }
             catch (Exception ex)
             {
@@ -245,51 +245,51 @@ namespace SailingMaster.Documentos
 
             try
             {
-                Moneda mon = MonedaController.GetByID(DDL_Moneda.Value.ToString());
+                //Moneda mon = MonedaController.GetByID(DDL_Moneda.Value.ToString());
 
-                doc.cuenta_buq = TB_CuentaBuque.Text;
-                doc.fecha = DateTime.Parse(DE_Fecha.Value.ToString());
-                doc.cliente = TB_Cliente.Text;
-                doc.co_mone = DDL_Moneda.Value.ToString();
-                doc.tasa = decimal.Parse(TB_Tasa.Text.Replace(".", ","));
-                doc.fec_llegada = DateTime.Parse(DE_FechaLlegada.Value.ToString());
-                doc.fec_salida = DateTime.Parse(DE_FechaSalida.Value.ToString());
-                doc.puerto = TB_Puerto.Text;
-                doc.buque = TB_Buque.Text;
-                doc.nro_viaje = TB_Viaje.Text;
-                doc.num_toneladas = int.Parse(TB_Toneladas.Text);
-                doc.status = doc.status == 2 ? 3 : 0; // CORREGIDO - GENERADO
-                doc.corrected_by = user.username;
-                doc.corrected_date = DateTime.Now;
-                doc.co_us_mo = (Session["USER"] as Usuario).username;
-                doc.fe_us_mo = DateTime.Now;
-                doc.total = rengs.Select(r => r.price_serv.Value).Sum();
-                doc.DocumentoReng = rengs;
+                //doc.cuenta_buq = TB_CuentaBuque.Text;
+                //doc.fecha = DateTime.Parse(DE_Fecha.Value.ToString());
+                //doc.cliente = TB_Cliente.Text;
+                //doc.co_mone = DDL_Moneda.Value.ToString();
+                //doc.tasa = decimal.Parse(TB_Tasa.Text.Replace(".", ","));
+                //doc.fec_llegada = DateTime.Parse(DE_FechaLlegada.Value.ToString());
+                //doc.fec_salida = DateTime.Parse(DE_FechaSalida.Value.ToString());
+                //doc.puerto = TB_Puerto.Text;
+                //doc.buque = TB_Buque.Text;
+                //doc.nro_viaje = TB_Viaje.Text;
+                //doc.num_toneladas = int.Parse(TB_Toneladas.Text);
+                //doc.status = doc.status == 2 ? 3 : 0; // CORREGIDO - GENERADO
+                //doc.corrected_by = user.username;
+                //doc.corrected_date = DateTime.Now;
+                //doc.co_us_mo = (Session["USER"] as Usuario).username;
+                //doc.fe_us_mo = DateTime.Now;
+                //doc.total = rengs.Select(r => r.price_serv.Value).Sum();
+                //doc.DocumentoReng = rengs;
 
-                if (rengs.Count == 0)
-                {
-                    PN_Error.Visible = true;
-                    LBL_Error.Text = "Debes agregar items al documento";
-                }
-                else
-                {
-                    foreach (DocumentoReng r in doc.DocumentoReng)
-                    {
-                        r.co_us_mo = (Session["USER"] as Usuario).username;
-                        r.fe_us_mo = DateTime.Now;
-                    }
+                //if (rengs.Count == 0)
+                //{
+                //    PN_Error.Visible = true;
+                //    LBL_Error.Text = "Debes agregar items al documento";
+                //}
+                //else
+                //{
+                //    foreach (DocumentoReng r in doc.DocumentoReng)
+                //    {
+                //        r.co_us_mo = (Session["USER"] as Usuario).username;
+                //        r.fe_us_mo = DateTime.Now;
+                //    }
 
-                    int result = DocumentoController.Edit(doc);
-                    if (result == 1)
-                    {
-                        Response.Redirect("/Documentos/Index.aspx?new_doc=3");
-                    }
-                    else
-                    {
-                        PN_Error.Visible = true;
-                        LBL_Error.Text = "Ha ocurrido un error al modificar el Documento. Ver tabla de Incidentes";
-                    }
-                }
+                //    int result = DocumentoController.Edit(doc);
+                //    if (result == 1)
+                //    {
+                //        Response.Redirect("/Documentos/Index.aspx?new_doc=3");
+                //    }
+                //    else
+                //    {
+                //        PN_Error.Visible = true;
+                //        LBL_Error.Text = "Ha ocurrido un error al modificar el Documento. Ver tabla de Incidentes";
+                //    }
+                //}
             }
             catch (Exception ex)
             {
@@ -403,39 +403,39 @@ namespace SailingMaster.Documentos
 
         protected void DDL_Moneda_SelectedIndexChanged(object sender, EventArgs e)
         {
-            string moneda = DDL_Moneda.Value?.ToString();
-            if (string.IsNullOrEmpty(moneda))
-                moneda = "BSD";
+            //string moneda = DDL_Moneda.Value?.ToString();
+            //if (string.IsNullOrEmpty(moneda))
+            //    moneda = "BSD";
 
-            Servicio serv;
-            Moneda mone = MonedaController.GetByID(moneda);
-            TB_Tasa.Text = mone.tasa.ToString();
+            //Servicio serv;
+            //Moneda mone = MonedaController.GetByID(moneda);
+            //TB_Tasa.Text = mone.tasa.ToString();
 
-            foreach (DocumentoReng r in rengs)
-            {
-                serv = ServicioController.GetByID(r.co_serv);
-                r.price_serv = Math.Round(serv.precio_base / mone.tasa, 2);
-            }
+            //foreach (DocumentoReng r in rengs)
+            //{
+            //    serv = ServicioController.GetByID(r.co_serv);
+            //    r.price_serv = Math.Round(serv.precio_base / mone.tasa, 2);
+            //}
 
-            BindGrid(rengs);
+            //BindGrid(rengs);
         }
 
         protected void TB_Tasa_TextChanged(object sender, EventArgs e)
         {
-            decimal tasa;
-            if (!string.IsNullOrEmpty(TB_Tasa.Text))
-                tasa = decimal.Parse(TB_Tasa.Text.Replace(".", ","));
-            else
-                tasa = 1;
+            //decimal tasa;
+            //if (!string.IsNullOrEmpty(TB_Tasa.Text))
+            //    tasa = decimal.Parse(TB_Tasa.Text.Replace(".", ","));
+            //else
+            //    tasa = 1;
 
-            Servicio serv;
-            foreach (DocumentoReng r in rengs)
-            {
-                serv = ServicioController.GetByID(r.co_serv);
-                r.price_serv = Math.Round(serv.precio_base / tasa, 2);
-            }
+            //Servicio serv;
+            //foreach (DocumentoReng r in rengs)
+            //{
+            //    serv = ServicioController.GetByID(r.co_serv);
+            //    r.price_serv = Math.Round(serv.precio_base / tasa, 2);
+            //}
 
-            BindGrid(rengs);
+            //BindGrid(rengs);
         }
 
         protected void GV_DocumentoReng_HtmlRowPrepared(object sender, ASPxGridViewTableRowEventArgs e)
@@ -453,63 +453,72 @@ namespace SailingMaster.Documentos
             }
         }
 
+        protected void GV_DocumentoReng_HtmlDataCellPrepared(object sender, ASPxGridViewTableDataCellEventArgs e)
+        {
+            if (e.DataColumn.Caption == "Subir Soporte")
+            {
+                ASPxButton button = GV_DocumentoReng.FindRowCellTemplateControl(e.VisibleIndex, e.DataColumn, "BTN_AgregarSoporte") as ASPxButton;
+                DisableButton(button);
+            }
+        }
+
         protected void GV_DocumentoReng_RowInserting(object sender, DevExpress.Web.Data.ASPxDataInsertingEventArgs e)
         {
-            string moneda = DDL_Moneda.Value?.ToString();
-            if (string.IsNullOrEmpty(moneda))
-                moneda = "BSD";
+            //string moneda = DDL_Moneda.Value?.ToString();
+            //if (string.IsNullOrEmpty(moneda))
+            //    moneda = "BSD";
 
-            Servicio serv = ServicioController.GetByID(e.NewValues["co_serv"] as string);
-            Moneda mone = MonedaController.GetByID(moneda);
+            //Servicio serv = ServicioController.GetByID(e.NewValues["co_serv"] as string);
+            //Moneda mone = MonedaController.GetByID(moneda);
 
-            decimal tasa;
-            if (!string.IsNullOrEmpty(TB_Tasa.Text))
-                tasa = decimal.Parse(TB_Tasa.Text.Replace(".", ","));
-            else
-                tasa = mone.tasa;
+            //decimal tasa;
+            //if (!string.IsNullOrEmpty(TB_Tasa.Text))
+            //    tasa = decimal.Parse(TB_Tasa.Text.Replace(".", ","));
+            //else
+            //    tasa = mone.tasa;
 
-            var newRow = new DocumentoReng
-            {
-                reng_num = rengs.Count + 1,
-                co_serv = e.NewValues["co_serv"] as string,
-                des_serv = serv.descrip,
-                price_serv = Math.Round(serv.precio_base / tasa, 2)
-            };
-            rengs.Add(newRow);
+            //var newRow = new DocumentoReng
+            //{
+            //    reng_num = rengs.Count + 1,
+            //    co_serv = e.NewValues["co_serv"] as string,
+            //    des_serv = serv.descrip,
+            //    price_serv = Math.Round(serv.precio_base / tasa, 2)
+            //};
+            //rengs.Add(newRow);
 
-            BindGrid(rengs);
-            e.Cancel = true;
-            GV_DocumentoReng.CancelEdit();
+            //BindGrid(rengs);
+            //e.Cancel = true;
+            //GV_DocumentoReng.CancelEdit();
         }
 
         protected void GV_DocumentoReng_RowUpdating(object sender, DevExpress.Web.Data.ASPxDataUpdatingEventArgs e)
         {
-            int reng_num = Convert.ToInt32(e.Keys["reng_num"]);
-            var row = rengs.Find(r => r.reng_num == reng_num);
+            //int reng_num = Convert.ToInt32(e.Keys["reng_num"]);
+            //var row = rengs.Find(r => r.reng_num == reng_num);
 
-            string moneda = DDL_Moneda.Value?.ToString();
-            if (string.IsNullOrEmpty(moneda))
-                moneda = "BSD";
+            //string moneda = DDL_Moneda.Value?.ToString();
+            //if (string.IsNullOrEmpty(moneda))
+            //    moneda = "BSD";
 
-            Servicio serv = ServicioController.GetByID(row.co_serv);
-            Moneda mone = MonedaController.GetByID(moneda);
+            //Servicio serv = ServicioController.GetByID(row.co_serv);
+            //Moneda mone = MonedaController.GetByID(moneda);
 
-            decimal tasa;
-            if (!string.IsNullOrEmpty(TB_Tasa.Text))
-                tasa = decimal.Parse(TB_Tasa.Text.Replace(".", ","));
-            else
-                tasa = mone.tasa;
+            //decimal tasa;
+            //if (!string.IsNullOrEmpty(TB_Tasa.Text))
+            //    tasa = decimal.Parse(TB_Tasa.Text.Replace(".", ","));
+            //else
+            //    tasa = mone.tasa;
 
-            if (row != null)
-            {
-                row.co_serv = e.NewValues["co_serv"] as string;
-                row.des_serv = ServicioController.GetByID(e.NewValues["co_serv"] as string).descrip;
-                row.price_serv = Math.Round(serv.precio_base / tasa, 2);
-            }
+            //if (row != null)
+            //{
+            //    row.co_serv = e.NewValues["co_serv"] as string;
+            //    row.des_serv = ServicioController.GetByID(e.NewValues["co_serv"] as string).descrip;
+            //    row.price_serv = Math.Round(serv.precio_base / tasa, 2);
+            //}
 
-            e.Cancel = true;
-            BindGrid(rengs);
-            GV_DocumentoReng.CancelEdit();
+            //e.Cancel = true;
+            //BindGrid(rengs);
+            //GV_DocumentoReng.CancelEdit();
         }
 
         protected void GV_DocumentoReng_RowDeleting(object sender, DevExpress.Web.Data.ASPxDataDeletingEventArgs e)
@@ -544,44 +553,49 @@ namespace SailingMaster.Documentos
         
         private void CargarDocumento(Documento doc)
         {
-            TB_CuentaBuque.Text = doc.cuenta_buq;
-            DE_Fecha.Value = doc.fecha;
-            TB_Cliente.Text = doc.cliente;
-            DDL_Moneda.Value = doc.co_mone;
-            TB_Tasa.Text = doc.tasa.ToString();
-            DE_FechaLlegada.Value = doc.fec_llegada;
-            DE_FechaSalida.Value = doc.fec_salida;
-            TB_Puerto.Text = doc.puerto;
-            TB_Buque.Text = doc.buque;
-            TB_Viaje.Text = doc.nro_viaje;
-            TB_Toneladas.Text = doc.num_toneladas.ToString();
-            doc.total = doc.DocumentoReng.Select(r => r.price_serv.Value).Sum();
-            rengs = doc.DocumentoReng.ToList();
+            //TB_CuentaBuque.Text = doc.cuenta_buq;
+            //DE_Fecha.Value = doc.fecha;
+            //TB_Cliente.Text = doc.cliente;
+            //DDL_Moneda.Value = doc.co_mone;
+            //TB_Tasa.Text = doc.tasa.ToString();
+            //DE_FechaLlegada.Value = doc.fec_llegada;
+            //DE_FechaSalida.Value = doc.fec_salida;
+            //TB_Puerto.Text = doc.puerto;
+            //TB_Buque.Text = doc.buque;
+            //TB_Viaje.Text = doc.nro_viaje;
+            //TB_Toneladas.Text = doc.num_toneladas.ToString();
+            //doc.total = doc.DocumentoReng.Select(r => r.price_serv.Value).Sum();
+            //rengs = doc.DocumentoReng.ToList();
 
-            foreach (ListEditItem item in DDL_Moneda.Items)
-            {
-                item.Selected = doc.co_mone.ToString() == item.Value.ToString();
-            }
+            //foreach (ListEditItem item in DDL_Moneda.Items)
+            //{
+            //    item.Selected = doc.co_mone.ToString() == item.Value.ToString();
+            //}
         }
 
         private void BlockAllItems(int status)
         {
             if (status == 6)
             {
+                // COLUMNA
+                GV_DocumentoReng.SettingsEditing.Mode = GridViewEditingMode.EditForm;
+                GV_DocumentoReng.Columns[0].Visible = false;
+
                 // BOTONES
-                DisableLinkButton(BTN_PreRevisarDocumento);
-                DisableLinkButton(BTN_PreAprobarDocumento);
-                DisableLinkButton(BTN_PreCobrarDocumento);
-                DisableLinkButton(BTN_PreLiquidarDocumento);
-                DisableLinkButton(BTN_PreCerrarDocumento);
-                DisableLinkButton(BTN_PreEliminarDocumento);
+                DisableButton(BTN_Guardar);
+                DisableButton(BTN_PreRevisarDocumento);
+                DisableButton(BTN_PreAprobarDocumento);
+                DisableButton(BTN_PreCobrarDocumento);
+                DisableButton(BTN_PreLiquidarDocumento);
+                DisableButton(BTN_PreCerrarDocumento);
+                DisableButton(BTN_PreEliminarDocumento);
 
                 // CAMPOS
                 TB_CuentaBuque.Enabled = false;
                 DE_Fecha.Enabled = false;
                 TB_Cliente.Enabled = false;
-                DDL_Moneda.Enabled = false;
-                TB_Tasa.Enabled = false;
+                //DDL_Moneda.Enabled = false;
+                //TB_Tasa.Enabled = false;
                 DE_FechaLlegada.Enabled = false;
                 DE_FechaSalida.Enabled = false;
                 TB_Puerto.Enabled = false;
@@ -591,15 +605,15 @@ namespace SailingMaster.Documentos
             }
         }
 
-        private void DisableLinkButton(LinkButton linkButton)
+        private void DisableButton(WebControl control)
         {
-            linkButton.Attributes.Add("class", "btn disabled");
-            linkButton.Attributes.Remove("href");
-            linkButton.Attributes.Remove("data-toggle");
-            linkButton.Attributes.Remove("data-target");
-            linkButton.Attributes.CssStyle[HtmlTextWriterStyle.Cursor] = "default";
-            linkButton.Enabled = false;
-            linkButton.OnClientClick = null;
+            control.Attributes.Add("class", "btn disabled");
+            control.Attributes.Add("style", "opacity: 0.5");
+            control.Attributes.Remove("href");
+            control.Attributes.Remove("data-toggle");
+            control.Attributes.Remove("data-target");
+            control.Attributes.CssStyle[HtmlTextWriterStyle.Cursor] = "default";
+            control.Enabled = false;
         }
     }
 }

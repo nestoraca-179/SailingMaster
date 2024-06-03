@@ -5,19 +5,18 @@
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
       <Diagram DiagramId="1245a5c06f2c4ca4815db03565b1b2f8" Name="Diagram1">
-        <EntityTypeShape EntityType="SailingMasterModel.Documento" Width="1.5" PointX="2.5" PointY="0.5" />
         <EntityTypeShape EntityType="SailingMasterModel.DocumentoReng" Width="1.5" PointX="4.375" PointY="0.5" />
         <EntityTypeShape EntityType="SailingMasterModel.Incidente" Width="1.5" PointX="10" PointY="0.5" />
         <EntityTypeShape EntityType="SailingMasterModel.Log" Width="1.5" PointX="10" PointY="2.5" />
         <EntityTypeShape EntityType="SailingMasterModel.Moneda" Width="1.5" PointX="0.5" PointY="0.5" />
         <EntityTypeShape EntityType="SailingMasterModel.Servicio" Width="1.5" PointX="6.25" PointY="0.5" />
         <EntityTypeShape EntityType="SailingMasterModel.Usuario" Width="1.5" PointX="8.125" PointY="0.5" />
-        <AssociationConnector Association="SailingMasterModel.FK__Proforma__co_mon__5CD6CB2B" />
-        <AssociationConnector Association="SailingMasterModel.FK__ProformaR__co_pr__0F624AF8" />
         <AssociationConnector Association="SailingMasterModel.FK__ProformaR__co_se__10566F31" />
         <EntityTypeShape EntityType="SailingMasterModel.TipoServicio" Width="1.5" PointX="5.375" PointY="6" />
         <AssociationConnector Association="SailingMasterModel.FK__Servicio__co_mon__04AFB25B" />
         <AssociationConnector Association="SailingMasterModel.FK__Servicio__tip_se__793DFFAF" />
+        <EntityTypeShape EntityType="SailingMasterModel.Documento" Width="1.5" PointX="2.5" PointY="0.5" />
+        <AssociationConnector Association="SailingMasterModel.FK__ProformaR__co_pr__0F624AF8" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

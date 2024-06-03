@@ -44,6 +44,11 @@ form .row:not(.my-5) {
     outline: 0;
     box-shadow: 0 0 0 0.25rem rgba(253, 145, 49, .5);
 }
+.btn.btn-success.dxbDisabled_MetropolisBlue, .btn.btn-primary.dxbDisabled_MetropolisBlue {
+    color: var(--bs-btn-hover-color);
+    background-color: var(--bs-btn-hover-bg);
+    border: 0;
+}
 </style>
 <script>
     function endCallback(s, e) {
@@ -156,25 +161,117 @@ form .row:not(.my-5) {
                 <div class="row">
                     <div class="col-md-6">
                         <div class="controls">
-                            <label>Moneda</label>
-                            <dx:ASPxComboBox ID="DDL_Moneda" runat="server" Theme="Material" Width="100%" BackColor="#303030" Border-BorderColor="#303030" 
-                                ValueField="ID" TextField="descrip" DataSourceID="DS_Moneda" AutoPostBack="true" OnSelectedIndexChanged="DDL_Moneda_SelectedIndexChanged">
-                                <Columns>
-                                    <dx:ListBoxColumn FieldName="ID" Width="70px" Caption="C&#243;digo"></dx:ListBoxColumn>
-                                    <dx:ListBoxColumn FieldName="descrip" Width="160px" Caption="Descripci&#243;n"></dx:ListBoxColumn>
-                                </Columns>
+                            <label>Buque</label>
+                            <dx:ASPxTextBox ID="TB_Buque" runat="server" Theme="Material" Width="100%" BackColor="#303030" ForeColor="#F0F0F0" Border-BorderColor="#303030" AutoCompleteType="None">
                                 <ValidationSettings Display="Dynamic" ValidationGroup="Documento" ErrorText="" ValidateOnLeave="false" ErrorTextPosition="Bottom">
                                     <RequiredField IsRequired="True" ErrorText="Campo Obligatorio" />
                                 </ValidationSettings>
-                            </dx:ASPxComboBox>
-                            <asp:SqlDataSource runat="server" ID="DS_Moneda" ConnectionString='<%$ ConnectionStrings:SailingMasterConnectionString %>' SelectCommand="SELECT [ID], [descrip] FROM [Moneda]"></asp:SqlDataSource>
+                            </dx:ASPxTextBox>
                         </div>
                     </div>
                     <div class="col-md-6">
                         <div class="controls">
-                            <label>Tasa de Cambio</label>
-                            <dx:ASPxTextBox ID="TB_Tasa" runat="server" Theme="Material" Width="100%" BackColor="#303030" ForeColor="#F0F0F0" Border-BorderColor="#303030" 
-                                AutoCompleteType="None" ValueType="System.Decimal" AutoPostBack="true" OnTextChanged="TB_Tasa_TextChanged">
+                            <label>Flag</label>
+                            <dx:ASPxTextBox ID="TB_Flag" runat="server" Theme="Material" Width="100%" BackColor="#303030" ForeColor="#F0F0F0" Border-BorderColor="#303030" AutoCompleteType="None">
+                                <ValidationSettings Display="Dynamic" ValidationGroup="Documento" ErrorText="" ValidateOnLeave="false" ErrorTextPosition="Bottom">
+                                    <RequiredField IsRequired="True" ErrorText="Campo Obligatorio" />
+                                </ValidationSettings>
+                            </dx:ASPxTextBox>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="controls">
+                            <label>Puerto</label>
+                            <dx:ASPxTextBox ID="TB_Puerto" runat="server" Theme="Material" Width="100%" BackColor="#303030" ForeColor="#F0F0F0" Border-BorderColor="#303030" AutoCompleteType="None">
+                                <ValidationSettings Display="Dynamic" ValidationGroup="Documento" ErrorText="" ValidateOnLeave="false" ErrorTextPosition="Bottom">
+                                    <RequiredField IsRequired="True" ErrorText="Campo Obligatorio" />
+                                </ValidationSettings>
+                            </dx:ASPxTextBox>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="controls">
+                            <label>Muelle</label>
+                            <dx:ASPxTextBox ID="TB_Muelle" runat="server" Theme="Material" Width="100%" BackColor="#303030" ForeColor="#F0F0F0" Border-BorderColor="#303030" AutoCompleteType="None">
+                                <ValidationSettings Display="Dynamic" ValidationGroup="Documento" ErrorText="" ValidateOnLeave="false" ErrorTextPosition="Bottom">
+                                    <RequiredField IsRequired="True" ErrorText="Campo Obligatorio" />
+                                </ValidationSettings>
+                            </dx:ASPxTextBox>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="controls">
+                            <label>Tiempo en muelle (Horas)</label>
+                            <dx:ASPxTextBox ID="TB_Horas" runat="server" Theme="Material" Width="100%" BackColor="#303030" ForeColor="#F0F0F0" Border-BorderColor="#303030" 
+                                AutoCompleteType="None" ValueType="System.Int32" AutoPostBack="true">
+                                <ClientSideEvents KeyPress="function (s,e) { onlyNumbers(s, e); }" />
+                                <ValidationSettings Display="Dynamic" ValidationGroup="Documento" ErrorText="" ValidateOnLeave="false" ErrorTextPosition="Bottom">
+                                    <RequiredField IsRequired="True" ErrorText="Campo Obligatorio" />
+                                </ValidationSettings>
+                            </dx:ASPxTextBox>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="controls">
+                            <label>Valor U.T</label>
+                            <dx:ASPxTextBox ID="TB_ValorUT" runat="server" Theme="Material" Width="100%" BackColor="#303030" ForeColor="#F0F0F0" Border-BorderColor="#303030" 
+                                AutoCompleteType="None" ValueType="System.Decimal" AutoPostBack="true">
+                                <ClientSideEvents KeyPress="function (s,e) { onlyNumbers(s, e); }" />
+                                <ValidationSettings Display="Dynamic" ValidationGroup="Documento" ErrorText="" ValidateOnLeave="false" ErrorTextPosition="Bottom">
+                                    <RequiredField IsRequired="True" ErrorText="Campo Obligatorio" />
+                                </ValidationSettings>
+                            </dx:ASPxTextBox>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="controls">
+                            <label>L.O.A.</label>
+                            <dx:ASPxTextBox ID="TB_LOA" runat="server" Theme="Material" Width="100%" BackColor="#303030" ForeColor="#F0F0F0" Border-BorderColor="#303030" 
+                                AutoCompleteType="None" ValueType="System.Decimal" AutoPostBack="true">
+                                <ClientSideEvents KeyPress="function (s,e) { onlyNumbers(s, e); }" />
+                                <ValidationSettings Display="Dynamic" ValidationGroup="Documento" ErrorText="" ValidateOnLeave="false" ErrorTextPosition="Bottom">
+                                    <RequiredField IsRequired="True" ErrorText="Campo Obligatorio" />
+                                </ValidationSettings>
+                            </dx:ASPxTextBox>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="controls">
+                            <label>G.R.T.</label>
+                            <dx:ASPxTextBox ID="TB_GRT" runat="server" Theme="Material" Width="100%" BackColor="#303030" ForeColor="#F0F0F0" Border-BorderColor="#303030" 
+                                AutoCompleteType="None" ValueType="System.Decimal" AutoPostBack="true">
+                                <ClientSideEvents KeyPress="function (s,e) { onlyNumbers(s, e); }" />
+                                <ValidationSettings Display="Dynamic" ValidationGroup="Documento" ErrorText="" ValidateOnLeave="false" ErrorTextPosition="Bottom">
+                                    <RequiredField IsRequired="True" ErrorText="Campo Obligatorio" />
+                                </ValidationSettings>
+                            </dx:ASPxTextBox>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="controls">
+                            <label>N.R.T.</label>
+                            <dx:ASPxTextBox ID="TB_NRT" runat="server" Theme="Material" Width="100%" BackColor="#303030" ForeColor="#F0F0F0" Border-BorderColor="#303030" 
+                                AutoCompleteType="None" ValueType="System.Int32" AutoPostBack="true">
+                                <ClientSideEvents KeyPress="function (s,e) { onlyNumbers(s, e); }" />
+                                <ValidationSettings Display="Dynamic" ValidationGroup="Documento" ErrorText="" ValidateOnLeave="false" ErrorTextPosition="Bottom">
+                                    <RequiredField IsRequired="True" ErrorText="Campo Obligatorio" />
+                                </ValidationSettings>
+                            </dx:ASPxTextBox>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="controls">
+                            <label>S.D.W.T.</label>
+                            <dx:ASPxTextBox ID="TB_SDWT" runat="server" Theme="Material" Width="100%" BackColor="#303030" ForeColor="#F0F0F0" Border-BorderColor="#303030" 
+                                AutoCompleteType="None" ValueType="System.Int32" AutoPostBack="true">
                                 <ClientSideEvents KeyPress="function (s,e) { onlyNumbers(s, e); }" />
                                 <ValidationSettings Display="Dynamic" ValidationGroup="Documento" ErrorText="" ValidateOnLeave="false" ErrorTextPosition="Bottom">
                                     <RequiredField IsRequired="True" ErrorText="Campo Obligatorio" />
@@ -208,28 +305,6 @@ form .row:not(.my-5) {
                 <div class="row">
                     <div class="col-md-6">
                         <div class="controls">
-                            <label>Puerto</label>
-                            <dx:ASPxTextBox ID="TB_Puerto" runat="server" Theme="Material" Width="100%" BackColor="#303030" ForeColor="#F0F0F0" Border-BorderColor="#303030" AutoCompleteType="None">
-                                <ValidationSettings Display="Dynamic" ValidationGroup="Documento" ErrorText="" ValidateOnLeave="false" ErrorTextPosition="Bottom">
-                                    <RequiredField IsRequired="True" ErrorText="Campo Obligatorio" />
-                                </ValidationSettings>
-                            </dx:ASPxTextBox>
-                        </div>
-                    </div>
-                    <div class="col-md-6">
-                        <div class="controls">
-                            <label>Buque</label>
-                            <dx:ASPxTextBox ID="TB_Buque" runat="server" Theme="Material" Width="100%" BackColor="#303030" ForeColor="#F0F0F0" Border-BorderColor="#303030" AutoCompleteType="None">
-                                <ValidationSettings Display="Dynamic" ValidationGroup="Documento" ErrorText="" ValidateOnLeave="false" ErrorTextPosition="Bottom">
-                                    <RequiredField IsRequired="True" ErrorText="Campo Obligatorio" />
-                                </ValidationSettings>
-                            </dx:ASPxTextBox>
-                        </div>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-md-6">
-                        <div class="controls">
                             <label>Nro. Viaje</label>
                             <dx:ASPxTextBox ID="TB_Viaje" runat="server" Theme="Material" Width="100%" BackColor="#303030" ForeColor="#F0F0F0" Border-BorderColor="#303030" AutoCompleteType="None">
                                 <ValidationSettings Display="Dynamic" ValidationGroup="Documento" ErrorText="" ValidateOnLeave="false" ErrorTextPosition="Bottom">
@@ -242,6 +317,58 @@ form .row:not(.my-5) {
                         <div class="controls">
                             <label>Toneladas</label>
                             <dx:ASPxTextBox ID="TB_Toneladas" runat="server" Theme="Material" Width="100%" BackColor="#303030" ForeColor="#F0F0F0" Border-BorderColor="#303030" AutoCompleteType="None" ValueType="System.Decimal">
+                                <ClientSideEvents KeyPress="function (s,e) { onlyNumbers(s, e); }" />
+                                <ValidationSettings Display="Dynamic" ValidationGroup="Documento" ErrorText="" ValidateOnLeave="false" ErrorTextPosition="Bottom">
+                                    <RequiredField IsRequired="True" ErrorText="Campo Obligatorio" />
+                                </ValidationSettings>
+                            </dx:ASPxTextBox>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="controls">
+                            <label>Tasa USD/BSD</label>
+                            <dx:ASPxTextBox ID="TB_TasaUSD" runat="server" Theme="Material" Width="100%" BackColor="#303030" ForeColor="#F0F0F0" Border-BorderColor="#303030" 
+                                AutoCompleteType="None" ValueType="System.Decimal" AutoPostBack="true">
+                                <ClientSideEvents KeyPress="function (s,e) { onlyNumbers(s, e); }" />
+                                <ValidationSettings Display="Dynamic" ValidationGroup="Documento" ErrorText="" ValidateOnLeave="false" ErrorTextPosition="Bottom">
+                                    <RequiredField IsRequired="True" ErrorText="Campo Obligatorio" />
+                                </ValidationSettings>
+                            </dx:ASPxTextBox>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="controls">
+                            <label>Tasa EUR/BSD</label>
+                            <dx:ASPxTextBox ID="TB_TasaEUR" runat="server" Theme="Material" Width="100%" BackColor="#303030" ForeColor="#F0F0F0" Border-BorderColor="#303030" 
+                                AutoCompleteType="None" ValueType="System.Decimal" AutoPostBack="true">
+                                <ClientSideEvents KeyPress="function (s,e) { onlyNumbers(s, e); }" />
+                                <ValidationSettings Display="Dynamic" ValidationGroup="Documento" ErrorText="" ValidateOnLeave="false" ErrorTextPosition="Bottom">
+                                    <RequiredField IsRequired="True" ErrorText="Campo Obligatorio" />
+                                </ValidationSettings>
+                            </dx:ASPxTextBox>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="controls">
+                            <label>Tasa PTR/BSD</label>
+                            <dx:ASPxTextBox ID="TB_TasaPTR" runat="server" Theme="Material" Width="100%" BackColor="#303030" ForeColor="#F0F0F0" Border-BorderColor="#303030" 
+                                AutoCompleteType="None" ValueType="System.Decimal" AutoPostBack="true">
+                                <ClientSideEvents KeyPress="function (s,e) { onlyNumbers(s, e); }" />
+                                <ValidationSettings Display="Dynamic" ValidationGroup="Documento" ErrorText="" ValidateOnLeave="false" ErrorTextPosition="Bottom">
+                                    <RequiredField IsRequired="True" ErrorText="Campo Obligatorio" />
+                                </ValidationSettings>
+                            </dx:ASPxTextBox>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="controls">
+                            <label>Tasa EUR/USD</label>
+                            <dx:ASPxTextBox ID="TB_TasaEURUSD" runat="server" Theme="Material" Width="100%" BackColor="#303030" ForeColor="#F0F0F0" Border-BorderColor="#303030" 
+                                AutoCompleteType="None" ValueType="System.Decimal" AutoPostBack="true">
                                 <ClientSideEvents KeyPress="function (s,e) { onlyNumbers(s, e); }" />
                                 <ValidationSettings Display="Dynamic" ValidationGroup="Documento" ErrorText="" ValidateOnLeave="false" ErrorTextPosition="Bottom">
                                     <RequiredField IsRequired="True" ErrorText="Campo Obligatorio" />
@@ -294,7 +421,7 @@ form .row:not(.my-5) {
             <div class="col">
                 <dx:ASPxGridView ID="GV_DocumentoReng" runat="server" Theme="Material" Width="100%" ClientInstanceName="grid" AutoGenerateColumns="False" KeyFieldName="reng_num"
                     OnRowInserting="GV_DocumentoReng_RowInserting" OnRowUpdating="GV_DocumentoReng_RowUpdating" OnRowDeleting="GV_DocumentoReng_RowDeleting" 
-                    OnInitNewRow="GV_DocumentoReng_InitNewRow" OnHtmlRowPrepared="GV_DocumentoReng_HtmlRowPrepared">
+                    OnInitNewRow="GV_DocumentoReng_InitNewRow" OnHtmlRowPrepared="GV_DocumentoReng_HtmlRowPrepared" OnHtmlDataCellPrepared="GV_DocumentoReng_HtmlDataCellPrepared">
                     <ClientSideEvents EndCallback="endCallback" />
                     <SettingsPager PageSize="5"></SettingsPager>
                     <SettingsEditing Mode="Batch" NewItemRowPosition="Bottom">
