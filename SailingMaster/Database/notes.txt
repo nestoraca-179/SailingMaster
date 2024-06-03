@@ -1,0 +1,18 @@
+calcular hora automaticamente
+eliminar cuenta de buque
+agregar nro. viaje
+colocar horas de llegada y salida en campo aparte
+dar opcion de colocar TBC en fechas
+colocar cliente y buque como lista desplegable
+sustituir muelle por "terminal"
+agregar dentro de tabla buque los valores de LOA, NRT, GRT y SDWT
+mostrar BSD y USD en totales
+
+gastos portuarios del buque - main doc pda
+liquidacion de uso de superficie de muelle - usm
+
+tarifario de gastos portuarios
+crear tarifario independiente de uso de superficie y muelle
+crear tarifario independiente de fumigacion
+
+crear item para posibles recargos

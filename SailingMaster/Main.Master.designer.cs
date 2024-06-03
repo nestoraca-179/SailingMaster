@@ -42,6 +42,24 @@ namespace SailingMaster
         protected global::System.Web.UI.HtmlControls.HtmlAnchor item_currencies;
 
         /// <summary>
+        /// Control item_banks.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlAnchor item_banks;
+
+        /// <summary>
+        /// Control item_ports.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlAnchor item_ports;
+
+        /// <summary>
         /// Control item_docs.
         /// </summary>
         /// <remarks>

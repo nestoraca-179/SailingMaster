@@ -17,6 +17,9 @@
         <AssociationConnector Association="SailingMasterModel.FK__Servicio__tip_se__793DFFAF" />
         <EntityTypeShape EntityType="SailingMasterModel.Documento" Width="1.5" PointX="2.5" PointY="0.5" />
         <AssociationConnector Association="SailingMasterModel.FK__ProformaR__co_pr__0F624AF8" />
+        <EntityTypeShape EntityType="SailingMasterModel.Banco" Width="1.5" PointX="2.75" PointY="11" />
+        <EntityTypeShape EntityType="SailingMasterModel.Puerto" Width="1.5" PointX="7.375" PointY="6" />
+        <AssociationConnector Association="SailingMasterModel.FK__Banco__co_mone__345EC57D" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

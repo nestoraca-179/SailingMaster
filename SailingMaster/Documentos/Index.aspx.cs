@@ -93,7 +93,7 @@ namespace SailingMaster.Documentos
                 switch (e.CellValue.ToString())
                 {
                     case "GENERADO":
-                        e.Cell.BackColor = ColorTranslator.FromHtml("#18191d");
+                        e.Cell.BackColor = ColorTranslator.FromHtml("#04574B");
                         break;
                     case "APROBADO":
                         e.Cell.BackColor = ColorTranslator.FromHtml("#034426");

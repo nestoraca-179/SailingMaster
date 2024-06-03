@@ -18,11 +18,17 @@ namespace SailingMaster.Models
         public int co_doc { get; set; }
         public string co_serv { get; set; }
         public string des_serv { get; set; }
-        public Nullable<decimal> price_serv { get; set; }
+        public decimal price_serv { get; set; }
         public string co_us_in { get; set; }
         public System.DateTime fe_us_in { get; set; }
         public string co_us_mo { get; set; }
         public System.DateTime fe_us_mo { get; set; }
+        public string co_mone { get; set; }
+        public Nullable<decimal> price_liq { get; set; }
+        public decimal price_bsd { get; set; }
+        public decimal price_usd { get; set; }
+        public decimal price_eur { get; set; }
+        public int cantidad { get; set; }
     
         public virtual Servicio Servicio { get; set; }
         public virtual Documento Documento { get; set; }

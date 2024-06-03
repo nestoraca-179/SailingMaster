@@ -53,12 +53,12 @@
                             <Paddings Padding="12px"></Paddings>
                         </CellStyle>
                     </dx:GridViewDataTextColumn>
-                    <dx:GridViewDataTextColumn FieldName="co_mone" VisibleIndex="1" Caption="Moneda">
+                    <%--<dx:GridViewDataTextColumn FieldName="co_mone" VisibleIndex="1" Caption="Moneda">
                         <HeaderStyle BackColor="#102140" Border-BorderWidth="0px" ForeColor="#F0F0F0" Paddings-Padding="5px"></HeaderStyle>
                         <CellStyle ForeColor="#F0F0F0" Border-BorderWidth="0px">
                             <Paddings Padding="12px"></Paddings>
                         </CellStyle>
-                    </dx:GridViewDataTextColumn>
+                    </dx:GridViewDataTextColumn>--%>
                     <dx:GridViewDataTextColumn FieldName="total" VisibleIndex="2" Caption="Total">
                         <PropertiesTextEdit DisplayFormatString="{0:N2}"></PropertiesTextEdit>
                         <HeaderStyle BackColor="#102140" Border-BorderWidth="0px" ForeColor="#F0F0F0" Paddings-Padding="5px"></HeaderStyle>
@@ -152,14 +152,14 @@
                                 <br />
                                 Buque: <dx:ASPxLabel runat="server" Text='<%# Eval("buque") %>' Font-Bold="true" ForeColor="#F0F0F0" />
                                 <br />
-                                Nro. Viaje: <dx:ASPxLabel runat="server" Text='<%# Eval("nro_viaje") %>' Font-Bold="true" ForeColor="#F0F0F0" />
-                                <br />
-                                Nro. Toneladas: <dx:ASPxLabel runat="server" Text='<%# Eval("num_toneladas", "{0:N2}") %>' Font-Bold="true" ForeColor="#F0F0F0" />
-                                <br />
-                                Moneda: <dx:ASPxLabel runat="server" Text='<%# Eval("co_mone", "{0:N2}") %>' Font-Bold="true" ForeColor="#F0F0F0" />
-                                <br />
-                                Tasa de Cambio: <dx:ASPxLabel runat="server" Text='<%# Eval("tasa") %>' Font-Bold="true" ForeColor="#F0F0F0" />
-                                <br />
+                                <%--Nro. Viaje: <dx:ASPxLabel runat="server" Text='<%# Eval("nro_viaje") %>' Font-Bold="true" ForeColor="#F0F0F0" />
+                                <br />--%>
+                                <%--Nro. Toneladas: <dx:ASPxLabel runat="server" Text='<%# Eval("num_toneladas", "{0:N2}") %>' Font-Bold="true" ForeColor="#F0F0F0" />
+                                <br />--%>
+                                <%--Moneda: <dx:ASPxLabel runat="server" Text='<%# Eval("co_mone", "{0:N2}") %>' Font-Bold="true" ForeColor="#F0F0F0" />
+                                <br />--%>
+                                <%--Tasa de Cambio: <dx:ASPxLabel runat="server" Text='<%# Eval("tasa") %>' Font-Bold="true" ForeColor="#F0F0F0" />
+                                <br />--%>
                                 Fecha Llegada: <dx:ASPxLabel runat="server" Text='<%# Eval("fec_llegada", "{0:dd/MM/yyyy}") %>' Font-Bold="true" ForeColor="#F0F0F0" />
                                 <br />
                                 Fecha Salida: <dx:ASPxLabel runat="server" Text='<%# Eval("fec_salida", "{0:dd/MM/yyyy}") %>' Font-Bold="true" ForeColor="#F0F0F0" />
@@ -197,7 +197,7 @@
                 </Templates>
             </dx:ASPxGridView>
             <asp:SqlDataSource runat="server" ID="DS_Documento" ConnectionString='<%$ ConnectionStrings:SailingMasterConnectionString %>' SelectCommand="select ID, 
-            cuenta_buq, fecha, cliente, puerto, buque, nro_viaje, co_mone, tasa, fec_llegada, fec_salida, num_toneladas, total, approved_date, reviewed_date, corrected_date, 
+            cuenta_buq, fecha, cliente, puerto, buque, fec_llegada, fec_salida, total, approved_date, reviewed_date, corrected_date, 
             collected_date, liquidated_date, closed_date, co_us_in, approved_by, reviewed_by, reviewed_observ, corrected_by, collected_by, collected_amount, collected_bank, 
             collected_date_transf, collected_nref_transf, liquidated_by, closed_by, status,
             case status

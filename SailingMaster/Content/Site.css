@@ -216,7 +216,7 @@ ul.menu li a i {
 ul.menu li a p {
     margin-left: 25px !important;
 }
-#item_reps.disabled, #item_currencies.disabled {
+#item_reps.disabled, #item_currencies.disabled, #item_banks, #item_ports {
     color: #848484 !important;
     border: 0;
 }
@@ -303,6 +303,6 @@ table td {
 .controls label {
     margin: 5px 0;
 }
-table[id^="MainContent_"] table {
+table[id^="MainContent_"], table[id^="MainContent_"] table {
     border-radius: 5px;
 }

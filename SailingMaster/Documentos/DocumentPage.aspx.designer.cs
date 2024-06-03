@@ -168,15 +168,6 @@ namespace SailingMaster.Documentos
         protected global::System.Web.UI.WebControls.LinkButton BTN_PreEliminarDocumento;
 
         /// <summary>
-        /// Control TB_CuentaBuque.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::DevExpress.Web.ASPxTextBox TB_CuentaBuque;
-
-        /// <summary>
         /// Control TB_Cliente.
         /// </summary>
         /// <remarks>
@@ -204,13 +195,22 @@ namespace SailingMaster.Documentos
         protected global::DevExpress.Web.ASPxTextBox TB_Flag;
 
         /// <summary>
-        /// Control TB_Puerto.
+        /// Control DDL_Puerto.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::DevExpress.Web.ASPxTextBox TB_Puerto;
+        protected global::DevExpress.Web.ASPxComboBox DDL_Puerto;
+
+        /// <summary>
+        /// Control DS_Puerto.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.SqlDataSource DS_Puerto;
 
         /// <summary>
         /// Control TB_Muelle.
@@ -294,60 +294,6 @@ namespace SailingMaster.Documentos
         protected global::DevExpress.Web.ASPxDateEdit DE_FechaSalida;
 
         /// <summary>
-        /// Control TB_Viaje.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::DevExpress.Web.ASPxTextBox TB_Viaje;
-
-        /// <summary>
-        /// Control TB_Toneladas.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::DevExpress.Web.ASPxTextBox TB_Toneladas;
-
-        /// <summary>
-        /// Control TB_TasaUSD.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::DevExpress.Web.ASPxTextBox TB_TasaUSD;
-
-        /// <summary>
-        /// Control TB_TasaEUR.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::DevExpress.Web.ASPxTextBox TB_TasaEUR;
-
-        /// <summary>
-        /// Control TB_TasaPTR.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::DevExpress.Web.ASPxTextBox TB_TasaPTR;
-
-        /// <summary>
-        /// Control TB_TasaEURUSD.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::DevExpress.Web.ASPxTextBox TB_TasaEURUSD;
-
-        /// <summary>
         /// Control LBL_SignoTD.
         /// </summary>
         /// <remarks>
@@ -409,6 +355,42 @@ namespace SailingMaster.Documentos
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::DevExpress.Web.ASPxLabel LBL_Balance;
+
+        /// <summary>
+        /// Control TB_TasaUSD.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::DevExpress.Web.ASPxTextBox TB_TasaUSD;
+
+        /// <summary>
+        /// Control TB_TasaEUR.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::DevExpress.Web.ASPxTextBox TB_TasaEUR;
+
+        /// <summary>
+        /// Control TB_TasaPTR.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::DevExpress.Web.ASPxTextBox TB_TasaPTR;
+
+        /// <summary>
+        /// Control TB_TasaEURUSD.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::DevExpress.Web.ASPxTextBox TB_TasaEURUSD;
 
         /// <summary>
         /// Control GV_DocumentoReng.
@@ -474,13 +456,22 @@ namespace SailingMaster.Documentos
         protected global::DevExpress.Web.ASPxTextBox TB_MontoTransf;
 
         /// <summary>
-        /// Control TB_BancoTransf.
+        /// Control DDL_BancoTransf.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::DevExpress.Web.ASPxTextBox TB_BancoTransf;
+        protected global::DevExpress.Web.ASPxComboBox DDL_BancoTransf;
+
+        /// <summary>
+        /// Control DS_Banco.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.SqlDataSource DS_Banco;
 
         /// <summary>
         /// Control DE_FechaTransf.
@@ -589,6 +580,15 @@ namespace SailingMaster.Documentos
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::DevExpress.Web.ASPxComboBox DDL_MonedaReng;
+
+        /// <summary>
+        /// Control DS_Moneda.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.SqlDataSource DS_Moneda;
 
         /// <summary>
         /// Control DE_FechaReng.

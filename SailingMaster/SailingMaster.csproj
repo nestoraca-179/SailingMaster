@@ -182,6 +182,9 @@
     <Compile Include="Main.Master.designer.cs">
       <DependentUpon>Main.Master</DependentUpon>
     </Compile>
+    <Compile Include="Models\Banco.cs">
+      <DependentUpon>SailingMaster.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\Documento.cs">
       <DependentUpon>SailingMaster.tt</DependentUpon>
     </Compile>
@@ -195,6 +198,9 @@
       <DependentUpon>SailingMaster.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Moneda.cs">
+      <DependentUpon>SailingMaster.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Puerto.cs">
       <DependentUpon>SailingMaster.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\SailingMaster.Context.cs">

@@ -33,5 +33,7 @@ namespace SailingMaster.Models
         public virtual DbSet<Usuario> Usuario { get; set; }
         public virtual DbSet<TipoServicio> TipoServicio { get; set; }
         public virtual DbSet<Documento> Documento { get; set; }
+        public virtual DbSet<Banco> Banco { get; set; }
+        public virtual DbSet<Puerto> Puerto { get; set; }
     }
 }
