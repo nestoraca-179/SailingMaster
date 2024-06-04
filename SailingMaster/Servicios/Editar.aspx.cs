@@ -29,7 +29,7 @@ namespace SailingMaster.Servicios
                         CargarServicio(serv);
 
                     IDServ = Request.QueryString["ID"].ToString();
-                    LBL_IDServicio.Text = "Editar Servicio " + serv.descrip;
+                    LBL_IDServicio.Text = "Editar Servicio " + serv.des_serv;
                 }
             }
             else
@@ -54,7 +54,7 @@ namespace SailingMaster.Servicios
             try
             {
                 serv.ID = IDServ;
-                serv.descrip = TB_Descrip.Text;
+                serv.des_serv = TB_Descrip.Text;
                 serv.tip_serv = int.Parse(DDL_TipoServicio.Value.ToString());
                 serv.precio_base = decimal.Parse(TB_Price.Text.Replace(".", ","));
                 serv.co_mone = DDL_Moneda.Value.ToString();
@@ -85,7 +85,7 @@ namespace SailingMaster.Servicios
         private void CargarServicio(Servicio serv)
         {
             TB_Code.Text = serv.ID;
-            TB_Descrip.Text = serv.descrip;
+            TB_Descrip.Text = serv.des_serv;
             DDL_TipoServicio.Value = serv.tip_serv.ToString();
             TB_Price.Text = Math.Round(serv.precio_base, 2).ToString();
             DDL_Moneda.Value = serv.co_mone;

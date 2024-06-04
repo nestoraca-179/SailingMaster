@@ -21,13 +21,13 @@ namespace SailingMaster.Models
         }
     
         public int ID { get; set; }
-        public string cuenta_buq { get; set; }
+        public int co_buque { get; set; }
+        public string nro_viaje { get; set; }
         public System.DateTime fecha { get; set; }
-        public string cliente { get; set; }
-        public string buque { get; set; }
+        public string co_cli { get; set; }
         public string flag { get; set; }
         public int horas { get; set; }
-        public string puerto { get; set; }
+        public string co_puerto { get; set; }
         public string muelle { get; set; }
         public decimal loa { get; set; }
         public decimal grt { get; set; }
@@ -64,6 +64,9 @@ namespace SailingMaster.Models
         public string co_us_mo { get; set; }
         public System.DateTime fe_us_mo { get; set; }
     
+        public virtual Buque Buque { get; set; }
+        public virtual Cliente Cliente { get; set; }
+        public virtual Puerto Puerto { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<DocumentoReng> DocumentoReng { get; set; }
     }

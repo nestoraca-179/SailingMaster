@@ -14,11 +14,20 @@ namespace SailingMaster.Models
     
     public partial class Puerto
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public Puerto()
+        {
+            this.Documento = new HashSet<Documento>();
+        }
+    
         public string ID { get; set; }
         public string des_puerto { get; set; }
         public string co_us_in { get; set; }
         public System.DateTime fe_us_in { get; set; }
         public string co_us_mo { get; set; }
         public System.DateTime fe_us_mo { get; set; }
+    
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Documento> Documento { get; set; }
     }
 }

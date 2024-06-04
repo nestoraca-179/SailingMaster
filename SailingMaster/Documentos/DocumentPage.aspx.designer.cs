@@ -168,22 +168,49 @@ namespace SailingMaster.Documentos
         protected global::System.Web.UI.WebControls.LinkButton BTN_PreEliminarDocumento;
 
         /// <summary>
-        /// Control TB_Cliente.
+        /// Control DDL_Cliente.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::DevExpress.Web.ASPxTextBox TB_Cliente;
+        protected global::DevExpress.Web.ASPxComboBox DDL_Cliente;
 
         /// <summary>
-        /// Control TB_Buque.
+        /// Control DS_Cliente.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::DevExpress.Web.ASPxTextBox TB_Buque;
+        protected global::System.Web.UI.WebControls.SqlDataSource DS_Cliente;
+
+        /// <summary>
+        /// Control TB_NroViaje.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::DevExpress.Web.ASPxTextBox TB_NroViaje;
+
+        /// <summary>
+        /// Control DDL_Buque.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::DevExpress.Web.ASPxComboBox DDL_Buque;
+
+        /// <summary>
+        /// Control DS_Buque.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.SqlDataSource DS_Buque;
 
         /// <summary>
         /// Control TB_Flag.
@@ -285,6 +312,15 @@ namespace SailingMaster.Documentos
         protected global::DevExpress.Web.ASPxDateEdit DE_FechaLlegada;
 
         /// <summary>
+        /// Control TE_HoraLlegada.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::DevExpress.Web.ASPxTimeEdit TE_HoraLlegada;
+
+        /// <summary>
         /// Control DE_FechaSalida.
         /// </summary>
         /// <remarks>
@@ -292,6 +328,15 @@ namespace SailingMaster.Documentos
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::DevExpress.Web.ASPxDateEdit DE_FechaSalida;
+
+        /// <summary>
+        /// Control TE_HoraSalida.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::DevExpress.Web.ASPxTimeEdit TE_HoraSalida;
 
         /// <summary>
         /// Control LBL_SignoTD.

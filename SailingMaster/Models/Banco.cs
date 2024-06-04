@@ -16,6 +16,7 @@ namespace SailingMaster.Models
     {
         public string ID { get; set; }
         public string des_cuenta { get; set; }
+        public string nro_cuenta { get; set; }
         public string co_mone { get; set; }
         public string co_us_in { get; set; }
         public System.DateTime fe_us_in { get; set; }

@@ -19,21 +19,23 @@ namespace SailingMaster.Models
         {
             Configuration.ProxyCreationEnabled = false;
         }
-
+    
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             throw new UnintentionalCodeFirstException();
         }
     
+        public virtual DbSet<Banco> Banco { get; set; }
+        public virtual DbSet<Buque> Buque { get; set; }
+        public virtual DbSet<Cliente> Cliente { get; set; }
+        public virtual DbSet<Documento> Documento { get; set; }
         public virtual DbSet<DocumentoReng> DocumentoReng { get; set; }
         public virtual DbSet<Incidente> Incidente { get; set; }
         public virtual DbSet<Log> Log { get; set; }
         public virtual DbSet<Moneda> Moneda { get; set; }
-        public virtual DbSet<Servicio> Servicio { get; set; }
-        public virtual DbSet<Usuario> Usuario { get; set; }
-        public virtual DbSet<TipoServicio> TipoServicio { get; set; }
-        public virtual DbSet<Documento> Documento { get; set; }
-        public virtual DbSet<Banco> Banco { get; set; }
         public virtual DbSet<Puerto> Puerto { get; set; }
+        public virtual DbSet<Servicio> Servicio { get; set; }
+        public virtual DbSet<TipoServicio> TipoServicio { get; set; }
+        public virtual DbSet<Usuario> Usuario { get; set; }
     }
 }

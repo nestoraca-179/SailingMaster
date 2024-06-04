@@ -24,9 +24,9 @@ form .row:not(.my-5) {
 .amounts h5, .amounts h6 {
     margin-bottom: 10px;
 }
-#MainContent_DE_Fecha_I, #MainContent_DDL_Puerto_I,
+#MainContent_DE_Fecha_I, #MainContent_DDL_Puerto_I, #MainContent_DDL_Buque_I, #MainContent_DDL_Cliente_I, 
 #MainContent_DE_FechaLlegada_I, #MainContent_DE_FechaSalida_I, #MainContent_DE_FechaTransf_I, 
-#MainContent_DE_Fecha_ETC, #MainContent_DDL_Puerto_ETC,
+#MainContent_DE_Fecha_ETC, #MainContent_DDL_Puerto_ETC, #MainContent_DDL_Buque_ETC, #MainContent_DDL_Cliente_ETC, 
 #MainContent_DE_FechaLlegada_ETC, #MainContent_DE_FechaSalida_ETC, #MainContent_DE_FechaTransf_ETC {
     color: #F0F0F0;
 }
@@ -134,25 +134,27 @@ form .row:not(.my-5) {
         </asp:Panel>
         <div class="row">
             <div class="col-md-8">
-                <%--
                 <div class="row">
-                    <div class="col-md-12">
+                    <div class="col-md-6">
                         <div class="controls">
-                            <label>Cuenta de Buque</label>
-                            <dx:ASPxTextBox ID="TB_CuentaBuque" runat="server" Theme="Material" BackColor="#303030" ForeColor="#F0F0F0" Border-BorderColor="#303030" Width="100%" AutoCompleteType="None">
+                            <label>Cliente</label>
+                            <dx:ASPxComboBox ID="DDL_Cliente" runat="server" Theme="Material" Width="100%" BackColor="#303030" Border-BorderColor="#303030" 
+                                ValueField="ID" TextField="des_cli" DataSourceID="DS_Cliente">
+                                <Columns>
+                                    <dx:ListBoxColumn FieldName="ID" Width="70px" Caption="C&#243;digo"></dx:ListBoxColumn>
+                                    <dx:ListBoxColumn FieldName="des_cli" Width="160px" Caption="Descripci&#243;n"></dx:ListBoxColumn>
+                                </Columns>
                                 <ValidationSettings Display="Dynamic" ValidationGroup="Documento" ErrorText="" ValidateOnLeave="false" ErrorTextPosition="Bottom">
                                     <RequiredField IsRequired="True" ErrorText="Campo Obligatorio" />
                                 </ValidationSettings>
-                            </dx:ASPxTextBox>
+                            </dx:ASPxComboBox>
+                            <asp:SqlDataSource ID="DS_Cliente" runat="server" ConnectionString='<%$ ConnectionStrings:SailingMasterConnectionString %>' SelectCommand="SELECT [ID], [des_cli] FROM [Cliente]"></asp:SqlDataSource>
                         </div>
                     </div>
-                </div>
-                --%>
-                <div class="row">
-                    <div class="col-md-12">
+                    <div class="col-md-6">
                         <div class="controls">
-                            <label>Cliente</label>
-                            <dx:ASPxTextBox ID="TB_Cliente" runat="server" Theme="Material" BackColor="#303030" ForeColor="#F0F0F0" Border-BorderColor="#303030" Width="100%" AutoCompleteType="None">
+                            <label>Nro. Viaje</label>
+                            <dx:ASPxTextBox ID="TB_NroViaje" runat="server" Theme="Material" BackColor="#303030" ForeColor="#F0F0F0" Border-BorderColor="#303030" Width="100%" AutoCompleteType="None">
                                 <ValidationSettings Display="Dynamic" ValidationGroup="Documento" ErrorText="" ValidateOnLeave="false" ErrorTextPosition="Bottom">
                                     <RequiredField IsRequired="True" ErrorText="Campo Obligatorio" />
                                 </ValidationSettings>
@@ -164,11 +166,17 @@ form .row:not(.my-5) {
                     <div class="col-md-6">
                         <div class="controls">
                             <label>Buque</label>
-                            <dx:ASPxTextBox ID="TB_Buque" runat="server" Theme="Material" Width="100%" BackColor="#303030" ForeColor="#F0F0F0" Border-BorderColor="#303030" AutoCompleteType="None">
+                            <dx:ASPxComboBox ID="DDL_Buque" runat="server" Theme="Material" Width="100%" BackColor="#303030" Border-BorderColor="#303030" 
+                                ValueField="ID" TextField="des_buque" DataSourceID="DS_Buque">
+                                <Columns>
+                                    <dx:ListBoxColumn FieldName="ID" Width="70px" Caption="C&#243;digo"></dx:ListBoxColumn>
+                                    <dx:ListBoxColumn FieldName="des_buque" Width="160px" Caption="Descripci&#243;n"></dx:ListBoxColumn>
+                                </Columns>
                                 <ValidationSettings Display="Dynamic" ValidationGroup="Documento" ErrorText="" ValidateOnLeave="false" ErrorTextPosition="Bottom">
                                     <RequiredField IsRequired="True" ErrorText="Campo Obligatorio" />
                                 </ValidationSettings>
-                            </dx:ASPxTextBox>
+                            </dx:ASPxComboBox>
+                            <asp:SqlDataSource ID="DS_Buque" runat="server" ConnectionString='<%$ ConnectionStrings:SailingMasterConnectionString %>' SelectCommand="SELECT [ID], [des_buque] FROM [Buque]"></asp:SqlDataSource>
                         </div>
                     </div>
                     <div class="col-md-6">
@@ -301,12 +309,34 @@ form .row:not(.my-5) {
                     </div>
                     <div class="col-md-6">
                         <div class="controls">
+                            <label>Hora Llegada</label>
+                            <dx:ASPxTimeEdit ID="TE_HoraLlegada" runat="server" Theme="Material" Width="100%" BackColor="#303030" ForeColor="#F0F0F0" Border-BorderColor="#303030" EditFormat="Time">
+                                <ValidationSettings Display="Dynamic" ValidationGroup="Documento" ErrorText="" ValidateOnLeave="false" ErrorTextPosition="Bottom">
+                                    <RequiredField IsRequired="True" ErrorText="Campo Obligatorio" />
+                                </ValidationSettings>
+                            </dx:ASPxTimeEdit>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="controls">
                             <label>Fecha Salida</label>
                             <dx:ASPxDateEdit ID="DE_FechaSalida" runat="server" Theme="Material" Width="100%" BackColor="#303030" Border-BorderColor="#303030" EditFormat="Date">
                                 <ValidationSettings Display="Dynamic" ValidationGroup="Documento" ErrorText="" ValidateOnLeave="false" ErrorTextPosition="Bottom">
                                     <RequiredField IsRequired="True" ErrorText="Campo Obligatorio" />
                                 </ValidationSettings>
                             </dx:ASPxDateEdit>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="controls">
+                            <label>Hora Salida</label>
+                            <dx:ASPxTimeEdit ID="TE_HoraSalida" runat="server" Theme="Material" Width="100%" BackColor="#303030" ForeColor="#F0F0F0" Border-BorderColor="#303030" EditFormat="Time">
+                                <ValidationSettings Display="Dynamic" ValidationGroup="Documento" ErrorText="" ValidateOnLeave="false" ErrorTextPosition="Bottom">
+                                    <RequiredField IsRequired="True" ErrorText="Campo Obligatorio" />
+                                </ValidationSettings>
+                            </dx:ASPxTimeEdit>
                         </div>
                     </div>
                 </div>
@@ -426,10 +456,10 @@ form .row:not(.my-5) {
                             </CellStyle>
                         </dx:GridViewDataTextColumn>
                         <dx:GridViewDataComboBoxColumn Width="150" FieldName="co_serv" Caption="Codigo" VisibleIndex="2">
-                            <PropertiesComboBox DataSourceID="DS_Servicio" ValueField="ID" TextField="descrip" TextFormatString="{0}">
+                            <PropertiesComboBox DataSourceID="DS_Servicio" ValueField="ID" TextField="des_serv" TextFormatString="{0}">
                                 <Columns>
                                     <dx:ListBoxColumn FieldName="ID" Caption="ID"></dx:ListBoxColumn>
-                                    <dx:ListBoxColumn FieldName="descrip" Caption="Servicio" Width="250"></dx:ListBoxColumn>
+                                    <dx:ListBoxColumn FieldName="des_serv" Caption="Servicio" Width="250"></dx:ListBoxColumn>
                                 </Columns>
                                 <ValidationSettings Display="Dynamic" RequiredField-IsRequired="true" />
                             </PropertiesComboBox>
@@ -514,7 +544,7 @@ form .row:not(.my-5) {
                         <dx:ASPxSummaryItem FieldName="price_serv" SummaryType="Sum" DisplayFormat="Total: {0:n}" />
                     </TotalSummary>
                 </dx:ASPxGridView>
-                <asp:SqlDataSource runat="server" ID="DS_Servicio" ConnectionString='<%$ ConnectionStrings:SailingMasterConnectionString %>' SelectCommand="SELECT [ID], [descrip] FROM [Servicio] ORDER BY [ID]"></asp:SqlDataSource>
+                <asp:SqlDataSource runat="server" ID="DS_Servicio" ConnectionString='<%$ ConnectionStrings:SailingMasterConnectionString %>' SelectCommand="SELECT [ID], [des_serv] FROM [Servicio] ORDER BY [ID]"></asp:SqlDataSource>
             </div>
         </div>
     </asp:Panel>
@@ -590,13 +620,13 @@ form .row:not(.my-5) {
                                     <Columns>
                                         <dx:ListBoxColumn FieldName="ID" Width="70px" Caption="C&#243;digo"></dx:ListBoxColumn>
                                         <dx:ListBoxColumn FieldName="des_cuenta" Width="160px" Caption="Descripci&#243;n"></dx:ListBoxColumn>
-                                        <dx:ListBoxColumn FieldName="num_cuenta" Width="160px" Caption="Nro. Cuenta"></dx:ListBoxColumn>
+                                        <dx:ListBoxColumn FieldName="nro_cuenta" Width="160px" Caption="Nro. Cuenta"></dx:ListBoxColumn>
                                     </Columns>
                                     <ValidationSettings Display="Dynamic" ValidationGroup="Cobrar" ErrorText="" ValidateOnLeave="false" ErrorTextPosition="Bottom">
                                         <RequiredField IsRequired="True" ErrorText="Campo Obligatorio" />
                                     </ValidationSettings>
                                 </dx:ASPxComboBox>
-                                <asp:SqlDataSource ID="DS_Banco" runat="server" ConnectionString='<%$ ConnectionStrings:SailingMasterConnectionString %>' SelectCommand="SELECT [ID], [des_cuenta], [num_cuenta] FROM [Banco]"></asp:SqlDataSource>
+                                <asp:SqlDataSource ID="DS_Banco" runat="server" ConnectionString='<%$ ConnectionStrings:SailingMasterConnectionString %>' SelectCommand="SELECT [ID], [des_cuenta], [nro_cuenta] FROM [Banco]"></asp:SqlDataSource>
                             </div>
                         </div>
                     </div>
@@ -705,13 +735,13 @@ form .row:not(.my-5) {
                             <div class="form-group-h" style="text-align: left !important;">
                                 <label class="my-1">Moneda</label>
                                 <dx:ASPxComboBox ID="DDL_MonedaReng" runat="server" Theme="Material" CssClass="form-control" Width="100%" BackColor="#303030" Border-BorderWidth="0" 
-                                    ValueField="ID" TextField="descrip" DataSourceID="DS_Moneda">
+                                    ValueField="ID" TextField="des_mone" DataSourceID="DS_Moneda">
                                     <Columns>
                                         <dx:ListBoxColumn FieldName="ID" Width="70px" Caption="C&#243;digo"></dx:ListBoxColumn>
-                                        <dx:ListBoxColumn FieldName="descrip" Width="160px" Caption="Descripci&#243;n"></dx:ListBoxColumn>
+                                        <dx:ListBoxColumn FieldName="des_mone" Width="160px" Caption="Descripci&#243;n"></dx:ListBoxColumn>
                                     </Columns>
                                 </dx:ASPxComboBox>
-                                <asp:SqlDataSource runat="server" ID="DS_Moneda" ConnectionString='<%$ ConnectionStrings:SailingMasterConnectionString %>' SelectCommand="SELECT [ID], [descrip] FROM [Moneda]"></asp:SqlDataSource>
+                                <asp:SqlDataSource runat="server" ID="DS_Moneda" ConnectionString='<%$ ConnectionStrings:SailingMasterConnectionString %>' SelectCommand="SELECT [ID], [des_mone] FROM [Moneda]"></asp:SqlDataSource>
                             </div>
                         </div>
                     </div>

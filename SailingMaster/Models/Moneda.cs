@@ -17,12 +17,12 @@ namespace SailingMaster.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Moneda()
         {
-            this.Servicio = new HashSet<Servicio>();
             this.Banco = new HashSet<Banco>();
+            this.Servicio = new HashSet<Servicio>();
         }
     
         public string ID { get; set; }
-        public string descrip { get; set; }
+        public string des_mone { get; set; }
         public bool @base { get; set; }
         public decimal tasa { get; set; }
         public string signo { get; set; }
@@ -32,8 +32,8 @@ namespace SailingMaster.Models
         public System.DateTime fe_us_mo { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Servicio> Servicio { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Banco> Banco { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Servicio> Servicio { get; set; }
     }
 }

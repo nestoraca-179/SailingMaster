@@ -40,7 +40,7 @@ namespace SailingMaster.Usuarios
             {
                 user.username = TB_Username.Text;
                 user.password = SecurityController.Encrypt(TB_Password.Text);
-                user.descrip = TB_Descrip.Text;
+                user.des_usuario = TB_Descrip.Text;
                 user.email = TB_Email.Text;
                 user.activo = CK_Activo.Checked;
                 user.tip_usuario = byte.Parse(DDL_TipoUsuario.Value.ToString());

@@ -10,7 +10,7 @@ namespace SailingMaster
             if (Session["USER"] != null)
             {
                 Usuario user = Session["USER"] as Usuario;
-                LBL_User.Text = user.descrip;
+                LBL_User.Text = user.des_usuario;
 
                 if (user.tip_usuario != 0)
                 {

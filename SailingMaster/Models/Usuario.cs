@@ -17,7 +17,7 @@ namespace SailingMaster.Models
         public int ID { get; set; }
         public string username { get; set; }
         public string password { get; set; }
-        public string descrip { get; set; }
+        public string des_usuario { get; set; }
         public string email { get; set; }
         public bool activo { get; set; }
         public byte tip_usuario { get; set; }

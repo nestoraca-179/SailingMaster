@@ -185,6 +185,12 @@
     <Compile Include="Models\Banco.cs">
       <DependentUpon>SailingMaster.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\Buque.cs">
+      <DependentUpon>SailingMaster.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Cliente.cs">
+      <DependentUpon>SailingMaster.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\Documento.cs">
       <DependentUpon>SailingMaster.tt</DependentUpon>
     </Compile>

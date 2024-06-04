@@ -31,7 +31,7 @@ namespace SailingMaster.Documentos
                     if (Request.QueryString["ID"] != null) // EDITANDO
                     {
                         Documento doc = DocumentoController.GetByID(int.Parse(Request.QueryString["ID"].ToString()));
-                        BlockAllItems(doc.status);
+                        BlockAllFields(doc.status);
 
                         if (doc.status < 4)
                         {
@@ -91,7 +91,7 @@ namespace SailingMaster.Documentos
                     }
                     else // AGREGANDO
                     {
-                        InitRates();
+                        InitAllFields();
                         LBL_TotalRecibido.Text = "0,00";
                         LBL_TotalCancelado.Text = "0,00";
                         LBL_Balance.Text = "0,00";
@@ -123,14 +123,12 @@ namespace SailingMaster.Documentos
 
             try
             {
-                // Moneda mon = MonedaController.GetByID(DDL_Moneda.Value.ToString());
-
-                doc.cuenta_buq = TB_CuentaBuque.Text;
                 doc.fecha = DateTime.Parse(DE_Fecha.Value.ToString());
-                doc.cliente = TB_Cliente.Text;
-                doc.buque = TB_Buque.Text;
+                doc.co_cli = DDL_Cliente.Value.ToString();
+                doc.nro_viaje = TB_NroViaje.Text;
+                doc.co_buque = int.Parse(DDL_Buque.Value.ToString());
                 doc.flag = TB_Flag.Text;
-                doc.puerto = DDL_Puerto.Value.ToString();
+                doc.co_puerto = DDL_Puerto.Value.ToString();
                 doc.muelle = TB_Muelle.Text;
                 doc.horas = int.Parse(TB_Horas.Text);
                 doc.valor_ut = decimal.Parse(TB_ValorUT.Text);
@@ -143,9 +141,7 @@ namespace SailingMaster.Documentos
                 doc.tasa_usd = decimal.Parse(TB_TasaUSD.Text.Replace(".", ","));
                 doc.tasa_eur = decimal.Parse(TB_TasaEUR.Text.Replace(".", ","));
                 doc.tasa_ptr = decimal.Parse(TB_TasaPTR.Text.Replace(".", ","));
-                // doc.co_mone = DDL_Moneda.Value.ToString();
-                // doc.nro_viaje = TB_Viaje.Text;
-                // doc.num_toneladas = int.Parse(TB_Toneladas.Text);
+                doc.status = 0; // GENERADO
                 doc.co_us_in = (Session["USER"] as Usuario).username;
                 doc.fe_us_in = DateTime.Now;
                 doc.co_us_mo = (Session["USER"] as Usuario).username;
@@ -249,51 +245,61 @@ namespace SailingMaster.Documentos
 
             try
             {
-                //Moneda mon = MonedaController.GetByID(DDL_Moneda.Value.ToString());
+                doc.fecha = DateTime.Parse(DE_Fecha.Value.ToString());
+                doc.co_cli = DDL_Cliente.Value.ToString();
+                doc.nro_viaje = TB_NroViaje.Text;
+                doc.co_buque = int.Parse(DDL_Buque.Value.ToString());
+                doc.flag = TB_Flag.Text;
+                doc.co_puerto = DDL_Puerto.Value.ToString();
+                doc.muelle = TB_Muelle.Text;
+                doc.horas = int.Parse(TB_Horas.Text);
+                doc.valor_ut = decimal.Parse(TB_ValorUT.Text);
+                doc.loa = decimal.Parse(TB_LOA.Text);
+                doc.grt = decimal.Parse(TB_GRT.Text);
+                doc.nrt = decimal.Parse(TB_NRT.Text);
+                doc.sdwt = decimal.Parse(TB_SDWT.Text);
+                doc.fec_llegada = DateTime.Parse(DE_FechaLlegada.Value.ToString());
+                doc.fec_salida = DateTime.Parse(DE_FechaSalida.Value.ToString());
+                doc.tasa_usd = decimal.Parse(TB_TasaUSD.Text.Replace(".", ","));
+                doc.tasa_eur = decimal.Parse(TB_TasaEUR.Text.Replace(".", ","));
+                doc.tasa_ptr = decimal.Parse(TB_TasaPTR.Text.Replace(".", ","));
+                doc.status = doc.status == 2 ? 3 : 0; // CORREGIDO - GENERADO
+                
+                if (doc.status == 3)
+                {
+                    doc.corrected_by = user.username;
+                    doc.corrected_date = DateTime.Now;
+                }
+                
+                doc.co_us_mo = (Session["USER"] as Usuario).username;
+                doc.fe_us_mo = DateTime.Now;
+                doc.total = rengs.Select(r => r.price_serv).Sum();
+                doc.DocumentoReng = rengs;
 
-                //doc.cuenta_buq = TB_CuentaBuque.Text;
-                //doc.fecha = DateTime.Parse(DE_Fecha.Value.ToString());
-                //doc.cliente = TB_Cliente.Text;
-                //doc.co_mone = DDL_Moneda.Value.ToString();
-                //doc.tasa = decimal.Parse(TB_Tasa.Text.Replace(".", ","));
-                //doc.fec_llegada = DateTime.Parse(DE_FechaLlegada.Value.ToString());
-                //doc.fec_salida = DateTime.Parse(DE_FechaSalida.Value.ToString());
-                //doc.puerto = TB_Puerto.Text;
-                //doc.buque = TB_Buque.Text;
-                //doc.nro_viaje = TB_Viaje.Text;
-                //doc.num_toneladas = int.Parse(TB_Toneladas.Text);
-                //doc.status = doc.status == 2 ? 3 : 0; // CORREGIDO - GENERADO
-                //doc.corrected_by = user.username;
-                //doc.corrected_date = DateTime.Now;
-                //doc.co_us_mo = (Session["USER"] as Usuario).username;
-                //doc.fe_us_mo = DateTime.Now;
-                //doc.total = rengs.Select(r => r.price_serv.Value).Sum();
-                //doc.DocumentoReng = rengs;
+                if (rengs.Count == 0)
+                {
+                    PN_Error.Visible = true;
+                    LBL_Error.Text = "Debes agregar items al documento";
+                }
+                else
+                {
+                    foreach (DocumentoReng r in doc.DocumentoReng)
+                    {
+                        r.co_us_mo = (Session["USER"] as Usuario).username;
+                        r.fe_us_mo = DateTime.Now;
+                    }
 
-                //if (rengs.Count == 0)
-                //{
-                //    PN_Error.Visible = true;
-                //    LBL_Error.Text = "Debes agregar items al documento";
-                //}
-                //else
-                //{
-                //    foreach (DocumentoReng r in doc.DocumentoReng)
-                //    {
-                //        r.co_us_mo = (Session["USER"] as Usuario).username;
-                //        r.fe_us_mo = DateTime.Now;
-                //    }
-
-                //    int result = DocumentoController.Edit(doc);
-                //    if (result == 1)
-                //    {
-                //        Response.Redirect("/Documentos/Index.aspx?new_doc=3");
-                //    }
-                //    else
-                //    {
-                //        PN_Error.Visible = true;
-                //        LBL_Error.Text = "Ha ocurrido un error al modificar el Documento. Ver tabla de Incidentes";
-                //    }
-                //}
+                    int result = DocumentoController.Edit(doc);
+                    if (result == 1)
+                    {
+                        Response.Redirect("/Documentos/Index.aspx?new_doc=3");
+                    }
+                    else
+                    {
+                        PN_Error.Visible = true;
+                        LBL_Error.Text = "Ha ocurrido un error al modificar el Documento. Ver tabla de Incidentes";
+                    }
+                }
             }
             catch (Exception ex)
             {
@@ -405,43 +411,6 @@ namespace SailingMaster.Documentos
             }
         }
 
-        protected void DDL_Moneda_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            //string moneda = DDL_Moneda.Value?.ToString();
-            //if (string.IsNullOrEmpty(moneda))
-            //    moneda = "BSD";
-
-            //Servicio serv;
-            //Moneda mone = MonedaController.GetByID(moneda);
-            //TB_Tasa.Text = mone.tasa.ToString();
-
-            //foreach (DocumentoReng r in rengs)
-            //{
-            //    serv = ServicioController.GetByID(r.co_serv);
-            //    r.price_serv = Math.Round(serv.precio_base / mone.tasa, 2);
-            //}
-
-            //BindGrid(rengs);
-        }
-
-        protected void TB_Tasa_TextChanged(object sender, EventArgs e)
-        {
-            //decimal tasa;
-            //if (!string.IsNullOrEmpty(TB_Tasa.Text))
-            //    tasa = decimal.Parse(TB_Tasa.Text.Replace(".", ","));
-            //else
-            //    tasa = 1;
-
-            //Servicio serv;
-            //foreach (DocumentoReng r in rengs)
-            //{
-            //    serv = ServicioController.GetByID(r.co_serv);
-            //    r.price_serv = Math.Round(serv.precio_base / tasa, 2);
-            //}
-
-            //BindGrid(rengs);
-        }
-
         protected void GV_DocumentoReng_HtmlRowPrepared(object sender, ASPxGridViewTableRowEventArgs e)
         {
             if (e.RowType == DevExpress.Web.GridViewRowType.Data)
@@ -459,14 +428,17 @@ namespace SailingMaster.Documentos
 
         protected void GV_DocumentoReng_HtmlDataCellPrepared(object sender, ASPxGridViewTableDataCellEventArgs e)
         {
-            Documento doc = DocumentoController.GetByID(int.Parse(Request.QueryString["ID"].ToString()));
-
-            if (doc.status == 6)
+            if (Request.QueryString["ID"] != null)
             {
-                if (e.DataColumn.Caption == "Subir Soporte")
+                Documento doc = DocumentoController.GetByID(int.Parse(Request.QueryString["ID"].ToString()));
+
+                if (doc.status == 6)
                 {
-                    ASPxButton button = GV_DocumentoReng.FindRowCellTemplateControl(e.VisibleIndex, e.DataColumn, "BTN_AgregarSoporte") as ASPxButton;
-                    DisableButton(button);
+                    if (e.DataColumn.Caption == "Subir Soporte")
+                    {
+                        ASPxButton button = GV_DocumentoReng.FindRowCellTemplateControl(e.VisibleIndex, e.DataColumn, "BTN_AgregarSoporte") as ASPxButton;
+                        DisableButton(button);
+                    }
                 }
             }
         }
@@ -489,13 +461,13 @@ namespace SailingMaster.Documentos
             {
                 reng_num = rengs.Count + 1,
                 co_serv = e.NewValues["co_serv"] as string,
-                des_serv = serv.descrip,
+                des_serv = serv.des_serv,
                 cantidad = cantidad,
                 co_mone = serv.co_mone,
                 price_serv = serv.precio_base,
-                price_bsd = serv.co_mone == "BSD" ? serv.precio_base : Math.Round(serv.precio_base * mone.tasa, 2),
-                price_usd = serv.co_mone == "USD" ? serv.precio_base : Math.Round((serv.precio_base * mone.tasa) / tasa_usd, 2),
-                price_eur = serv.co_mone == "EUR" ? serv.precio_base : Math.Round((serv.precio_base * mone.tasa) / tasa_eur, 2),
+                price_bsd = (serv.co_mone == "BSD" ? serv.precio_base : Math.Round(serv.precio_base * mone.tasa, 2)) * cantidad,
+                price_usd = (serv.co_mone == "USD" ? serv.precio_base : Math.Round((serv.precio_base * mone.tasa) / tasa_usd, 2)) * cantidad,
+                price_eur = (serv.co_mone == "EUR" ? serv.precio_base : Math.Round((serv.precio_base * mone.tasa) / tasa_eur, 2)) * cantidad,
                 price_liq = 0
             };
             rengs.Add(newRow);
@@ -564,26 +536,14 @@ namespace SailingMaster.Documentos
             GV_DocumentoReng.DataSource = data;
             GV_DocumentoReng.DataBind();
         }
-
-        private void InitRates()
-        {
-            Moneda usd = MonedaController.GetByID("USD");
-            Moneda eur = MonedaController.GetByID("EUR");
-
-            TB_TasaUSD.Text = usd.tasa.ToString();
-            TB_TasaEUR.Text = eur.tasa.ToString();
-            TB_TasaPTR.Text = (60 * usd.tasa).ToString();
-            TB_TasaEURUSD.Text = Math.Round(eur.tasa / usd.tasa, 2).ToString();
-        }
         
         private void CargarDocumento(Documento doc)
         {
-            TB_CuentaBuque.Text = doc.cuenta_buq;
             DE_Fecha.Value = doc.fecha;
-            TB_Cliente.Text = doc.cliente;
-            TB_Buque.Text = doc.buque;
+            DDL_Cliente.Value = doc.co_cli;
+            DDL_Buque.Value = doc.co_buque;
             TB_Flag.Text = doc.flag;
-            DDL_Puerto.Value = doc.puerto;
+            DDL_Puerto.Value = doc.co_puerto;
             TB_Muelle.Text = doc.muelle;
             TB_Horas.Text = doc.horas.ToString();
             TB_ValorUT.Text = doc.valor_ut.ToString();
@@ -597,16 +557,37 @@ namespace SailingMaster.Documentos
             TB_TasaEUR.Text = doc.tasa_eur.ToString();
             TB_TasaPTR.Text = doc.tasa_ptr.ToString();
             TB_TasaEURUSD.Text = Math.Round(doc.tasa_eur / doc.tasa_usd, 2).ToString();
-            // doc.total = doc.DocumentoReng.Select(r => r.price_serv).Sum();
             rengs = doc.DocumentoReng.ToList();
 
-            //foreach (ListEditItem item in DDL_Moneda.Items)
-            //{
-            //    item.Selected = doc.co_mone.ToString() == item.Value.ToString();
-            //}
+            foreach (ListEditItem item in DDL_Cliente.Items)
+            {
+                item.Selected = doc.co_cli.ToString() == item.Value.ToString();
+            }
+
+            foreach (ListEditItem item in DDL_Buque.Items)
+            {
+                item.Selected = doc.co_buque.ToString() == item.Value.ToString();
+            }
+
+            foreach (ListEditItem item in DDL_Puerto.Items)
+            {
+                item.Selected = doc.co_puerto.ToString() == item.Value.ToString();
+            }
         }
 
-        private void BlockAllItems(int status)
+        private void InitAllFields()
+        {
+            Moneda usd = MonedaController.GetByID("USD");
+            Moneda eur = MonedaController.GetByID("EUR");
+
+            DE_Fecha.Value = DateTime.Now;
+            TB_TasaUSD.Text = usd.tasa.ToString();
+            TB_TasaEUR.Text = eur.tasa.ToString();
+            TB_TasaPTR.Text = (60 * usd.tasa).ToString();
+            TB_TasaEURUSD.Text = Math.Round(eur.tasa / usd.tasa, 2).ToString();
+        }
+
+        private void BlockAllFields(int status)
         {
             if (status == 6)
             {
@@ -624,13 +605,24 @@ namespace SailingMaster.Documentos
                 DisableButton(BTN_PreEliminarDocumento);
 
                 // CAMPOS
-                TB_CuentaBuque.Enabled = false;
                 DE_Fecha.Enabled = false;
-                TB_Cliente.Enabled = false;
+                DDL_Cliente.Enabled = false;
+                DDL_Buque.Enabled = false;
+                TB_Flag.Enabled = false;
+                DDL_Puerto.Enabled = false;
+                TB_Muelle.Enabled = false;
+                TB_Horas.Enabled = false;
+                TB_ValorUT.Enabled = false;
+                TB_LOA.Enabled = false;
+                TB_GRT.Enabled = false;
+                TB_NRT.Enabled = false;
+                TB_SDWT.Enabled = false;
                 DE_FechaLlegada.Enabled = false;
                 DE_FechaSalida.Enabled = false;
-                DDL_Puerto.Enabled = false;
-                TB_Buque.Enabled = false;
+                TB_TasaUSD.Enabled = false;
+                TB_TasaEUR.Enabled = false;
+                TB_TasaPTR.Enabled = false;
+                TB_TasaEURUSD.Enabled = false;
             }
         }
 

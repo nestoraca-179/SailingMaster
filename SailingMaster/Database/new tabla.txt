@@ -1,0 +1,16 @@
+cliente
+nro viaje
+buque
+flag
+puerto
+muelle
+horas
+valor ut
+loa
+grt
+nrt
+sdwt
+fec llegada
+hora llegada
+fec salida
+hora salida

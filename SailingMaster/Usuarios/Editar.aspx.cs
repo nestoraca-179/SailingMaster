@@ -29,7 +29,7 @@ namespace SailingMaster.Usuarios
                         CargarUsuario(edit_user);
 
                     IDUser = Request.QueryString["ID"].ToString();
-                    LBL_IDUsuario.Text = "Editar Usuario " + edit_user.descrip;
+                    LBL_IDUsuario.Text = "Editar Usuario " + edit_user.des_usuario;
                 }
             }
             else
@@ -56,7 +56,7 @@ namespace SailingMaster.Usuarios
                 user.ID = int.Parse(IDUser);
                 user.username = TB_Username.Text;
                 // user.password = SecurityController.Encrypt(TB_Password.Text);
-                user.descrip = TB_Descrip.Text;
+                user.des_usuario = TB_Descrip.Text;
                 user.email = TB_Email.Text;
                 user.activo = CK_Activo.Checked;
                 user.tip_usuario = byte.Parse(DDL_TipoUsuario.Value.ToString());
@@ -87,7 +87,7 @@ namespace SailingMaster.Usuarios
         {
             TB_Username.Text = user.username;
             TB_Password.Text = SecurityController.GeneratePointPass(user.password);
-            TB_Descrip.Text = user.descrip;
+            TB_Descrip.Text = user.des_usuario;
             TB_Email.Text = user.email;
             CK_Activo.Checked = user.activo;
             DDL_TipoUsuario.Value = user.tip_usuario;
