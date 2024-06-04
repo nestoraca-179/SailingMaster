@@ -167,7 +167,7 @@ form .row:not(.my-5) {
                         <div class="controls">
                             <label>Buque</label>
                             <dx:ASPxComboBox ID="DDL_Buque" runat="server" Theme="Material" Width="100%" BackColor="#303030" Border-BorderColor="#303030" 
-                                ValueField="ID" TextField="des_buque" DataSourceID="DS_Buque">
+                                ValueField="ID" TextField="des_buque" DataSourceID="DS_Buque" OnSelectedIndexChanged="DDL_Buque_SelectedIndexChanged" AutoPostBack="true">
                                 <Columns>
                                     <dx:ListBoxColumn FieldName="ID" Width="70px" Caption="C&#243;digo"></dx:ListBoxColumn>
                                     <dx:ListBoxColumn FieldName="des_buque" Width="160px" Caption="Descripci&#243;n"></dx:ListBoxColumn>
@@ -223,7 +223,7 @@ form .row:not(.my-5) {
                         <div class="controls">
                             <label>Horas</label>
                             <dx:ASPxTextBox ID="TB_Horas" runat="server" Theme="Material" Width="100%" BackColor="#303030" ForeColor="#F0F0F0" Border-BorderColor="#303030" 
-                                AutoCompleteType="None" ValueType="System.Int32">
+                                AutoCompleteType="None" ValueType="System.Int32" ReadOnly="true">
                                 <ClientSideEvents KeyPress="function (s,e) { onlyNumbers(s, e); }" />
                                 <ValidationSettings Display="Dynamic" ValidationGroup="Documento" ErrorText="" ValidateOnLeave="false" ErrorTextPosition="Bottom">
                                     <RequiredField IsRequired="True" ErrorText="Campo Obligatorio" />
@@ -249,7 +249,7 @@ form .row:not(.my-5) {
                         <div class="controls">
                             <label>L.O.A.</label>
                             <dx:ASPxTextBox ID="TB_LOA" runat="server" Theme="Material" Width="100%" BackColor="#303030" ForeColor="#F0F0F0" Border-BorderColor="#303030" 
-                                AutoCompleteType="None" ValueType="System.Decimal">
+                                AutoCompleteType="None" ValueType="System.Decimal" ReadOnly="true">
                                 <ClientSideEvents KeyPress="function (s,e) { onlyNumbers(s, e); }" />
                                 <ValidationSettings Display="Dynamic" ValidationGroup="Documento" ErrorText="" ValidateOnLeave="false" ErrorTextPosition="Bottom">
                                     <RequiredField IsRequired="True" ErrorText="Campo Obligatorio" />
@@ -261,7 +261,7 @@ form .row:not(.my-5) {
                         <div class="controls">
                             <label>G.R.T.</label>
                             <dx:ASPxTextBox ID="TB_GRT" runat="server" Theme="Material" Width="100%" BackColor="#303030" ForeColor="#F0F0F0" Border-BorderColor="#303030" 
-                                AutoCompleteType="None" ValueType="System.Decimal">
+                                AutoCompleteType="None" ValueType="System.Decimal" ReadOnly="true">
                                 <ClientSideEvents KeyPress="function (s,e) { onlyNumbers(s, e); }" />
                                 <ValidationSettings Display="Dynamic" ValidationGroup="Documento" ErrorText="" ValidateOnLeave="false" ErrorTextPosition="Bottom">
                                     <RequiredField IsRequired="True" ErrorText="Campo Obligatorio" />
@@ -275,7 +275,7 @@ form .row:not(.my-5) {
                         <div class="controls">
                             <label>N.R.T.</label>
                             <dx:ASPxTextBox ID="TB_NRT" runat="server" Theme="Material" Width="100%" BackColor="#303030" ForeColor="#F0F0F0" Border-BorderColor="#303030" 
-                                AutoCompleteType="None" ValueType="System.Int32">
+                                AutoCompleteType="None" ValueType="System.Int32" ReadOnly="true">
                                 <ClientSideEvents KeyPress="function (s,e) { onlyNumbers(s, e); }" />
                                 <ValidationSettings Display="Dynamic" ValidationGroup="Documento" ErrorText="" ValidateOnLeave="false" ErrorTextPosition="Bottom">
                                     <RequiredField IsRequired="True" ErrorText="Campo Obligatorio" />
@@ -287,7 +287,7 @@ form .row:not(.my-5) {
                         <div class="controls">
                             <label>S.D.W.T.</label>
                             <dx:ASPxTextBox ID="TB_SDWT" runat="server" Theme="Material" Width="100%" BackColor="#303030" ForeColor="#F0F0F0" Border-BorderColor="#303030" 
-                                AutoCompleteType="None" ValueType="System.Int32">
+                                AutoCompleteType="None" ValueType="System.Int32" ReadOnly="true">
                                 <ClientSideEvents KeyPress="function (s,e) { onlyNumbers(s, e); }" />
                                 <ValidationSettings Display="Dynamic" ValidationGroup="Documento" ErrorText="" ValidateOnLeave="false" ErrorTextPosition="Bottom">
                                     <RequiredField IsRequired="True" ErrorText="Campo Obligatorio" />
@@ -300,7 +300,8 @@ form .row:not(.my-5) {
                     <div class="col-md-6">
                         <div class="controls">
                             <label>Fecha Llegada</label>
-                            <dx:ASPxDateEdit ID="DE_FechaLlegada" runat="server" Theme="Material" Width="100%" BackColor="#303030" Border-BorderColor="#303030" EditFormat="Date">
+                            <dx:ASPxDateEdit ID="DE_FechaLlegada" runat="server" Theme="Material" Width="100%" BackColor="#303030" Border-BorderColor="#303030" 
+                                EditFormat="Date" OnValueChanged="TB_DateHour_ValueChanged" AutoPostBack="true">
                                 <ValidationSettings Display="Dynamic" ValidationGroup="Documento" ErrorText="" ValidateOnLeave="false" ErrorTextPosition="Bottom">
                                     <RequiredField IsRequired="True" ErrorText="Campo Obligatorio" />
                                 </ValidationSettings>
@@ -310,7 +311,8 @@ form .row:not(.my-5) {
                     <div class="col-md-6">
                         <div class="controls">
                             <label>Hora Llegada</label>
-                            <dx:ASPxTimeEdit ID="TE_HoraLlegada" runat="server" Theme="Material" Width="100%" BackColor="#303030" ForeColor="#F0F0F0" Border-BorderColor="#303030" EditFormat="Time">
+                            <dx:ASPxTimeEdit ID="TE_HoraLlegada" runat="server" Theme="Material" Width="100%" BackColor="#303030" ForeColor="#F0F0F0" 
+                                Border-BorderColor="#303030" EditFormat="Time" OnValueChanged="TB_DateHour_ValueChanged" AutoPostBack="true">
                                 <ValidationSettings Display="Dynamic" ValidationGroup="Documento" ErrorText="" ValidateOnLeave="false" ErrorTextPosition="Bottom">
                                     <RequiredField IsRequired="True" ErrorText="Campo Obligatorio" />
                                 </ValidationSettings>
@@ -322,7 +324,8 @@ form .row:not(.my-5) {
                     <div class="col-md-6">
                         <div class="controls">
                             <label>Fecha Salida</label>
-                            <dx:ASPxDateEdit ID="DE_FechaSalida" runat="server" Theme="Material" Width="100%" BackColor="#303030" Border-BorderColor="#303030" EditFormat="Date">
+                            <dx:ASPxDateEdit ID="DE_FechaSalida" runat="server" Theme="Material" Width="100%" BackColor="#303030" Border-BorderColor="#303030" 
+                                EditFormat="Date" OnValueChanged="TB_DateHour_ValueChanged" AutoPostBack="true">
                                 <ValidationSettings Display="Dynamic" ValidationGroup="Documento" ErrorText="" ValidateOnLeave="false" ErrorTextPosition="Bottom">
                                     <RequiredField IsRequired="True" ErrorText="Campo Obligatorio" />
                                 </ValidationSettings>
@@ -332,7 +335,8 @@ form .row:not(.my-5) {
                     <div class="col-md-6">
                         <div class="controls">
                             <label>Hora Salida</label>
-                            <dx:ASPxTimeEdit ID="TE_HoraSalida" runat="server" Theme="Material" Width="100%" BackColor="#303030" ForeColor="#F0F0F0" Border-BorderColor="#303030" EditFormat="Time">
+                            <dx:ASPxTimeEdit ID="TE_HoraSalida" runat="server" Theme="Material" Width="100%" BackColor="#303030" ForeColor="#F0F0F0" 
+                                Border-BorderColor="#303030" EditFormat="Time" OnValueChanged="TB_DateHour_ValueChanged" AutoPostBack="true">
                                 <ValidationSettings Display="Dynamic" ValidationGroup="Documento" ErrorText="" ValidateOnLeave="false" ErrorTextPosition="Bottom">
                                     <RequiredField IsRequired="True" ErrorText="Campo Obligatorio" />
                                 </ValidationSettings>

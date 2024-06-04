@@ -136,8 +136,8 @@ namespace SailingMaster.Documentos
                 doc.grt = decimal.Parse(TB_GRT.Text);
                 doc.nrt = decimal.Parse(TB_NRT.Text);
                 doc.sdwt = decimal.Parse(TB_SDWT.Text);
-                doc.fec_llegada = DateTime.Parse(DE_FechaLlegada.Value.ToString());
-                doc.fec_salida = DateTime.Parse(DE_FechaSalida.Value.ToString());
+                doc.fec_llegada = GetDateTime(DE_FechaLlegada.Value.ToString(), TE_HoraLlegada.Value.ToString());
+                doc.fec_salida = GetDateTime(DE_FechaSalida.Value.ToString(), TE_HoraSalida.Value.ToString());
                 doc.tasa_usd = decimal.Parse(TB_TasaUSD.Text.Replace(".", ","));
                 doc.tasa_eur = decimal.Parse(TB_TasaEUR.Text.Replace(".", ","));
                 doc.tasa_ptr = decimal.Parse(TB_TasaPTR.Text.Replace(".", ","));
@@ -148,6 +148,8 @@ namespace SailingMaster.Documentos
                 doc.fe_us_mo = DateTime.Now;
                 doc.total = rengs.Select(r => r.price_serv).Sum();
                 doc.DocumentoReng = rengs;
+
+                var hora = TE_HoraLlegada.Value;
 
                 if (rengs.Count == 0)
                 {
@@ -258,8 +260,8 @@ namespace SailingMaster.Documentos
                 doc.grt = decimal.Parse(TB_GRT.Text);
                 doc.nrt = decimal.Parse(TB_NRT.Text);
                 doc.sdwt = decimal.Parse(TB_SDWT.Text);
-                doc.fec_llegada = DateTime.Parse(DE_FechaLlegada.Value.ToString());
-                doc.fec_salida = DateTime.Parse(DE_FechaSalida.Value.ToString());
+                doc.fec_llegada = GetDateTime(DE_FechaLlegada.Value.ToString(), TE_HoraLlegada.Value.ToString());
+                doc.fec_salida = GetDateTime(DE_FechaSalida.Value.ToString(), TE_HoraSalida.Value.ToString());
                 doc.tasa_usd = decimal.Parse(TB_TasaUSD.Text.Replace(".", ","));
                 doc.tasa_eur = decimal.Parse(TB_TasaEUR.Text.Replace(".", ","));
                 doc.tasa_ptr = decimal.Parse(TB_TasaPTR.Text.Replace(".", ","));
@@ -408,6 +410,29 @@ namespace SailingMaster.Documentos
             {
                 PN_Error.Visible = true;
                 LBL_Error.Text = "Ha ocurrido un error al eliminar el Documento. Ver tabla de Incidentes";
+            }
+        }
+
+        protected void DDL_Buque_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            Buque buque = BuqueController.GetByID(int.Parse(DDL_Buque.Value.ToString()));
+
+            TB_LOA.Text = buque.loa.ToString();
+            TB_GRT.Text = buque.grt.ToString();
+            TB_NRT.Text = buque.nrt.ToString();
+            TB_SDWT.Text = buque.sdwt.ToString();
+        }
+
+        protected void TB_DateHour_ValueChanged(object sender, EventArgs e)
+        {
+            if (!string.IsNullOrEmpty(DE_FechaLlegada.Text) && !string.IsNullOrEmpty(TE_HoraLlegada.Text) &&
+                !string.IsNullOrEmpty(DE_FechaSalida.Text) && !string.IsNullOrEmpty(TE_HoraSalida.Text))
+            {
+                DateTime fec_llegada = GetDateTime(DE_FechaLlegada.Value.ToString(), TE_HoraLlegada.Value.ToString());
+                DateTime fec_salida = GetDateTime(DE_FechaSalida.Value.ToString(), TE_HoraSalida.Value.ToString());
+
+                TimeSpan diff = fec_salida.Subtract(fec_llegada);
+                TB_Horas.Text = ((diff.Days * 24) + diff.Hours).ToString();
             }
         }
 
@@ -579,12 +604,14 @@ namespace SailingMaster.Documentos
         {
             Moneda usd = MonedaController.GetByID("USD");
             Moneda eur = MonedaController.GetByID("EUR");
+            Moneda utv = MonedaController.GetByID("UTV");
 
             DE_Fecha.Value = DateTime.Now;
             TB_TasaUSD.Text = usd.tasa.ToString();
             TB_TasaEUR.Text = eur.tasa.ToString();
             TB_TasaPTR.Text = (60 * usd.tasa).ToString();
             TB_TasaEURUSD.Text = Math.Round(eur.tasa / usd.tasa, 2).ToString();
+            TB_ValorUT.Text = utv.tasa.ToString();
         }
 
         private void BlockAllFields(int status)
@@ -635,6 +662,14 @@ namespace SailingMaster.Documentos
             control.Attributes.Remove("data-target");
             control.Attributes.CssStyle[HtmlTextWriterStyle.Cursor] = "default";
             control.Enabled = false;
+        }
+
+        private DateTime GetDateTime(string date, string time)
+        {
+            DateTime d = DateTime.Parse(date);
+            DateTime t = DateTime.Parse(time);
+
+            return new DateTime(d.Year, d.Month, d.Day, t.Hour, t.Minute, 0);
         }
     }
 }
