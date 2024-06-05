@@ -386,7 +386,7 @@ form .row:not(.my-5) {
                         <div class="controls">
                             <label style="min-width: 110px;">Tasa USD/BSD</label>
                             <dx:ASPxTextBox ID="TB_TasaUSD" runat="server" Theme="Material" Width="100%" BackColor="#303030" ForeColor="#F0F0F0" Border-BorderColor="#303030" 
-                                AutoCompleteType="None" ValueType="System.Decimal" AutoPostBack="true">
+                                AutoCompleteType="None" ValueType="System.Decimal" AutoPostBack="true" ReadOnly="true">
                                 <ClientSideEvents KeyPress="function (s,e) { onlyNumbers(s, e); }" />
                                 <ValidationSettings Display="Dynamic" ValidationGroup="Documento" ErrorText="" ValidateOnLeave="false" ErrorTextPosition="Bottom">
                                     <RequiredField IsRequired="True" ErrorText="Obligatorio" />
@@ -398,7 +398,7 @@ form .row:not(.my-5) {
                         <div class="controls">
                             <label style="min-width: 110px;">Tasa EUR/BSD</label>
                             <dx:ASPxTextBox ID="TB_TasaEUR" runat="server" Theme="Material" Width="100%" BackColor="#303030" ForeColor="#F0F0F0" Border-BorderColor="#303030" 
-                                AutoCompleteType="None" ValueType="System.Decimal" AutoPostBack="true">
+                                AutoCompleteType="None" ValueType="System.Decimal" AutoPostBack="true" ReadOnly="true">
                                 <ClientSideEvents KeyPress="function (s,e) { onlyNumbers(s, e); }" />
                                 <ValidationSettings Display="Dynamic" ValidationGroup="Documento" ErrorText="" ValidateOnLeave="false" ErrorTextPosition="Bottom">
                                     <RequiredField IsRequired="True" ErrorText="Obligatorio" />
@@ -412,7 +412,7 @@ form .row:not(.my-5) {
                         <div class="controls">
                             <label style="min-width: 110px;">Tasa PTR/BSD</label>
                             <dx:ASPxTextBox ID="TB_TasaPTR" runat="server" Theme="Material" Width="100%" BackColor="#303030" ForeColor="#F0F0F0" Border-BorderColor="#303030" 
-                                AutoCompleteType="None" ValueType="System.Decimal" AutoPostBack="true">
+                                AutoCompleteType="None" ValueType="System.Decimal" AutoPostBack="true" ReadOnly="true">
                                 <ClientSideEvents KeyPress="function (s,e) { onlyNumbers(s, e); }" />
                                 <ValidationSettings Display="Dynamic" ValidationGroup="Documento" ErrorText="" ValidateOnLeave="false" ErrorTextPosition="Bottom">
                                     <RequiredField IsRequired="True" ErrorText="Obligatorio" />
@@ -424,7 +424,7 @@ form .row:not(.my-5) {
                         <div class="controls">
                             <label style="min-width: 110px;">Tasa EUR/USD</label>
                             <dx:ASPxTextBox ID="TB_TasaEURUSD" runat="server" Theme="Material" Width="100%" BackColor="#303030" ForeColor="#F0F0F0" Border-BorderColor="#303030" 
-                                AutoCompleteType="None" ValueType="System.Decimal" AutoPostBack="true">
+                                AutoCompleteType="None" ValueType="System.Decimal" AutoPostBack="true" ReadOnly="true">
                                 <ClientSideEvents KeyPress="function (s,e) { onlyNumbers(s, e); }" />
                                 <ValidationSettings Display="Dynamic" ValidationGroup="Documento" ErrorText="" ValidateOnLeave="false" ErrorTextPosition="Bottom">
                                     <RequiredField IsRequired="True" ErrorText="Obligatorio" />

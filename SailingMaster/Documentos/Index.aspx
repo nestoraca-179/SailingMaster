@@ -47,12 +47,12 @@
                 <SettingsDetail ShowDetailRow="True" AllowOnlyOneMasterRowExpanded="True"></SettingsDetail>
                 <SettingsSearchPanel Visible="True"></SettingsSearchPanel>
                 <Columns>
-                    <%--<dx:GridViewDataTextColumn FieldName="cuenta_buq" ReadOnly="True" VisibleIndex="0" Caption="Cuenta de Buque">
+                    <dx:GridViewDataTextColumn FieldName="des_buque" ReadOnly="True" VisibleIndex="0" Caption="Buque">
                         <HeaderStyle BackColor="#102140" Border-BorderWidth="0px" ForeColor="#F0F0F0" Paddings-Padding="5px"></HeaderStyle>
                         <CellStyle ForeColor="#F0F0F0" Border-BorderWidth="0px">
                             <Paddings Padding="12px"></Paddings>
                         </CellStyle>
-                    </dx:GridViewDataTextColumn>--%>
+                    </dx:GridViewDataTextColumn>
                     <%--<dx:GridViewDataTextColumn FieldName="co_mone" VisibleIndex="1" Caption="Moneda">
                         <HeaderStyle BackColor="#102140" Border-BorderWidth="0px" ForeColor="#F0F0F0" Paddings-Padding="5px"></HeaderStyle>
                         <CellStyle ForeColor="#F0F0F0" Border-BorderWidth="0px">
@@ -196,20 +196,18 @@
                     </DetailRow>
                 </Templates>
             </dx:ASPxGridView>
-            <asp:SqlDataSource runat="server" ID="DS_Documento" ConnectionString='<%$ ConnectionStrings:SailingMasterConnectionString %>' SelectCommand="select ID, 
-            fecha, fec_llegada, fec_salida, total, approved_date, reviewed_date, corrected_date, 
-            collected_date, liquidated_date, closed_date, co_us_in, approved_by, reviewed_by, reviewed_observ, corrected_by, collected_by, collected_amount, collected_bank, 
-            collected_date_transf, collected_nref_transf, liquidated_by, closed_by, status,
-            case status
-	            when 0 then 'GENERADO'
-	            when 1 then 'APROBADO'
-	            when 2 then 'REVISADO'
-	            when 3 then 'CORREGIDO'
-                when 4 then 'COBRADO'
-	            when 5 then 'LIQUIDADO'
-	            when 6 then 'CERRADO'
-            end as doc_status
-            from Documento"></asp:SqlDataSource>
+            <asp:SqlDataSource runat="server" ID="DS_Documento" ConnectionString='<%$ ConnectionStrings:SailingMasterConnectionString %>' SelectCommand="select D.ID, B.des_buque, D.fecha, D.fec_llegada, D.fec_salida, D.total, D.approved_date, D.reviewed_date, D.corrected_date, D.collected_date, D.liquidated_date, D.closed_date, D.co_us_in, D.approved_by, D.reviewed_by, D.reviewed_observ, D.corrected_by, D.collected_by, D.collected_amount, D.collected_bank, D.collected_date_transf, D.collected_nref_transf, D.liquidated_by, D.closed_by, D.status,
+case D.status
+     when 0 then 'GENERADO'
+     when 1 then 'APROBADO'
+     when 2 then 'REVISADO'
+     when 3 then 'CORREGIDO'
+     when 4 then 'COBRADO'
+     when 5 then 'LIQUIDADO'
+     when 6 then 'CERRADO'
+end as doc_status
+from Documento D
+inner join Buque B on B.ID = D.co_buque"></asp:SqlDataSource>
         </div>
     </asp:Panel>
 </form>

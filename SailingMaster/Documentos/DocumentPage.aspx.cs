@@ -149,8 +149,6 @@ namespace SailingMaster.Documentos
                 doc.total = rengs.Select(r => r.price_serv).Sum();
                 doc.DocumentoReng = rengs;
 
-                var hora = TE_HoraLlegada.Value;
-
                 if (rengs.Count == 0)
                 {
                     PN_Error.Visible = true;
@@ -566,6 +564,7 @@ namespace SailingMaster.Documentos
         {
             DE_Fecha.Value = doc.fecha;
             DDL_Cliente.Value = doc.co_cli;
+            TB_NroViaje.Text = doc.nro_viaje;
             DDL_Buque.Value = doc.co_buque;
             TB_Flag.Text = doc.flag;
             DDL_Puerto.Value = doc.co_puerto;
@@ -577,7 +576,9 @@ namespace SailingMaster.Documentos
             TB_NRT.Text = doc.nrt.ToString();
             TB_SDWT.Text = doc.sdwt.ToString();
             DE_FechaLlegada.Value = doc.fec_llegada;
+            TE_HoraLlegada.Value = doc.fec_llegada;
             DE_FechaSalida.Value = doc.fec_salida;
+            TE_HoraSalida.Value = doc.fec_salida;
             TB_TasaUSD.Text = doc.tasa_usd.ToString();
             TB_TasaEUR.Text = doc.tasa_eur.ToString();
             TB_TasaPTR.Text = doc.tasa_ptr.ToString();
