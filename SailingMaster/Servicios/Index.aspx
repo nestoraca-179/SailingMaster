@@ -43,7 +43,7 @@
                             <Paddings Padding="12px"></Paddings>
                         </CellStyle>
                     </dx:GridViewDataTextColumn>
-                    <dx:GridViewDataTextColumn FieldName="descrip" VisibleIndex="1" Caption="Descripción">
+                    <dx:GridViewDataTextColumn FieldName="des_serv" VisibleIndex="1" Caption="Descripción">
                         <HeaderStyle BackColor="#102140" Border-BorderWidth="0px" ForeColor="#F0F0F0" Paddings-Padding="5px"></HeaderStyle>
                         <CellStyle ForeColor="#F0F0F0" Border-BorderWidth="0px">
                             <Paddings Padding="12px"></Paddings>
@@ -103,9 +103,9 @@
                     <SearchPanel BackColor="#464C53"></SearchPanel>
                 </Styles>
             </dx:ASPxGridView>
-            <asp:SqlDataSource runat="server" ID="DS_Servicio" ConnectionString='<%$ ConnectionStrings:SailingMasterConnectionString %>' SelectCommand="select S.ID, S.descrip, TS.des_tipo, S.co_mone, S.precio_base, S.activo
-from Servicio S
-inner join TipoServicio TS on TS.ID = S.tip_serv"></asp:SqlDataSource>
+            <asp:SqlDataSource runat="server" ID="DS_Servicio" ConnectionString='<%$ ConnectionStrings:SailingMasterConnectionString %>' SelectCommand="select S.ID, S.des_serv, TS.des_tipo, S.co_mone, S.precio_base, S.activo
+            from Servicio S
+            inner join TipoServicio TS on TS.ID = S.tip_serv"></asp:SqlDataSource>
         </div>
     </asp:Panel>
     <!-- MODAL DELETE -->

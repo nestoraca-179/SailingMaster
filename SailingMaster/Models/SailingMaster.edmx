@@ -50,14 +50,15 @@
             <PropertyRef Name="ID" />
           </Key>
           <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="co_buque" Type="int" Nullable="false" />
-          <Property Name="nro_viaje" Type="varchar" MaxLength="25" Nullable="false" />
           <Property Name="fecha" Type="smalldatetime" Nullable="false" />
           <Property Name="co_cli" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="nro_viaje" Type="varchar" MaxLength="25" Nullable="false" />
+          <Property Name="co_buque" Type="int" Nullable="false" />
           <Property Name="flag" Type="varchar" MaxLength="20" Nullable="false" />
-          <Property Name="horas" Type="int" Nullable="false" />
           <Property Name="co_puerto" Type="varchar" MaxLength="10" Nullable="false" />
           <Property Name="muelle" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="horas" Type="int" Nullable="false" />
+          <Property Name="valor_ut" Type="decimal" Precision="18" Scale="2" Nullable="false" />
           <Property Name="loa" Type="decimal" Precision="18" Scale="2" Nullable="false" />
           <Property Name="grt" Type="decimal" Precision="18" Scale="2" Nullable="false" />
           <Property Name="nrt" Type="decimal" Precision="18" Scale="2" Nullable="false" />
@@ -68,8 +69,8 @@
           <Property Name="tasa_eur" Type="decimal" Precision="18" Scale="2" Nullable="false" />
           <Property Name="tasa_ptr" Type="decimal" Precision="18" Scale="2" Nullable="false" />
           <Property Name="eur_usd" Type="decimal" Precision="18" Scale="2" Nullable="false" />
-          <Property Name="valor_ut" Type="decimal" Precision="18" Scale="2" Nullable="false" />
           <Property Name="total" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="total_usd" Type="decimal" Precision="18" Scale="2" />
           <Property Name="status" Type="int" Nullable="false" />
           <Property Name="approved_by" Type="varchar" MaxLength="20" />
           <Property Name="approved_date" Type="datetime" />
@@ -493,6 +494,7 @@
           <NavigationProperty Name="Cliente" Relationship="SailingMasterModel.FK__Documento__co_cl__29AC2CE0" FromRole="Documento" ToRole="Cliente" />
           <NavigationProperty Name="Puerto" Relationship="SailingMasterModel.FK__Documento__co_pu__324172E1" FromRole="Documento" ToRole="Puerto" />
           <NavigationProperty Name="DocumentoReng" Relationship="SailingMasterModel.FK__DocumentoR__co_pr__0F624AF8" FromRole="Documento" ToRole="DocumentoReng" />
+          <Property Name="total_usd" Type="Decimal" Precision="18" Scale="2" />
         </EntityType>
         <EntityType Name="DocumentoReng">
           <Key>
@@ -765,6 +767,7 @@
           <EntitySetMapping Name="Documento">
             <EntityTypeMapping TypeName="SailingMasterModel.Documento">
               <MappingFragment StoreEntitySet="Documento">
+                <ScalarProperty Name="total_usd" ColumnName="total_usd" />
                 <ScalarProperty Name="fe_us_mo" ColumnName="fe_us_mo" />
                 <ScalarProperty Name="co_us_mo" ColumnName="co_us_mo" />
                 <ScalarProperty Name="fe_us_in" ColumnName="fe_us_in" />

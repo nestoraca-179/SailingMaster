@@ -41,7 +41,7 @@
             <li><a href="/Usuarios/Index.aspx" id="item_users" runat="server"><i class="fas fa-user"></i><p class="m-0">Usuarios</p></a></li>
         </ul>
     </div>
-    <div class="col-10 container">
+    <div class="col-10 container-fluid">
         <asp:ContentPlaceHolder ID="MainContent" runat="server"></asp:ContentPlaceHolder>
     </div>
 </section>

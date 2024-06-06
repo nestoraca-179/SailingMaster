@@ -17,7 +17,7 @@
         setTimeout(function () { $("#modal-delete").modal("show"); }, 1);
     }
 </script>
-<form id="Form1" runat="server" class="container">
+<form id="Form1" runat="server" class="container-fluid">
     <asp:Panel ID="PN_Success" runat="server" Width="100%" CssClass="mt-2" Visible="false">
         <div class="alert alert-success m-0">
             <dx:ASPxLabel ID="LBL_Success" runat="server" Width="100%" Font-Size="14px" CssClass="m-0"></dx:ASPxLabel>
@@ -203,7 +203,10 @@
                     </DetailRow>
                 </Templates>
             </dx:ASPxGridView>
-            <asp:SqlDataSource runat="server" ID="DS_Documento" ConnectionString='<%$ ConnectionStrings:SailingMasterConnectionString %>' SelectCommand="select D.ID, B.des_buque, D.fecha, D.nro_viaje, D.fec_llegada, D.fec_salida, D.total, (D.total / D.tasa_usd) as total_usd, D.approved_date, D.reviewed_date, D.corrected_date, D.collected_date, D.liquidated_date, D.closed_date, D.co_us_in, D.approved_by, D.reviewed_by, D.reviewed_observ, D.corrected_by, D.collected_by, D.collected_amount, D.collected_bank, D.collected_date_transf, D.collected_nref_transf, D.liquidated_by, D.closed_by, D.status,
+            <asp:SqlDataSource runat="server" ID="DS_Documento" ConnectionString='<%$ ConnectionStrings:SailingMasterConnectionString %>' SelectCommand="select D.ID, B.des_buque, 
+            D.fecha, D.nro_viaje, D.fec_llegada, D.fec_salida, D.total, D.total_usd, D.approved_date, D.reviewed_date, D.corrected_date, D.collected_date, D.liquidated_date, 
+            D.closed_date, D.co_us_in, D.approved_by, D.reviewed_by, D.reviewed_observ, D.corrected_by, D.collected_by, D.collected_amount, D.collected_bank, D.collected_date_transf, 
+            D.collected_nref_transf, D.liquidated_by, D.closed_by, D.status,
             case D.status
                  when 0 then 'GENERADO'
                  when 1 then 'APROBADO'

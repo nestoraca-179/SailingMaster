@@ -143,6 +143,7 @@ namespace SailingMaster.Documentos
                 doc.co_us_mo = (Session["USER"] as Usuario).username;
                 doc.fe_us_mo = DateTime.Now;
                 doc.total = rengs.Select(r => r.price_bsd).Sum();
+                doc.total_usd = rengs.Select(r => r.price_usd).Sum();
                 doc.DocumentoReng = rengs;
 
                 if (rengs.Count == 0)
@@ -270,6 +271,7 @@ namespace SailingMaster.Documentos
                 doc.co_us_mo = (Session["USER"] as Usuario).username;
                 doc.fe_us_mo = DateTime.Now;
                 doc.total = rengs.Select(r => r.price_bsd).Sum();
+                doc.total_usd = rengs.Select(r => r.price_usd).Sum();
                 doc.DocumentoReng = rengs;
 
                 if (rengs.Count == 0)
@@ -464,16 +466,7 @@ namespace SailingMaster.Documentos
         protected void GV_DocumentoReng_RowInserting(object sender, DevExpress.Web.Data.ASPxDataInsertingEventArgs e)
         {
             Servicio serv = ServicioController.GetByID(e.NewValues["co_serv"] as string);
-            Moneda mone = MonedaController.GetByID(serv.co_mone);
-
             int cantidad = Convert.ToInt32(e.NewValues["cantidad"]);
-            decimal tasa_usd = MonedaController.GetByID("USD").tasa;
-            decimal tasa_eur = MonedaController.GetByID("EUR").tasa;
-            //decimal tasa;
-            //if (!string.IsNullOrEmpty(TB_Tasa.Text))
-            //    tasa = decimal.Parse(TB_Tasa.Text.Replace(".", ","));
-            //else
-            //    tasa = mone.tasa;
 
             var newRow = new DocumentoReng
             {
@@ -483,9 +476,9 @@ namespace SailingMaster.Documentos
                 cantidad = cantidad,
                 co_mone = serv.co_mone,
                 price_serv = serv.precio_base,
-                price_bsd = (serv.co_mone == "BSD" ? serv.precio_base : Math.Round(serv.precio_base * mone.tasa, 2)) * cantidad,
-                price_usd = (serv.co_mone == "USD" ? serv.precio_base : Math.Round((serv.precio_base * mone.tasa) / tasa_usd, 2)) * cantidad,
-                price_eur = (serv.co_mone == "EUR" ? serv.precio_base : Math.Round((serv.precio_base * mone.tasa) / tasa_eur, 2)) * cantidad,
+                price_bsd = (serv.co_mone == "BSD" ? serv.precio_base : MonedaController.ConvertToBSD(serv)) * cantidad,
+                price_usd = (serv.co_mone == "USD" ? serv.precio_base : MonedaController.ConvertToUSD(serv)) * cantidad,
+                price_eur = (serv.co_mone == "EUR" ? serv.precio_base : MonedaController.ConvertToEUR(serv)) * cantidad,
                 price_liq = 0
             };
             rengs.Add(newRow);
@@ -497,32 +490,31 @@ namespace SailingMaster.Documentos
 
         protected void GV_DocumentoReng_RowUpdating(object sender, DevExpress.Web.Data.ASPxDataUpdatingEventArgs e)
         {
-            //int reng_num = Convert.ToInt32(e.Keys["reng_num"]);
-            //var row = rengs.Find(r => r.reng_num == reng_num);
+            int reng_num = Convert.ToInt32(e.Keys["reng_num"]);
+            var row = rengs.Find(r => r.reng_num == reng_num);
 
-            //string moneda = DDL_Moneda.Value?.ToString();
-            //if (string.IsNullOrEmpty(moneda))
-            //    moneda = "BSD";
+            Servicio serv = ServicioController.GetByID(e.NewValues["co_serv"].ToString());
+            Moneda mone = MonedaController.GetByID(serv.co_mone);
 
-            //Servicio serv = ServicioController.GetByID(row.co_serv);
-            //Moneda mone = MonedaController.GetByID(moneda);
+            int cantidad = Convert.ToInt32(e.NewValues["cantidad"]);
+            decimal tasa_usd = MonedaController.GetByID("USD").tasa;
+            decimal tasa_eur = MonedaController.GetByID("EUR").tasa;
 
-            //decimal tasa;
-            //if (!string.IsNullOrEmpty(TB_Tasa.Text))
-            //    tasa = decimal.Parse(TB_Tasa.Text.Replace(".", ","));
-            //else
-            //    tasa = mone.tasa;
+            if (row != null)
+            {
+                row.co_serv = e.NewValues["co_serv"] as string;
+                row.des_serv = serv.des_serv;
+                row.cantidad = cantidad;
+                row.co_mone = serv.co_mone;
+                row.price_serv = serv.precio_base;
+                row.price_bsd = (serv.co_mone == "BSD" ? serv.precio_base : MonedaController.ConvertToBSD(serv)) * cantidad;
+                row.price_usd = (serv.co_mone == "USD" ? serv.precio_base : MonedaController.ConvertToUSD(serv)) * cantidad;
+                row.price_eur = (serv.co_mone == "EUR" ? serv.precio_base : MonedaController.ConvertToEUR(serv)) * cantidad;
+            }
 
-            //if (row != null)
-            //{
-            //    row.co_serv = e.NewValues["co_serv"] as string;
-            //    row.des_serv = ServicioController.GetByID(e.NewValues["co_serv"] as string).descrip;
-            //    row.price_serv = Math.Round(serv.precio_base / tasa, 2);
-            //}
-
-            //e.Cancel = true;
-            //BindGrid(rengs);
-            //GV_DocumentoReng.CancelEdit();
+            e.Cancel = true;
+            BindGrid(rengs);
+            GV_DocumentoReng.CancelEdit();
         }
 
         protected void GV_DocumentoReng_RowDeleting(object sender, DevExpress.Web.Data.ASPxDataDeletingEventArgs e)
@@ -616,6 +608,13 @@ namespace SailingMaster.Documentos
 
         private void BlockAllFields(int status)
         {
+            if (status == 0)
+            {
+                DisableButton(BTN_PreCobrarDocumento);
+                DisableButton(BTN_PreLiquidarDocumento);
+                DisableButton(BTN_PreCerrarDocumento);
+            }
+
             if (status == 6)
             {
                 // COLUMNA
