@@ -92,10 +92,6 @@ namespace SailingMaster.Documentos
                     else // AGREGANDO
                     {
                         InitAllFields();
-                        LBL_TotalRecibido.Text = "0,00";
-                        LBL_TotalCancelado.Text = "0,00";
-                        LBL_Balance.Text = "0,00";
-
                         if (!IsPostBack)
                             rengs = new List<DocumentoReng>();
                     }
@@ -146,7 +142,7 @@ namespace SailingMaster.Documentos
                 doc.fe_us_in = DateTime.Now;
                 doc.co_us_mo = (Session["USER"] as Usuario).username;
                 doc.fe_us_mo = DateTime.Now;
-                doc.total = rengs.Select(r => r.price_serv).Sum();
+                doc.total = rengs.Select(r => r.price_bsd).Sum();
                 doc.DocumentoReng = rengs;
 
                 if (rengs.Count == 0)
@@ -273,7 +269,7 @@ namespace SailingMaster.Documentos
                 
                 doc.co_us_mo = (Session["USER"] as Usuario).username;
                 doc.fe_us_mo = DateTime.Now;
-                doc.total = rengs.Select(r => r.price_serv).Sum();
+                doc.total = rengs.Select(r => r.price_bsd).Sum();
                 doc.DocumentoReng = rengs;
 
                 if (rengs.Count == 0)
@@ -451,13 +447,12 @@ namespace SailingMaster.Documentos
 
         protected void GV_DocumentoReng_HtmlDataCellPrepared(object sender, ASPxGridViewTableDataCellEventArgs e)
         {
-            if (Request.QueryString["ID"] != null)
+            if (e.DataColumn.Caption == "Subir Soporte")
             {
-                Documento doc = DocumentoController.GetByID(int.Parse(Request.QueryString["ID"].ToString()));
-
-                if (doc.status == 6)
+                if (Request.QueryString["ID"] != null)
                 {
-                    if (e.DataColumn.Caption == "Subir Soporte")
+                    Documento doc = DocumentoController.GetByID(int.Parse(Request.QueryString["ID"].ToString()));
+                    if (doc.status != 5)
                     {
                         ASPxButton button = GV_DocumentoReng.FindRowCellTemplateControl(e.VisibleIndex, e.DataColumn, "BTN_AgregarSoporte") as ASPxButton;
                         DisableButton(button);
@@ -613,6 +608,10 @@ namespace SailingMaster.Documentos
             TB_TasaPTR.Text = (60 * usd.tasa).ToString();
             TB_TasaEURUSD.Text = Math.Round(eur.tasa / usd.tasa, 2).ToString();
             TB_ValorUT.Text = utv.tasa.ToString();
+            LBL_TotalRecibido.Text = "0,00";
+            LBL_TotalCancelado.Text = "0,00";
+            LBL_Balance.Text = "0,00";
+            GV_DocumentoReng.Columns[GV_DocumentoReng.Columns.Count - 1].Visible = false;
         }
 
         private void BlockAllFields(int status)

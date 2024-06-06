@@ -53,75 +53,82 @@
                             <Paddings Padding="12px"></Paddings>
                         </CellStyle>
                     </dx:GridViewDataTextColumn>
-                    <%--<dx:GridViewDataTextColumn FieldName="co_mone" VisibleIndex="1" Caption="Moneda">
-                        <HeaderStyle BackColor="#102140" Border-BorderWidth="0px" ForeColor="#F0F0F0" Paddings-Padding="5px"></HeaderStyle>
-                        <CellStyle ForeColor="#F0F0F0" Border-BorderWidth="0px">
-                            <Paddings Padding="12px"></Paddings>
-                        </CellStyle>
-                    </dx:GridViewDataTextColumn>--%>
-                    <dx:GridViewDataTextColumn FieldName="total" VisibleIndex="2" Caption="Total">
-                        <PropertiesTextEdit DisplayFormatString="{0:N2}"></PropertiesTextEdit>
+                    <dx:GridViewDataTextColumn FieldName="nro_viaje" VisibleIndex="1" Caption="Nro. Viaje">
                         <HeaderStyle BackColor="#102140" Border-BorderWidth="0px" ForeColor="#F0F0F0" Paddings-Padding="5px"></HeaderStyle>
                         <CellStyle ForeColor="#F0F0F0" Border-BorderWidth="0px">
                             <Paddings Padding="12px"></Paddings>
                         </CellStyle>
                     </dx:GridViewDataTextColumn>
-                    <dx:GridViewDataTextColumn FieldName="doc_status" VisibleIndex="3" Caption="Status">
+                    <dx:GridViewDataTextColumn FieldName="total" VisibleIndex="2" Caption="Total BSD">
+                        <PropertiesTextEdit DisplayFormatString="{0:N2}"></PropertiesTextEdit>
+                        <HeaderStyle BackColor="#102140" Border-BorderWidth="0px" ForeColor="#F0F0F0" Paddings-Padding="5px"></HeaderStyle>
+                        <CellStyle ForeColor="#F0F0F0" Border-BorderWidth="0px" HorizontalAlign="Left">
+                            <Paddings Padding="12px"></Paddings>
+                        </CellStyle>
+                    </dx:GridViewDataTextColumn>
+                    <dx:GridViewDataTextColumn FieldName="total_usd" VisibleIndex="3" Caption="Total USD">
+                        <PropertiesTextEdit DisplayFormatString="{0:N2}"></PropertiesTextEdit>
+                        <HeaderStyle BackColor="#102140" Border-BorderWidth="0px" ForeColor="#F0F0F0" Paddings-Padding="5px"></HeaderStyle>
+                        <CellStyle ForeColor="#F0F0F0" Border-BorderWidth="0px" HorizontalAlign="Left">
+                            <Paddings Padding="12px"></Paddings>
+                        </CellStyle>
+                    </dx:GridViewDataTextColumn>
+                    <dx:GridViewDataTextColumn FieldName="doc_status" VisibleIndex="4" Caption="Status">
                         <HeaderStyle BackColor="#102140" Border-BorderWidth="0px" ForeColor="#F0F0F0" Paddings-Padding="5px"></HeaderStyle>
                         <CellStyle ForeColor="#F0F0F0" Border-BorderWidth="0px" Font-Bold="true">
                             <Paddings Padding="12px"></Paddings>
                         </CellStyle>
                     </dx:GridViewDataTextColumn>
-                    <dx:GridViewDataDateColumn FieldName="fecha" VisibleIndex="4" Caption="Fec. Generacion">
+                    <dx:GridViewDataDateColumn FieldName="fecha" VisibleIndex="5" Caption="Fec. Generacion">
                         <PropertiesDateEdit DisplayFormatString="dd/MM/yyyy HH:mm"></PropertiesDateEdit>
                         <HeaderStyle BackColor="#102140" Border-BorderWidth="0px" ForeColor="#F0F0F0" Paddings-Padding="5px"></HeaderStyle>
                         <CellStyle ForeColor="#F0F0F0" Border-BorderWidth="0px">
                             <Paddings Padding="12px"></Paddings>
                         </CellStyle>
                     </dx:GridViewDataDateColumn>
-                    <dx:GridViewDataDateColumn FieldName="approved_date" VisibleIndex="5" Caption="Fec. Aprobacion">
+                    <dx:GridViewDataDateColumn FieldName="approved_date" VisibleIndex="6" Caption="Fec. Aprobacion">
                         <PropertiesDateEdit DisplayFormatString="dd/MM/yyyy HH:mm"></PropertiesDateEdit>
                         <HeaderStyle BackColor="#102140" Border-BorderWidth="0px" ForeColor="#F0F0F0" Paddings-Padding="5px"></HeaderStyle>
                         <CellStyle ForeColor="#F0F0F0" Border-BorderWidth="0px">
                             <Paddings Padding="12px"></Paddings>
                         </CellStyle>
                     </dx:GridViewDataDateColumn>
-                    <dx:GridViewDataDateColumn FieldName="reviewed_date" VisibleIndex="6" Caption="Fec. Revision">
+                    <dx:GridViewDataDateColumn FieldName="reviewed_date" VisibleIndex="7" Caption="Fec. Revision">
                         <PropertiesDateEdit DisplayFormatString="dd/MM/yyyy HH:mm"></PropertiesDateEdit>
                         <HeaderStyle BackColor="#102140" Border-BorderWidth="0px" ForeColor="#F0F0F0" Paddings-Padding="5px"></HeaderStyle>
                         <CellStyle ForeColor="#F0F0F0" Border-BorderWidth="0px">
                             <Paddings Padding="12px"></Paddings>
                         </CellStyle>
                     </dx:GridViewDataDateColumn>
-                    <dx:GridViewDataDateColumn FieldName="corrected_date" VisibleIndex="7" Caption="Fec. Correccion">
+                    <dx:GridViewDataDateColumn FieldName="corrected_date" VisibleIndex="8" Caption="Fec. Correccion">
                         <PropertiesDateEdit DisplayFormatString="dd/MM/yyyy HH:mm"></PropertiesDateEdit>
                         <HeaderStyle BackColor="#102140" Border-BorderWidth="0px" ForeColor="#F0F0F0" Paddings-Padding="5px"></HeaderStyle>
                         <CellStyle ForeColor="#F0F0F0" Border-BorderWidth="0px">
                             <Paddings Padding="12px"></Paddings>
                         </CellStyle>
                     </dx:GridViewDataDateColumn>
-                    <dx:GridViewDataDateColumn FieldName="collected_date" VisibleIndex="8" Caption="Fec. Cobro">
+                    <dx:GridViewDataDateColumn FieldName="collected_date" VisibleIndex="9" Caption="Fec. Cobro">
                         <PropertiesDateEdit DisplayFormatString="dd/MM/yyyy HH:mm"></PropertiesDateEdit>
                         <HeaderStyle BackColor="#102140" Border-BorderWidth="0px" ForeColor="#F0F0F0" Paddings-Padding="5px"></HeaderStyle>
                         <CellStyle ForeColor="#F0F0F0" Border-BorderWidth="0px">
                             <Paddings Padding="12px"></Paddings>
                         </CellStyle>
                     </dx:GridViewDataDateColumn>
-                    <dx:GridViewDataDateColumn FieldName="liquidated_date" VisibleIndex="9" Caption="Fec. Liquidacion">
+                    <dx:GridViewDataDateColumn FieldName="liquidated_date" VisibleIndex="10" Caption="Fec. Liquidacion">
                         <PropertiesDateEdit DisplayFormatString="dd/MM/yyyy HH:mm"></PropertiesDateEdit>
                         <HeaderStyle BackColor="#102140" Border-BorderWidth="0px" ForeColor="#F0F0F0" Paddings-Padding="5px"></HeaderStyle>
                         <CellStyle ForeColor="#F0F0F0" Border-BorderWidth="0px">
                             <Paddings Padding="12px"></Paddings>
                         </CellStyle>
                     </dx:GridViewDataDateColumn>
-                    <dx:GridViewDataDateColumn FieldName="closed_date" VisibleIndex="10" Caption="Fec. Cerrada">
+                    <dx:GridViewDataDateColumn FieldName="closed_date" VisibleIndex="11" Caption="Fec. Cerrada">
                         <PropertiesDateEdit DisplayFormatString="dd/MM/yyyy HH:mm"></PropertiesDateEdit>
                         <HeaderStyle BackColor="#102140" Border-BorderWidth="0px" ForeColor="#F0F0F0" Paddings-Padding="5px"></HeaderStyle>
                         <CellStyle ForeColor="#F0F0F0" Border-BorderWidth="0px">
                             <Paddings Padding="12px"></Paddings>
                         </CellStyle>
                     </dx:GridViewDataDateColumn>
-                    <dx:GridViewDataColumn Width="110px" VisibleIndex="11" Caption="Revisar">
+                    <dx:GridViewDataColumn Width="110px" VisibleIndex="12" Caption="Revisar">
                         <HeaderStyle BackColor="#102140" Border-BorderWidth="0px" ForeColor="#F0F0F0" Paddings-Padding="5px"></HeaderStyle>
                         <CellStyle ForeColor="#F0F0F0" Border-BorderWidth="0px">
                             <Paddings Padding="12px"></Paddings>
@@ -196,18 +203,18 @@
                     </DetailRow>
                 </Templates>
             </dx:ASPxGridView>
-            <asp:SqlDataSource runat="server" ID="DS_Documento" ConnectionString='<%$ ConnectionStrings:SailingMasterConnectionString %>' SelectCommand="select D.ID, B.des_buque, D.fecha, D.fec_llegada, D.fec_salida, D.total, D.approved_date, D.reviewed_date, D.corrected_date, D.collected_date, D.liquidated_date, D.closed_date, D.co_us_in, D.approved_by, D.reviewed_by, D.reviewed_observ, D.corrected_by, D.collected_by, D.collected_amount, D.collected_bank, D.collected_date_transf, D.collected_nref_transf, D.liquidated_by, D.closed_by, D.status,
-case D.status
-     when 0 then 'GENERADO'
-     when 1 then 'APROBADO'
-     when 2 then 'REVISADO'
-     when 3 then 'CORREGIDO'
-     when 4 then 'COBRADO'
-     when 5 then 'LIQUIDADO'
-     when 6 then 'CERRADO'
-end as doc_status
-from Documento D
-inner join Buque B on B.ID = D.co_buque"></asp:SqlDataSource>
+            <asp:SqlDataSource runat="server" ID="DS_Documento" ConnectionString='<%$ ConnectionStrings:SailingMasterConnectionString %>' SelectCommand="select D.ID, B.des_buque, D.fecha, D.nro_viaje, D.fec_llegada, D.fec_salida, D.total, (D.total / D.tasa_usd) as total_usd, D.approved_date, D.reviewed_date, D.corrected_date, D.collected_date, D.liquidated_date, D.closed_date, D.co_us_in, D.approved_by, D.reviewed_by, D.reviewed_observ, D.corrected_by, D.collected_by, D.collected_amount, D.collected_bank, D.collected_date_transf, D.collected_nref_transf, D.liquidated_by, D.closed_by, D.status,
+            case D.status
+                 when 0 then 'GENERADO'
+                 when 1 then 'APROBADO'
+                 when 2 then 'REVISADO'
+                 when 3 then 'CORREGIDO'
+                 when 4 then 'COBRADO'
+                 when 5 then 'LIQUIDADO'
+                 when 6 then 'CERRADO'
+            end as doc_status
+            from Documento D
+            inner join Buque B on B.ID = D.co_buque"></asp:SqlDataSource>
         </div>
     </asp:Panel>
 </form>

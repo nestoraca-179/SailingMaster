@@ -49,7 +49,7 @@
                             <Paddings Padding="12px"></Paddings>
                         </CellStyle>
                     </dx:GridViewDataTextColumn>
-                    <dx:GridViewDataTextColumn FieldName="descrip" Caption="Nombre" VisibleIndex="3">
+                    <dx:GridViewDataTextColumn FieldName="des_usuario" Caption="Nombre" VisibleIndex="3">
                         <HeaderStyle BackColor="#102140" Border-BorderWidth="0px" ForeColor="#F0F0F0" Paddings-Padding="5px"></HeaderStyle>
                         <CellStyle ForeColor="#F0F0F0" Border-BorderWidth="0px">
                             <Paddings Padding="12px"></Paddings>
@@ -102,7 +102,7 @@
                     </SearchPanel>
                 </Styles>
             </dx:ASPxGridView>
-            <asp:SqlDataSource runat="server" ID="DS_Usuario" ConnectionString='<%$ ConnectionStrings:SailingMasterConnectionString %>' SelectCommand="SELECT [ID], [username], [descrip], [email], [activo], case [tip_usuario] 
+            <asp:SqlDataSource runat="server" ID="DS_Usuario" ConnectionString='<%$ ConnectionStrings:SailingMasterConnectionString %>' SelectCommand="SELECT [ID], [username], [des_usuario], [email], [activo], case [tip_usuario] 
             WHEN 0 THEN 'Administrador'
             WHEN 1 THEN 'Generador'
             WHEN 2 THEN 'Aprobador'
