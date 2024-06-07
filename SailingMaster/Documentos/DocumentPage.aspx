@@ -352,61 +352,11 @@ form .row:not(.my-5) {
                         </div>
                     </div>
                 </div>
-            </div>
-            <div class="col-md-4">
-                <div class="amounts">
-                    <div class="w-100 d-flex justify-content-between">
-                        <h6 class="text-white m-0" style="font-weight: 100">Items:</h6>
-                        <h5 class="text-white m-0" id="items"></h5>
-                    </div>
-                    <div class="w-100 d-flex justify-content-between mt-2">
-                        <h6 class="text-white m-0" style="font-weight: 100">Total Documento:</h6>
-                        <div class="d-flex align-items-center">
-                            <dx:ASPxLabel ID="LBL_SignoTD" runat="server" CssClass="text-light mx-2" Text="Bs. D" style="font-size: 1.25rem;"></dx:ASPxLabel>
-                            <h5 class="text-white m-0" id="total_doc"></h5>
-                        </div>
-                    </div>
-                    <div class="w-100 d-flex justify-content-between mt-1">
-                        <h6 class="text-white m-0" style="font-weight: 100"></h6>
-                        <div class="d-flex align-items-center">
-                            <dx:ASPxLabel ID="LBL_SignoTD_USD" runat="server" CssClass="text-light mx-2" Text="$" style="font-size: 1.125rem;"></dx:ASPxLabel>
-                            <h6 class="text-white m-0" id="total_doc_usd" style="font-size: 1.125rem;"></h6>
-                        </div>
-                    </div>
-                    <div class="w-100 d-flex justify-content-between mt-2">
-                        <h6 class="text-white m-0" style="font-weight: 100">Total Monto Recibido:</h6>
-                        <div class="d-flex align-items-center">
-                            <dx:ASPxLabel ID="LBL_SignoTR" runat="server" CssClass="text-light mx-2" Text="Bs. D" style="font-size: 1.25rem;"></dx:ASPxLabel>
-                            <dx:ASPxLabel ID="LBL_TotalRecibido" runat="server" CssClass="text-light" style="font-size: 1.25rem;"></dx:ASPxLabel>
-                        </div>
-                    </div>
-                    <div class="w-100 d-flex justify-content-between mt-1">
-                        <h6 class="text-white m-0" style="font-weight: 100"></h6>
-                        <div class="d-flex align-items-center">
-                            <dx:ASPxLabel ID="LBL_SignoTR_USD" runat="server" CssClass="text-light mx-2" Text="$" style="font-size: 1.125rem;"></dx:ASPxLabel>
-                            <dx:ASPxLabel ID="LBL_TotalRecibido_USD" runat="server" CssClass="text-light" style="font-size: 1.125rem;"></dx:ASPxLabel>
-                        </div>
-                    </div>
-                    <div class="w-100 d-flex justify-content-between mt-2">
-                        <h6 class="text-white m-0" style="font-weight: 100">Total Monto Cancelado:</h6>
-                        <div class="d-flex align-items-center">
-                            <dx:ASPxLabel ID="LBL_SignoTC" runat="server" CssClass="text-light" style="font-size: 1.25rem; margin: 0 5px 10px 0;"></dx:ASPxLabel>
-                            <dx:ASPxLabel ID="LBL_TotalCancelado" runat="server" CssClass="text-light" style="font-size: 1.25rem;"></dx:ASPxLabel>
-                        </div>
-                    </div>
-                    <hr class="my-2 text-light" />
-                    <div class="w-100 d-flex justify-content-between">
-                        <h6 class="text-white m-0" style="font-weight: 100">Balance:</h6>
-                        <div class="d-flex align-items-center">
-                            <dx:ASPxLabel ID="LBL_SignoBC" runat="server" CssClass="text-light" style="font-size: 1.25rem; margin: 0 5px 10px 0;"></dx:ASPxLabel>
-                            <dx:ASPxLabel ID="LBL_Balance" runat="server" CssClass="text-light" style="font-size: 1.25rem;"></dx:ASPxLabel>
-                        </div>
-                    </div>
-                </div>
-                <div class="row mt-4">
+                <hr class="my-3 text-light" />
+                <div class="row">
                     <div class="col-md-6">
                         <div class="controls">
-                            <label style="min-width: 110px;">Tasa USD/BSD</label>
+                            <label>Tasa USD/BSD</label>
                             <dx:ASPxTextBox ID="TB_TasaUSD" runat="server" Theme="Material" Width="100%" BackColor="#303030" ForeColor="#F0F0F0" Border-BorderColor="#303030" 
                                 AutoCompleteType="None" ValueType="System.Decimal" AutoPostBack="true" ReadOnly="true">
                                 <ClientSideEvents KeyPress="function (s,e) { onlyNumbers(s, e); }" />
@@ -418,7 +368,7 @@ form .row:not(.my-5) {
                     </div>
                     <div class="col-md-6">
                         <div class="controls">
-                            <label style="min-width: 110px;">Tasa EUR/BSD</label>
+                            <label>Tasa EUR/BSD</label>
                             <dx:ASPxTextBox ID="TB_TasaEUR" runat="server" Theme="Material" Width="100%" BackColor="#303030" ForeColor="#F0F0F0" Border-BorderColor="#303030" 
                                 AutoCompleteType="None" ValueType="System.Decimal" AutoPostBack="true" ReadOnly="true">
                                 <ClientSideEvents KeyPress="function (s,e) { onlyNumbers(s, e); }" />
@@ -432,7 +382,7 @@ form .row:not(.my-5) {
                 <div class="row">
                     <div class="col-md-6">
                         <div class="controls">
-                            <label style="min-width: 110px;">Tasa PTR/BSD</label>
+                            <label>Tasa PTR/BSD</label>
                             <dx:ASPxTextBox ID="TB_TasaPTR" runat="server" Theme="Material" Width="100%" BackColor="#303030" ForeColor="#F0F0F0" Border-BorderColor="#303030" 
                                 AutoCompleteType="None" ValueType="System.Decimal" AutoPostBack="true" ReadOnly="true">
                                 <ClientSideEvents KeyPress="function (s,e) { onlyNumbers(s, e); }" />
@@ -444,7 +394,7 @@ form .row:not(.my-5) {
                     </div>
                     <div class="col-md-6">
                         <div class="controls">
-                            <label style="min-width: 110px;">Tasa EUR/USD</label>
+                            <label>Tasa EUR/USD</label>
                             <dx:ASPxTextBox ID="TB_TasaEURUSD" runat="server" Theme="Material" Width="100%" BackColor="#303030" ForeColor="#F0F0F0" Border-BorderColor="#303030" 
                                 AutoCompleteType="None" ValueType="System.Decimal" AutoPostBack="true" ReadOnly="true">
                                 <ClientSideEvents KeyPress="function (s,e) { onlyNumbers(s, e); }" />
@@ -452,6 +402,71 @@ form .row:not(.my-5) {
                                     <RequiredField IsRequired="True" ErrorText="Obligatorio" />
                                 </ValidationSettings>
                             </dx:ASPxTextBox>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="amounts">
+                    <div class="w-100 d-flex justify-content-between">
+                        <h6 class="text-white m-0" style="font-weight: 100">Items:</h6>
+                        <h5 class="text-white m-0" id="items"></h5>
+                    </div>
+                    <div class="w-100 d-flex justify-content-between mt-4">
+                        <h6 class="text-white m-0" style="font-weight: 100">Total Documento:</h6>
+                        <div class="d-flex align-items-center">
+                            <dx:ASPxLabel ID="LBL_SignoTD" runat="server" CssClass="text-light mx-2" Text="Bs. D" style="font-size: 1.25rem;"></dx:ASPxLabel>
+                            <h5 class="text-white m-0" id="total_doc"></h5>
+                        </div>
+                    </div>
+                    <div class="w-100 d-flex justify-content-between mt-1">
+                        <h6 class="text-white m-0" style="font-weight: 100"></h6>
+                        <div class="d-flex align-items-center">
+                            <dx:ASPxLabel ID="LBL_SignoTD_USD" runat="server" CssClass="text-light mx-2" Text="$" style="font-size: 1.125rem;"></dx:ASPxLabel>
+                            <h6 class="text-white m-0" id="total_doc_usd" style="font-size: 1.125rem;"></h6>
+                        </div>
+                    </div>
+                    <div class="w-100 d-flex justify-content-between mt-4">
+                        <h6 class="text-white m-0" style="font-weight: 100">Total Monto Recibido:</h6>
+                        <div class="d-flex align-items-center">
+                            <dx:ASPxLabel ID="LBL_SignoTR" runat="server" CssClass="text-light mx-2" Text="Bs. D" style="font-size: 1.25rem;"></dx:ASPxLabel>
+                            <dx:ASPxLabel ID="LBL_TotalRecibido" runat="server" CssClass="text-light" style="font-size: 1.25rem;"></dx:ASPxLabel>
+                        </div>
+                    </div>
+                    <div class="w-100 d-flex justify-content-between mt-1">
+                        <h6 class="text-white m-0" style="font-weight: 100"></h6>
+                        <div class="d-flex align-items-center">
+                            <dx:ASPxLabel ID="LBL_SignoTR_USD" runat="server" CssClass="text-light mx-2" Text="$" style="font-size: 1.125rem;"></dx:ASPxLabel>
+                            <dx:ASPxLabel ID="LBL_TotalRecibido_USD" runat="server" CssClass="text-light" style="font-size: 1.125rem;"></dx:ASPxLabel>
+                        </div>
+                    </div>
+                    <div class="w-100 d-flex justify-content-between mt-4">
+                        <h6 class="text-white m-0" style="font-weight: 100">Total Monto Cancelado:</h6>
+                        <div class="d-flex align-items-center">
+                            <dx:ASPxLabel ID="LBL_SignoTC" runat="server" CssClass="text-light mx-2" Text="Bs. D" style="font-size: 1.25rem;"></dx:ASPxLabel>
+                            <dx:ASPxLabel ID="LBL_TotalCancelado" runat="server" CssClass="text-light" style="font-size: 1.25rem;"></dx:ASPxLabel>
+                        </div>
+                    </div>
+                    <div class="w-100 d-flex justify-content-between mt-1">
+                        <h6 class="text-white m-0" style="font-weight: 100"></h6>
+                        <div class="d-flex align-items-center">
+                            <dx:ASPxLabel ID="LBL_SignoTC_USD" runat="server" CssClass="text-light mx-2" Text="$" style="font-size: 1.125rem;"></dx:ASPxLabel>
+                            <dx:ASPxLabel ID="LBL_TotalCancelado_USD" runat="server" CssClass="text-light" style="font-size: 1.125rem;"></dx:ASPxLabel>
+                        </div>
+                    </div>
+                    <hr class="my-4 text-light" />
+                    <div class="w-100 d-flex justify-content-between">
+                        <h6 class="text-white m-0" style="font-weight: 100">Balance:</h6>
+                        <div class="d-flex align-items-center">
+                            <dx:ASPxLabel ID="LBL_SignoBC" runat="server" CssClass="text-light mx-2" Text="Bs. D" style="font-size: 1.25rem;"></dx:ASPxLabel>
+                            <dx:ASPxLabel ID="LBL_Balance" runat="server" CssClass="text-light" style="font-size: 1.25rem;"></dx:ASPxLabel>
+                        </div>
+                    </div>
+                    <div class="w-100 d-flex justify-content-between mt-1">
+                        <h6 class="text-white m-0" style="font-weight: 100"></h6>
+                        <div class="d-flex align-items-center">
+                            <dx:ASPxLabel ID="LBL_SignoBC_USD" runat="server" CssClass="text-light mx-2" Text="$" style="font-size: 1.125rem;"></dx:ASPxLabel>
+                            <dx:ASPxLabel ID="LBL_Balance_USD" runat="server" CssClass="text-light" style="font-size: 1.125rem;"></dx:ASPxLabel>
                         </div>
                     </div>
                 </div>
@@ -567,7 +582,9 @@ form .row:not(.my-5) {
                     </Columns>
                     <Settings ShowFooter="true" />
                     <TotalSummary>
-                        <dx:ASPxSummaryItem FieldName="price_serv" SummaryType="Sum" DisplayFormat="Total: {0:n}" />
+                        <dx:ASPxSummaryItem FieldName="price_bsd" SummaryType="Sum" DisplayFormat="Total: {0:n}" />
+                        <dx:ASPxSummaryItem FieldName="price_usd" SummaryType="Sum" DisplayFormat="Total: {0:n}" />
+                        <dx:ASPxSummaryItem FieldName="price_eur" SummaryType="Sum" DisplayFormat="Total: {0:n}" />
                     </TotalSummary>
                 </dx:ASPxGridView>
                 <asp:SqlDataSource runat="server" ID="DS_Servicio" ConnectionString='<%$ ConnectionStrings:SailingMasterConnectionString %>' SelectCommand="SELECT [ID], [des_serv] FROM [Servicio] ORDER BY [ID]"></asp:SqlDataSource>

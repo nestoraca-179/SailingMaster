@@ -51,19 +51,40 @@ namespace SailingMaster.Controllers
         {
             int result = 0;
 
-            try
+            using (SailingMasterEntities context = new SailingMasterEntities())
             {
-                Documento existing = GetByID(doc.ID);
-                string campos = GetChanges(existing, doc);
-                db.Entry(doc).State = EntityState.Modified;
-                db.SaveChanges();
+                using (DbContextTransaction tran = context.Database.BeginTransaction())
+                {
+                    try
+                    {
+                        Documento existing = GetByID(doc.ID);
+                        string campos = GetChanges(existing, doc);
+                        context.Entry(doc).State = EntityState.Modified;
 
-                LogController.CreateLog(doc.co_us_mo, "DOCUMENTO", doc.ID.ToString(), "M", campos);
-                result = 1;
-            }
-            catch (Exception ex)
-            {
-                IncidentController.CreateIncident(string.Format("ERROR MODIFICANDO DOCUMENTO N° {0}", doc.ID), ex);
+                        foreach (DocumentoReng r in doc.DocumentoReng)
+                        {
+                            if (r.co_us_in == null) // NUEVO
+                            {
+                                r.co_us_in = r.co_us_mo;
+                                r.fe_us_in = r.fe_us_mo;
+                                context.DocumentoReng.Add(r);
+                            }
+                            else // EXISTENTE
+                                context.Entry(r).State = EntityState.Modified;
+                        }
+
+                        context.SaveChanges();
+                        tran.Commit();
+
+                        LogController.CreateLog(doc.co_us_mo, "DOCUMENTO", doc.ID.ToString(), "M", campos);
+                        result = 1;
+                    }
+                    catch (Exception ex)
+                    {
+                        tran.Rollback();
+                        IncidentController.CreateIncident(string.Format("ERROR MODIFICANDO DOCUMENTO N° {0}", doc.ID), ex);
+                    }
+                }
             }
 
             return result;

@@ -38,7 +38,9 @@ namespace SailingMaster.Documentos
                             LBL_TotalRecibido.Text = "0,00";
                             LBL_TotalRecibido_USD.Text = "0,00";
                             LBL_TotalCancelado.Text = "0,00";
+                            LBL_TotalCancelado_USD.Text = "0,00";
                             LBL_Balance.Text = "0,00";
+                            LBL_Balance_USD.Text = "0,00";
                         }
                         else
                         {
@@ -49,7 +51,9 @@ namespace SailingMaster.Documentos
                             LBL_TotalRecibido.Text = doc.collected_amount.Value.ToString("N2", formato);
                             LBL_TotalRecibido_USD.Text = Math.Round(doc.collected_amount.Value / MonedaController.GetByID("USD").tasa, 2).ToString("N2", formato);
                             LBL_TotalCancelado.Text = "0,00";
+                            LBL_TotalCancelado_USD.Text = "0,00";
                             LBL_Balance.Text = doc.collected_amount.Value.ToString("N2", formato);
+                            LBL_Balance_USD.Text = Math.Round(doc.collected_amount.Value / MonedaController.GetByID("USD").tasa, 2).ToString("N2", formato);
                         }
 
                         string status;
@@ -258,18 +262,17 @@ namespace SailingMaster.Documentos
                 doc.tasa_eur = decimal.Parse(TB_TasaEUR.Text.Replace(".", ","));
                 doc.tasa_ptr = decimal.Parse(TB_TasaPTR.Text.Replace(".", ","));
                 doc.status = doc.status == 2 ? 3 : 0; // CORREGIDO - GENERADO
-                
-                if (doc.status == 3)
-                {
-                    doc.corrected_by = user.username;
-                    doc.corrected_date = DateTime.Now;
-                }
-                
                 doc.co_us_mo = (Session["USER"] as Usuario).username;
                 doc.fe_us_mo = DateTime.Now;
                 doc.total = rengs.Select(r => r.price_bsd).Sum();
                 doc.total_usd = rengs.Select(r => r.price_usd).Sum();
                 doc.DocumentoReng = rengs;
+
+                if (doc.status == 3)
+                {
+                    doc.corrected_by = user.username;
+                    doc.corrected_date = DateTime.Now;
+                }
 
                 if (rengs.Count == 0)
                 {
@@ -280,6 +283,7 @@ namespace SailingMaster.Documentos
                 {
                     foreach (DocumentoReng r in doc.DocumentoReng)
                     {
+                        r.co_doc = doc.ID;
                         r.co_us_mo = (Session["USER"] as Usuario).username;
                         r.fe_us_mo = DateTime.Now;
                     }
@@ -549,7 +553,7 @@ namespace SailingMaster.Documentos
             DE_Fecha.Value = doc.fecha;
             DDL_Cliente.Value = doc.co_cli;
             TB_NroViaje.Text = doc.nro_viaje;
-            DDL_Buque.Value = doc.co_buque;
+            DDL_Buque.Value = doc.co_buque.ToString();
             TB_Flag.Text = doc.flag;
             DDL_Puerto.Value = doc.co_puerto;
             TB_Muelle.Text = doc.muelle;
@@ -605,29 +609,32 @@ namespace SailingMaster.Documentos
 
         private void BlockAllFields(int status)
         {
-            if (status == 0)
+            if (status == 0 || status == 3)
             {
                 DisableButton(BTN_PreCobrarDocumento);
                 DisableButton(BTN_PreLiquidarDocumento);
                 DisableButton(BTN_PreCerrarDocumento);
+
+                if (status == 3)
+                    DisableButton(BTN_PreEliminarDocumento);
             }
 
-            if (status == 6)
+            if (status == 1 || status == 6)
             {
-                // COLUMNA
                 GV_DocumentoReng.SettingsEditing.Mode = GridViewEditingMode.EditForm;
                 GV_DocumentoReng.Columns[0].Visible = false;
 
-                // BOTONES
                 DisableButton(BTN_Guardar);
                 DisableButton(BTN_PreRevisarDocumento);
                 DisableButton(BTN_PreAprobarDocumento);
-                DisableButton(BTN_PreCobrarDocumento);
+
+                if (status == 6)
+                    DisableButton(BTN_PreCobrarDocumento);
+
                 DisableButton(BTN_PreLiquidarDocumento);
                 DisableButton(BTN_PreCerrarDocumento);
                 DisableButton(BTN_PreEliminarDocumento);
 
-                // CAMPOS
                 DE_Fecha.Enabled = false;
                 DDL_Cliente.Enabled = false;
                 DDL_Buque.Enabled = false;
@@ -646,6 +653,16 @@ namespace SailingMaster.Documentos
                 TB_TasaEUR.Enabled = false;
                 TB_TasaPTR.Enabled = false;
                 TB_TasaEURUSD.Enabled = false;
+            }
+
+            if (status == 2)
+            {
+                DisableButton(BTN_PreRevisarDocumento);
+                DisableButton(BTN_PreAprobarDocumento);
+                DisableButton(BTN_PreCobrarDocumento);
+                DisableButton(BTN_PreLiquidarDocumento);
+                DisableButton(BTN_PreCerrarDocumento);
+                DisableButton(BTN_PreEliminarDocumento);
             }
         }
 
