@@ -348,6 +348,15 @@ namespace SailingMaster.Documentos
         protected global::DevExpress.Web.ASPxLabel LBL_SignoTD;
 
         /// <summary>
+        /// Control LBL_SignoTD_USD.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::DevExpress.Web.ASPxLabel LBL_SignoTD_USD;
+
+        /// <summary>
         /// Control LBL_SignoTR.
         /// </summary>
         /// <remarks>
@@ -364,6 +373,24 @@ namespace SailingMaster.Documentos
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::DevExpress.Web.ASPxLabel LBL_TotalRecibido;
+
+        /// <summary>
+        /// Control LBL_SignoTR_USD.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::DevExpress.Web.ASPxLabel LBL_SignoTR_USD;
+
+        /// <summary>
+        /// Control LBL_TotalRecibido_USD.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::DevExpress.Web.ASPxLabel LBL_TotalRecibido_USD;
 
         /// <summary>
         /// Control LBL_SignoTC.

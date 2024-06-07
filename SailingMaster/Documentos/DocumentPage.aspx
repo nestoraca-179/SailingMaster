@@ -13,7 +13,6 @@ form .row:not(.my-5) {
 }
 .amounts {
     height: 100%;
-    max-height: 200px;
     background: #242529;
     padding: 15px;
     border: solid 2px #2a2b2e;
@@ -55,6 +54,7 @@ form .row:not(.my-5) {
         $("#items").text(grid.GetVisibleRowsOnPage());
 
         var price_total = 0;
+        var price_total_usd = 0;
         for (var i = 0; i < grid.GetVisibleRowsOnPage(); i++) {
             var elem_parent = grid.GetRow(i).getElementsByTagName("td")[5];
             var elem_last = elem_parent.lastElementChild;
@@ -62,8 +62,16 @@ form .row:not(.my-5) {
 
             var r = parseFloat(elem_f.innerHTML.replaceAll(".", "").replaceAll(",", "."));
             price_total += r;
+
+            elem_parent = grid.GetRow(i).getElementsByTagName("td")[6];
+            elem_last = elem_parent.lastElementChild;
+            elem_f = elem_last ?? elem_parent;
+
+            var r = parseFloat(elem_f.innerHTML.replaceAll(".", "").replaceAll(",", "."));
+            price_total_usd += r;
         }
         $("#total_doc").text(price_total.toLocaleString("es-ES", { minimumFractionDigits: 2, maximumFractionDigits: 2, useGrouping: true }));
+        $("#total_doc_usd").text(price_total_usd.toLocaleString("es-ES", { minimumFractionDigits: 2, maximumFractionDigits: 2, useGrouping: true }));
 
         $("span").click(function () {
             if (this.innerHTML == "Eliminar") {
@@ -354,15 +362,29 @@ form .row:not(.my-5) {
                     <div class="w-100 d-flex justify-content-between mt-2">
                         <h6 class="text-white m-0" style="font-weight: 100">Total Documento:</h6>
                         <div class="d-flex align-items-center">
-                            <dx:ASPxLabel ID="LBL_SignoTD" runat="server" CssClass="text-light" style="font-size: 1.25rem; margin: 0 5px 10px 0;"></dx:ASPxLabel>
+                            <dx:ASPxLabel ID="LBL_SignoTD" runat="server" CssClass="text-light mx-2" Text="Bs. D" style="font-size: 1.25rem;"></dx:ASPxLabel>
                             <h5 class="text-white m-0" id="total_doc"></h5>
+                        </div>
+                    </div>
+                    <div class="w-100 d-flex justify-content-between mt-1">
+                        <h6 class="text-white m-0" style="font-weight: 100"></h6>
+                        <div class="d-flex align-items-center">
+                            <dx:ASPxLabel ID="LBL_SignoTD_USD" runat="server" CssClass="text-light mx-2" Text="$" style="font-size: 1.125rem;"></dx:ASPxLabel>
+                            <h6 class="text-white m-0" id="total_doc_usd" style="font-size: 1.125rem;"></h6>
                         </div>
                     </div>
                     <div class="w-100 d-flex justify-content-between mt-2">
                         <h6 class="text-white m-0" style="font-weight: 100">Total Monto Recibido:</h6>
                         <div class="d-flex align-items-center">
-                            <dx:ASPxLabel ID="LBL_SignoTR" runat="server" CssClass="text-light" style="font-size: 1.25rem; margin: 0 5px 10px 0;"></dx:ASPxLabel>
+                            <dx:ASPxLabel ID="LBL_SignoTR" runat="server" CssClass="text-light mx-2" Text="Bs. D" style="font-size: 1.25rem;"></dx:ASPxLabel>
                             <dx:ASPxLabel ID="LBL_TotalRecibido" runat="server" CssClass="text-light" style="font-size: 1.25rem;"></dx:ASPxLabel>
+                        </div>
+                    </div>
+                    <div class="w-100 d-flex justify-content-between mt-1">
+                        <h6 class="text-white m-0" style="font-weight: 100"></h6>
+                        <div class="d-flex align-items-center">
+                            <dx:ASPxLabel ID="LBL_SignoTR_USD" runat="server" CssClass="text-light mx-2" Text="$" style="font-size: 1.125rem;"></dx:ASPxLabel>
+                            <dx:ASPxLabel ID="LBL_TotalRecibido_USD" runat="server" CssClass="text-light" style="font-size: 1.125rem;"></dx:ASPxLabel>
                         </div>
                     </div>
                     <div class="w-100 d-flex justify-content-between mt-2">
@@ -787,6 +809,7 @@ form .row:not(.my-5) {
         $("#items").text(grid.GetVisibleRowsOnPage());
 
         var price_total = 0;
+        var price_total_usd = 0;
         for (var i = 0; i < grid.GetVisibleRowsOnPage(); i++) {
             var elem_parent = grid.GetRow(i).getElementsByTagName("td")[5];
             var elem_last = elem_parent.lastElementChild;
@@ -794,8 +817,16 @@ form .row:not(.my-5) {
 
             var r = parseFloat(elem_f.innerHTML.replaceAll(".", "").replaceAll(",", "."));
             price_total += r;
+
+            elem_parent = grid.GetRow(i).getElementsByTagName("td")[6];
+            elem_last = elem_parent.lastElementChild;
+            elem_f = elem_last ?? elem_parent;
+
+            var r = parseFloat(elem_f.innerHTML.replaceAll(".", "").replaceAll(",", "."));
+            price_total_usd += r;
         }
         $("#total_doc").text(price_total.toLocaleString("es-ES", { minimumFractionDigits: 2, maximumFractionDigits: 2, useGrouping: true }));
+        $("#total_doc_usd").text(price_total_usd.toLocaleString("es-ES", { minimumFractionDigits: 2, maximumFractionDigits: 2, useGrouping: true }));
 
         $("span").click(function () {
             if (this.innerHTML == "Eliminar") {

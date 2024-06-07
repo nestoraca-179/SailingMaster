@@ -36,6 +36,7 @@ namespace SailingMaster.Documentos
                         if (doc.status < 4)
                         {
                             LBL_TotalRecibido.Text = "0,00";
+                            LBL_TotalRecibido_USD.Text = "0,00";
                             LBL_TotalCancelado.Text = "0,00";
                             LBL_Balance.Text = "0,00";
                         }
@@ -46,6 +47,7 @@ namespace SailingMaster.Documentos
                             formato.NumberGroupSeparator = ".";
 
                             LBL_TotalRecibido.Text = doc.collected_amount.Value.ToString("N2", formato);
+                            LBL_TotalRecibido_USD.Text = Math.Round(doc.collected_amount.Value / MonedaController.GetByID("USD").tasa, 2).ToString("N2", formato);
                             LBL_TotalCancelado.Text = "0,00";
                             LBL_Balance.Text = doc.collected_amount.Value.ToString("N2", formato);
                         }
@@ -95,11 +97,6 @@ namespace SailingMaster.Documentos
                         if (!IsPostBack)
                             rengs = new List<DocumentoReng>();
                     }
-
-                    // LBL_SignoTD.Text = mone.signo;
-                    // LBL_SignoTR.Text = mone.signo;
-                    // LBL_SignoTC.Text = mone.signo;
-                    // LBL_SignoBC.Text = mone.signo;
 
                     BindGrid(rengs);
                 }

@@ -47,7 +47,7 @@
                 <SettingsDetail ShowDetailRow="True" AllowOnlyOneMasterRowExpanded="True"></SettingsDetail>
                 <SettingsSearchPanel Visible="True"></SettingsSearchPanel>
                 <Columns>
-                    <dx:GridViewDataTextColumn FieldName="des_buque" ReadOnly="True" VisibleIndex="0" Caption="Buque">
+                    <dx:GridViewDataTextColumn FieldName="des_buque" ReadOnly="True" VisibleIndex="0" Caption="Buque" Width="150px">
                         <HeaderStyle BackColor="#102140" Border-BorderWidth="0px" ForeColor="#F0F0F0" Paddings-Padding="5px"></HeaderStyle>
                         <CellStyle ForeColor="#F0F0F0" Border-BorderWidth="0px">
                             <Paddings Padding="12px"></Paddings>
@@ -67,7 +67,7 @@
                         </CellStyle>
                     </dx:GridViewDataTextColumn>
                     <dx:GridViewDataTextColumn FieldName="total_usd" VisibleIndex="3" Caption="Total USD">
-                        <PropertiesTextEdit DisplayFormatString="{0:N2}"></PropertiesTextEdit>
+                        <PropertiesTextEdit DisplayFormatString="${0:N2}"></PropertiesTextEdit>
                         <HeaderStyle BackColor="#102140" Border-BorderWidth="0px" ForeColor="#F0F0F0" Paddings-Padding="5px"></HeaderStyle>
                         <CellStyle ForeColor="#F0F0F0" Border-BorderWidth="0px" HorizontalAlign="Left">
                             <Paddings Padding="12px"></Paddings>
@@ -153,23 +153,23 @@
                     <DetailRow>
                         <div class="row details-doc">
                             <div class="col">
-                                Cliente: <dx:ASPxLabel runat="server" Text='<%# Eval("cliente") %>' Font-Bold="true" ForeColor="#F0F0F0" />
+                                Cliente: <dx:ASPxLabel runat="server" Text='<%# Eval("des_cli") %>' Font-Bold="true" ForeColor="#F0F0F0" />
                                 <br />
-                                Puerto: <dx:ASPxLabel runat="server" Text='<%# Eval("puerto") %>' Font-Bold="true" ForeColor="#F0F0F0" />
+                                Nro. Viaje: <dx:ASPxLabel runat="server" Text='<%# Eval("nro_viaje") %>' Font-Bold="true" ForeColor="#F0F0F0" />
                                 <br />
-                                Buque: <dx:ASPxLabel runat="server" Text='<%# Eval("buque") %>' Font-Bold="true" ForeColor="#F0F0F0" />
+                                Buque: <dx:ASPxLabel runat="server" Text='<%# Eval("des_buque") %>' Font-Bold="true" ForeColor="#F0F0F0" />
                                 <br />
-                                <%--Nro. Viaje: <dx:ASPxLabel runat="server" Text='<%# Eval("nro_viaje") %>' Font-Bold="true" ForeColor="#F0F0F0" />
-                                <br />--%>
-                                <%--Nro. Toneladas: <dx:ASPxLabel runat="server" Text='<%# Eval("num_toneladas", "{0:N2}") %>' Font-Bold="true" ForeColor="#F0F0F0" />
-                                <br />--%>
-                                <%--Moneda: <dx:ASPxLabel runat="server" Text='<%# Eval("co_mone", "{0:N2}") %>' Font-Bold="true" ForeColor="#F0F0F0" />
-                                <br />--%>
-                                <%--Tasa de Cambio: <dx:ASPxLabel runat="server" Text='<%# Eval("tasa") %>' Font-Bold="true" ForeColor="#F0F0F0" />
-                                <br />--%>
-                                Fecha Llegada: <dx:ASPxLabel runat="server" Text='<%# Eval("fec_llegada", "{0:dd/MM/yyyy}") %>' Font-Bold="true" ForeColor="#F0F0F0" />
+                                Flag: <dx:ASPxLabel runat="server" Text='<%# Eval("flag") %>' Font-Bold="true" ForeColor="#F0F0F0" />
                                 <br />
-                                Fecha Salida: <dx:ASPxLabel runat="server" Text='<%# Eval("fec_salida", "{0:dd/MM/yyyy}") %>' Font-Bold="true" ForeColor="#F0F0F0" />
+                                Puerto: <dx:ASPxLabel runat="server" Text='<%# Eval("co_puerto") %>' Font-Bold="true" ForeColor="#F0F0F0" />
+                                <br />
+                                Muelle: <dx:ASPxLabel runat="server" Text='<%# Eval("muelle") %>' Font-Bold="true" ForeColor="#F0F0F0" />
+                                <br />
+                                Horas: <dx:ASPxLabel runat="server" Text='<%# Eval("horas") %>' Font-Bold="true" ForeColor="#F0F0F0" />
+                                <br />
+                                Fecha Llegada: <dx:ASPxLabel runat="server" Text='<%# Eval("fec_llegada", "{0:dd/MM/yyyy HH:mm}") %>' Font-Bold="true" ForeColor="#F0F0F0" />
+                                <br />
+                                Fecha Salida: <dx:ASPxLabel runat="server" Text='<%# Eval("fec_salida", "{0:dd/MM/yyyy HH:mm}") %>' Font-Bold="true" ForeColor="#F0F0F0" />
                                 <br />
                                 Generado Por: <dx:ASPxLabel runat="server" Text='<%# Eval("co_us_in") %>' Font-Bold="true" ForeColor="#F0F0F0" />
                             </div>
@@ -203,10 +203,10 @@
                     </DetailRow>
                 </Templates>
             </dx:ASPxGridView>
-            <asp:SqlDataSource runat="server" ID="DS_Documento" ConnectionString='<%$ ConnectionStrings:SailingMasterConnectionString %>' SelectCommand="select D.ID, B.des_buque, 
-            D.fecha, D.nro_viaje, D.fec_llegada, D.fec_salida, D.total, D.total_usd, D.approved_date, D.reviewed_date, D.corrected_date, D.collected_date, D.liquidated_date, 
-            D.closed_date, D.co_us_in, D.approved_by, D.reviewed_by, D.reviewed_observ, D.corrected_by, D.collected_by, D.collected_amount, D.collected_bank, D.collected_date_transf, 
-            D.collected_nref_transf, D.liquidated_by, D.closed_by, D.status,
+            <asp:SqlDataSource runat="server" ID="DS_Documento" ConnectionString='<%$ ConnectionStrings:SailingMasterConnectionString %>' SelectCommand="select D.ID, D.fecha, 
+            C.des_cli, D.nro_viaje, B.des_buque, D.flag, D.co_puerto, D.muelle, D.horas, D.fec_llegada, D.fec_salida, D.total, D.total_usd, D.approved_date, D.reviewed_date, 
+            D.corrected_date, D.collected_date, D.liquidated_date, D.closed_date, D.co_us_in, D.approved_by, D.reviewed_by, D.reviewed_observ, D.corrected_by, D.collected_by, 
+            D.collected_amount, D.collected_bank, D.collected_date_transf, D.collected_nref_transf, D.liquidated_by, D.closed_by, D.status,
             case D.status
                  when 0 then 'GENERADO'
                  when 1 then 'APROBADO'
@@ -217,7 +217,8 @@
                  when 6 then 'CERRADO'
             end as doc_status
             from Documento D
-            inner join Buque B on B.ID = D.co_buque"></asp:SqlDataSource>
+            inner join Buque B on B.ID = D.co_buque
+            inner join Cliente C on C.ID = D.co_cli"></asp:SqlDataSource>
         </div>
     </asp:Panel>
 </form>
