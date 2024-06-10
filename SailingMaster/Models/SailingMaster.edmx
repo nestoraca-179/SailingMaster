@@ -70,7 +70,7 @@
           <Property Name="tasa_ptr" Type="decimal" Precision="18" Scale="2" Nullable="false" />
           <Property Name="eur_usd" Type="decimal" Precision="18" Scale="2" Nullable="false" />
           <Property Name="total" Type="decimal" Precision="18" Scale="2" Nullable="false" />
-          <Property Name="total_usd" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="total_usd" Type="decimal" Precision="18" Scale="2" Nullable="false" />
           <Property Name="status" Type="int" Nullable="false" />
           <Property Name="approved_by" Type="varchar" MaxLength="20" />
           <Property Name="approved_date" Type="datetime" />
@@ -96,11 +96,11 @@
         </EntityType>
         <EntityType Name="DocumentoReng">
           <Key>
-            <PropertyRef Name="reng_num" />
             <PropertyRef Name="co_doc" />
+            <PropertyRef Name="reng_num" />
           </Key>
-          <Property Name="reng_num" Type="int" Nullable="false" />
           <Property Name="co_doc" Type="int" Nullable="false" />
+          <Property Name="reng_num" Type="int" Nullable="false" />
           <Property Name="co_serv" Type="varchar" MaxLength="40" Nullable="false" />
           <Property Name="des_serv" Type="varchar(max)" Nullable="false" />
           <Property Name="cantidad" Type="int" Nullable="false" />
@@ -150,6 +150,23 @@
           <Property Name="co_us_mo" Type="varchar" MaxLength="20" Nullable="false" />
           <Property Name="fe_us_mo" Type="datetime" Nullable="false" />
         </EntityType>
+        <EntityType Name="PrecioServicio">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="co_serv" Type="varchar" MaxLength="40" Nullable="false" />
+          <Property Name="campo_valor" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="desde" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="hasta" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="precio_min" Type="money" Nullable="false" />
+          <Property Name="precio_base" Type="money" Nullable="false" />
+          <Property Name="precio_max" Type="money" Nullable="false" />
+          <Property Name="co_us_in" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="fe_us_in" Type="datetime" Nullable="false" />
+          <Property Name="co_us_mo" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="fe_us_mo" Type="datetime" Nullable="false" />
+        </EntityType>
         <EntityType Name="Puerto">
           <Key>
             <PropertyRef Name="ID" />
@@ -169,7 +186,9 @@
           <Property Name="des_serv" Type="varchar" MaxLength="100" Nullable="false" />
           <Property Name="tip_serv" Type="int" Nullable="false" />
           <Property Name="co_mone" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="precio_min" Type="money" Nullable="false" />
           <Property Name="precio_base" Type="money" Nullable="false" />
+          <Property Name="precio_max" Type="money" Nullable="false" />
           <Property Name="activo" Type="bit" Nullable="false" />
           <Property Name="co_us_in" Type="varchar" MaxLength="20" Nullable="false" />
           <Property Name="fe_us_in" Type="datetime" Nullable="false" />
@@ -266,6 +285,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK__PrecioSer__co_se__0EC32C7A">
+          <End Role="Servicio" Type="Self.Servicio" Multiplicity="1" />
+          <End Role="PrecioServicio" Type="Self.PrecioServicio" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Servicio">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="PrecioServicio">
+              <PropertyRef Name="co_serv" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK__ProformaR__co_se__10566F31">
           <End Role="Servicio" Type="Self.Servicio" Multiplicity="1">
             <OnDelete Action="Cascade" />
@@ -313,6 +344,7 @@
           <EntitySet Name="Incidente" EntityType="Self.Incidente" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Log" EntityType="Self.Log" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Moneda" EntityType="Self.Moneda" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PrecioServicio" EntityType="Self.PrecioServicio" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Puerto" EntityType="Self.Puerto" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Servicio" EntityType="Self.Servicio" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TipoServicio" EntityType="Self.TipoServicio" Schema="dbo" store:Type="Tables" />
@@ -336,6 +368,10 @@
           <AssociationSet Name="FK__DocumentoR__co_pr__0F624AF8" Association="Self.FK__DocumentoR__co_pr__0F624AF8">
             <End Role="Documento" EntitySet="Documento" />
             <End Role="DocumentoReng" EntitySet="DocumentoReng" />
+          </AssociationSet>
+          <AssociationSet Name="FK__PrecioSer__co_se__0EC32C7A" Association="Self.FK__PrecioSer__co_se__0EC32C7A">
+            <End Role="Servicio" EntitySet="Servicio" />
+            <End Role="PrecioServicio" EntitySet="PrecioServicio" />
           </AssociationSet>
           <AssociationSet Name="FK__ProformaR__co_se__10566F31" Association="Self.FK__ProformaR__co_se__10566F31">
             <End Role="Servicio" EntitySet="Servicio" />
@@ -398,6 +434,11 @@
           <AssociationSet Name="FK__Servicio__tip_se__793DFFAF" Association="SailingMasterModel.FK__Servicio__tip_se__793DFFAF">
             <End Role="TipoServicio" EntitySet="TipoServicio" />
             <End Role="Servicio" EntitySet="Servicio" />
+          </AssociationSet>
+          <EntitySet Name="PrecioServicio" EntityType="SailingMasterModel.PrecioServicio" />
+          <AssociationSet Name="FK__PrecioSer__co_se__0EC32C7A" Association="SailingMasterModel.FK__PrecioSer__co_se__0EC32C7A">
+            <End Role="Servicio" EntitySet="Servicio" />
+            <End Role="PrecioServicio" EntitySet="PrecioServicio" />
           </AssociationSet>
         </EntityContainer>
         <EntityType Name="Banco">
@@ -494,7 +535,7 @@
           <NavigationProperty Name="Cliente" Relationship="SailingMasterModel.FK__Documento__co_cl__29AC2CE0" FromRole="Documento" ToRole="Cliente" />
           <NavigationProperty Name="Puerto" Relationship="SailingMasterModel.FK__Documento__co_pu__324172E1" FromRole="Documento" ToRole="Puerto" />
           <NavigationProperty Name="DocumentoReng" Relationship="SailingMasterModel.FK__DocumentoR__co_pr__0F624AF8" FromRole="Documento" ToRole="DocumentoReng" />
-          <Property Name="total_usd" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="total_usd" Type="Decimal" Precision="18" Scale="2" Nullable="false" />
         </EntityType>
         <EntityType Name="DocumentoReng">
           <Key>
@@ -585,6 +626,9 @@
           <NavigationProperty Name="DocumentoReng" Relationship="SailingMasterModel.FK__ProformaR__co_se__10566F31" FromRole="Servicio" ToRole="DocumentoReng" />
           <NavigationProperty Name="Moneda" Relationship="SailingMasterModel.FK__Servicio__co_mon__04AFB25B" FromRole="Servicio" ToRole="Moneda" />
           <NavigationProperty Name="TipoServicio" Relationship="SailingMasterModel.FK__Servicio__tip_se__793DFFAF" FromRole="Servicio" ToRole="TipoServicio" />
+          <Property Name="precio_min" Type="Decimal" Nullable="false" Precision="19" Scale="4" />
+          <Property Name="precio_max" Type="Decimal" Nullable="false" Precision="19" Scale="4" />
+          <NavigationProperty Name="PrecioServicio" Relationship="SailingMasterModel.FK__PrecioSer__co_se__0EC32C7A" FromRole="Servicio" ToRole="PrecioServicio" />
         </EntityType>
         <EntityType Name="TipoServicio">
           <Key>
@@ -712,6 +756,36 @@
             </Principal>
             <Dependent Role="Servicio">
               <PropertyRef Name="tip_serv" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="PrecioServicio">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="co_serv" Type="String" Nullable="false" MaxLength="40" FixedLength="false" Unicode="false" />
+          <Property Name="campo_valor" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="desde" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+          <Property Name="hasta" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+          <Property Name="precio_min" Type="Decimal" Nullable="false" Precision="19" Scale="4" />
+          <Property Name="precio_base" Type="Decimal" Nullable="false" Precision="19" Scale="4" />
+          <Property Name="precio_max" Type="Decimal" Nullable="false" Precision="19" Scale="4" />
+          <Property Name="co_us_in" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="fe_us_in" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="co_us_mo" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="fe_us_mo" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="Servicio" Relationship="SailingMasterModel.FK__PrecioSer__co_se__0EC32C7A" FromRole="PrecioServicio" ToRole="Servicio" />
+        </EntityType>
+        <Association Name="FK__PrecioSer__co_se__0EC32C7A">
+          <End Type="SailingMasterModel.Servicio" Role="Servicio" Multiplicity="1" />
+          <End Type="SailingMasterModel.PrecioServicio" Role="PrecioServicio" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Servicio">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="PrecioServicio">
+              <PropertyRef Name="co_serv" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -888,6 +962,8 @@
           <EntitySetMapping Name="Servicio">
             <EntityTypeMapping TypeName="SailingMasterModel.Servicio">
               <MappingFragment StoreEntitySet="Servicio">
+                <ScalarProperty Name="precio_max" ColumnName="precio_max" />
+                <ScalarProperty Name="precio_min" ColumnName="precio_min" />
                 <ScalarProperty Name="fe_us_mo" ColumnName="fe_us_mo" />
                 <ScalarProperty Name="co_us_mo" ColumnName="co_us_mo" />
                 <ScalarProperty Name="fe_us_in" ColumnName="fe_us_in" />
@@ -927,6 +1003,24 @@
                 <ScalarProperty Name="des_usuario" ColumnName="des_usuario" />
                 <ScalarProperty Name="password" ColumnName="password" />
                 <ScalarProperty Name="username" ColumnName="username" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PrecioServicio">
+            <EntityTypeMapping TypeName="SailingMasterModel.PrecioServicio">
+              <MappingFragment StoreEntitySet="PrecioServicio">
+                <ScalarProperty Name="fe_us_mo" ColumnName="fe_us_mo" />
+                <ScalarProperty Name="co_us_mo" ColumnName="co_us_mo" />
+                <ScalarProperty Name="fe_us_in" ColumnName="fe_us_in" />
+                <ScalarProperty Name="co_us_in" ColumnName="co_us_in" />
+                <ScalarProperty Name="precio_max" ColumnName="precio_max" />
+                <ScalarProperty Name="precio_base" ColumnName="precio_base" />
+                <ScalarProperty Name="precio_min" ColumnName="precio_min" />
+                <ScalarProperty Name="hasta" ColumnName="hasta" />
+                <ScalarProperty Name="desde" ColumnName="desde" />
+                <ScalarProperty Name="campo_valor" ColumnName="campo_valor" />
+                <ScalarProperty Name="co_serv" ColumnName="co_serv" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
               </MappingFragment>
             </EntityTypeMapping>

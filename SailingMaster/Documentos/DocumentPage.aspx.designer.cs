@@ -15,6 +15,24 @@ namespace SailingMaster.Documentos
     {
 
         /// <summary>
+        /// Control PN_Success.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Panel PN_Success;
+
+        /// <summary>
+        /// Control LBL_Success.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::DevExpress.Web.ASPxLabel LBL_Success;
+
+        /// <summary>
         /// Control PN_Error.
         /// </summary>
         /// <remarks>
@@ -724,5 +742,14 @@ namespace SailingMaster.Documentos
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.FileUpload FU_TransfReng;
+
+        /// <summary>
+        /// Control BTN_AgregarSoporteReng.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::DevExpress.Web.ASPxButton BTN_AgregarSoporteReng;
     }
 }

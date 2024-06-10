@@ -24,10 +24,25 @@ form .row:not(.my-5) {
     margin-bottom: 10px;
 }
 #MainContent_DE_Fecha_I, #MainContent_DDL_Puerto_I, #MainContent_DDL_Buque_I, #MainContent_DDL_Cliente_I, 
-#MainContent_DE_FechaLlegada_I, #MainContent_DE_FechaSalida_I, #MainContent_DE_FechaTransf_I, 
+#MainContent_DE_FechaLlegada_I, #MainContent_DE_FechaSalida_I, #MainContent_DE_FechaTransf_I, #MainContent_DDL_BancoTransf_I, 
+#MainContent_DDL_MonedaReng_I, #MainContent_DE_FechaReng_I, 
 #MainContent_DE_Fecha_ETC, #MainContent_DDL_Puerto_ETC, #MainContent_DDL_Buque_ETC, #MainContent_DDL_Cliente_ETC, 
-#MainContent_DE_FechaLlegada_ETC, #MainContent_DE_FechaSalida_ETC, #MainContent_DE_FechaTransf_ETC {
+#MainContent_DE_FechaLlegada_ETC, #MainContent_DE_FechaSalida_ETC, #MainContent_DE_FechaTransf_ETC, #MainContent_DDL_BancoTransf_ETC,
+#MainContent_DDL_MonedaReng_ETC, #MainContent_DE_FechaReng_ETC {
     color: #F0F0F0;
+}
+#MainContent_TB_NroViaje_ET, #MainContent_TE_HoraLlegada_ET, 
+#MainContent_TE_HoraSalida_ET {
+    background: #303030;
+}
+#MainContent_DDL_BancoTransf_DDD_PW-1, #MainContent_DDL_MonedaReng_DDD_PW-1 {
+    top: 52px !important;
+}
+#MainContent_DE_FechaTransf_DDD_PW-1 {
+    top: 108px !important;
+}
+#MainContent_DE_FechaReng_DDD_PW-1 {
+    top: 130px !important;
 }
 .buttons-actions {
     display: flex;
@@ -53,25 +68,35 @@ form .row:not(.my-5) {
     function endCallback(s, e) {
         $("#items").text(grid.GetVisibleRowsOnPage());
 
-        var price_total = 0;
-        var price_total_usd = 0;
-        for (var i = 0; i < grid.GetVisibleRowsOnPage(); i++) {
-            var elem_parent = grid.GetRow(i).getElementsByTagName("td")[5];
-            var elem_last = elem_parent.lastElementChild;
-            var elem_f = elem_last ?? elem_parent;
+        if (grid.GetVisibleRowsOnPage() > 0) {
+            var columns = grid.GetRow(0).querySelectorAll("td:not(.dxgvCommandColumn_Material)").length, ind_price;
+            if (columns == 8)
+                ind_price = 5;
+            else if (columns == 9)
+                ind_price = 4;
 
-            var r = parseFloat(elem_f.innerHTML.replaceAll(".", "").replaceAll(",", "."));
-            price_total += r;
+            var price_total = 0, price_total_usd = 0;
+            for (var i = 0; i < grid.GetVisibleRowsOnPage(); i++) {
+                var elem_parent = grid.GetRow(i).getElementsByTagName("td")[ind_price];
+                var elem_last = elem_parent.lastElementChild;
+                var elem_f = elem_last ?? elem_parent;
 
-            elem_parent = grid.GetRow(i).getElementsByTagName("td")[6];
-            elem_last = elem_parent.lastElementChild;
-            elem_f = elem_last ?? elem_parent;
+                var r = parseFloat(elem_f.innerHTML.replaceAll(".", "").replaceAll(",", "."));
+                price_total += r;
 
-            var r = parseFloat(elem_f.innerHTML.replaceAll(".", "").replaceAll(",", "."));
-            price_total_usd += r;
+                elem_parent = grid.GetRow(i).getElementsByTagName("td")[ind_price + 1];
+                elem_last = elem_parent.lastElementChild;
+                elem_f = elem_last ?? elem_parent;
+
+                var r = parseFloat(elem_f.innerHTML.replaceAll(".", "").replaceAll(",", "."));
+                price_total_usd += r;
+            }
+            $("#total_doc").text(price_total.toLocaleString("es-ES", { minimumFractionDigits: 2, maximumFractionDigits: 2, useGrouping: true }));
+            $("#total_doc_usd").text(price_total_usd.toLocaleString("es-ES", { minimumFractionDigits: 2, maximumFractionDigits: 2, useGrouping: true }));
+        } else {
+            $("#total_doc").text("0,00");
+            $("#total_doc_usd").text("0,00");
         }
-        $("#total_doc").text(price_total.toLocaleString("es-ES", { minimumFractionDigits: 2, maximumFractionDigits: 2, useGrouping: true }));
-        $("#total_doc_usd").text(price_total_usd.toLocaleString("es-ES", { minimumFractionDigits: 2, maximumFractionDigits: 2, useGrouping: true }));
 
         $("span").click(function () {
             if (this.innerHTML == "Eliminar") {
@@ -83,7 +108,16 @@ form .row:not(.my-5) {
             }
         });
     }
+
+    function openModalReng() {
+        $("#modalAgregarSoporte").modal("show");
+    }
 </script>
+<asp:Panel ID="PN_Success" runat="server" Width="100%" CssClass="mt-2" Visible="false">
+    <div class="alert alert-success m-0">
+        <dx:ASPxLabel ID="LBL_Success" runat="server" Width="100%" Font-Size="14px" CssClass="m-0"></dx:ASPxLabel>
+    </div>
+</asp:Panel>
 <asp:Panel ID="PN_Error" runat="server" Width="100%" CssClass="mt-2" Visible="false">
     <div class="alert alert-danger m-0">
         <dx:ASPxLabel ID="LBL_Error" runat="server" Width="100%" Font-Size="14px" CssClass="m-0"></dx:ASPxLabel>
@@ -476,8 +510,8 @@ form .row:not(.my-5) {
         <div class="row">
             <div class="col">
                 <dx:ASPxGridView ID="GV_DocumentoReng" runat="server" Theme="Material" Width="100%" ClientInstanceName="grid" AutoGenerateColumns="False" KeyFieldName="reng_num"
-                    OnRowInserting="GV_DocumentoReng_RowInserting" OnRowUpdating="GV_DocumentoReng_RowUpdating" OnRowDeleting="GV_DocumentoReng_RowDeleting" 
-                    OnInitNewRow="GV_DocumentoReng_InitNewRow" OnHtmlRowPrepared="GV_DocumentoReng_HtmlRowPrepared" OnHtmlDataCellPrepared="GV_DocumentoReng_HtmlDataCellPrepared">
+                    OnRowInserting="GV_DocumentoReng_RowInserting" OnRowUpdating="GV_DocumentoReng_RowUpdating" OnRowDeleting="GV_DocumentoReng_RowDeleting" OnInitNewRow="GV_DocumentoReng_InitNewRow" 
+                    OnRowCommand="GV_DocumentoReng_RowCommand" OnHtmlRowPrepared="GV_DocumentoReng_HtmlRowPrepared" OnHtmlDataCellPrepared="GV_DocumentoReng_HtmlDataCellPrepared">
                     <ClientSideEvents EndCallback="endCallback" />
                     <SettingsPager PageSize="5"></SettingsPager>
                     <SettingsEditing Mode="Batch" NewItemRowPosition="Bottom">
@@ -500,7 +534,7 @@ form .row:not(.my-5) {
                             <PropertiesComboBox DataSourceID="DS_Servicio" ValueField="ID" TextField="des_serv" TextFormatString="{0}">
                                 <Columns>
                                     <dx:ListBoxColumn FieldName="ID" Caption="ID"></dx:ListBoxColumn>
-                                    <dx:ListBoxColumn FieldName="des_serv" Caption="Servicio" Width="250"></dx:ListBoxColumn>
+                                    <dx:ListBoxColumn FieldName="des_serv" Caption="Servicio" Width="300px"></dx:ListBoxColumn>
                                 </Columns>
                                 <ValidationSettings Display="Dynamic" RequiredField-IsRequired="true" />
                             </PropertiesComboBox>
@@ -565,9 +599,6 @@ form .row:not(.my-5) {
                             <CellStyle ForeColor="#F0F0F0" Border-BorderWidth="0px">
                                 <Paddings Padding="12px"></Paddings>
                             </CellStyle>
-                            <DataItemTemplate>
-                                <span class="mx-1">0,00</span>
-                            </DataItemTemplate>
                         </dx:GridViewDataTextColumn>
                         <dx:GridViewDataTextColumn Caption="Subir Soporte" VisibleIndex="11" ReadOnly="true">
                             <HeaderStyle BackColor="#102140" Border-BorderWidth="0px" ForeColor="#F0F0F0" Paddings-Padding="5px"></HeaderStyle>
@@ -575,8 +606,7 @@ form .row:not(.my-5) {
                                 <Paddings Padding="12px"></Paddings>
                             </CellStyle>
                             <DataItemTemplate>
-                                <dx:ASPxButton ID="BTN_AgregarSoporte" runat="server" CssClass="btn btn-primary p-1" ForeColor="#F0F0F0" Text="..." AutoPostBack="false" 
-                                    data-toggle="modal" data-target="#modalAgregarSoporte"></dx:ASPxButton>
+                                <dx:ASPxButton ID="BTN_AgregarSoporte" runat="server" CssClass="btn btn-primary p-1" ForeColor="#F0F0F0" Text="..." CommandName="Soporte"></dx:ASPxButton>
                             </DataItemTemplate>
                         </dx:GridViewDataTextColumn>
                     </Columns>
@@ -642,7 +672,8 @@ form .row:not(.my-5) {
                         <div class="col">
                             <div class="form-group-h" style="text-align: left !important;">
                                 <label class="my-1">Monto Transf.</label>
-                                <dx:ASPxTextBox ID="TB_MontoTransf" runat="server" Width="100%" CssClass="form-control" Theme="Material" BackColor="#303030" Border-BorderWidth="0" ForeColor="#F0F0F0">
+                                <dx:ASPxTextBox ID="TB_MontoTransf" runat="server" Width="100%" CssClass="form-control" Theme="Material" BackColor="#303030" Border-BorderColor="#303030" 
+                                    ForeColor="#F0F0F0">
                                     <ClientSideEvents KeyPress="function (s,e) { onlyNumbers(s, e); }" />
                                     <ValidationSettings Display="Dynamic" ValidationGroup="Cobrar" ErrorText="" ValidateOnLeave="false" ErrorTextPosition="Bottom">
                                         <RequiredField IsRequired="True" ErrorText="Campo Obligatorio" />
@@ -653,17 +684,12 @@ form .row:not(.my-5) {
                         <div class="col">
                             <div class="form-group-h" style="text-align: left !important;">
                                 <label class="my-1">Banco</label>
-                                <%--<dx:ASPxTextBox ID="TB_BancoTransf" runat="server" Width="100%" CssClass="form-control" Theme="Material" BackColor="#303030" Border-BorderWidth="0" ForeColor="#F0F0F0">
-                                    <ValidationSettings Display="Dynamic" ValidationGroup="Cobrar" ErrorText="" ValidateOnLeave="false" ErrorTextPosition="Bottom">
-                                        <RequiredField IsRequired="True" ErrorText="Campo Obligatorio" />
-                                    </ValidationSettings>
-                                </dx:ASPxTextBox>--%>
-                                <dx:ASPxComboBox ID="DDL_BancoTransf" runat="server" Theme="Material" Width="100%" BackColor="#303030" Border-BorderColor="#303030" 
-                                    ValueField="ID" TextField="des_cuenta" DataSourceID="DS_Banco" AutoPostBack="true">
+                                <dx:ASPxComboBox ID="DDL_BancoTransf" runat="server" Theme="Material" Width="100%" CssClass="form-control" BackColor="#303030" Border-BorderWidth="0" 
+                                    Border-BorderColor="#303030" ValueField="ID" TextField="nro_cuenta" DataSourceID="DS_Banco">
                                     <Columns>
                                         <dx:ListBoxColumn FieldName="ID" Width="70px" Caption="C&#243;digo"></dx:ListBoxColumn>
-                                        <dx:ListBoxColumn FieldName="des_cuenta" Width="160px" Caption="Descripci&#243;n"></dx:ListBoxColumn>
-                                        <dx:ListBoxColumn FieldName="nro_cuenta" Width="160px" Caption="Nro. Cuenta"></dx:ListBoxColumn>
+                                        <dx:ListBoxColumn FieldName="des_cuenta" Caption="Banco"></dx:ListBoxColumn>
+                                        <dx:ListBoxColumn FieldName="nro_cuenta" Width="280px" Caption="Nro. Cuenta"></dx:ListBoxColumn>
                                     </Columns>
                                     <ValidationSettings Display="Dynamic" ValidationGroup="Cobrar" ErrorText="" ValidateOnLeave="false" ErrorTextPosition="Bottom">
                                         <RequiredField IsRequired="True" ErrorText="Campo Obligatorio" />
@@ -677,7 +703,8 @@ form .row:not(.my-5) {
                         <div class="col">
                             <div class="form-group-h" style="text-align: left !important;">
                                 <label class="my-1">Fec. Transf.</label>
-                                <dx:ASPxDateEdit ID="DE_FechaTransf" runat="server" Width="100%" CssClass="form-control" EditFormat="Date" Theme="Material" BackColor="#303030" Border-BorderWidth="0">
+                                <dx:ASPxDateEdit ID="DE_FechaTransf" runat="server" Width="100%" CssClass="form-control" EditFormat="Date" Theme="Material" BackColor="#303030" 
+                                    Border-BorderWidth="0">
                                     <ValidationSettings Display="Dynamic" ValidationGroup="Cobrar" ErrorText="" ValidateOnLeave="false" ErrorTextPosition="Bottom">
                                         <RequiredField IsRequired="True" ErrorText="Campo Obligatorio" />
                                     </ValidationSettings>
@@ -687,7 +714,8 @@ form .row:not(.my-5) {
                         <div class="col">
                             <div class="form-group-h" style="text-align: left !important;">
                                 <label class="my-1">Ref. Transf.</label>
-                                <dx:ASPxTextBox ID="TB_RefTransf" runat="server" Width="100%" CssClass="form-control" Theme="Material" BackColor="#303030" Border-BorderWidth="0" ForeColor="#F0F0F0">
+                                <dx:ASPxTextBox ID="TB_RefTransf" runat="server" Width="100%" CssClass="form-control" Theme="Material" BackColor="#303030" Border-BorderColor="#303030" 
+                                    ForeColor="#F0F0F0">
                                     <ClientSideEvents KeyPress="function (s,e) { onlyNumbers(s, e); }" />
                                     <ValidationSettings Display="Dynamic" ValidationGroup="Cobrar" ErrorText="" ValidateOnLeave="false" ErrorTextPosition="Bottom">
                                         <RequiredField IsRequired="True" ErrorText="Campo Obligatorio" />
@@ -769,8 +797,11 @@ form .row:not(.my-5) {
                         <div class="col">
                             <div class="form-group-h" style="text-align: left !important;">
                                 <label class="my-1">Monto Pagado</label>
-                                <dx:ASPxTextBox ID="TB_MontoReng" runat="server" Width="100%" CssClass="form-control" BackColor="#303030" Border-BorderWidth="0" ForeColor="#F0F0F0">
+                                <dx:ASPxTextBox ID="TB_MontoReng" runat="server" Theme="Material" Width="100%" CssClass="form-control" BackColor="#303030" Border-BorderColor="#303030" ForeColor="#F0F0F0">
                                     <ClientSideEvents KeyPress="function (s,e) { onlyNumbers(s, e); }" />
+                                    <ValidationSettings Display="Dynamic" ValidationGroup="Soporte" ErrorText="" ValidateOnLeave="false" ErrorTextPosition="Bottom">
+                                        <RequiredField IsRequired="True" ErrorText="Campo Obligatorio" />
+                                    </ValidationSettings>
                                 </dx:ASPxTextBox>
                             </div>
                         </div>
@@ -783,6 +814,9 @@ form .row:not(.my-5) {
                                         <dx:ListBoxColumn FieldName="ID" Width="70px" Caption="C&#243;digo"></dx:ListBoxColumn>
                                         <dx:ListBoxColumn FieldName="des_mone" Width="160px" Caption="Descripci&#243;n"></dx:ListBoxColumn>
                                     </Columns>
+                                    <ValidationSettings Display="Dynamic" ValidationGroup="Soporte" ErrorText="" ValidateOnLeave="false" ErrorTextPosition="Bottom">
+                                        <RequiredField IsRequired="True" ErrorText="Campo Obligatorio" />
+                                    </ValidationSettings>
                                 </dx:ASPxComboBox>
                                 <asp:SqlDataSource runat="server" ID="DS_Moneda" ConnectionString='<%$ ConnectionStrings:SailingMasterConnectionString %>' SelectCommand="SELECT [ID], [des_mone] FROM [Moneda]"></asp:SqlDataSource>
                             </div>
@@ -792,14 +826,22 @@ form .row:not(.my-5) {
                         <div class="col">
                             <div class="form-group-h" style="text-align: left !important;">
                                 <label class="my-1">Fecha</label>
-                                <dx:ASPxDateEdit ID="DE_FechaReng" runat="server" Width="100%" CssClass="form-control" EditFormat="Date" Theme="Material" BackColor="#303030" Border-BorderWidth="0"></dx:ASPxDateEdit>
+                                <dx:ASPxDateEdit ID="DE_FechaReng" runat="server" Width="100%" CssClass="form-control" EditFormat="Date" Theme="Material" 
+                                    BackColor="#303030" Border-BorderWidth="0">
+                                    <ValidationSettings Display="Dynamic" ValidationGroup="Soporte" ErrorText="" ValidateOnLeave="false" ErrorTextPosition="Bottom">
+                                        <RequiredField IsRequired="True" ErrorText="Campo Obligatorio" />
+                                    </ValidationSettings>
+                                </dx:ASPxDateEdit>
                             </div>
                         </div>
                         <div class="col">
                             <div class="form-group-h" style="text-align: left !important;">
                                 <label class="my-1">Referencia</label>
-                                <dx:ASPxTextBox ID="TB_RefReng" runat="server" Width="100%" CssClass="form-control" BackColor="#303030" Border-BorderWidth="0" ForeColor="#F0F0F0">
+                                <dx:ASPxTextBox ID="TB_RefReng" runat="server" Theme="Material" Width="100%" CssClass="form-control" BackColor="#303030" Border-BorderColor="#303030" ForeColor="#F0F0F0">
                                     <ClientSideEvents KeyPress="function (s,e) { onlyNumbers(s, e); }" />
+                                    <ValidationSettings Display="Dynamic" ValidationGroup="Soporte" ErrorText="" ValidateOnLeave="false" ErrorTextPosition="Bottom">
+                                        <RequiredField IsRequired="True" ErrorText="Campo Obligatorio" />
+                                    </ValidationSettings>
                                 </dx:ASPxTextBox>
                             </div>
                         </div>
@@ -815,7 +857,7 @@ form .row:not(.my-5) {
                 </div>
                 <div class="modal-footer buttons">
                     <button class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
-                    <button class="btn btn-primary">Guardar</button>
+                    <dx:ASPxButton ID="BTN_AgregarSoporteReng" runat="server" Text="Guardar" CssClass="btn btn-primary" ValidationGroup="Soporte" OnClick="BTN_AgregarSoporteReng_Click"></dx:ASPxButton>
                 </div>
             </div>
         </div>
@@ -823,37 +865,7 @@ form .row:not(.my-5) {
 </form>
 <script>
     $(document).ready(function () {
-        $("#items").text(grid.GetVisibleRowsOnPage());
-
-        var price_total = 0;
-        var price_total_usd = 0;
-        for (var i = 0; i < grid.GetVisibleRowsOnPage(); i++) {
-            var elem_parent = grid.GetRow(i).getElementsByTagName("td")[5];
-            var elem_last = elem_parent.lastElementChild;
-            var elem_f = elem_last ?? elem_parent;
-
-            var r = parseFloat(elem_f.innerHTML.replaceAll(".", "").replaceAll(",", "."));
-            price_total += r;
-
-            elem_parent = grid.GetRow(i).getElementsByTagName("td")[6];
-            elem_last = elem_parent.lastElementChild;
-            elem_f = elem_last ?? elem_parent;
-
-            var r = parseFloat(elem_f.innerHTML.replaceAll(".", "").replaceAll(",", "."));
-            price_total_usd += r;
-        }
-        $("#total_doc").text(price_total.toLocaleString("es-ES", { minimumFractionDigits: 2, maximumFractionDigits: 2, useGrouping: true }));
-        $("#total_doc_usd").text(price_total_usd.toLocaleString("es-ES", { minimumFractionDigits: 2, maximumFractionDigits: 2, useGrouping: true }));
-
-        $("span").click(function () {
-            if (this.innerHTML == "Eliminar") {
-                setTimeout(function () {
-                    if (grid.batchEditApi.HasChanges()) {
-                        grid.UpdateEdit();
-                    }
-                }, 10)
-            }
-        });
+        endCallback(null, null);
     });
 
     window.onkeydown = function (e) {

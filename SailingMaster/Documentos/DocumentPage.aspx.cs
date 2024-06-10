@@ -12,6 +12,7 @@ namespace SailingMaster.Documentos
 {
     public partial class DocumentPage : System.Web.UI.Page
     {
+        private static int IDSelected;
         private static List<DocumentoReng> rengs = new List<DocumentoReng>();
 
         protected void Page_Load(object sender, EventArgs e)
@@ -44,16 +45,7 @@ namespace SailingMaster.Documentos
                         }
                         else
                         {
-                            NumberFormatInfo formato = new NumberFormatInfo();
-                            formato.NumberDecimalSeparator = ",";
-                            formato.NumberGroupSeparator = ".";
-
-                            LBL_TotalRecibido.Text = doc.collected_amount.Value.ToString("N2", formato);
-                            LBL_TotalRecibido_USD.Text = Math.Round(doc.collected_amount.Value / MonedaController.GetByID("USD").tasa, 2).ToString("N2", formato);
-                            LBL_TotalCancelado.Text = "0,00";
-                            LBL_TotalCancelado_USD.Text = "0,00";
-                            LBL_Balance.Text = doc.collected_amount.Value.ToString("N2", formato);
-                            LBL_Balance_USD.Text = Math.Round(doc.collected_amount.Value / MonedaController.GetByID("USD").tasa, 2).ToString("N2", formato);
+                            SetAmounts(doc);
                         }
 
                         string status;
@@ -410,6 +402,35 @@ namespace SailingMaster.Documentos
             }
         }
 
+        protected void BTN_AgregarSoporteReng_Click(object sender, EventArgs e)
+        {
+            Usuario user = (Session["USER"] as Usuario);
+            Documento doc = DocumentoController.GetByID(int.Parse(Request.QueryString["ID"].ToString()));
+            DocumentoReng reng = doc.DocumentoReng.Single(r => r.reng_num == IDSelected);
+            int index = doc.DocumentoReng.ToList().IndexOf(reng);
+
+            reng.price_liq = decimal.Parse(TB_MontoReng.Text.Replace(".", ","));
+            reng.co_us_mo = user.username;
+            reng.fe_us_mo = DateTime.Now;
+
+            int result = DocumentoController.LiqReng(reng);
+
+            if (result == 1)
+            {
+                rengs[index] = reng;
+                SetAmounts(doc);
+                BindGrid(rengs);
+
+                PN_Success.Visible = true;
+                LBL_Success.Text = "Renglon liquidado con éxito";
+            }
+            else
+            {
+                PN_Error.Visible = true;
+                LBL_Error.Text = "Ha ocurrido un error al revisar el Documento. Ver tabla de Incidentes";
+            }
+        }
+
         protected void DDL_Buque_SelectedIndexChanged(object sender, EventArgs e)
         {
             Buque buque = BuqueController.GetByID(int.Parse(DDL_Buque.Value.ToString()));
@@ -455,7 +476,9 @@ namespace SailingMaster.Documentos
                 if (Request.QueryString["ID"] != null)
                 {
                     Documento doc = DocumentoController.GetByID(int.Parse(Request.QueryString["ID"].ToString()));
-                    if (doc.status != 5)
+                    DocumentoReng reng = rengs.Single(r => r.reng_num == Convert.ToInt32(e.KeyValue ?? "1"));
+
+                    if (doc.status != 5 || reng.price_liq > 0)
                     {
                         ASPxButton button = GV_DocumentoReng.FindRowCellTemplateControl(e.VisibleIndex, e.DataColumn, "BTN_AgregarSoporte") as ASPxButton;
                         DisableButton(button);
@@ -464,10 +487,27 @@ namespace SailingMaster.Documentos
             }
         }
 
+        protected void GV_DocumentoReng_RowCommand(object sender, ASPxGridViewRowCommandEventArgs e)
+        {
+            IDSelected = int.Parse(e.KeyValue.ToString());
+            ScriptManager.RegisterStartupScript(this, GetType(), "modal", "openModalReng()", true);
+        }
+
         protected void GV_DocumentoReng_RowInserting(object sender, DevExpress.Web.Data.ASPxDataInsertingEventArgs e)
         {
             Servicio serv = ServicioController.GetByID(e.NewValues["co_serv"] as string);
             int cantidad = Convert.ToInt32(e.NewValues["cantidad"]);
+
+            if (ServicioController.HasRange(serv.ID))
+            {
+                if (DDL_Buque.Value == null)
+                    throw new Exception("El servicio seleccionado depende de los valores del buque. Por favor, seleccione un buque.");
+                else
+                {
+                    Buque buque = BuqueController.GetByID(Convert.ToInt32(DDL_Buque.Value));
+                    serv.precio_base = ServicioController.GetPriceServ(serv.ID, buque);
+                }
+            }
 
             var newRow = new DocumentoReng
             {
@@ -602,8 +642,11 @@ namespace SailingMaster.Documentos
             TB_TasaEURUSD.Text = Math.Round(eur.tasa / usd.tasa, 2).ToString();
             TB_ValorUT.Text = utv.tasa.ToString();
             LBL_TotalRecibido.Text = "0,00";
+            LBL_TotalRecibido_USD.Text = "0,00";
             LBL_TotalCancelado.Text = "0,00";
+            LBL_TotalCancelado_USD.Text = "0,00";
             LBL_Balance.Text = "0,00";
+            LBL_Balance_USD.Text = "0,00";
             GV_DocumentoReng.Columns[GV_DocumentoReng.Columns.Count - 1].Visible = false;
         }
 
@@ -619,7 +662,7 @@ namespace SailingMaster.Documentos
                     DisableButton(BTN_PreEliminarDocumento);
             }
 
-            if (status == 1 || status == 6)
+            if (status == 1 || status == 4 || status == 5 || status == 6)
             {
                 GV_DocumentoReng.SettingsEditing.Mode = GridViewEditingMode.EditForm;
                 GV_DocumentoReng.Columns[0].Visible = false;
@@ -628,11 +671,15 @@ namespace SailingMaster.Documentos
                 DisableButton(BTN_PreRevisarDocumento);
                 DisableButton(BTN_PreAprobarDocumento);
 
-                if (status == 6)
+                if (status != 1)
                     DisableButton(BTN_PreCobrarDocumento);
 
-                DisableButton(BTN_PreLiquidarDocumento);
-                DisableButton(BTN_PreCerrarDocumento);
+                if (status != 4)
+                    DisableButton(BTN_PreLiquidarDocumento);
+
+                if (status != 5)
+                    DisableButton(BTN_PreCerrarDocumento);
+
                 DisableButton(BTN_PreEliminarDocumento);
 
                 DE_Fecha.Enabled = false;
@@ -683,6 +730,24 @@ namespace SailingMaster.Documentos
             DateTime t = DateTime.Parse(time);
 
             return new DateTime(d.Year, d.Month, d.Day, t.Hour, t.Minute, 0);
+        }
+
+        private void SetAmounts(Documento doc)
+        {
+            NumberFormatInfo formato = new NumberFormatInfo();
+            formato.NumberDecimalSeparator = ",";
+            formato.NumberGroupSeparator = ".";
+
+            decimal tasa_usd = doc.tasa_usd;
+            decimal cancelled = doc.DocumentoReng.ToList().Select(r => r.price_liq ?? 0).Sum();
+            decimal balance = doc.collected_amount.Value - cancelled;
+
+            LBL_TotalRecibido.Text = doc.collected_amount.Value.ToString("N2", formato);
+            LBL_TotalRecibido_USD.Text = Math.Round(doc.collected_amount.Value / tasa_usd, 2).ToString("N2", formato);
+            LBL_TotalCancelado.Text = cancelled.ToString("N2", formato);
+            LBL_TotalCancelado_USD.Text = Math.Round(cancelled / tasa_usd, 2).ToString("N2", formato); ;
+            LBL_Balance.Text = balance.ToString("N2", formato);
+            LBL_Balance_USD.Text = Math.Round(balance / tasa_usd, 2).ToString("N2", formato);
         }
     }
 }

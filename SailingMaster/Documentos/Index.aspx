@@ -128,14 +128,14 @@
                             <Paddings Padding="12px"></Paddings>
                         </CellStyle>
                     </dx:GridViewDataDateColumn>
-                    <dx:GridViewDataColumn Width="110px" VisibleIndex="12" Caption="Revisar">
+                    <dx:GridViewDataColumn VisibleIndex="12" Caption="Revisar">
                         <HeaderStyle BackColor="#102140" Border-BorderWidth="0px" ForeColor="#F0F0F0" Paddings-Padding="5px"></HeaderStyle>
                         <CellStyle ForeColor="#F0F0F0" Border-BorderWidth="0px">
                             <Paddings Padding="12px"></Paddings>
                         </CellStyle>
                         <DataItemTemplate>
                             <asp:LinkButton ID="BTN_RevisarDocumento" runat="server" CssClass="btn btn-primary" CommandName="Revisar">
-                                <i class="fas fa-search" style="margin-right: 5px;"></i>
+                                <i class="fas fa-search"></i>
                             </asp:LinkButton>
                         </DataItemTemplate>
                     </dx:GridViewDataColumn>
@@ -191,7 +191,7 @@
                                 <br />
                                 Cobrado Por: <dx:ASPxLabel runat="server" Text='<%# Eval("collected_by") %>' Font-Bold="true" ForeColor="#F0F0F0" />
                                 <br />
-                                Monto Recibido: <dx:ASPxLabel runat="server" Text='<%# Eval("collected_amount") %>' Font-Bold="true" ForeColor="#F0F0F0" />
+                                Monto Recibido: <dx:ASPxLabel runat="server" Text='<%# Eval("collected_amount", "{0:N2}") %>' Font-Bold="true" ForeColor="#F0F0F0" />
                                 <br />
                                 Banco Destino: <dx:ASPxLabel runat="server" Text='<%# Eval("collected_bank") %>' Font-Bold="true" ForeColor="#F0F0F0" />
                                 <br />
@@ -218,7 +218,8 @@
             end as doc_status
             from Documento D
             inner join Buque B on B.ID = D.co_buque
-            inner join Cliente C on C.ID = D.co_cli"></asp:SqlDataSource>
+            inner join Cliente C on C.ID = D.co_cli
+            order by D.fe_us_in desc"></asp:SqlDataSource>
         </div>
     </asp:Panel>
 </form>

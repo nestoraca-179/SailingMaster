@@ -124,7 +124,7 @@ hr {
 
 /* MODALES */
 .modal {
-    background: rgba(0, 0, 0, 0.5);
+    background: rgba(0, 0, 0, 0.75);
 }
 .modal .modal-dialog {
     max-width: 800px;
@@ -289,7 +289,7 @@ table td {
     text-decoration: none;
     border-radius: 3px;
 }
-#MainContent_GV_DocumentoReng_DXEmptyRow, #MainContent_GV_Documentos_DXEmptyRow {
+#MainContent_GV_Documentos_DXEmptyRow, #MainContent_GV_DocumentoReng_DXEmptyRow, #MainContent_GV_PrecioServicio_DXEmptyRow {
     background: #141517 !important;
     color: #F0F0F0;
 }
@@ -297,6 +297,10 @@ table td {
     background: #141517 !important;
     color: #F0F0F0;
     border-radius: 0;
+}
+.dxgvPagerBottomPanel_Material {
+    background: #1a1e24;
+    border: 0;
 }
 
 /* VISTAS AGREGAR */

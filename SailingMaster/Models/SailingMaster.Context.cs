@@ -37,5 +37,6 @@ namespace SailingMaster.Models
         public virtual DbSet<Servicio> Servicio { get; set; }
         public virtual DbSet<TipoServicio> TipoServicio { get; set; }
         public virtual DbSet<Usuario> Usuario { get; set; }
+        public virtual DbSet<PrecioServicio> PrecioServicio { get; set; }
     }
 }

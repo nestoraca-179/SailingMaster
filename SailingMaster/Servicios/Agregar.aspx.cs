@@ -39,12 +39,13 @@ namespace SailingMaster.Servicios
             try
             {
                 Moneda mon = MonedaController.GetByID(DDL_Moneda.Value.ToString());
-                decimal price = decimal.Parse(TB_Price.Value.ToString());
 
                 serv.ID = TB_Code.Text;
                 serv.des_serv = TB_Descrip.Text;
                 serv.tip_serv = int.Parse(DDL_TipoServicio.Value.ToString());
-                serv.precio_base = decimal.Parse(TB_Price.Text.Replace(".", ","));
+                serv.precio_min = decimal.Parse(TB_PrecioMin.Text.Replace(".", ","));
+                serv.precio_base = decimal.Parse(TB_PrecioBase.Text.Replace(".", ","));
+                serv.precio_max = decimal.Parse(TB_PrecioMax.Text.Replace(".", ","));
                 serv.co_mone = DDL_Moneda.Value.ToString();
                 serv.activo = CK_Activo.Checked;
                 serv.co_us_in = (Session["USER"] as Usuario).username;

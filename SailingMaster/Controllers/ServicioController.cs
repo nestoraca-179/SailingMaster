@@ -1,5 +1,6 @@
 ﻿using SailingMaster.Models;
 using System;
+using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
 using System.Reflection;
@@ -86,6 +87,27 @@ namespace SailingMaster.Controllers
             }
 
             return result;
+        }
+
+        public static bool HasRange(string id)
+        {
+            return db.PrecioServicio.Any(ps => ps.co_serv.Equals(id, StringComparison.OrdinalIgnoreCase));
+        }
+
+        public static decimal GetPriceServ(string id, Buque buque)
+        {
+            // Por defecto, siempre vamos a tomar el primer campo
+            string campo = db.PrecioServicio.AsNoTracking().Where(p => p.co_serv == id).Select(p => p.campo_valor).Distinct().ToList()[0];
+            decimal valor = 0;
+
+            if (campo == "GRT")
+                valor = buque.grt;
+            else if (campo == "LOA")
+                valor = buque.loa;
+
+            PrecioServicio precio = db.PrecioServicio.AsNoTracking().Single(p => p.co_serv == id && p.desde <= valor && p.hasta >= valor);
+
+            return precio.precio_base;
         }
 
         private static string GetChanges(Servicio user_v, Servicio user_n)

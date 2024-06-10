@@ -2,6 +2,7 @@
 using SailingMaster.Controllers;
 using SailingMaster.Models;
 using System;
+using System.Drawing;
 
 namespace SailingMaster.Servicios
 {
@@ -54,9 +55,11 @@ namespace SailingMaster.Servicios
             try
             {
                 serv.ID = IDServ;
-                serv.des_serv = TB_Descrip.Text;
                 serv.tip_serv = int.Parse(DDL_TipoServicio.Value.ToString());
-                serv.precio_base = decimal.Parse(TB_Price.Text.Replace(".", ","));
+                serv.des_serv = TB_Descrip.Text;
+                serv.precio_min = decimal.Parse(TB_PrecioMin.Text.Replace(".", ","));
+                serv.precio_base = decimal.Parse(TB_PrecioBase.Text.Replace(".", ","));
+                serv.precio_max = decimal.Parse(TB_PrecioMax.Text.Replace(".", ","));
                 serv.co_mone = DDL_Moneda.Value.ToString();
                 serv.activo = CK_Activo.Checked;
                 serv.co_us_mo = (Session["USER"] as Usuario).username;
@@ -82,12 +85,25 @@ namespace SailingMaster.Servicios
             }
         }
 
+        protected void GV_PrecioServicio_HtmlRowPrepared(object sender, ASPxGridViewTableRowEventArgs e)
+        {
+            if (e.RowType == DevExpress.Web.GridViewRowType.Data)
+            {
+                if (e.VisibleIndex % 2 == 0)
+                    e.Row.BackColor = ColorTranslator.FromHtml("#26272a");
+                else
+                    e.Row.BackColor = ColorTranslator.FromHtml("#333438");
+            }
+        }
+
         private void CargarServicio(Servicio serv)
         {
             TB_Code.Text = serv.ID;
-            TB_Descrip.Text = serv.des_serv;
             DDL_TipoServicio.Value = serv.tip_serv.ToString();
-            TB_Price.Text = Math.Round(serv.precio_base, 2).ToString();
+            TB_Descrip.Text = serv.des_serv;
+            TB_PrecioMin.Text = Math.Round(serv.precio_min, 2).ToString();
+            TB_PrecioBase.Text = Math.Round(serv.precio_base, 2).ToString();
+            TB_PrecioMax.Text = Math.Round(serv.precio_max, 2).ToString();
             DDL_Moneda.Value = serv.co_mone;
             CK_Activo.Checked = serv.activo;
 

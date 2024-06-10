@@ -78,6 +78,15 @@ namespace SailingMaster.Servicios
         protected global::DevExpress.Web.ASPxLabel LBL_IDServicio;
 
         /// <summary>
+        /// Control CK_Activo.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::DevExpress.Web.ASPxCheckBox CK_Activo;
+
+        /// <summary>
         /// Control TB_Code.
         /// </summary>
         /// <remarks>
@@ -85,15 +94,6 @@ namespace SailingMaster.Servicios
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::DevExpress.Web.ASPxTextBox TB_Code;
-
-        /// <summary>
-        /// Control TB_Descrip.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::DevExpress.Web.ASPxTextBox TB_Descrip;
 
         /// <summary>
         /// Control DDL_TipoServicio.
@@ -114,13 +114,13 @@ namespace SailingMaster.Servicios
         protected global::System.Web.UI.WebControls.SqlDataSource DS_TipoServicio;
 
         /// <summary>
-        /// Control TB_Price.
+        /// Control TB_Descrip.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::DevExpress.Web.ASPxTextBox TB_Price;
+        protected global::DevExpress.Web.ASPxTextBox TB_Descrip;
 
         /// <summary>
         /// Control DDL_Moneda.
@@ -141,12 +141,48 @@ namespace SailingMaster.Servicios
         protected global::System.Web.UI.WebControls.SqlDataSource DS_Moneda;
 
         /// <summary>
-        /// Control CK_Activo.
+        /// Control TB_PrecioMin.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::DevExpress.Web.ASPxCheckBox CK_Activo;
+        protected global::DevExpress.Web.ASPxTextBox TB_PrecioMin;
+
+        /// <summary>
+        /// Control TB_PrecioBase.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::DevExpress.Web.ASPxTextBox TB_PrecioBase;
+
+        /// <summary>
+        /// Control TB_PrecioMax.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::DevExpress.Web.ASPxTextBox TB_PrecioMax;
+
+        /// <summary>
+        /// Control GV_PrecioServicio.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::DevExpress.Web.ASPxGridView GV_PrecioServicio;
+
+        /// <summary>
+        /// Control DS_PrecioServicio.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.SqlDataSource DS_PrecioServicio;
     }
 }

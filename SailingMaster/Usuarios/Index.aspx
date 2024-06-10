@@ -73,25 +73,25 @@
                             <Paddings Padding="12px"></Paddings>
                         </CellStyle>
                     </dx:GridViewDataTextColumn>
-                    <dx:GridViewDataColumn Width="110px" VisibleIndex="7" Caption="Editar">
+                    <dx:GridViewDataColumn Width="30px" VisibleIndex="7" Caption="Editar">
                         <HeaderStyle BackColor="#102140" Border-BorderWidth="0px" ForeColor="#F0F0F0" Paddings-Padding="5px"></HeaderStyle>
                         <CellStyle ForeColor="#F0F0F0" Border-BorderWidth="0px">
                             <Paddings Padding="12px"></Paddings>
                         </CellStyle>
                         <DataItemTemplate>
                             <asp:LinkButton ID="BTN_EditarUsuario" runat="server" CssClass="btn btn-primary" CommandName="Editar">
-                                <i class="fas fa-edit"></i> Editar
+                                <i class="fas fa-edit"></i>
                             </asp:LinkButton>
                         </DataItemTemplate>
                     </dx:GridViewDataColumn>
-                    <dx:GridViewDataColumn Width="110px" VisibleIndex="8" Caption="Eliminar" >
+                    <dx:GridViewDataColumn Width="30px" VisibleIndex="8" Caption="Eliminar" >
                         <HeaderStyle BackColor="#102140" Border-BorderWidth="0px" ForeColor="#F0F0F0" Paddings-Padding="5px"></HeaderStyle>
                         <CellStyle ForeColor="#F0F0F0" Border-BorderWidth="0px">
                             <Paddings Padding="12px"></Paddings>
                         </CellStyle>
                         <DataItemTemplate>
                             <asp:LinkButton ID="BTN_ConfirmarEliminarUsuario" runat="server" CssClass="btn btn-danger" CommandName="Eliminar">
-                                <i class="fas fa-trash"></i> Eliminar
+                                <i class="fas fa-trash"></i>
                             </asp:LinkButton>
                         </DataItemTemplate>
                     </dx:GridViewDataColumn>

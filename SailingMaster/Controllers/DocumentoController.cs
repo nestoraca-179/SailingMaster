@@ -111,6 +111,36 @@ namespace SailingMaster.Controllers
             return result;
         }
 
+        public static int LiqReng(DocumentoReng reng)
+        {
+            int result = 0;
+
+            using (SailingMasterEntities context = new SailingMasterEntities())
+            {
+                using (DbContextTransaction tran = context.Database.BeginTransaction())
+                {
+                    try
+                    {
+                        DocumentoReng existing = context.DocumentoReng.AsNoTracking().Single(r => r.co_doc == reng.co_doc && r.reng_num == reng.reng_num);
+                        string campos = GetChangesReng(existing, reng);
+                        context.Entry(reng).State = EntityState.Modified;
+                        context.SaveChanges();
+                        tran.Commit();
+
+                        LogController.CreateLog(reng.co_us_mo, "DOCUMENTO RENGLON", string.Format("{0}-{1}", reng.co_doc, reng.reng_num), "M", campos);
+                        result = 1;
+                    }
+                    catch (Exception ex)
+                    {
+                        tran.Rollback();
+                        IncidentController.CreateIncident(string.Format("ERROR MODIFICANDO DOCUMENTO RENGLON N° {0}-{1}", reng.co_doc, reng.reng_num), ex);
+                    }
+                }
+            }
+
+            return result;
+        }
+
         private static string GetChanges(Documento doc_v, Documento doc_n)
         {
             string campos = "";
@@ -122,6 +152,28 @@ namespace SailingMaster.Controllers
                 {
                     string valor1 = prop.GetValue(doc_v) == null ? "" : prop.GetValue(doc_v).ToString();
                     string valor2 = prop.GetValue(doc_n) == null ? "" : prop.GetValue(doc_n).ToString();
+
+                    if (valor1 != valor2)
+                    {
+                        campos += string.Format("{0}: {1} -> {2}; ", prop.Name, valor1, valor2);
+                    }
+                }
+            }
+
+            return campos;
+        }
+
+        private static string GetChangesReng(DocumentoReng reng_v, DocumentoReng reng_n)
+        {
+            string campos = "";
+            Type type = new DocumentoReng().GetType();
+
+            foreach (PropertyInfo prop in type.GetProperties())
+            {
+                if (prop.Name != "fe_us_in" && prop.Name != "fe_us_mo")
+                {
+                    string valor1 = prop.GetValue(reng_v) == null ? "" : prop.GetValue(reng_n).ToString();
+                    string valor2 = prop.GetValue(reng_v) == null ? "" : prop.GetValue(reng_n).ToString();
 
                     if (valor1 != valor2)
                     {

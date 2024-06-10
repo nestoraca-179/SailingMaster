@@ -25,6 +25,8 @@
         <AssociationConnector Association="SailingMasterModel.FK__ProformaR__co_se__10566F31" />
         <AssociationConnector Association="SailingMasterModel.FK__Servicio__co_mon__04AFB25B" />
         <AssociationConnector Association="SailingMasterModel.FK__Servicio__tip_se__793DFFAF" />
+        <EntityTypeShape EntityType="SailingMasterModel.PrecioServicio" Width="1.5" PointX="8.375" PointY="8.75" />
+        <AssociationConnector Association="SailingMasterModel.FK__PrecioSer__co_se__0EC32C7A" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

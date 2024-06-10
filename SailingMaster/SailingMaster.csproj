@@ -207,6 +207,9 @@
     <Compile Include="Models\Moneda.cs">
       <DependentUpon>SailingMaster.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\PrecioServicio.cs">
+      <DependentUpon>SailingMaster.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\Puerto.cs">
       <DependentUpon>SailingMaster.tt</DependentUpon>
     </Compile>

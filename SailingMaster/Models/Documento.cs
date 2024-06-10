@@ -63,7 +63,7 @@ namespace SailingMaster.Models
         public System.DateTime fe_us_in { get; set; }
         public string co_us_mo { get; set; }
         public System.DateTime fe_us_mo { get; set; }
-        public Nullable<decimal> total_usd { get; set; }
+        public decimal total_usd { get; set; }
     
         public virtual Buque Buque { get; set; }
         public virtual Cliente Cliente { get; set; }
