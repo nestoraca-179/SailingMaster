@@ -220,6 +220,14 @@ ul.menu li a p {
     color: #848484 !important;
     border: 0;
 }
+.title-type {
+    background: #5a5d66;
+    padding: 5px 15px;
+}
+.title-type span {
+    margin: 0 15px 0 5px;
+    font-size: 15px;
+}
 
 /* GRIDVIEWS */
 form {

@@ -31,13 +31,20 @@
 </header>
 <section class="container-fluid row">
     <div class="col-2" id="menu">
+        <p class="m-0 title-type"><span class="fas fa-chevron-right"></span>Tablas</p>
         <ul class="menu">
             <li><a href="/Servicios/Index.aspx" id="item_prods" runat="server"><i class="fas fa-list"></i><p class="m-0">Tarifario</p></a></li>
             <li><a href="#" id="item_currencies" runat="server"><i class="fa-solid fa-dollar-sign"></i><p class="m-0">Monedas</p></a></li>
             <li><a href="#" id="item_banks" runat="server"><i class="fas fa-university"></i><p class="m-0">Bancos</p></a></li>
             <li><a href="#" id="item_ports" runat="server"><i class="fas fa-passport"></i><p class="m-0">Puertos</p></a></li>
+        </ul>
+        <p class="m-0 title-type"><span class="fas fa-chevron-right"></span>Gestion Naviera</p>
+        <ul class="menu">
             <li><a href="/Documentos/Index.aspx" id="item_docs" runat="server"><i class="fa-solid fa-file-invoice-dollar"></i><p class="m-0">Documentos</p></a></li>
             <li><a href="#" id="item_reps" runat="server"><i class="fa-solid fa-file"></i><p class="m-0">Reportes</p></a></li>
+        </ul>
+        <p class="m-0 title-type"><span class="fas fa-chevron-right"></span>Configuracion</p>
+        <ul class="menu">
             <li><a href="/Usuarios/Index.aspx" id="item_users" runat="server"><i class="fas fa-user"></i><p class="m-0">Usuarios</p></a></li>
         </ul>
     </div>

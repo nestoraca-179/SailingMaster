@@ -304,12 +304,13 @@ namespace SailingMaster.Documentos
         {
             Usuario user = (Session["USER"] as Usuario);
             int id = int.Parse(Request.QueryString["ID"].ToString());
+            string co_mone = BancoController.GetByID(DDL_BancoTransf.Value.ToString()).co_mone;
 
             Documento doc = DocumentoController.GetByID(id);
             doc.status = 4; // COBRADO
             doc.collected_by = user.username;
             doc.collected_date = DateTime.Now;
-            doc.collected_amount = decimal.Parse(TB_MontoTransf.Text.Replace(".", ","));
+            doc.collected_amount = decimal.Parse(TB_MontoTransf.Text.Replace(".", ",")) * (co_mone == "USD" ? doc.tasa_usd : 1);
             doc.collected_bank = DDL_BancoTransf.Value.ToString();
             doc.collected_date_transf = DateTime.Parse(DE_FechaTransf.Value.ToString());
             doc.collected_nref_transf = TB_RefTransf.Text;
@@ -407,9 +408,12 @@ namespace SailingMaster.Documentos
             Usuario user = (Session["USER"] as Usuario);
             Documento doc = DocumentoController.GetByID(int.Parse(Request.QueryString["ID"].ToString()));
             DocumentoReng reng = doc.DocumentoReng.Single(r => r.reng_num == IDSelected);
+            
+            string co_mone = MonedaController.GetByID(DDL_MonedaReng.Value.ToString()).ID;
             int index = doc.DocumentoReng.ToList().IndexOf(reng);
 
-            reng.price_liq = decimal.Parse(TB_MontoReng.Text.Replace(".", ","));
+            reng.mone_liq = co_mone;
+            reng.price_liq = decimal.Parse(TB_MontoReng.Text.Replace(".", ",")) * (co_mone == "USD" ? doc.tasa_usd : 1);
             reng.co_us_mo = user.username;
             reng.fe_us_mo = DateTime.Now;
 
@@ -417,6 +421,7 @@ namespace SailingMaster.Documentos
 
             if (result == 1)
             {
+                reng.price_liq = decimal.Parse(TB_MontoReng.Text.Replace(".", ","));
                 rengs[index] = reng;
                 SetAmounts(doc);
                 BindGrid(rengs);
@@ -626,6 +631,12 @@ namespace SailingMaster.Documentos
             foreach (ListEditItem item in DDL_Puerto.Items)
             {
                 item.Selected = doc.co_puerto.ToString() == item.Value.ToString();
+            }
+
+            foreach (DocumentoReng reng in rengs)
+            {
+                if (reng.mone_liq == "USD")
+                    reng.price_liq = Math.Round(reng.price_liq.Value / doc.tasa_usd, 2);
             }
         }
 

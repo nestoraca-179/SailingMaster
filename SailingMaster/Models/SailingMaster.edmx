@@ -109,6 +109,7 @@
           <Property Name="price_bsd" Type="money" Nullable="false" />
           <Property Name="price_usd" Type="money" Nullable="false" />
           <Property Name="price_eur" Type="money" Nullable="false" />
+          <Property Name="mone_liq" Type="varchar" MaxLength="10" />
           <Property Name="price_liq" Type="money" />
           <Property Name="co_us_in" Type="varchar" MaxLength="20" Nullable="false" />
           <Property Name="fe_us_in" Type="datetime" Nullable="false" />
@@ -559,6 +560,7 @@
           <Property Name="fe_us_mo" Type="DateTime" Nullable="false" Precision="3" />
           <NavigationProperty Name="Documento" Relationship="SailingMasterModel.FK__DocumentoR__co_pr__0F624AF8" FromRole="DocumentoReng" ToRole="Documento" />
           <NavigationProperty Name="Servicio" Relationship="SailingMasterModel.FK__ProformaR__co_se__10566F31" FromRole="DocumentoReng" ToRole="Servicio" />
+          <Property Name="mone_liq" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="Incidente">
           <Key>
@@ -891,6 +893,7 @@
           <EntitySetMapping Name="DocumentoReng">
             <EntityTypeMapping TypeName="SailingMasterModel.DocumentoReng">
               <MappingFragment StoreEntitySet="DocumentoReng">
+                <ScalarProperty Name="mone_liq" ColumnName="mone_liq" />
                 <ScalarProperty Name="fe_us_mo" ColumnName="fe_us_mo" />
                 <ScalarProperty Name="co_us_mo" ColumnName="co_us_mo" />
                 <ScalarProperty Name="fe_us_in" ColumnName="fe_us_in" />

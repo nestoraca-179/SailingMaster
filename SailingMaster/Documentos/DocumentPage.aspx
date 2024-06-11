@@ -70,9 +70,9 @@ form .row:not(.my-5) {
 
         if (grid.GetVisibleRowsOnPage() > 0) {
             var columns = grid.GetRow(0).querySelectorAll("td:not(.dxgvCommandColumn_Material)").length, ind_price;
-            if (columns == 8)
+            if (columns == 9)
                 ind_price = 5;
-            else if (columns == 9)
+            else if (columns == 10)
                 ind_price = 4;
 
             var price_total = 0, price_total_usd = 0;
@@ -251,7 +251,7 @@ form .row:not(.my-5) {
                     </div>
                     <div class="col-md-6">
                         <div class="controls">
-                            <label>Muelle</label>
+                            <label>Terminal</label>
                             <dx:ASPxTextBox ID="TB_Muelle" runat="server" Theme="Material" Width="100%" BackColor="#303030" ForeColor="#F0F0F0" Border-BorderColor="#303030" AutoCompleteType="None">
                                 <ValidationSettings Display="Dynamic" ValidationGroup="Documento" ErrorText="" ValidateOnLeave="false" ErrorTextPosition="Bottom">
                                     <RequiredField IsRequired="True" ErrorText="Campo Obligatorio" />
@@ -593,14 +593,21 @@ form .row:not(.my-5) {
                                 <Paddings Padding="12px"></Paddings>
                             </CellStyle>
                         </dx:GridViewDataTextColumn>
-                        <dx:GridViewDataTextColumn FieldName="price_liq" Caption="Monto Liquidado" VisibleIndex="10" ReadOnly="true">
+                        <dx:GridViewDataTextColumn FieldName="mone_liq" Caption="Liquidado en" VisibleIndex="10" ReadOnly="true">
                             <PropertiesTextEdit DisplayFormatString="{0:n}"></PropertiesTextEdit>
                             <HeaderStyle BackColor="#102140" Border-BorderWidth="0px" ForeColor="#F0F0F0" Paddings-Padding="5px"></HeaderStyle>
                             <CellStyle ForeColor="#F0F0F0" Border-BorderWidth="0px">
                                 <Paddings Padding="12px"></Paddings>
                             </CellStyle>
                         </dx:GridViewDataTextColumn>
-                        <dx:GridViewDataTextColumn Caption="Subir Soporte" VisibleIndex="11" ReadOnly="true">
+                        <dx:GridViewDataTextColumn FieldName="price_liq" Caption="Monto Liquidado" VisibleIndex="11" ReadOnly="true">
+                            <PropertiesTextEdit DisplayFormatString="{0:n}"></PropertiesTextEdit>
+                            <HeaderStyle BackColor="#102140" Border-BorderWidth="0px" ForeColor="#F0F0F0" Paddings-Padding="5px"></HeaderStyle>
+                            <CellStyle ForeColor="#F0F0F0" Border-BorderWidth="0px">
+                                <Paddings Padding="12px"></Paddings>
+                            </CellStyle>
+                        </dx:GridViewDataTextColumn>
+                        <dx:GridViewDataTextColumn Caption="Subir Soporte" VisibleIndex="12" ReadOnly="true">
                             <HeaderStyle BackColor="#102140" Border-BorderWidth="0px" ForeColor="#F0F0F0" Paddings-Padding="5px"></HeaderStyle>
                             <CellStyle ForeColor="#F0F0F0" Border-BorderWidth="0px">
                                 <Paddings Padding="12px"></Paddings>
@@ -689,13 +696,14 @@ form .row:not(.my-5) {
                                     <Columns>
                                         <dx:ListBoxColumn FieldName="ID" Width="70px" Caption="C&#243;digo"></dx:ListBoxColumn>
                                         <dx:ListBoxColumn FieldName="des_cuenta" Caption="Banco"></dx:ListBoxColumn>
+                                        <dx:ListBoxColumn FieldName="co_mone" Caption="Moneda"></dx:ListBoxColumn>
                                         <dx:ListBoxColumn FieldName="nro_cuenta" Width="280px" Caption="Nro. Cuenta"></dx:ListBoxColumn>
                                     </Columns>
                                     <ValidationSettings Display="Dynamic" ValidationGroup="Cobrar" ErrorText="" ValidateOnLeave="false" ErrorTextPosition="Bottom">
                                         <RequiredField IsRequired="True" ErrorText="Campo Obligatorio" />
                                     </ValidationSettings>
                                 </dx:ASPxComboBox>
-                                <asp:SqlDataSource ID="DS_Banco" runat="server" ConnectionString='<%$ ConnectionStrings:SailingMasterConnectionString %>' SelectCommand="SELECT [ID], [des_cuenta], [nro_cuenta] FROM [Banco]"></asp:SqlDataSource>
+                                <asp:SqlDataSource ID="DS_Banco" runat="server" ConnectionString='<%$ ConnectionStrings:SailingMasterConnectionString %>' SelectCommand="SELECT [ID], [des_cuenta], [co_mone], [nro_cuenta] FROM [Banco]"></asp:SqlDataSource>
                             </div>
                         </div>
                     </div>
@@ -818,7 +826,7 @@ form .row:not(.my-5) {
                                         <RequiredField IsRequired="True" ErrorText="Campo Obligatorio" />
                                     </ValidationSettings>
                                 </dx:ASPxComboBox>
-                                <asp:SqlDataSource runat="server" ID="DS_Moneda" ConnectionString='<%$ ConnectionStrings:SailingMasterConnectionString %>' SelectCommand="SELECT [ID], [des_mone] FROM [Moneda]"></asp:SqlDataSource>
+                                <asp:SqlDataSource runat="server" ID="DS_Moneda" ConnectionString='<%$ ConnectionStrings:SailingMasterConnectionString %>' SelectCommand="SELECT [ID], [des_mone] FROM [Moneda] where [ID] in ('BSD', 'USD')"></asp:SqlDataSource>
                             </div>
                         </div>
                     </div>
