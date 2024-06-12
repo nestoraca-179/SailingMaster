@@ -94,11 +94,11 @@ namespace SailingMaster.Controllers
             return db.PrecioServicio.Any(ps => ps.co_serv.Equals(id, StringComparison.OrdinalIgnoreCase));
         }
 
-        public static decimal GetPriceServ(string id, Buque buque)
+        public static decimal GetPriceServ(string id, Buque buque, string tipo)
         {
             // Por defecto, siempre vamos a tomar el primer campo
             string campo = db.PrecioServicio.AsNoTracking().Where(p => p.co_serv == id).Select(p => p.campo_valor).Distinct().ToList()[0];
-            decimal valor = 0;
+            decimal valor = 0, precio_f = 0;
 
             if (campo == "GRT")
                 valor = buque.grt;
@@ -107,7 +107,20 @@ namespace SailingMaster.Controllers
 
             PrecioServicio precio = db.PrecioServicio.AsNoTracking().Single(p => p.co_serv == id && p.desde <= valor && p.hasta >= valor);
 
-            return precio.precio_base;
+            switch (tipo)
+            {
+                case "MIN":
+                    precio_f = precio.precio_min;
+                    break;
+                case "MED":
+                    precio_f = precio.precio_base;
+                    break;
+                case "MAX":
+                    precio_f = precio.precio_max;
+                    break;
+            }
+
+            return precio_f;
         }
 
         private static string GetChanges(Servicio user_v, Servicio user_n)

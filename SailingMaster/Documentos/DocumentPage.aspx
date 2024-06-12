@@ -31,10 +31,6 @@ form .row:not(.my-5) {
 #MainContent_DDL_MonedaReng_ETC, #MainContent_DE_FechaReng_ETC {
     color: #F0F0F0;
 }
-#MainContent_TB_NroViaje_ET, #MainContent_TE_HoraLlegada_ET, 
-#MainContent_TE_HoraSalida_ET {
-    background: #303030;
-}
 #MainContent_DDL_BancoTransf_DDD_PW-1, #MainContent_DDL_MonedaReng_DDD_PW-1 {
     top: 52px !important;
 }
@@ -70,10 +66,10 @@ form .row:not(.my-5) {
 
         if (grid.GetVisibleRowsOnPage() > 0) {
             var columns = grid.GetRow(0).querySelectorAll("td:not(.dxgvCommandColumn_Material)").length, ind_price;
-            if (columns == 9)
-                ind_price = 5;
+            if (columns == 13)
+                ind_price = 7;
             else if (columns == 10)
-                ind_price = 4;
+                ind_price = 8;
 
             var price_total = 0, price_total_usd = 0;
             for (var i = 0; i < grid.GetVisibleRowsOnPage(); i++) {
@@ -524,17 +520,17 @@ form .row:not(.my-5) {
                                 <Paddings Padding="12px"></Paddings>
                             </CellStyle>
                         </dx:GridViewCommandColumn>
-                        <dx:GridViewDataTextColumn Width="50" FieldName="reng_num" Caption="Renglon" VisibleIndex="1" ReadOnly="True">
+                        <dx:GridViewDataTextColumn Width="50" FieldName="reng_num" Caption="Reng." VisibleIndex="1" ReadOnly="True">
                             <HeaderStyle BackColor="#102140" Border-BorderWidth="0px" ForeColor="#F0F0F0" Paddings-Padding="5px"></HeaderStyle>
                             <CellStyle ForeColor="#F0F0F0" Border-BorderWidth="0px">
                                 <Paddings Padding="12px"></Paddings>
                             </CellStyle>
                         </dx:GridViewDataTextColumn>
                         <dx:GridViewDataComboBoxColumn Width="150" FieldName="co_serv" Caption="Codigo" VisibleIndex="2">
-                            <PropertiesComboBox DataSourceID="DS_Servicio" ValueField="ID" TextField="des_serv" TextFormatString="{0}">
+                            <PropertiesComboBox DataSourceID="DS_Servicio" ValueType="System.String" ValueField="ID" TextField="des_serv" TextFormatString="{0}">
                                 <Columns>
                                     <dx:ListBoxColumn FieldName="ID" Caption="ID"></dx:ListBoxColumn>
-                                    <dx:ListBoxColumn FieldName="des_serv" Caption="Servicio" Width="300px"></dx:ListBoxColumn>
+                                    <dx:ListBoxColumn FieldName="des_serv" Caption="Servicio" Width="400px"></dx:ListBoxColumn>
                                 </Columns>
                                 <ValidationSettings Display="Dynamic" RequiredField-IsRequired="true" />
                             </PropertiesComboBox>
@@ -542,7 +538,6 @@ form .row:not(.my-5) {
                             <CellStyle ForeColor="#F0F0F0" Border-BorderWidth="0px">
                                 <Paddings Padding="12px"></Paddings>
                             </CellStyle>
-                            <PropertiesComboBox DataSourceID="DS_Servicio" ValueType="System.String" ValueField="ID" TextField="ID" />
                         </dx:GridViewDataComboBoxColumn>
                         <dx:GridViewDataTextColumn Width="550" FieldName="des_serv" Caption="Descripcion" VisibleIndex="3" ReadOnly="True">
                             <HeaderStyle BackColor="#102140" Border-BorderWidth="0px" ForeColor="#F0F0F0" Paddings-Padding="5px"></HeaderStyle>
@@ -550,7 +545,7 @@ form .row:not(.my-5) {
                                 <Paddings Padding="12px"></Paddings>
                             </CellStyle>
                         </dx:GridViewDataTextColumn>
-                        <dx:GridViewDataTextColumn FieldName="cantidad" Caption="Cantidad" VisibleIndex="4">
+                        <dx:GridViewDataTextColumn FieldName="cantidad" Caption="Cant." VisibleIndex="4">
                             <HeaderStyle BackColor="#102140" Border-BorderWidth="0px" ForeColor="#F0F0F0" Paddings-Padding="5px"></HeaderStyle>
                             <CellStyle ForeColor="#F0F0F0" Border-BorderWidth="0px">
                                 <Paddings Padding="12px"></Paddings>
@@ -559,55 +554,69 @@ form .row:not(.my-5) {
                                 <ValidationSettings Display="Dynamic" RequiredField-IsRequired="true"></ValidationSettings>
                             </PropertiesTextEdit>
                         </dx:GridViewDataTextColumn>
-                        <%--<dx:GridViewDataTextColumn FieldName="co_mone" Caption="Moneda" VisibleIndex="5" ReadOnly="true">
+                        <dx:GridViewDataTextColumn FieldName="co_mone" Caption="Moneda" VisibleIndex="5" ReadOnly="true">
                             <HeaderStyle BackColor="#102140" Border-BorderWidth="0px" ForeColor="#F0F0F0" Paddings-Padding="5px"></HeaderStyle>
                             <CellStyle ForeColor="#F0F0F0" Border-BorderWidth="0px">
                                 <Paddings Padding="12px"></Paddings>
                             </CellStyle>
                         </dx:GridViewDataTextColumn>
-                        <dx:GridViewDataTextColumn FieldName="price_serv" Caption="Precio Base" VisibleIndex="6" ReadOnly="true">
-                            <PropertiesTextEdit DisplayFormatString="{0:n}"></PropertiesTextEdit>
-                            <HeaderStyle BackColor="#102140" Border-BorderWidth="0px" ForeColor="#F0F0F0" Paddings-Padding="5px"></HeaderStyle>
-                            <CellStyle ForeColor="#F0F0F0" Border-BorderWidth="0px">
-                                <Paddings Padding="12px"></Paddings>
-                            </CellStyle>
-                        </dx:GridViewDataTextColumn>--%>
-                        <dx:GridViewDataTextColumn FieldName="price_bsd" Caption="Total BSD" VisibleIndex="7" ReadOnly="true">
+                        <dx:GridViewDataTextColumn FieldName="price_serv" Caption="Precio" VisibleIndex="6" ReadOnly="true">
                             <PropertiesTextEdit DisplayFormatString="{0:n}"></PropertiesTextEdit>
                             <HeaderStyle BackColor="#102140" Border-BorderWidth="0px" ForeColor="#F0F0F0" Paddings-Padding="5px"></HeaderStyle>
                             <CellStyle ForeColor="#F0F0F0" Border-BorderWidth="0px">
                                 <Paddings Padding="12px"></Paddings>
                             </CellStyle>
                         </dx:GridViewDataTextColumn>
-                        <dx:GridViewDataTextColumn FieldName="price_usd" Caption="Total USD" VisibleIndex="8" ReadOnly="true">
+                        <dx:GridViewDataComboBoxColumn Width="250px" FieldName="tip_precio" Caption="Tip. Precio" VisibleIndex="7">
+                            <PropertiesComboBox>
+                                <Items>
+                                    <dx:ListEditItem Text="Precio Min." Value="MIN" />
+                                    <dx:ListEditItem Text="Precio Med." Value="MED" />
+                                    <dx:ListEditItem Text="Precio Max." Value="MAX" />
+                                </Items>
+                                <ValidationSettings Display="Dynamic" RequiredField-IsRequired="true" />
+                            </PropertiesComboBox>
+                            <HeaderStyle BackColor="#102140" Border-BorderWidth="0px" ForeColor="#F0F0F0" Paddings-Padding="5px"></HeaderStyle>
+                            <CellStyle ForeColor="#F0F0F0" Border-BorderWidth="0px">
+                                <Paddings Padding="12px"></Paddings>
+                            </CellStyle>
+                        </dx:GridViewDataComboBoxColumn>
+                        <dx:GridViewDataTextColumn FieldName="price_bsd" Caption="Tot. BSD" VisibleIndex="8" ReadOnly="true">
+                            <PropertiesTextEdit DisplayFormatString="{0:n}"></PropertiesTextEdit>
+                            <HeaderStyle BackColor="#102140" Border-BorderWidth="0px" ForeColor="#F0F0F0" Paddings-Padding="5px"></HeaderStyle>
+                            <CellStyle ForeColor="#F0F0F0" Border-BorderWidth="0px" HorizontalAlign="Left">
+                                <Paddings Padding="12px"></Paddings>
+                            </CellStyle>
+                        </dx:GridViewDataTextColumn>
+                        <dx:GridViewDataTextColumn FieldName="price_usd" Caption="Tot. USD" VisibleIndex="9" ReadOnly="true">
+                            <PropertiesTextEdit DisplayFormatString="{0:n}"></PropertiesTextEdit>
+                            <HeaderStyle BackColor="#102140" Border-BorderWidth="0px" ForeColor="#F0F0F0" Paddings-Padding="5px"></HeaderStyle>
+                            <CellStyle ForeColor="#F0F0F0" Border-BorderWidth="0px" HorizontalAlign="Left">
+                                <Paddings Padding="12px"></Paddings>
+                            </CellStyle>
+                        </dx:GridViewDataTextColumn>
+                        <dx:GridViewDataTextColumn FieldName="price_eur" Caption="Tot. EUR" VisibleIndex="10" ReadOnly="true">
+                            <PropertiesTextEdit DisplayFormatString="{0:n}"></PropertiesTextEdit>
+                            <HeaderStyle BackColor="#102140" Border-BorderWidth="0px" ForeColor="#F0F0F0" Paddings-Padding="5px"></HeaderStyle>
+                            <CellStyle ForeColor="#F0F0F0" Border-BorderWidth="0px" HorizontalAlign="Left">
+                                <Paddings Padding="12px"></Paddings>
+                            </CellStyle>
+                        </dx:GridViewDataTextColumn>
+                        <dx:GridViewDataTextColumn FieldName="mone_liq" Caption="Liq. en" VisibleIndex="11" ReadOnly="true">
                             <PropertiesTextEdit DisplayFormatString="{0:n}"></PropertiesTextEdit>
                             <HeaderStyle BackColor="#102140" Border-BorderWidth="0px" ForeColor="#F0F0F0" Paddings-Padding="5px"></HeaderStyle>
                             <CellStyle ForeColor="#F0F0F0" Border-BorderWidth="0px">
                                 <Paddings Padding="12px"></Paddings>
                             </CellStyle>
                         </dx:GridViewDataTextColumn>
-                        <dx:GridViewDataTextColumn FieldName="price_eur" Caption="Total EUR" VisibleIndex="9" ReadOnly="true">
+                        <dx:GridViewDataTextColumn FieldName="price_liq" Caption="Tot. Liq." VisibleIndex="12" ReadOnly="true">
                             <PropertiesTextEdit DisplayFormatString="{0:n}"></PropertiesTextEdit>
                             <HeaderStyle BackColor="#102140" Border-BorderWidth="0px" ForeColor="#F0F0F0" Paddings-Padding="5px"></HeaderStyle>
                             <CellStyle ForeColor="#F0F0F0" Border-BorderWidth="0px">
                                 <Paddings Padding="12px"></Paddings>
                             </CellStyle>
                         </dx:GridViewDataTextColumn>
-                        <dx:GridViewDataTextColumn FieldName="mone_liq" Caption="Liquidado en" VisibleIndex="10" ReadOnly="true">
-                            <PropertiesTextEdit DisplayFormatString="{0:n}"></PropertiesTextEdit>
-                            <HeaderStyle BackColor="#102140" Border-BorderWidth="0px" ForeColor="#F0F0F0" Paddings-Padding="5px"></HeaderStyle>
-                            <CellStyle ForeColor="#F0F0F0" Border-BorderWidth="0px">
-                                <Paddings Padding="12px"></Paddings>
-                            </CellStyle>
-                        </dx:GridViewDataTextColumn>
-                        <dx:GridViewDataTextColumn FieldName="price_liq" Caption="Monto Liquidado" VisibleIndex="11" ReadOnly="true">
-                            <PropertiesTextEdit DisplayFormatString="{0:n}"></PropertiesTextEdit>
-                            <HeaderStyle BackColor="#102140" Border-BorderWidth="0px" ForeColor="#F0F0F0" Paddings-Padding="5px"></HeaderStyle>
-                            <CellStyle ForeColor="#F0F0F0" Border-BorderWidth="0px">
-                                <Paddings Padding="12px"></Paddings>
-                            </CellStyle>
-                        </dx:GridViewDataTextColumn>
-                        <dx:GridViewDataTextColumn Caption="Subir Soporte" VisibleIndex="12" ReadOnly="true">
+                        <dx:GridViewDataTextColumn Caption="Soporte" VisibleIndex="13" ReadOnly="true">
                             <HeaderStyle BackColor="#102140" Border-BorderWidth="0px" ForeColor="#F0F0F0" Paddings-Padding="5px"></HeaderStyle>
                             <CellStyle ForeColor="#F0F0F0" Border-BorderWidth="0px">
                                 <Paddings Padding="12px"></Paddings>

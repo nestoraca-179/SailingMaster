@@ -30,6 +30,7 @@ namespace SailingMaster.Models
         public string co_us_mo { get; set; }
         public System.DateTime fe_us_mo { get; set; }
         public string mone_liq { get; set; }
+        public string tip_precio { get; set; }
     
         public virtual Documento Documento { get; set; }
         public virtual Servicio Servicio { get; set; }

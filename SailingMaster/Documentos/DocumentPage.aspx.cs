@@ -444,6 +444,22 @@ namespace SailingMaster.Documentos
             TB_GRT.Text = buque.grt.ToString();
             TB_NRT.Text = buque.nrt.ToString();
             TB_SDWT.Text = buque.sdwt.ToString();
+
+            foreach (DocumentoReng reng in rengs)
+            {
+                Servicio serv = ServicioController.GetByID(reng.co_serv);
+                if (ServicioController.HasRange(reng.co_serv))
+                {
+                    serv.precio_base = ServicioController.GetPriceServ(reng.co_serv, buque, reng.tip_precio);
+                }
+
+                reng.price_serv = serv.precio_base;
+                reng.price_bsd = (reng.co_mone == "BSD" ? reng.price_serv : MonedaController.ConvertToBSD(serv)) * reng.cantidad;
+                reng.price_usd = (reng.co_mone == "USD" ? reng.price_serv : MonedaController.ConvertToUSD(serv)) * reng.cantidad;
+                reng.price_eur = (reng.co_mone == "EUR" ? reng.price_serv : MonedaController.ConvertToEUR(serv)) * reng.cantidad;
+            }
+
+            BindGrid(rengs);
         }
 
         protected void TB_DateHour_ValueChanged(object sender, EventArgs e)
@@ -476,7 +492,7 @@ namespace SailingMaster.Documentos
 
         protected void GV_DocumentoReng_HtmlDataCellPrepared(object sender, ASPxGridViewTableDataCellEventArgs e)
         {
-            if (e.DataColumn.Caption == "Subir Soporte")
+            if (e.DataColumn.Caption == "Soporte")
             {
                 if (Request.QueryString["ID"] != null)
                 {
@@ -502,6 +518,7 @@ namespace SailingMaster.Documentos
         {
             Servicio serv = ServicioController.GetByID(e.NewValues["co_serv"] as string);
             int cantidad = Convert.ToInt32(e.NewValues["cantidad"]);
+            string tip_precio = e.NewValues["tip_precio"] as string;
 
             if (ServicioController.HasRange(serv.ID))
             {
@@ -510,7 +527,7 @@ namespace SailingMaster.Documentos
                 else
                 {
                     Buque buque = BuqueController.GetByID(Convert.ToInt32(DDL_Buque.Value));
-                    serv.precio_base = ServicioController.GetPriceServ(serv.ID, buque);
+                    serv.precio_base = ServicioController.GetPriceServ(serv.ID, buque, tip_precio);
                 }
             }
 
@@ -522,6 +539,7 @@ namespace SailingMaster.Documentos
                 cantidad = cantidad,
                 co_mone = serv.co_mone,
                 price_serv = serv.precio_base,
+                tip_precio = tip_precio,
                 price_bsd = (serv.co_mone == "BSD" ? serv.precio_base : MonedaController.ConvertToBSD(serv)) * cantidad,
                 price_usd = (serv.co_mone == "USD" ? serv.precio_base : MonedaController.ConvertToUSD(serv)) * cantidad,
                 price_eur = (serv.co_mone == "EUR" ? serv.precio_base : MonedaController.ConvertToEUR(serv)) * cantidad,
@@ -543,8 +561,20 @@ namespace SailingMaster.Documentos
             Moneda mone = MonedaController.GetByID(serv.co_mone);
 
             int cantidad = Convert.ToInt32(e.NewValues["cantidad"]);
+            string tip_precio = e.NewValues["tip_precio"] as string;
             decimal tasa_usd = MonedaController.GetByID("USD").tasa;
             decimal tasa_eur = MonedaController.GetByID("EUR").tasa;
+
+            if (ServicioController.HasRange(serv.ID))
+            {
+                if (DDL_Buque.Value == null)
+                    throw new Exception("El servicio seleccionado depende de los valores del buque. Por favor, seleccione un buque.");
+                else
+                {
+                    Buque buque = BuqueController.GetByID(Convert.ToInt32(DDL_Buque.Value));
+                    serv.precio_base = ServicioController.GetPriceServ(serv.ID, buque, tip_precio);
+                }
+            }
 
             if (row != null)
             {
@@ -553,6 +583,7 @@ namespace SailingMaster.Documentos
                 row.cantidad = cantidad;
                 row.co_mone = serv.co_mone;
                 row.price_serv = serv.precio_base;
+                row.tip_precio = tip_precio;
                 row.price_bsd = (serv.co_mone == "BSD" ? serv.precio_base : MonedaController.ConvertToBSD(serv)) * cantidad;
                 row.price_usd = (serv.co_mone == "USD" ? serv.precio_base : MonedaController.ConvertToUSD(serv)) * cantidad;
                 row.price_eur = (serv.co_mone == "EUR" ? serv.precio_base : MonedaController.ConvertToEUR(serv)) * cantidad;
@@ -658,7 +689,9 @@ namespace SailingMaster.Documentos
             LBL_TotalCancelado_USD.Text = "0,00";
             LBL_Balance.Text = "0,00";
             LBL_Balance_USD.Text = "0,00";
-            GV_DocumentoReng.Columns[GV_DocumentoReng.Columns.Count - 1].Visible = false;
+            GV_DocumentoReng.Columns[11].Visible = false;
+            GV_DocumentoReng.Columns[12].Visible = false;
+            GV_DocumentoReng.Columns[13].Visible = false;
         }
 
         private void BlockAllFields(int status)

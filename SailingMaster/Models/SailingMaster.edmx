@@ -106,6 +106,7 @@
           <Property Name="cantidad" Type="int" Nullable="false" />
           <Property Name="co_mone" Type="varchar" MaxLength="10" Nullable="false" />
           <Property Name="price_serv" Type="money" Nullable="false" />
+          <Property Name="tip_precio" Type="char" MaxLength="3" Nullable="false" />
           <Property Name="price_bsd" Type="money" Nullable="false" />
           <Property Name="price_usd" Type="money" Nullable="false" />
           <Property Name="price_eur" Type="money" Nullable="false" />
@@ -561,6 +562,7 @@
           <NavigationProperty Name="Documento" Relationship="SailingMasterModel.FK__DocumentoR__co_pr__0F624AF8" FromRole="DocumentoReng" ToRole="Documento" />
           <NavigationProperty Name="Servicio" Relationship="SailingMasterModel.FK__ProformaR__co_se__10566F31" FromRole="DocumentoReng" ToRole="Servicio" />
           <Property Name="mone_liq" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="tip_precio" Type="String" Nullable="false" MaxLength="3" FixedLength="true" Unicode="false" />
         </EntityType>
         <EntityType Name="Incidente">
           <Key>
@@ -893,6 +895,7 @@
           <EntitySetMapping Name="DocumentoReng">
             <EntityTypeMapping TypeName="SailingMasterModel.DocumentoReng">
               <MappingFragment StoreEntitySet="DocumentoReng">
+                <ScalarProperty Name="tip_precio" ColumnName="tip_precio" />
                 <ScalarProperty Name="mone_liq" ColumnName="mone_liq" />
                 <ScalarProperty Name="fe_us_mo" ColumnName="fe_us_mo" />
                 <ScalarProperty Name="co_us_mo" ColumnName="co_us_mo" />
